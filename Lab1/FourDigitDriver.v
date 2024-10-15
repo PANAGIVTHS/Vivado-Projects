@@ -1,7 +1,8 @@
 module FourDigitLEDdriver(reset, clk, an3, an2, an1, an0, a, b, c, d, e, f, g, dp, counter, char);
-    input clk, reset;
+    input clk, reset, button;
     output an3, an2, an1, an0;
     output a, b, c, d, e, f, g, dp;
+    output button_debounced;
     assign dp = 1'b0;
     reg an3, an2, an1, an0;
     output reg [3:0] counter;
@@ -30,6 +31,8 @@ module FourDigitLEDdriver(reset, clk, an3, an2, an1, an0, a, b, c, d, e, f, g, d
     );
 
     LEDdecoder LEDdecoder_inst (.char(char), .LED({a, b, c, d, e, f, g}));
+    debounce debounce_inst (.clk(clk), .reset(reset_sync), .button(button), .button_debounced(button_debounced));
+
     always@(posedge clk) begin
         reset_prime <= reset;
     end
