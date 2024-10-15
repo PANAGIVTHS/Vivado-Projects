@@ -51,47 +51,6 @@ module FourDigitLEDdriver(reset, clk, an3, an2, an1, an0, a, b, c, d, e, f, g, d
 
     always @(counter) begin
         case (counter)
-            AN0_SETUP_BUS: begin
-                char = 4'b0000;
-            end
-            4'b0001: begin
-                char = 4'b0000;
-            end
-            4'b0010: begin
-                char = 4'b0000;
-            end
-            AN1_SETUP_BUS: begin
-                char = 4'b0001;
-            end
-            4'b0100: begin
-                char = 4'b0001;
-            end
-            4'b0101: begin
-                char = 4'b0001;
-            end
-            AN2_SETUP_BUS: begin
-                char = 4'b0010;
-            end
-            4'b1000: begin
-                char = 4'b0010;
-            end
-            4'b1001: begin
-                char = 4'b0010;
-            end
-            AN3_SETUP_BUS: begin
-                char = 4'b0011;
-            end
-            4'b1110: begin
-                char = 4'b0011;
-            end
-            4'b1111: begin
-                char = 4'b0011;
-            end
-        endcase
-    end
-
-    always @(counter) begin
-        case (counter)
             AN0_LOW: begin
                 an0 = 1'b0;
                 an1 = 1'b1;

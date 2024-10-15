@@ -6,7 +6,7 @@ module debounce(clk, reset, button, button_debounced);
     reg [6:0] counter;
     wire button_ON;
 
-    always @(button or posedge reset) begin
+    always @(posedge clock or posedge reset) begin
         if (reset) begin
             FF_wire <= 3'b0;
         end else begin
@@ -21,7 +21,6 @@ module debounce(clk, reset, button, button_debounced);
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             button_debounced <= 1'b0;
-            button_ON <= 1'b0;
             counter <= 8'b0;
         end else begin
             if (button_ON) begin 
