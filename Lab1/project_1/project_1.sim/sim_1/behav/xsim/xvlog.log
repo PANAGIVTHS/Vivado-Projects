@@ -1,5 +1,0 @@
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/LEDdecoder.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module LEDdecoder
-WARNING: [VRFC 10-3676] redeclaration of ansi port 'LED' is not allowed [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/LEDdecoder.v:3]
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/testbench.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module tb_
