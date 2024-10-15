@@ -1,0 +1,18 @@
+Vivado Simulator 2018.3
+Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
+Running: D:/Vivado/2018.3/bin/unwrapped/win64.o/xelab.exe -wto 34f4a2b7988b4b7b8f8a61a08bec529e --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_FourDigitDriver_behav xil_defaultlib.tb_FourDigitDriver xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/FourDigitDriver.v" Line 1. Module FourDigitLEDdriver doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/LEDdecoder.v" Line 2. Module LEDdecoder doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module unisims_ver.MMCME2_ADV(CLKFBOUT_MULT_F=6.0,C...
+Compiling module unisims_ver.MMCME2_BASE(CLKFBOUT_MULT_F=6.0,...
+Compiling module xil_defaultlib.LEDdecoder
+Compiling module xil_defaultlib.FourDigitLEDdriver
+Compiling module xil_defaultlib.tb_FourDigitDriver
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_FourDigitDriver_behav
