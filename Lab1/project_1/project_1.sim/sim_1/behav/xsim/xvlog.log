@@ -1,9 +1,5 @@
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/FourDigitDriver.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module FourDigitLEDdriver
 INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/LEDdecoder.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module LEDdecoder
 WARNING: [VRFC 10-3676] redeclaration of ansi port 'LED' is not allowed [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/LEDdecoder.v:3]
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/FourDigitDriver_tb.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module tb_FourDigitDriver
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/project_1/project_1.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module glbl
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/testbench.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_

@@ -1,0 +1,4 @@
+Running: xsim.dir/LEDdecoder_tb_behav/xsimk.exe -simmode gui -wdb LEDdecoder_tb_behav.wdb -simrunnum 0 -socket 60121
+Design successfully loaded
+Design Loading Memory Usage: 7308 KB (Peak: 7308 KB)
+Design Loading CPU Usage: 0 ms
