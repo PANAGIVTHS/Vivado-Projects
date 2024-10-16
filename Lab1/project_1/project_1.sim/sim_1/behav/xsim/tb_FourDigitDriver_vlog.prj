@@ -2,6 +2,8 @@
 verilog xil_defaultlib  \
 "../../../../../FourDigitDriver.v" \
 "../../../../../LEDdecoder.v" \
+"../../../../../char_decoder.v" \
+"../../../../../debounce.v" \
 "../../../../../FourDigitDriver_tb.v" \
 
 # compile glbl module

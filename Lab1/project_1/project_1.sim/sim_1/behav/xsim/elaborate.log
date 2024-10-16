@@ -1,7 +1,22 @@
 Vivado Simulator 2018.3
 Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
-Running: D:/Vivado/2018.3/bin/unwrapped/win64.o/xelab.exe -wto 34f4a2b7988b4b7b8f8a61a08bec529e --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_debounce_behav xil_defaultlib.tb_debounce xil_defaultlib.glbl -log elaborate.log 
+Running: D:/Vivado/2018.3/bin/unwrapped/win64.o/xelab.exe -wto 34f4a2b7988b4b7b8f8a61a08bec529e --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_FourDigitDriver_behav xil_defaultlib.tb_FourDigitDriver xil_defaultlib.glbl -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
+WARNING: [VRFC 10-3705] select index 5 into 'mem' is out of bounds [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/char_decoder.v:21]
+WARNING: [VRFC 10-3705] select index 6 into 'mem' is out of bounds [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/char_decoder.v:22]
+WARNING: [VRFC 10-3705] select index 7 into 'mem' is out of bounds [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/char_decoder.v:23]
+WARNING: [VRFC 10-3705] select index 8 into 'mem' is out of bounds [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/char_decoder.v:24]
+WARNING: [VRFC 10-3705] select index 9 into 'mem' is out of bounds [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/char_decoder.v:25]
+WARNING: [VRFC 10-3705] select index 10 into 'mem' is out of bounds [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/char_decoder.v:26]
+WARNING: [VRFC 10-3705] select index 11 into 'mem' is out of bounds [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/char_decoder.v:27]
+WARNING: [VRFC 10-3705] select index 12 into 'mem' is out of bounds [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/char_decoder.v:28]
+WARNING: [VRFC 10-3705] select index 13 into 'mem' is out of bounds [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/char_decoder.v:29]
+WARNING: [VRFC 10-3705] select index 14 into 'mem' is out of bounds [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/char_decoder.v:30]
+WARNING: [VRFC 10-3705] select index 15 into 'mem' is out of bounds [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/char_decoder.v:31]
+WARNING: [VRFC 10-3705] select index 16 into 'mem' is out of bounds [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/char_decoder.v:32]
+WARNING: [VRFC 10-3705] select index 17 into 'mem' is out of bounds [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/char_decoder.v:33]
+WARNING: [VRFC 10-3705] select index 18 into 'mem' is out of bounds [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/char_decoder.v:34]
+WARNING: [VRFC 10-3705] select index 19 into 'mem' is out of bounds [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/char_decoder.v:35]
 Completed static elaboration
 INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel

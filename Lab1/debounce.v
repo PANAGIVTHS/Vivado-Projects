@@ -10,6 +10,10 @@ module debounce(clk, reset, button, button_debounced, button_ON, enabled);
 
     // No need to reset cause button has only 2 states
     // after 3 cycles, button_ON will be 0
+    always @(posedge reset) begin
+        button_debounced = 1'b0;
+    end
+    
     always @(posedge clk) begin
         FF_wire[0] <= button;
         FF_wire[1] <= FF_wire[0];

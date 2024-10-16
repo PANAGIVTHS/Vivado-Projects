@@ -2,9 +2,15 @@
 
 module char_decoder (counter, char, button_presses, reset);
     input [3:0] counter;
+    input reset;
     output reg [3:0] char;
     input [4:0] button_presses;
     reg [4:0] mem [4:0];
+    
+    parameter AN0_SETUP_BUS = 4'b0000;
+    parameter AN1_SETUP_BUS = 4'b0011;
+    parameter AN2_SETUP_BUS = 4'b0111;
+    parameter AN3_SETUP_BUS = 4'b1011;
     
     always @(posedge reset) begin
         mem[0] <= 4'b1100; // [

@@ -2,10 +2,11 @@
 2018.3
 Dec  7 2018
 00:33:28
-C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/FourDigitDriver.v,1728925955,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/LEDdecoder.v,,FourDigitLEDdriver,,,,,,,,
-C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/FourDigitDriver_tb.v,1728922425,verilog,,,,tb_FourDigitDriver,,,,,,,,
-C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/LEDdecoder.v,1729030673,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/testbench.v,,LEDdecoder,,,,,,,,
-C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/debounce.v,1729033553,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/debounce_tb.v,,debounce,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/FourDigitDriver.v,1729042211,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/LEDdecoder.v,,FourDigitLEDdriver,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/FourDigitDriver_tb.v,1729042054,verilog,,,,tb_FourDigitDriver,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/LEDdecoder.v,1729031248,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/char_decoder.v,,LEDdecoder,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/char_decoder.v,1729040361,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/debounce.v,,char_decoder,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/debounce.v,1729042596,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/FourDigitDriver_tb.v,,debounce,,,,,,,,
 C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/debounce_tb.v,1729033894,verilog,,,,tb_debounce,,,,,,,,
 C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/project_1/project_1.sim/sim_1/behav/xsim/glbl.v,1544155481,verilog,,,,glbl,,,,,,,,
 C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/testbench.v,1729030717,verilog,,,,tb_,,,,,,,,
