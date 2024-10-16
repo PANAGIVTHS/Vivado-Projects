@@ -2,3 +2,6 @@ Running: xsim.dir/tb_debounce_behav/xsimk.exe -simmode gui -wdb tb_debounce_beha
 Design successfully loaded
 Design Loading Memory Usage: 6836 KB (Peak: 6836 KB)
 Design Loading CPU Usage: 0 ms
+Simulation completed
+Simulation Memory Usage: 7732 KB (Peak: 7732 KB)
+Simulation CPU Usage: 0 ms

@@ -1,7 +1,7 @@
 Vivado Simulator 2018.3
 Time resolution is 1 ps
-clk=0 reset=x an3=x an2=x an1=x an0=x a=x b=x c=x d=x e=x f=x g=x dp=0
-clk=1 reset=x an3=x an2=x an1=x an0=x a=x b=x c=x d=x e=x f=x g=x dp=0
+$finish called at time : 980 ns : File "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/debounce_tb.v" Line 35
+x e=x f=x g=x dp=0
 clk=0 reset=x an3=x an2=x an1=x an0=x a=x b=x c=x d=x e=x f=x g=x dp=0
 clk=1 reset=x an3=x an2=x an1=x an0=x a=x b=x c=x d=x e=x f=x g=x dp=0
 clk=0 reset=x an3=x an2=x an1=x an0=x a=x b=x c=x d=x e=x f=x g=x dp=0
@@ -63,6 +63,474 @@ clk=1 reset=0 an3=1 an2=1 an1=1 an0=0 a=0 b=1 c=1 d=0 e=0 f=0 g=1 dp=0
 clk=0 reset=0 an3=1 an2=1 an1=1 an0=0 a=0 b=1 c=1 d=0 e=0 f=0 g=1 dp=0
 clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=1 f=0 g=0 dp=0
 clk=0 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=1 f=0 g=0 dp=0
+clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=1 f=0e   c
+e   c
+       
+
+
+Displaying Character: 
+       
+     
+     
+ --g-- 
+e   c
+e   c
+       
+
+
+Displaying Character: 
+       
+f   b
+f   b
+ --g-- 
+e   c
+e   c
+ --d-- 
+
+
+Displaying Character: 
+ --a-- 
+f   b
+f   b
+ --g-- 
+e    
+e    
+       
+
+
+Displaying Character: 
+ --a-- 
+f   b
+f   b
+ --g-- 
+    c
+    c
+       
+
+
+Displaying Character: 
+ --a-- 
+f   b
+f   b
+       
+e    
+e    
+       
+
+
+Displaying Character: 
+ --a-- 
+f    
+f    
+ --g-- 
+    c
+    c
+ --d-- 
+
+
+Displaying Character: 
+ --a-- 
+    b
+    b
+ --g-- 
+     
+     
+       
+
+
+Displaying Character: 
+       
+f   b
+f   b
+       
+e   c
+e   c
+ --d-- 
+
+
+Displaying Character: 
+       
+     
+     
+       
+e   c
+e   c
+ --d-- 
+
+
+Displaying Character: 0
+       
+f   b
+f   b
+ --g-- 
+e   c
+e   c
+ --d-- 
+
+
+Displaying Character: 1
+       
+    b
+    b
+       
+    c
+    c
+       
+
+
+Displaying Character: 2
+ --a-- 
+    b
+    b
+ --g-- 
+e    
+e    
+ --d-- 
+
+
+Displaying Character: 3
+ --a-- 
+    b
+    b
+ --g-- 
+    c
+    c
+ --d-- 
+
+
+Displaying Character: 4
+ --a-- 
+f   b
+f   b
+       
+    c
+    c
+       
+
+
+Displaying Character: 5
+ --a-- 
+f    
+f    
+ --g-- 
+    c
+    c
+ --d-- 
+
+
+Displaying Character: 6
+ --a-- 
+f    
+f    
+ --g-- 
+e   c
+e   c
+ --d-- 
+
+
+Displaying Character: 7
+       
+    b
+    b
+ --g-- 
+    c
+    c
+       
+
+
+Displaying Character: 8
+ --a-- 
+f   b
+f   b
+ --g-- 
+e   c
+e   c
+ --d-- 
+
+
+Displaying Character: 9
+ --a-- 
+f   b
+f   b
+ --g-- 
+    c
+    c
+ --d-- 
+
+
+Displaying Character: 
+ --a-- 
+f   b
+f   b
+ --g-- 
+e   c
+e   c
+       
+
+
+Displaying Character: 
+ --a-- 
+f    
+f    
+       
+e   c
+e   c
+ --d-- 
+
+
+Displaying Character: 
+       
+f    
+f    
+ --g-- 
+e    
+e    
+ --d-- 
+
+
+Displaying Character: 
+ --a-- 
+    b
+    b
+       
+e   c
+e   c
+ --d-- 
+
+
+Displaying Character: 
+ --a-- 
+f    
+f    
+ --g-- 
+e    
+e    
+ --d-- 
+
+
+Displaying Character: 
+ --a-- 
+f    
+f    
+ --g-- 
+e    
+e    
+       
+
+
+Displaying Character: 
+       
+f    
+f    
+ --g-- 
+e   c
+e   c
+ --d-- 
+
+
+Displaying Character: 
+ --a-- 
+f   b
+f   b
+       
+e   c
+e   c
+       
+
+
+Displaying Character: 	
+       
+    b
+    b
+       
+    c
+    c
+       
+
+
+Displaying Character: 
+
+       
+    b
+    b
+       
+e   c
+e   c
+ --d-- 
+
+
+Displaying Character: 
+ --a-- 
+    b
+    b
+       
+    c
+    c
+       
+
+
+Displaying Character: 
+       
+f    
+f    
+       
+e    
+e    
+ --d-- 
+
+
+Displaying Character: 
+
+ --a-- 
+f   b
+f   b
+ --g-- 
+e   c
+e   c
+       
+
+
+Displaying Character: 
+       
+     
+     
+ --g-- 
+e   c
+e   c
+       
+
+
+Displaying Character: 
+       
+f   b
+f   b
+ --g-- 
+e   c
+e   c
+ --d-- 
+
+
+Displaying Character: 
+ --a-- 
+f   b
+f   b
+ --g-- 
+e    
+e    
+       
+
+
+Displaying Character: 
+ --a-- 
+f   b
+f   b
+ --g-- 
+    c
+    c
+       
+
+
+Displaying Character: 
+ --a-- 
+f   b
+f   b
+       
+e    
+e    
+       
+
+
+Displaying Character: 
+ --a-- 
+f    
+f    
+ --g-- 
+    c
+    c
+ --d-- 
+
+
+Displaying Character: 
+ --a-- 
+    b
+    b
+ --g-- 
+     
+     
+       
+
+
+Displaying Character: 
+       
+f   b
+f   b
+       
+e   c
+e   c
+ --d-- 
+
+
+Displaying Character: 
+       
+     
+     
+       
+e   c
+e   c
+ --d-- 
+
+
+Displaying Character: 0
+       
+f   b
+f   b
+ --g-- 
+e   c
+e   c
+ --d-- 
+
+
+Displaying Character: 1
+       
+    b
+    b
+       
+    c
+    c
+       
+
+
+Displaying Character: 2
+ --a-- 
+    b
+    b
+ --g-- 
+e    
+e    
+ --d-- 
+
+
+Displaying Character: 3
+ --a-- 
+    b
+    b
+ --g-- 
+    c
+    c
+ --d-- 
+
+
+e=0 f=0 g=1 dp=0
+clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=1 d=0 e=0 f=0 g=1 dp=0
+clk=0 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=1 d=0 e=0 f=0 g=1 dp=0
+clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=1 d=0 e=0 f=0 g=1 dp=0
+clk=0 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=1 d=0 e=0 f=0 g=1 dp=0
+clk=1 reset=0 an3=1 an2=1 an1=1 an0=0 a=0 b=1 c=1 d=0 e=0 f=0 g=1 dp=0
+clk=0 reset=0 an3=1 an2=1 an1=1 an0=0 a=0 b=1 c=1 d=0 e=0 f=0 g=1 dp=0
+clk=1 reset=0 an3=1 an2=1 an1=1 an0=0 a=0 b=1 c=1 d=0 e=0 f=0 g=1 dp=0
+clk=0 reset=0 an3=1 an2=1 an1=1 an0=0 a=0 b=1 c=1 d=0 e=0 f=0 g=1 dp=0
+clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=1 f=0 g=0 dp=0
+clk=0 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=1 f=0 g=0 dp=0
 clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=1 f=0 g=0 dp=0
 clk=0 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=1 f=0 g=0 dp=0
 clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=1 f=0 g=0 dp=0
@@ -137,39 +605,3 @@ clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=1 f=0 g=0 dp=0
 clk=0 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=1 f=0 g=0 dp=0
 clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=1 f=0 g=0 dp=0
 clk=0 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=1 f=0 g=0 dp=0
-clk=1 reset=0 an3=1 an2=1 an1=0 an0=1 a=0 b=1 c=0 d=0 e=1 f=0 g=0 dp=0
-clk=0 reset=0 an3=1 an2=1 an1=0 an0=1 a=0 b=1 c=0 d=0 e=1 f=0 g=0 dp=0
-clk=1 reset=0 an3=1 an2=1 an1=0 an0=1 a=0 b=1 c=0 d=0 e=1 f=0 g=0 dp=0
-clk=0 reset=0 an3=1 an2=1 an1=0 an0=1 a=0 b=1 c=0 d=0 e=1 f=0 g=0 dp=0
-clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=1 d=0 e=0 f=0 g=0 dp=0
-clk=0 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=1 d=0 e=0 f=0 g=0 dp=0
-clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=1 d=0 e=0 f=0 g=0 dp=0
-clk=0 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=1 d=0 e=0 f=0 g=0 dp=0
-clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=1 d=0 e=0 f=0 g=0 dp=0
-clk=0 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=1 d=0 e=0 f=0 g=0 dp=0
-clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=1 d=0 e=0 f=0 g=0 dp=0
-clk=0 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=1 d=0 e=0 f=0 g=0 dp=0
-clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=1 d=0 e=0 f=0 g=0 dp=0
-clk=0 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=1 d=0 e=0 f=0 g=0 dp=0
-clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=1 d=0 e=0 f=0 g=0 dp=0
-clk=0 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=1 d=0 e=0 f=0 g=0 dp=0
-clk=1 reset=0 an3=1 an2=0 an1=1 an0=1 a=0 b=1 c=1 d=0 e=0 f=0 g=0 dp=0
-clk=0 reset=0 an3=1 an2=0 an1=1 an0=1 a=0 b=1 c=1 d=0 e=0 f=0 g=0 dp=0
-clk=1 reset=0 an3=1 an2=0 an1=1 an0=1 a=0 b=1 c=1 d=0 e=0 f=0 g=0 dp=0
-clk=0 reset=0 an3=1 an2=0 an1=1 an0=1 a=0 b=1 c=1 d=0 e=0 f=0 g=0 dp=0
-clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=0 f=0 g=1 dp=0
-clk=0 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=0 f=0 g=1 dp=0
-clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=0 f=0 g=1 dp=0
-clk=0 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=0 f=0 g=1 dp=0
-clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=0 f=0 g=1 dp=0
-clk=0 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=0 f=0 g=1 dp=0
-clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=0 f=0 g=1 dp=0
-clk=0 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=0 f=0 g=1 dp=0
-clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=0 f=0 g=1 dp=0
-clk=0 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=0 f=0 g=1 dp=0
-clk=1 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=0 f=0 g=1 dp=0
-clk=0 reset=0 an3=1 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=0 f=0 g=1 dp=0
-clk=1 reset=0 an3=0 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=0 f=0 g=1 dp=0
-clk=0 reset=0 an3=0 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=0 f=0 g=1 dp=0
-clk=1 reset=0 an3=0 an2=1 an1=1 an0=1 a=0 b=1 c=0 d=0 e=0 f=0 g=1 dp=0
-clk=0 reset=0 an3=0 an2=1 an
