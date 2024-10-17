@@ -1,4 +1,4 @@
-module incrementer (input clk, input reset, input button_debounced, output reg [4:0] button_presses);
+module Incrementer (input clk, input reset, input button_debounced, output reg [4:0] button_presses);
     wire increment;
     reg [1:0] FF;
 

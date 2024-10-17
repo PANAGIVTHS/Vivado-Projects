@@ -1,4 +1,4 @@
-module reset_debounce (input clk, input button, output reg button_debounced);
+module Debouncer (input clk, input button, output reg button_debounced);
     reg [2:0] FF_wire;
     reg [4:0] counter;
     

@@ -1,9 +1,9 @@
 
-module char_decoder (counter, char, button_presses, reset);
+module CharacterDecoder (counter, char, active_mem_offset, reset);
     input [3:0] counter;
+    input [4:0] button_presses;
     input reset;
     output reg [3:0] char;
-    input [4:0] button_presses;
     reg [3:0] mem [19:0];
     
     parameter AN0_SETUP_BUS = 4'b1111;
@@ -11,6 +11,7 @@ module char_decoder (counter, char, button_presses, reset);
     parameter AN2_SETUP_BUS = 4'b0111;
     parameter AN3_SETUP_BUS = 4'b1011;
     
+    // Initialize memory
     always @(posedge reset) begin
         mem[0] <= 4'b1100; // [
         mem[1] <= 4'b0000; // S
@@ -34,7 +35,7 @@ module char_decoder (counter, char, button_presses, reset);
         mem[19] <= 4'b1101; // ]
     end
 
-    // ----> button presses maybe NEDDED
+    // ----> + @button presses maybe NEDDED
     always @(counter) begin
         case (counter)
             AN0_SETUP_BUS: char = mem[4'b0000 + button_presses];

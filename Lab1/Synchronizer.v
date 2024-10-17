@@ -1,5 +1,5 @@
 
-module synchroniser (input clk, input signal, output reg signal_sync);
+module Synchronizer (input clk, input signal, output reg signal_sync);
     reg signal_prime;
 
     always@(posedge clk) begin

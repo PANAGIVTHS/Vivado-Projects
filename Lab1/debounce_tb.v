@@ -1,3 +1,4 @@
+`timescale 1ns/10ps
 
 module tb_debounce;
     reg clk;
@@ -7,11 +8,6 @@ module tb_debounce;
     wire button_ON;
     wire enabled;
     debounce debounce_inst (.clk(clk), .reset(reset), .button(button), .button_debounced(button_debounced), .button_ON(button_ON), .enabled(enabled));
-
-    initial begin
-        $dumpfile("tb_debounce.vcd");
-        $dumpvars(0, tb_debounce);
-    end
 
     initial begin
         clk = 1'b0;

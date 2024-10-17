@@ -1,5 +1,5 @@
 
-module debounce(clk, reset, button, button_debounced);
+module DebouncerInstantRelease(clk, reset, button, button_debounced);
     input clk, button, reset;
     output button_debounced;
     reg button_debounced;

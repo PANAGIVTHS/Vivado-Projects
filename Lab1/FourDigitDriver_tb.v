@@ -11,11 +11,6 @@ module tb_FourDigitDriver;
     FourDigitLEDdriver FourDigitLEDdriver_inst (.clk(clk), .reset(reset), .an3(an3), .an2(an2), .an1(an1), .an0(an0), .a(a), .b(b), .c(c), .d(d), .e(e), .f(f), .g(g), .dp(dp), .counter(counter), .button(button));
 
     initial begin
-        $dumpfile("tb_FourDigitDriver.vcd");
-        $dumpvars(0, tb_FourDigitDriver);
-    end
-
-    initial begin
         clk = 1'b0;
         #90 reset = 1'b1;
         #20000 reset = 1'b0;

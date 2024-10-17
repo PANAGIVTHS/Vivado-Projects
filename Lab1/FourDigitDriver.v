@@ -24,13 +24,13 @@ module FourDigitLEDdriver(reset, clk, an3, an2, an1, an0, a, b, c, d, e, f, g, d
       .CLKFBIN(feedback)      // 1-bit input: Feedback clock
     );
 
-    //debounce debounce_inst_2 (.clk(new_clk), .button(reset), .button_debounced(reset_debounced));
-    //debounce debounce_inst (.clk(new_clk), .button(button), .button_debounced(button_debounced));
-    reset_debounce reset_debounce_inst (.clk(new_clk), .button(reset), .button_debounced(reset_debounced));
-    counter_module counter_inst (.clk(new_clk), .reset(reset_debounced), .counter(counter));
-    reset_debounce reset_debounce_inst_2 (.clk(new_clk), .button(button), .button_debounced(button_debounced));
-    incrementer incrementer_inst (.clk(new_clk), .reset(reset_debounced), .button_presses(button_presses), .button_debounced(button_debounced));
-    char_decoder char_decoder_inst (.counter(counter), .char(char), .button_presses(button_presses), .reset(reset_debounced));
+    //DebouncerInstantRelease debounce_inst_2 (.clk(new_clk), .button(reset), .button_debounced(reset_debounced));
+    //DebouncerInstantRelease debounce_inst (.clk(new_clk), .button(button), .button_debounced(button_debounced));
+    Debouncer Debouncer_inst (.clk(new_clk), .button(reset), .button_debounced(reset_debounced));
+    ConstCounter ConstCounter_inst (.clk(new_clk), .reset(reset_debounced), .counter(counter));
+    Debouncer Debouncer_inst_2 (.clk(new_clk), .button(button), .button_debounced(button_debounced));
+    Incrementer Incrementer_inst (.clk(new_clk), .reset(reset_debounced), .button_presses(button_presses), .button_debounced(button_debounced));
+    CharacterDecoder CharacterDecoder_inst (.counter(counter), .char(char), .active_mem_offset(button_presses), .reset(reset_debounced));
     LEDdecoder LEDdecoder_inst (.char(char), .LED({a, b, c, d, e, f, g}));
-    anode_decoder anode_decoder_inst (.counter(counter), .an0(an0), .an1(an1), .an2(an2), .an3(an3));
+    AnodeDecoder AnodeDecoder_inst (.counter(counter), .an0(an0), .an1(an1), .an2(an2), .an3(an3));
 endmodule
