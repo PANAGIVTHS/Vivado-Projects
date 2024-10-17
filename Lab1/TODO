@@ -2,8 +2,10 @@
     [√] Create Incrementer Module
     [√] Create Anode Decoder
     [x] Update Dataflow
+        reset_debouncer
     [√] Create simple debounce for reset
     [x] Clean Up Mess
     [√] Divide into more Modules
     [!] Rewrite TOP module
+    [x] Better module names
     - DONE -

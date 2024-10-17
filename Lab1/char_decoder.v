@@ -34,6 +34,7 @@ module char_decoder (counter, char, button_presses, reset);
         mem[19] <= 4'b1101; // ]
     end
 
+    // ----> button presses maybe NEDDED
     always @(counter) begin
         case (counter)
             AN0_SETUP_BUS: char = mem[4'b0000 + button_presses];

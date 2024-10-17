@@ -11,9 +11,9 @@ module incrementer (input clk, input reset, input button_debounced, output reg [
     assign increment = ~FF[0] & FF[1];
 
     always @(posedge clk or posedge reset) begin
-        if (reset) begin
+        if (reset | (increment & (button_presses == 5'b01111))) begin
             button_presses <= 5'b0;
-        end else if (increment) begin
+        end else if (increment) begin    
             button_presses <= button_presses + 5'b1;
         end
     end
