@@ -1,0 +1,16 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../../FourDigitDriver.v" \
+"../../../../../LEDdecoder.v" \
+"../../../../../anode_decoder.v" \
+"../../../../../char_decoder.v" \
+"../../../../../counter_module.v" \
+"../../../../../incrementer.v" \
+"../../../../../reset_debounce.v" \
+"../../../../../FourDigitDriver_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

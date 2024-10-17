@@ -1,13 +1,12 @@
 
-
 module char_decoder (counter, char, button_presses, reset);
     input [3:0] counter;
     input reset;
     output reg [3:0] char;
     input [4:0] button_presses;
-    reg [4:0] mem [4:0];
+    reg [3:0] mem [19:0];
     
-    parameter AN0_SETUP_BUS = 4'b0000;
+    parameter AN0_SETUP_BUS = 4'b1111;
     parameter AN1_SETUP_BUS = 4'b0011;
     parameter AN2_SETUP_BUS = 4'b0111;
     parameter AN3_SETUP_BUS = 4'b1011;
@@ -38,17 +37,21 @@ module char_decoder (counter, char, button_presses, reset);
     always @(counter) begin
         case (counter)
             AN0_SETUP_BUS: char = mem[4'b0000 + button_presses];
+            4'b0000: char = mem[4'b0000 + button_presses];
             4'b0001: char = mem[4'b0000 + button_presses];
             4'b0010: char = mem[4'b0000 + button_presses];
             AN1_SETUP_BUS: char = mem[4'b0001 + button_presses];
             4'b0100: char = mem[4'b0001 + button_presses];
             4'b0101: char = mem[4'b0001 + button_presses];
+            4'b0110: char = mem[4'b0001 + button_presses];
             AN2_SETUP_BUS: char = mem[4'b0010 + button_presses];
             4'b1000: char = mem[4'b0010 + button_presses];
             4'b1001: char = mem[4'b0010 + button_presses];
+            4'b1010: char = mem[4'b0010 + button_presses];
             AN3_SETUP_BUS: char = mem[4'b0011 + button_presses];
+            4'b1100: char = mem[4'b0011 + button_presses];
+            4'b1101: char = mem[4'b0011 + button_presses];
             4'b1110: char = mem[4'b0011 + button_presses];
-            4'b1111: char = mem[4'b0011 + button_presses];
         endcase
     end
 endmodule

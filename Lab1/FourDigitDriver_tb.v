@@ -18,9 +18,22 @@ module tb_FourDigitDriver;
     initial begin
         clk = 1'b0;
         #90 reset = 1'b1;
-        #150 reset = 1'b0;
+        #20000 reset = 1'b0;
         #10 button = 1'b1;
-        #1000 $finish;
+        #100 button = 1'b0;
+        #100 button = 1'b1;
+        #100 button = 1'b0;
+        #1000 button = 1'b1;
+        #20000 button = 1'b0;
+        #10000 button = 1'b1;
+        #20000 button = 1'b0;
+        #10000 button = 1'b1;
+        #20000 button = 1'b0;
+        #10000 button = 1'b1;
+        #20000 button = 1'b0;
+        #10000 button = 1'b1;
+        #20000 button = 1'b0;
+        #200000 $finish;
     end
 
     always begin

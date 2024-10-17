@@ -1,0 +1,17 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/FourDigitDriver.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module FourDigitLEDdriver
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/LEDdecoder.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module LEDdecoder
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/anode_decoder.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module anode_decoder
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/char_decoder.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module char_decoder
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/counter_module.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module counter_module
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/incrementer.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module incrementer
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/reset_debounce.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module reset_debounce
+INFO: [VRFC 10-2458] undeclared symbol enabled, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/reset_debounce.v:11]
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/FourDigitDriver_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_FourDigitDriver

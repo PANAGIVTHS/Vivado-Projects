@@ -1,7 +1,5 @@
 
-module LEDdecoder (input [3:0] char, output [6:0] LED);
-    reg [6:0] LED;
-    
+module LEDdecoder (input [3:0] char, output reg [6:0] LED);
     // segmentation fault
     always @(char) begin
         case (char)
