@@ -34,6 +34,4 @@ module tb_FourDigitDriver;
     always begin
         #5 clk = ~clk;
     end
-
-    initial $monitor ("clk=%b reset=%b an3=%b an2=%b an1=%b an0=%b a=%b b=%b c=%b d=%b e=%b f=%b g=%b dp=%b", clk, reset, an3, an2, an1, an0, a, b, c, d, e, f, g, dp);
 endmodule

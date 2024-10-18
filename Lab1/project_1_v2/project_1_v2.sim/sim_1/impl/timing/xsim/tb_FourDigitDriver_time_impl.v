@@ -1,7 +1,7 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-// Date        : Wed Oct 16 21:20:44 2024
+// Date        : Fri Oct 18 03:43:34 2024
 // Host        : DESKTOP-922FQ13 running 64-bit major release  (build 9200)
 // Command     : write_verilog -mode timesim -nolib -sdf_anno true -force -file
 //               C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/project_1_v2/project_1_v2.sim/sim_1/impl/timing/xsim/tb_FourDigitDriver_time_impl.v
@@ -13,9 +13,438 @@
 `timescale 1 ps / 1 ps
 `define XIL_TIMING
 
-(* AN0_LOW = "4'b0010" *) (* AN0_SETUP_BUS = "4'b0000" *) (* AN1_LOW = "4'b0110" *) 
-(* AN1_SETUP_BUS = "4'b0011" *) (* AN2_LOW = "4'b1010" *) (* AN2_SETUP_BUS = "4'b0111" *) 
-(* AN3_LOW = "4'b1110" *) (* AN3_SETUP_BUS = "4'b1011" *) (* ECO_CHECKSUM = "3fc12fa0" *) 
+module ConstCounter
+   (Q,
+    an0_OBUF,
+    an1_OBUF,
+    an2_OBUF,
+    an3_OBUF,
+    CLK,
+    AR);
+  output [3:0]Q;
+  output an0_OBUF;
+  output an1_OBUF;
+  output an2_OBUF;
+  output an3_OBUF;
+  input CLK;
+  input [0:0]AR;
+
+  wire [0:0]AR;
+  wire CLK;
+  wire [3:0]Q;
+  wire an0_OBUF;
+  wire an1_OBUF;
+  wire an2_OBUF;
+  wire an3_OBUF;
+  wire \counter[0]_i_1__0_n_0 ;
+  wire [3:1]p_0_in;
+
+  LUT4 #(
+    .INIT(16'hFEFF)) 
+    an0_OBUF_inst_i_1
+       (.I0(Q[0]),
+        .I1(Q[3]),
+        .I2(Q[2]),
+        .I3(Q[1]),
+        .O(an0_OBUF));
+  LUT4 #(
+    .INIT(16'hEFFF)) 
+    an1_OBUF_inst_i_1
+       (.I0(Q[0]),
+        .I1(Q[3]),
+        .I2(Q[2]),
+        .I3(Q[1]),
+        .O(an1_OBUF));
+  LUT4 #(
+    .INIT(16'hEFFF)) 
+    an2_OBUF_inst_i_1
+       (.I0(Q[0]),
+        .I1(Q[2]),
+        .I2(Q[3]),
+        .I3(Q[1]),
+        .O(an2_OBUF));
+  LUT4 #(
+    .INIT(16'hBFFF)) 
+    an3_OBUF_inst_i_1
+       (.I0(Q[0]),
+        .I1(Q[3]),
+        .I2(Q[2]),
+        .I3(Q[1]),
+        .O(an3_OBUF));
+  (* SOFT_HLUTNM = "soft_lutpair3" *) 
+  LUT1 #(
+    .INIT(2'h1)) 
+    \counter[0]_i_1__0 
+       (.I0(Q[0]),
+        .O(\counter[0]_i_1__0_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair3" *) 
+  LUT2 #(
+    .INIT(4'h6)) 
+    \counter[1]_i_1 
+       (.I0(Q[1]),
+        .I1(Q[0]),
+        .O(p_0_in[1]));
+  LUT3 #(
+    .INIT(8'h78)) 
+    \counter[2]_i_1__0 
+       (.I0(Q[0]),
+        .I1(Q[1]),
+        .I2(Q[2]),
+        .O(p_0_in[2]));
+  LUT4 #(
+    .INIT(16'h7F80)) 
+    \counter[3]_i_1__0 
+       (.I0(Q[2]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(Q[3]),
+        .O(p_0_in[3]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \counter_reg[0] 
+       (.C(CLK),
+        .CE(1'b1),
+        .CLR(AR),
+        .D(\counter[0]_i_1__0_n_0 ),
+        .Q(Q[0]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \counter_reg[1] 
+       (.C(CLK),
+        .CE(1'b1),
+        .CLR(AR),
+        .D(p_0_in[1]),
+        .Q(Q[1]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \counter_reg[2] 
+       (.C(CLK),
+        .CE(1'b1),
+        .CLR(AR),
+        .D(p_0_in[2]),
+        .Q(Q[2]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \counter_reg[3] 
+       (.C(CLK),
+        .CE(1'b1),
+        .CLR(AR),
+        .D(p_0_in[3]),
+        .Q(Q[3]));
+endmodule
+
+module Debouncer
+   (AR,
+    CLK,
+    D);
+  output [0:0]AR;
+  input CLK;
+  input [0:0]D;
+
+  wire [0:0]AR;
+  wire CLK;
+  wire [0:0]D;
+  wire button_debounced_i_1_n_0;
+  wire button_debounced_i_2_n_0;
+  wire \counter[4]_i_1_n_0 ;
+  wire [4:0]counter_reg__0;
+  wire [4:0]p_0_in;
+  wire p_0_in_0;
+  wire [1:1]p_0_in__0;
+  wire p_1_in;
+
+  FDRE #(
+    .INIT(1'b0)) 
+    \FF_wire_reg[0] 
+       (.C(CLK),
+        .CE(1'b1),
+        .D(D),
+        .Q(p_0_in__0),
+        .R(1'b0));
+  FDRE #(
+    .INIT(1'b0)) 
+    \FF_wire_reg[1] 
+       (.C(CLK),
+        .CE(1'b1),
+        .D(p_0_in__0),
+        .Q(p_1_in),
+        .R(1'b0));
+  FDRE #(
+    .INIT(1'b0)) 
+    \FF_wire_reg[2] 
+       (.C(CLK),
+        .CE(1'b1),
+        .D(p_1_in),
+        .Q(p_0_in_0),
+        .R(1'b0));
+  LUT6 #(
+    .INIT(64'hBFFFFFFF80000000)) 
+    button_debounced_i_1
+       (.I0(p_0_in_0),
+        .I1(counter_reg__0[3]),
+        .I2(button_debounced_i_2_n_0),
+        .I3(counter_reg__0[2]),
+        .I4(counter_reg__0[4]),
+        .I5(AR),
+        .O(button_debounced_i_1_n_0));
+  LUT2 #(
+    .INIT(4'h8)) 
+    button_debounced_i_2
+       (.I0(counter_reg__0[0]),
+        .I1(counter_reg__0[1]),
+        .O(button_debounced_i_2_n_0));
+  FDRE #(
+    .INIT(1'b0)) 
+    button_debounced_reg
+       (.C(CLK),
+        .CE(1'b1),
+        .D(button_debounced_i_1_n_0),
+        .Q(AR),
+        .R(1'b0));
+  (* SOFT_HLUTNM = "soft_lutpair6" *) 
+  LUT1 #(
+    .INIT(2'h1)) 
+    \counter[0]_i_1 
+       (.I0(counter_reg__0[0]),
+        .O(p_0_in[0]));
+  (* SOFT_HLUTNM = "soft_lutpair6" *) 
+  LUT2 #(
+    .INIT(4'h6)) 
+    \counter[1]_i_1__0 
+       (.I0(counter_reg__0[1]),
+        .I1(counter_reg__0[0]),
+        .O(p_0_in[1]));
+  LUT3 #(
+    .INIT(8'h6A)) 
+    \counter[2]_i_1 
+       (.I0(counter_reg__0[2]),
+        .I1(counter_reg__0[1]),
+        .I2(counter_reg__0[0]),
+        .O(p_0_in[2]));
+  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+  LUT4 #(
+    .INIT(16'h6AAA)) 
+    \counter[3]_i_1 
+       (.I0(counter_reg__0[3]),
+        .I1(counter_reg__0[1]),
+        .I2(counter_reg__0[0]),
+        .I3(counter_reg__0[2]),
+        .O(p_0_in[3]));
+  LUT2 #(
+    .INIT(4'h6)) 
+    \counter[4]_i_1 
+       (.I0(p_0_in_0),
+        .I1(p_1_in),
+        .O(\counter[4]_i_1_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+  LUT5 #(
+    .INIT(32'h6AAAAAAA)) 
+    \counter[4]_i_2 
+       (.I0(counter_reg__0[4]),
+        .I1(counter_reg__0[2]),
+        .I2(counter_reg__0[0]),
+        .I3(counter_reg__0[1]),
+        .I4(counter_reg__0[3]),
+        .O(p_0_in[4]));
+  FDRE #(
+    .INIT(1'b0)) 
+    \counter_reg[0] 
+       (.C(CLK),
+        .CE(1'b1),
+        .D(p_0_in[0]),
+        .Q(counter_reg__0[0]),
+        .R(\counter[4]_i_1_n_0 ));
+  FDRE #(
+    .INIT(1'b0)) 
+    \counter_reg[1] 
+       (.C(CLK),
+        .CE(1'b1),
+        .D(p_0_in[1]),
+        .Q(counter_reg__0[1]),
+        .R(\counter[4]_i_1_n_0 ));
+  FDRE #(
+    .INIT(1'b0)) 
+    \counter_reg[2] 
+       (.C(CLK),
+        .CE(1'b1),
+        .D(p_0_in[2]),
+        .Q(counter_reg__0[2]),
+        .R(\counter[4]_i_1_n_0 ));
+  FDRE #(
+    .INIT(1'b0)) 
+    \counter_reg[3] 
+       (.C(CLK),
+        .CE(1'b1),
+        .D(p_0_in[3]),
+        .Q(counter_reg__0[3]),
+        .R(\counter[4]_i_1_n_0 ));
+  FDRE #(
+    .INIT(1'b0)) 
+    \counter_reg[4] 
+       (.C(CLK),
+        .CE(1'b1),
+        .D(p_0_in[4]),
+        .Q(counter_reg__0[4]),
+        .R(\counter[4]_i_1_n_0 ));
+endmodule
+
+(* ORIG_REF_NAME = "Debouncer" *) 
+module Debouncer_0
+   (D,
+    CLK,
+    \FF_wire_reg[0]_0 );
+  output [0:0]D;
+  input CLK;
+  input [0:0]\FF_wire_reg[0]_0 ;
+
+  wire CLK;
+  wire [0:0]D;
+  wire [0:0]\FF_wire_reg[0]_0 ;
+  wire button_debounced_i_1__0_n_0;
+  wire button_debounced_i_2__0_n_0;
+  wire \counter[4]_i_1__0_n_0 ;
+  wire [4:0]counter_reg__0;
+  wire [4:0]p_0_in;
+  wire p_0_in_0;
+  wire [1:1]p_0_in__0;
+  wire p_1_in;
+
+  FDRE #(
+    .INIT(1'b0)) 
+    \FF_wire_reg[0] 
+       (.C(CLK),
+        .CE(1'b1),
+        .D(\FF_wire_reg[0]_0 ),
+        .Q(p_0_in__0),
+        .R(1'b0));
+  FDRE #(
+    .INIT(1'b0)) 
+    \FF_wire_reg[1] 
+       (.C(CLK),
+        .CE(1'b1),
+        .D(p_0_in__0),
+        .Q(p_1_in),
+        .R(1'b0));
+  FDRE #(
+    .INIT(1'b0)) 
+    \FF_wire_reg[2] 
+       (.C(CLK),
+        .CE(1'b1),
+        .D(p_1_in),
+        .Q(p_0_in_0),
+        .R(1'b0));
+  LUT6 #(
+    .INIT(64'hBFFFFFFF80000000)) 
+    button_debounced_i_1__0
+       (.I0(p_0_in_0),
+        .I1(counter_reg__0[3]),
+        .I2(button_debounced_i_2__0_n_0),
+        .I3(counter_reg__0[2]),
+        .I4(counter_reg__0[4]),
+        .I5(D),
+        .O(button_debounced_i_1__0_n_0));
+  LUT2 #(
+    .INIT(4'h8)) 
+    button_debounced_i_2__0
+       (.I0(counter_reg__0[1]),
+        .I1(counter_reg__0[0]),
+        .O(button_debounced_i_2__0_n_0));
+  FDRE #(
+    .INIT(1'b0)) 
+    button_debounced_reg
+       (.C(CLK),
+        .CE(1'b1),
+        .D(button_debounced_i_1__0_n_0),
+        .Q(D),
+        .R(1'b0));
+  (* SOFT_HLUTNM = "soft_lutpair9" *) 
+  LUT1 #(
+    .INIT(2'h1)) 
+    \counter[0]_i_1__1 
+       (.I0(counter_reg__0[0]),
+        .O(p_0_in[0]));
+  (* SOFT_HLUTNM = "soft_lutpair9" *) 
+  LUT2 #(
+    .INIT(4'h6)) 
+    \counter[1]_i_1__1 
+       (.I0(counter_reg__0[0]),
+        .I1(counter_reg__0[1]),
+        .O(p_0_in[1]));
+  LUT3 #(
+    .INIT(8'h6A)) 
+    \counter[2]_i_1__1 
+       (.I0(counter_reg__0[2]),
+        .I1(counter_reg__0[0]),
+        .I2(counter_reg__0[1]),
+        .O(p_0_in[2]));
+  (* SOFT_HLUTNM = "soft_lutpair7" *) 
+  LUT4 #(
+    .INIT(16'h6AAA)) 
+    \counter[3]_i_1__1 
+       (.I0(counter_reg__0[3]),
+        .I1(counter_reg__0[0]),
+        .I2(counter_reg__0[1]),
+        .I3(counter_reg__0[2]),
+        .O(p_0_in[3]));
+  LUT2 #(
+    .INIT(4'h6)) 
+    \counter[4]_i_1__0 
+       (.I0(p_0_in_0),
+        .I1(p_1_in),
+        .O(\counter[4]_i_1__0_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair7" *) 
+  LUT5 #(
+    .INIT(32'h6AAAAAAA)) 
+    \counter[4]_i_2__0 
+       (.I0(counter_reg__0[4]),
+        .I1(counter_reg__0[2]),
+        .I2(counter_reg__0[1]),
+        .I3(counter_reg__0[0]),
+        .I4(counter_reg__0[3]),
+        .O(p_0_in[4]));
+  FDRE #(
+    .INIT(1'b0)) 
+    \counter_reg[0] 
+       (.C(CLK),
+        .CE(1'b1),
+        .D(p_0_in[0]),
+        .Q(counter_reg__0[0]),
+        .R(\counter[4]_i_1__0_n_0 ));
+  FDRE #(
+    .INIT(1'b0)) 
+    \counter_reg[1] 
+       (.C(CLK),
+        .CE(1'b1),
+        .D(p_0_in[1]),
+        .Q(counter_reg__0[1]),
+        .R(\counter[4]_i_1__0_n_0 ));
+  FDRE #(
+    .INIT(1'b0)) 
+    \counter_reg[2] 
+       (.C(CLK),
+        .CE(1'b1),
+        .D(p_0_in[2]),
+        .Q(counter_reg__0[2]),
+        .R(\counter[4]_i_1__0_n_0 ));
+  FDRE #(
+    .INIT(1'b0)) 
+    \counter_reg[3] 
+       (.C(CLK),
+        .CE(1'b1),
+        .D(p_0_in[3]),
+        .Q(counter_reg__0[3]),
+        .R(\counter[4]_i_1__0_n_0 ));
+  FDRE #(
+    .INIT(1'b0)) 
+    \counter_reg[4] 
+       (.C(CLK),
+        .CE(1'b1),
+        .D(p_0_in[4]),
+        .Q(counter_reg__0[4]),
+        .R(\counter[4]_i_1__0_n_0 ));
+endmodule
+
+(* ECO_CHECKSUM = "7c906dda" *) 
 (* NotValidForBitStream *)
 module FourDigitLEDdriver
    (reset,
@@ -52,6 +481,7 @@ module FourDigitLEDdriver
   input button;
 
   wire a;
+  wire a_OBUF;
   wire an0;
   wire an0_OBUF;
   wire an1;
@@ -61,6 +491,10 @@ module FourDigitLEDdriver
   wire an3;
   wire an3_OBUF;
   wire b;
+  wire b_OBUF;
+  wire button;
+  wire button_IBUF;
+  wire button_debounced;
   wire c;
   wire c_OBUF;
   wire clk;
@@ -68,15 +502,18 @@ module FourDigitLEDdriver
   wire [3:0]counter;
   wire [3:0]counter_OBUF;
   wire d;
+  wire d_OBUF;
   wire dp;
   wire e;
   wire e_OBUF;
   wire f;
+  wire f_OBUF;
   wire feedback;
   wire g;
   wire g_OBUF;
   wire new_clk;
   wire new_clk_BUFG;
+  wire [0:0]p_0_in;
   wire reset;
   wire reset_IBUF;
   wire NLW_MMCME2_BASE_inst_CLKFBOUTB_UNCONNECTED;
@@ -100,10 +537,33 @@ module FourDigitLEDdriver
 initial begin
  $sdf_annotate("tb_FourDigitDriver_time_impl.sdf",,,,"tool_control");
 end
-  LEDdecoder LEDdecoder_inst
-       (.Q(counter_OBUF),
+  ConstCounter ConstCounter_inst
+       (.AR(button_debounced),
+        .CLK(new_clk_BUFG),
+        .Q(counter_OBUF),
+        .an0_OBUF(an0_OBUF),
+        .an1_OBUF(an1_OBUF),
+        .an2_OBUF(an2_OBUF),
+        .an3_OBUF(an3_OBUF));
+  Debouncer Debouncer_inst
+       (.AR(button_debounced),
+        .CLK(new_clk_BUFG),
+        .D(reset_IBUF));
+  Debouncer_0 Debouncer_inst_2
+       (.CLK(new_clk_BUFG),
+        .D(p_0_in),
+        .\FF_wire_reg[0]_0 (button_IBUF));
+  Incrementer Incrementer_inst
+       (.AR(button_debounced),
+        .CLK(new_clk_BUFG),
+        .D(p_0_in),
+        .Q(counter_OBUF),
+        .a_OBUF(a_OBUF),
+        .b_OBUF(b_OBUF),
         .c_OBUF(c_OBUF),
+        .d_OBUF(d_OBUF),
         .e_OBUF(e_OBUF),
+        .f_OBUF(f_OBUF),
         .g_OBUF(g_OBUF));
   (* BOX_TYPE = "PRIMITIVE" *) 
   (* OPT_MODIFIED = "BUFG_OPT " *) 
@@ -187,7 +647,7 @@ end
         .PWRDWN(1'b0),
         .RST(1'b0));
   OBUF a_OBUF_inst
-       (.I(1'b0),
+       (.I(a_OBUF),
         .O(a));
   OBUF an0_OBUF_inst
        (.I(an0_OBUF),
@@ -201,13 +661,12 @@ end
   OBUF an3_OBUF_inst
        (.I(an3_OBUF),
         .O(an3));
-  anode_decoder anode_decoder_inst
-       (.Q(counter_OBUF),
-        .an2_OBUF(an2_OBUF),
-        .an3_OBUF(an3_OBUF));
   OBUF b_OBUF_inst
-       (.I(1'b1),
+       (.I(b_OBUF),
         .O(b));
+  IBUF button_IBUF_inst
+       (.I(button),
+        .O(button_IBUF));
   OBUF c_OBUF_inst
        (.I(c_OBUF),
         .O(c));
@@ -226,14 +685,8 @@ end
   OBUF \counter_OBUF[3]_inst 
        (.I(counter_OBUF[3]),
         .O(counter[3]));
-  counter_module counter_inst
-       (.AR(reset_IBUF),
-        .CLK(new_clk_BUFG),
-        .Q(counter_OBUF),
-        .an0_OBUF(an0_OBUF),
-        .an1_OBUF(an1_OBUF));
   OBUF d_OBUF_inst
-       (.I(1'b0),
+       (.I(d_OBUF),
         .O(d));
   OBUF dp_OBUF_inst
        (.I(1'b0),
@@ -242,7 +695,7 @@ end
        (.I(e_OBUF),
         .O(e));
   OBUF f_OBUF_inst
-       (.I(1'b0),
+       (.I(f_OBUF),
         .O(f));
   OBUF g_OBUF_inst
        (.I(g_OBUF),
@@ -257,173 +710,449 @@ end
         .O(reset_IBUF));
 endmodule
 
-module LEDdecoder
+module Incrementer
    (g_OBUF,
-    c_OBUF,
+    a_OBUF,
+    f_OBUF,
     e_OBUF,
-    Q);
-  output g_OBUF;
-  output c_OBUF;
-  output e_OBUF;
-  input [3:0]Q;
-
-  wire [3:0]Q;
-  wire c_OBUF;
-  wire e_OBUF;
-  wire g_OBUF;
-
-  LUT4 #(
-    .INIT(16'hC3BB)) 
-    c_OBUF_inst_i_1
-       (.I0(Q[3]),
-        .I1(Q[2]),
-        .I2(Q[0]),
-        .I3(Q[1]),
-        .O(c_OBUF));
-  LUT4 #(
-    .INIT(16'h1444)) 
-    e_OBUF_inst_i_1
-       (.I0(Q[3]),
-        .I1(Q[2]),
-        .I2(Q[0]),
-        .I3(Q[1]),
-        .O(e_OBUF));
-  LUT4 #(
-    .INIT(16'hA911)) 
-    g_OBUF_inst_i_1
-       (.I0(Q[3]),
-        .I1(Q[2]),
-        .I2(Q[0]),
-        .I3(Q[1]),
-        .O(g_OBUF));
-endmodule
-
-module anode_decoder
-   (an2_OBUF,
-    an3_OBUF,
-    Q);
-  output an2_OBUF;
-  output an3_OBUF;
-  input [3:0]Q;
-
-  wire [3:0]Q;
-  wire an2_OBUF;
-  wire an3_OBUF;
-
-  LUT4 #(
-    .INIT(16'hFFF7)) 
-    an2
-       (.I0(Q[3]),
-        .I1(Q[1]),
-        .I2(Q[0]),
-        .I3(Q[2]),
-        .O(an2_OBUF));
-  LUT4 #(
-    .INIT(16'hFF7F)) 
-    an3
-       (.I0(Q[3]),
-        .I1(Q[2]),
-        .I2(Q[1]),
-        .I3(Q[0]),
-        .O(an3_OBUF));
-endmodule
-
-module counter_module
-   (an0_OBUF,
+    d_OBUF,
+    c_OBUF,
+    b_OBUF,
+    D,
     Q,
-    an1_OBUF,
     CLK,
     AR);
-  output an0_OBUF;
-  output [3:0]Q;
-  output an1_OBUF;
+  output g_OBUF;
+  output a_OBUF;
+  output f_OBUF;
+  output e_OBUF;
+  output d_OBUF;
+  output c_OBUF;
+  output b_OBUF;
+  input [0:0]D;
+  input [3:0]Q;
   input CLK;
   input [0:0]AR;
 
   wire [0:0]AR;
   wire CLK;
+  wire [0:0]D;
+  wire \FF_reg_n_0_[1] ;
   wire [3:0]Q;
-  wire an0_OBUF;
-  wire an1_OBUF;
-  wire \counter[0]_i_1_n_0 ;
-  wire [3:1]p_0_in;
+  wire a_OBUF;
+  wire a_OBUF_inst_i_2_n_0;
+  wire a_OBUF_inst_i_3_n_0;
+  wire a_OBUF_inst_i_4_n_0;
+  wire b_OBUF;
+  wire b_OBUF_inst_i_2_n_0;
+  wire b_OBUF_inst_i_3_n_0;
+  wire b_OBUF_inst_i_4_n_0;
+  wire [4:0]button_presses;
+  wire \button_presses[4]_i_1_n_0 ;
+  wire c_OBUF;
+  wire c_OBUF_inst_i_2_n_0;
+  wire c_OBUF_inst_i_3_n_0;
+  wire c_OBUF_inst_i_4_n_0;
+  wire d_OBUF;
+  wire d_OBUF_inst_i_2_n_0;
+  wire d_OBUF_inst_i_3_n_0;
+  wire d_OBUF_inst_i_4_n_0;
+  wire e_OBUF;
+  wire e_OBUF_inst_i_2_n_0;
+  wire e_OBUF_inst_i_3_n_0;
+  wire e_OBUF_inst_i_4_n_0;
+  wire f_OBUF;
+  wire f_OBUF_inst_i_2_n_0;
+  wire f_OBUF_inst_i_3_n_0;
+  wire f_OBUF_inst_i_4_n_0;
+  wire g_OBUF;
+  wire g_OBUF_inst_i_2_n_0;
+  wire g_OBUF_inst_i_3_n_0;
+  wire g_OBUF_inst_i_4_n_0;
+  wire [1:1]p_0_in;
+  wire [4:0]p_0_in__0;
 
-  LUT4 #(
-    .INIT(16'hFFFD)) 
-    an0_OBUF_inst_i_1
-       (.I0(Q[1]),
-        .I1(Q[2]),
-        .I2(Q[0]),
-        .I3(Q[3]),
-        .O(an0_OBUF));
-  LUT4 #(
-    .INIT(16'hFFF7)) 
-    an1_OBUF_inst_i_1
-       (.I0(Q[1]),
-        .I1(Q[2]),
-        .I2(Q[0]),
-        .I3(Q[3]),
-        .O(an1_OBUF));
-  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+  FDRE #(
+    .INIT(1'b0)) 
+    \FF_reg[0] 
+       (.C(CLK),
+        .CE(1'b1),
+        .D(D),
+        .Q(p_0_in),
+        .R(1'b0));
+  FDRE #(
+    .INIT(1'b0)) 
+    \FF_reg[1] 
+       (.C(CLK),
+        .CE(1'b1),
+        .D(p_0_in),
+        .Q(\FF_reg_n_0_[1] ),
+        .R(1'b0));
+  LUT6 #(
+    .INIT(64'hBF80FF3FBF80C000)) 
+    a_OBUF_inst_i_1
+       (.I0(a_OBUF_inst_i_2_n_0),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(a_OBUF_inst_i_3_n_0),
+        .I4(Q[2]),
+        .I5(a_OBUF_inst_i_4_n_0),
+        .O(a_OBUF));
+  LUT6 #(
+    .INIT(64'h11AA9BA93098ECDC)) 
+    a_OBUF_inst_i_2
+       (.I0(Q[3]),
+        .I1(button_presses[4]),
+        .I2(button_presses[2]),
+        .I3(button_presses[1]),
+        .I4(button_presses[0]),
+        .I5(button_presses[3]),
+        .O(a_OBUF_inst_i_2_n_0));
+  LUT6 #(
+    .INIT(64'h3122223023115464)) 
+    a_OBUF_inst_i_3
+       (.I0(Q[3]),
+        .I1(button_presses[4]),
+        .I2(button_presses[2]),
+        .I3(button_presses[0]),
+        .I4(button_presses[3]),
+        .I5(button_presses[1]),
+        .O(a_OBUF_inst_i_3_n_0));
+  LUT6 #(
+    .INIT(64'h226730DC555664EC)) 
+    a_OBUF_inst_i_4
+       (.I0(Q[3]),
+        .I1(button_presses[4]),
+        .I2(button_presses[2]),
+        .I3(button_presses[0]),
+        .I4(button_presses[3]),
+        .I5(button_presses[1]),
+        .O(a_OBUF_inst_i_4_n_0));
+  LUT6 #(
+    .INIT(64'hBF80FF3FBF80C000)) 
+    b_OBUF_inst_i_1
+       (.I0(b_OBUF_inst_i_2_n_0),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(b_OBUF_inst_i_3_n_0),
+        .I4(Q[2]),
+        .I5(b_OBUF_inst_i_4_n_0),
+        .O(b_OBUF));
+  LUT6 #(
+    .INIT(64'h5E5DE7E43E3FB7B7)) 
+    b_OBUF_inst_i_2
+       (.I0(Q[3]),
+        .I1(button_presses[4]),
+        .I2(button_presses[0]),
+        .I3(button_presses[2]),
+        .I4(button_presses[1]),
+        .I5(button_presses[3]),
+        .O(b_OBUF_inst_i_2_n_0));
+  LUT6 #(
+    .INIT(64'hEFEEDEDD03335777)) 
+    b_OBUF_inst_i_3
+       (.I0(Q[3]),
+        .I1(button_presses[4]),
+        .I2(button_presses[2]),
+        .I3(button_presses[0]),
+        .I4(button_presses[1]),
+        .I5(button_presses[3]),
+        .O(b_OBUF_inst_i_3_n_0));
+  LUT6 #(
+    .INIT(64'hAADDDEB83377DFBB)) 
+    b_OBUF_inst_i_4
+       (.I0(Q[3]),
+        .I1(button_presses[4]),
+        .I2(button_presses[2]),
+        .I3(button_presses[1]),
+        .I4(button_presses[0]),
+        .I5(button_presses[3]),
+        .O(b_OBUF_inst_i_4_n_0));
   LUT1 #(
     .INIT(2'h1)) 
-    \counter[0]_i_1 
-       (.I0(Q[0]),
-        .O(\counter[0]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+    \button_presses[0]_i_1 
+       (.I0(button_presses[0]),
+        .O(p_0_in__0[0]));
+  (* SOFT_HLUTNM = "soft_lutpair11" *) 
   LUT2 #(
     .INIT(4'h6)) 
-    \counter[1]_i_1 
-       (.I0(Q[0]),
-        .I1(Q[1]),
-        .O(p_0_in[1]));
+    \button_presses[1]_i_1 
+       (.I0(button_presses[0]),
+        .I1(button_presses[1]),
+        .O(p_0_in__0[1]));
+  (* SOFT_HLUTNM = "soft_lutpair11" *) 
   LUT3 #(
-    .INIT(8'h78)) 
-    \counter[2]_i_1 
-       (.I0(Q[1]),
-        .I1(Q[0]),
-        .I2(Q[2]),
-        .O(p_0_in[2]));
+    .INIT(8'h6A)) 
+    \button_presses[2]_i_1 
+       (.I0(button_presses[2]),
+        .I1(button_presses[1]),
+        .I2(button_presses[0]),
+        .O(p_0_in__0[2]));
+  (* SOFT_HLUTNM = "soft_lutpair10" *) 
   LUT4 #(
     .INIT(16'h7F80)) 
-    \counter[3]_i_1 
-       (.I0(Q[0]),
-        .I1(Q[1]),
-        .I2(Q[2]),
-        .I3(Q[3]),
-        .O(p_0_in[3]));
+    \button_presses[3]_i_1 
+       (.I0(button_presses[1]),
+        .I1(button_presses[0]),
+        .I2(button_presses[2]),
+        .I3(button_presses[3]),
+        .O(p_0_in__0[3]));
+  LUT2 #(
+    .INIT(4'h2)) 
+    \button_presses[4]_i_1 
+       (.I0(\FF_reg_n_0_[1] ),
+        .I1(p_0_in),
+        .O(\button_presses[4]_i_1_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair10" *) 
+  LUT5 #(
+    .INIT(32'h70F0F0F0)) 
+    \button_presses[4]_i_2 
+       (.I0(button_presses[3]),
+        .I1(button_presses[1]),
+        .I2(button_presses[4]),
+        .I3(button_presses[0]),
+        .I4(button_presses[2]),
+        .O(p_0_in__0[4]));
   FDCE #(
     .INIT(1'b0)) 
-    \counter_reg[0] 
+    \button_presses_reg[0] 
        (.C(CLK),
-        .CE(1'b1),
+        .CE(\button_presses[4]_i_1_n_0 ),
         .CLR(AR),
-        .D(\counter[0]_i_1_n_0 ),
-        .Q(Q[0]));
+        .D(p_0_in__0[0]),
+        .Q(button_presses[0]));
   FDCE #(
     .INIT(1'b0)) 
-    \counter_reg[1] 
+    \button_presses_reg[1] 
        (.C(CLK),
-        .CE(1'b1),
+        .CE(\button_presses[4]_i_1_n_0 ),
         .CLR(AR),
-        .D(p_0_in[1]),
-        .Q(Q[1]));
+        .D(p_0_in__0[1]),
+        .Q(button_presses[1]));
   FDCE #(
     .INIT(1'b0)) 
-    \counter_reg[2] 
+    \button_presses_reg[2] 
        (.C(CLK),
-        .CE(1'b1),
+        .CE(\button_presses[4]_i_1_n_0 ),
         .CLR(AR),
-        .D(p_0_in[2]),
-        .Q(Q[2]));
+        .D(p_0_in__0[2]),
+        .Q(button_presses[2]));
   FDCE #(
     .INIT(1'b0)) 
-    \counter_reg[3] 
+    \button_presses_reg[3] 
        (.C(CLK),
-        .CE(1'b1),
+        .CE(\button_presses[4]_i_1_n_0 ),
         .CLR(AR),
-        .D(p_0_in[3]),
-        .Q(Q[3]));
+        .D(p_0_in__0[3]),
+        .Q(button_presses[3]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \button_presses_reg[4] 
+       (.C(CLK),
+        .CE(\button_presses[4]_i_1_n_0 ),
+        .CLR(AR),
+        .D(p_0_in__0[4]),
+        .Q(button_presses[4]));
+  LUT6 #(
+    .INIT(64'hBF80FF3FBF80C000)) 
+    c_OBUF_inst_i_1
+       (.I0(c_OBUF_inst_i_2_n_0),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(c_OBUF_inst_i_3_n_0),
+        .I4(Q[2]),
+        .I5(c_OBUF_inst_i_4_n_0),
+        .O(c_OBUF));
+  LUT6 #(
+    .INIT(64'h11EC31CEAA54B847)) 
+    c_OBUF_inst_i_2
+       (.I0(Q[3]),
+        .I1(button_presses[4]),
+        .I2(button_presses[2]),
+        .I3(button_presses[0]),
+        .I4(button_presses[3]),
+        .I5(button_presses[1]),
+        .O(c_OBUF_inst_i_2_n_0));
+  LUT6 #(
+    .INIT(64'hEE660032DCDD4574)) 
+    c_OBUF_inst_i_3
+       (.I0(Q[3]),
+        .I1(button_presses[4]),
+        .I2(button_presses[2]),
+        .I3(button_presses[0]),
+        .I4(button_presses[3]),
+        .I5(button_presses[1]),
+        .O(c_OBUF_inst_i_3_n_0));
+  LUT6 #(
+    .INIT(64'h2255DCA83274CD8B)) 
+    c_OBUF_inst_i_4
+       (.I0(Q[3]),
+        .I1(button_presses[4]),
+        .I2(button_presses[2]),
+        .I3(button_presses[1]),
+        .I4(button_presses[0]),
+        .I5(button_presses[3]),
+        .O(c_OBUF_inst_i_4_n_0));
+  LUT6 #(
+    .INIT(64'hBF80FF3FBF80C000)) 
+    d_OBUF_inst_i_1
+       (.I0(d_OBUF_inst_i_2_n_0),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(d_OBUF_inst_i_3_n_0),
+        .I4(Q[2]),
+        .I5(d_OBUF_inst_i_4_n_0),
+        .O(d_OBUF));
+  LUT6 #(
+    .INIT(64'h000000008CBF40DC)) 
+    d_OBUF_inst_i_2
+       (.I0(Q[3]),
+        .I1(button_presses[3]),
+        .I2(button_presses[1]),
+        .I3(button_presses[0]),
+        .I4(button_presses[2]),
+        .I5(button_presses[4]),
+        .O(d_OBUF_inst_i_2_n_0));
+  LUT6 #(
+    .INIT(64'h0000000017CCECC8)) 
+    d_OBUF_inst_i_3
+       (.I0(Q[3]),
+        .I1(button_presses[0]),
+        .I2(button_presses[1]),
+        .I3(button_presses[3]),
+        .I4(button_presses[2]),
+        .I5(button_presses[4]),
+        .O(d_OBUF_inst_i_3_n_0));
+  LUT6 #(
+    .INIT(64'h00000000770F8F08)) 
+    d_OBUF_inst_i_4
+       (.I0(button_presses[1]),
+        .I1(Q[3]),
+        .I2(button_presses[0]),
+        .I3(button_presses[3]),
+        .I4(button_presses[2]),
+        .I5(button_presses[4]),
+        .O(d_OBUF_inst_i_4_n_0));
+  LUT6 #(
+    .INIT(64'hBF80FF3FBF80C000)) 
+    e_OBUF_inst_i_1
+       (.I0(e_OBUF_inst_i_2_n_0),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(e_OBUF_inst_i_3_n_0),
+        .I4(Q[2]),
+        .I5(e_OBUF_inst_i_4_n_0),
+        .O(e_OBUF));
+  LUT6 #(
+    .INIT(64'hC6C40000D4C62100)) 
+    e_OBUF_inst_i_2
+       (.I0(Q[3]),
+        .I1(button_presses[4]),
+        .I2(button_presses[1]),
+        .I3(button_presses[3]),
+        .I4(button_presses[0]),
+        .I5(button_presses[2]),
+        .O(e_OBUF_inst_i_2_n_0));
+  LUT6 #(
+    .INIT(64'h008AECCC01108889)) 
+    e_OBUF_inst_i_3
+       (.I0(Q[3]),
+        .I1(button_presses[4]),
+        .I2(button_presses[2]),
+        .I3(button_presses[0]),
+        .I4(button_presses[3]),
+        .I5(button_presses[1]),
+        .O(e_OBUF_inst_i_3_n_0));
+  LUT6 #(
+    .INIT(64'hCE01CC0098028900)) 
+    e_OBUF_inst_i_4
+       (.I0(Q[3]),
+        .I1(button_presses[4]),
+        .I2(button_presses[2]),
+        .I3(button_presses[0]),
+        .I4(button_presses[3]),
+        .I5(button_presses[1]),
+        .O(e_OBUF_inst_i_4_n_0));
+  LUT6 #(
+    .INIT(64'hBF80FF3FBF80C000)) 
+    f_OBUF_inst_i_1
+       (.I0(f_OBUF_inst_i_2_n_0),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(f_OBUF_inst_i_3_n_0),
+        .I4(Q[2]),
+        .I5(f_OBUF_inst_i_4_n_0),
+        .O(f_OBUF));
+  LUT6 #(
+    .INIT(64'h89032021CC214430)) 
+    f_OBUF_inst_i_2
+       (.I0(Q[3]),
+        .I1(button_presses[4]),
+        .I2(button_presses[2]),
+        .I3(button_presses[0]),
+        .I4(button_presses[1]),
+        .I5(button_presses[3]),
+        .O(f_OBUF_inst_i_2_n_0));
+  LUT6 #(
+    .INIT(64'h01EF039A02CC1088)) 
+    f_OBUF_inst_i_3
+       (.I0(Q[3]),
+        .I1(button_presses[4]),
+        .I2(button_presses[2]),
+        .I3(button_presses[3]),
+        .I4(button_presses[1]),
+        .I5(button_presses[0]),
+        .O(f_OBUF_inst_i_3_n_0));
+  LUT6 #(
+    .INIT(64'h4610CC8803121230)) 
+    f_OBUF_inst_i_4
+       (.I0(Q[3]),
+        .I1(button_presses[4]),
+        .I2(button_presses[2]),
+        .I3(button_presses[1]),
+        .I4(button_presses[3]),
+        .I5(button_presses[0]),
+        .O(f_OBUF_inst_i_4_n_0));
+  LUT6 #(
+    .INIT(64'hBF80FF3FBF80C000)) 
+    g_OBUF_inst_i_1
+       (.I0(g_OBUF_inst_i_2_n_0),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(g_OBUF_inst_i_3_n_0),
+        .I4(Q[2]),
+        .I5(g_OBUF_inst_i_4_n_0),
+        .O(g_OBUF));
+  LUT6 #(
+    .INIT(64'h9B56CE00A9CDCD8A)) 
+    g_OBUF_inst_i_2
+       (.I0(Q[3]),
+        .I1(button_presses[4]),
+        .I2(button_presses[2]),
+        .I3(button_presses[0]),
+        .I4(button_presses[3]),
+        .I5(button_presses[1]),
+        .O(g_OBUF_inst_i_2_n_0));
+  LUT6 #(
+    .INIT(64'h54EC67CDED88DECE)) 
+    g_OBUF_inst_i_3
+       (.I0(Q[3]),
+        .I1(button_presses[4]),
+        .I2(button_presses[2]),
+        .I3(button_presses[3]),
+        .I4(button_presses[0]),
+        .I5(button_presses[1]),
+        .O(g_OBUF_inst_i_3_n_0));
+  LUT6 #(
+    .INIT(64'h67A956CECD00CE45)) 
+    g_OBUF_inst_i_4
+       (.I0(Q[3]),
+        .I1(button_presses[4]),
+        .I2(button_presses[2]),
+        .I3(button_presses[0]),
+        .I4(button_presses[1]),
+        .I5(button_presses[3]),
+        .O(g_OBUF_inst_i_4_n_0));
 endmodule
 `ifndef GLBL
 `define GLBL

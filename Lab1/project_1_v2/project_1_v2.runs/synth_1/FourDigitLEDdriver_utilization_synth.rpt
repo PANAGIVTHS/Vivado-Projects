@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date         : Thu Oct 17 02:55:49 2024
+| Date         : Fri Oct 18 03:44:51 2024
 | Host         : DESKTOP-922FQ13 running 64-bit major release  (build 9200)
 | Command      : report_utilization -file FourDigitLEDdriver_utilization_synth.rpt -pb FourDigitLEDdriver_utilization_synth.pb
 | Design       : FourDigitLEDdriver
@@ -30,8 +30,8 @@ Table of Contents
 +-------------------------+------+-------+-----------+-------+
 |        Site Type        | Used | Fixed | Available | Util% |
 +-------------------------+------+-------+-----------+-------+
-| Slice LUTs*             |   43 |     0 |     63400 |  0.07 |
-|   LUT as Logic          |   43 |     0 |     63400 |  0.07 |
+| Slice LUTs*             |   46 |     0 |     63400 |  0.07 |
+|   LUT as Logic          |   46 |     0 |     63400 |  0.07 |
 |   LUT as Memory         |    0 |     0 |     19000 |  0.00 |
 | Slice Registers         |   29 |     0 |    126800 |  0.02 |
 |   Register as Flip Flop |   29 |     0 |    126800 |  0.02 |
@@ -146,15 +146,15 @@ Table of Contents
 +------------+------+---------------------+
 |  Ref Name  | Used | Functional Category |
 +------------+------+---------------------+
-| LUT6       |   20 |                 LUT |
+| LUT6       |   30 |                 LUT |
 | FDRE       |   20 |        Flop & Latch |
 | OBUF       |   16 |                  IO |
-| LUT4       |   15 |                 LUT |
+| LUT2       |    9 |                 LUT |
 | FDCE       |    9 |        Flop & Latch |
-| LUT2       |    8 |                 LUT |
-| LUT3       |    6 |                 LUT |
-| LUT5       |    5 |                 LUT |
+| LUT4       |    8 |                 LUT |
+| LUT3       |    4 |                 LUT |
 | LUT1       |    4 |                 LUT |
+| LUT5       |    3 |                 LUT |
 | IBUF       |    3 |                  IO |
 | MMCME2_ADV |    1 |               Clock |
 +------------+------+---------------------+

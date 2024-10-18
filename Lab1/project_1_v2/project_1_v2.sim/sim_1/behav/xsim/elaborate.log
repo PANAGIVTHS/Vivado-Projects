@@ -6,23 +6,23 @@ Starting static elaboration
 Completed static elaboration
 Starting simulation data flow analysis
 WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/FourDigitDriver.v" Line 2. Module FourDigitLEDdriver doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/incrementer.v" Line 1. Module incrementer doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/Debouncer.v" Line 1. Module Debouncer doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/ConstCounter.v" Line 1. Module ConstCounter doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/Debouncer.v" Line 1. Module Debouncer doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/Incrementer.v" Line 1. Module Incrementer doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/CharacterDecoder.v" Line 2. Module CharacterDecoder doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/LEDdecoder.v" Line 2. Module LEDdecoder doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/reset_debounce.v" Line 1. Module reset_debounce doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/reset_debounce.v" Line 1. Module reset_debounce doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/char_decoder.v" Line 2. Module char_decoder doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/counter_module.v" Line 1. Module counter_module doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/anode_decoder.v" Line 1. Module anode_decoder doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/AnodeDecoder.v" Line 1. Module AnodeDecoder doesn't have a timescale but at least one module in design has a timescale.
 Completed simulation data flow analysis
 Time Resolution for simulation is 1ps
 Compiling module unisims_ver.MMCME2_ADV(CLKFBOUT_MULT_F=6.0,C...
 Compiling module unisims_ver.MMCME2_BASE(CLKFBOUT_MULT_F=6.0,...
-Compiling module xil_defaultlib.incrementer
+Compiling module xil_defaultlib.Debouncer
+Compiling module xil_defaultlib.ConstCounter
+Compiling module xil_defaultlib.Incrementer
+Compiling module xil_defaultlib.CharacterDecoder
 Compiling module xil_defaultlib.LEDdecoder
-Compiling module xil_defaultlib.reset_debounce
-Compiling module xil_defaultlib.char_decoder
-Compiling module xil_defaultlib.counter_module
-Compiling module xil_defaultlib.anode_decoder
+Compiling module xil_defaultlib.AnodeDecoder
 Compiling module xil_defaultlib.FourDigitLEDdriver
 Compiling module xil_defaultlib.tb_FourDigitDriver
 Compiling module xil_defaultlib.glbl

@@ -1,7 +1,7 @@
 
 module CharacterDecoder (counter, char, active_mem_offset, reset);
     input [3:0] counter;
-    input [4:0] button_presses;
+    input [4:0] active_mem_offset;
     input reset;
     output reg [3:0] char;
     reg [3:0] mem [19:0];
@@ -38,22 +38,22 @@ module CharacterDecoder (counter, char, active_mem_offset, reset);
     // ----> + @button presses maybe NEDDED
     always @(counter) begin
         case (counter)
-            AN0_SETUP_BUS: char = mem[4'b0000 + button_presses];
-            4'b0000: char = mem[4'b0000 + button_presses];
-            4'b0001: char = mem[4'b0000 + button_presses];
-            4'b0010: char = mem[4'b0000 + button_presses];
-            AN1_SETUP_BUS: char = mem[4'b0001 + button_presses];
-            4'b0100: char = mem[4'b0001 + button_presses];
-            4'b0101: char = mem[4'b0001 + button_presses];
-            4'b0110: char = mem[4'b0001 + button_presses];
-            AN2_SETUP_BUS: char = mem[4'b0010 + button_presses];
-            4'b1000: char = mem[4'b0010 + button_presses];
-            4'b1001: char = mem[4'b0010 + button_presses];
-            4'b1010: char = mem[4'b0010 + button_presses];
-            AN3_SETUP_BUS: char = mem[4'b0011 + button_presses];
-            4'b1100: char = mem[4'b0011 + button_presses];
-            4'b1101: char = mem[4'b0011 + button_presses];
-            4'b1110: char = mem[4'b0011 + button_presses];
+            AN0_SETUP_BUS: char = mem[4'b0000 + active_mem_offset];
+            4'b0000: char = mem[4'b0000 + active_mem_offset];
+            4'b0001: char = mem[4'b0000 + active_mem_offset];
+            4'b0010: char = mem[4'b0000 + active_mem_offset];
+            AN1_SETUP_BUS: char = mem[4'b0001 + active_mem_offset];
+            4'b0100: char = mem[4'b0001 + active_mem_offset];
+            4'b0101: char = mem[4'b0001 + active_mem_offset];
+            4'b0110: char = mem[4'b0001 + active_mem_offset];
+            AN2_SETUP_BUS: char = mem[4'b0010 + active_mem_offset];
+            4'b1000: char = mem[4'b0010 + active_mem_offset];
+            4'b1001: char = mem[4'b0010 + active_mem_offset];
+            4'b1010: char = mem[4'b0010 + active_mem_offset];
+            AN3_SETUP_BUS: char = mem[4'b0011 + active_mem_offset];
+            4'b1100: char = mem[4'b0011 + active_mem_offset];
+            4'b1101: char = mem[4'b0011 + active_mem_offset];
+            4'b1110: char = mem[4'b0011 + active_mem_offset];
         endcase
     end
 endmodule

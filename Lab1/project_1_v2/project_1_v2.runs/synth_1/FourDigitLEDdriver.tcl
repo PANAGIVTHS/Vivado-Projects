@@ -17,7 +17,6 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
-set_msg_config -id {Common 17-41} -limit 10000000
 create_project -in_memory -part xc7a100tcsg324-1
 
 set_param project.singleFileAddWarning.threshold 0
@@ -31,12 +30,12 @@ set_property board_part digilentinc.com:arty-a7-100:part0:1.1 [current_project]
 set_property ip_output_repo c:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/project_1_v2/project_1_v2.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 read_verilog -library xil_defaultlib {
+  C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/AnodeDecoder.v
+  C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/CharacterDecoder.v
+  C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/ConstCounter.v
+  C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/Debouncer.v
+  C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/Incrementer.v
   C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/LEDdecoder.v
-  C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/anode_decoder.v
-  C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/char_decoder.v
-  C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/counter_module.v
-  C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/incrementer.v
-  C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/reset_debounce.v
   C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/FourDigitDriver.v
 }
 # Mark all dcp files as not used in implementation to prevent them from being

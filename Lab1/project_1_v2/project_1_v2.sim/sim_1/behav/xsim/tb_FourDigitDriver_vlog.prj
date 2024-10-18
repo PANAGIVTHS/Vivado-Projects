@@ -1,12 +1,12 @@
 # compile verilog/system verilog design source files
 verilog xil_defaultlib  \
+"../../../../../AnodeDecoder.v" \
+"../../../../../CharacterDecoder.v" \
+"../../../../../ConstCounter.v" \
+"../../../../../Debouncer.v" \
 "../../../../../FourDigitDriver.v" \
+"../../../../../Incrementer.v" \
 "../../../../../LEDdecoder.v" \
-"../../../../../anode_decoder.v" \
-"../../../../../char_decoder.v" \
-"../../../../../counter_module.v" \
-"../../../../../incrementer.v" \
-"../../../../../reset_debounce.v" \
 "../../../../../FourDigitDriver_tb.v" \
 
 # compile glbl module

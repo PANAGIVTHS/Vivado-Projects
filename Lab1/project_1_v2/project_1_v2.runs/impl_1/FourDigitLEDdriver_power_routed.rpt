@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date             : Thu Oct 17 02:56:32 2024
+| Date             : Fri Oct 18 03:45:36 2024
 | Host             : DESKTOP-922FQ13 running 64-bit major release  (build 9200)
 | Command          : report_power -file FourDigitLEDdriver_power_routed.rpt -pb FourDigitLEDdriver_power_summary_routed.pb -rpx FourDigitLEDdriver_power_routed.rpx
 | Design           : FourDigitLEDdriver
@@ -54,10 +54,10 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |    <0.001 |        5 |       --- |             --- |
 | Slice Logic    |    <0.001 |       97 |       --- |             --- |
-|   LUT as Logic |    <0.001 |       43 |     63400 |            0.07 |
+|   LUT as Logic |    <0.001 |       45 |     63400 |            0.07 |
 |   Register     |    <0.001 |       29 |    126800 |            0.02 |
 |   Others       |     0.000 |       10 |       --- |             --- |
-| Signals        |    <0.001 |       73 |       --- |             --- |
+| Signals        |    <0.001 |       71 |       --- |             --- |
 | MMCM           |     0.084 |        1 |         6 |           16.67 |
 | I/O            |    <0.001 |       19 |       210 |            9.05 |
 | Static Power   |     0.105 |          |           |                 |
