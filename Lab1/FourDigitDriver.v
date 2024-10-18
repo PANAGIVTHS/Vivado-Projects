@@ -1,9 +1,9 @@
 
-module FourDigitLEDdriver(reset, clk, an3, an2, an1, an0, a, b, c, d, e, f, g, dp, counter, button);
+module FourDigitLEDdriver(reset, clk, an3, an2, an1, an0, a, b, c, d, e, f, g, dp, button);
     input clk, reset, button;
     output an3, an2, an1, an0;
-    output wire [3:0] counter;
     output wire a, b, c, d, e, f, g, dp;
+    wire [3:0] counter;
     wire button_debounced, an3, an2, an1, an0, feedback;
     wire new_clk, button_ON, enabled, reset_debounced;
     wire [4:0] button_presses;

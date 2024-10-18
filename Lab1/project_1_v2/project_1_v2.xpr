@@ -4,7 +4,7 @@
 <!-- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.   -->
 
 <Project Version="7" Minor="39" Path="C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/project_1_v2/project_1_v2.xpr">
-  <DefaultLaunch Dir="$PRUNDIR"/>
+  <DefaultLaunch Dir="$PRUNDIR/impl_1"/>
   <Configuration>
     <Option Name="Id" Val="bdb48d6b6b804b099be549daa7a78bb1"/>
     <Option Name="Part" Val="xc7a100tcsg324-1"/>
@@ -193,7 +193,7 @@
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018"/>
         <Step Id="synth_design"/>
       </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <GeneratedRun Dir="$PRUNDIR/impl_1" File="gen_run.xml"/>
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2018"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
     </Run>
@@ -210,7 +210,7 @@
         <Step Id="post_route_phys_opt_design"/>
         <Step Id="write_bitstream"/>
       </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <GeneratedRun Dir="$PRUNDIR/impl_1" File="gen_run.xml"/>
       <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2018"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
     </Run>

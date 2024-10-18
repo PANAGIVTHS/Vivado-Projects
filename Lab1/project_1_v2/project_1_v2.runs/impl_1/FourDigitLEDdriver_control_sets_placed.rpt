@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date         : Fri Oct 18 03:45:15 2024
+| Date         : Fri Oct 18 14:03:45 2024
 | Host         : DESKTOP-922FQ13 running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file FourDigitLEDdriver_control_sets_placed.rpt
 | Design       : FourDigitLEDdriver
@@ -46,11 +46,11 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |              10 |            4 |
+| No           | No                    | No                     |              10 |            2 |
 | No           | No                    | Yes                    |               4 |            1 |
 | No           | Yes                   | No                     |              10 |            3 |
 | Yes          | No                    | No                     |               0 |            0 |
-| Yes          | No                    | Yes                    |               5 |            1 |
+| Yes          | No                    | Yes                    |               5 |            2 |
 | Yes          | Yes                   | No                     |               0 |            0 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
@@ -62,10 +62,10 @@ Table of Contents
 |  Clock Signal |                Enable Signal               |            Set/Reset Signal            | Slice Load Count | Bel Load Count |
 +---------------+--------------------------------------------+----------------------------------------+------------------+----------------+
 |  new_clk_BUFG |                                            | Debouncer_inst/AR[0]                   |                1 |              4 |
-|  new_clk_BUFG |                                            | Debouncer_inst/counter[4]_i_1_n_0      |                1 |              5 |
-|  new_clk_BUFG |                                            | Debouncer_inst_2/counter[4]_i_1__0_n_0 |                2 |              5 |
-|  new_clk_BUFG | Incrementer_inst/button_presses[4]_i_1_n_0 | Debouncer_inst/AR[0]                   |                1 |              5 |
-|  new_clk_BUFG |                                            |                                        |                4 |             10 |
+|  new_clk_BUFG |                                            | Debouncer_inst/counter[4]_i_1_n_0      |                2 |              5 |
+|  new_clk_BUFG |                                            | Debouncer_inst_2/counter[4]_i_1__0_n_0 |                1 |              5 |
+|  new_clk_BUFG | Incrementer_inst/button_presses[4]_i_1_n_0 | Debouncer_inst/AR[0]                   |                2 |              5 |
+|  new_clk_BUFG |                                            |                                        |                2 |             10 |
 +---------------+--------------------------------------------+----------------------------------------+------------------+----------------+
 
 
