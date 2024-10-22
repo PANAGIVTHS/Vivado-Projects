@@ -1,6 +1,6 @@
 # compile verilog/system verilog design source files
 verilog xil_defaultlib  \
-"../../../../../debounce.v" \
+"../../../../../Debouncer.v" \
 "../../../../../debounce_tb.v" \
 
 # compile glbl module
