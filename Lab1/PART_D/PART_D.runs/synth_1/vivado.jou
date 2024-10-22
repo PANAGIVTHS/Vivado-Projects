@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2018.3 (64-bit)
+# SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+# IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+# Start of session at: Wed Oct 23 00:04:24 2024
+# Process ID: 19588
+# Current directory: C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/PART_D/PART_D.runs/synth_1
+# Command line: vivado.exe -log FourDigitLEDdriver.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source FourDigitLEDdriver.tcl
+# Log file: C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/PART_D/PART_D.runs/synth_1/FourDigitLEDdriver.vds
+# Journal file: C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/PART_D/PART_D.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source FourDigitLEDdriver.tcl -notrace

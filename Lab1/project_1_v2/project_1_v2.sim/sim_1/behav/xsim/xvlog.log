@@ -1,5 +1,0 @@
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/Debouncer.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module Debouncer
-INFO: [VRFC 10-2458] undeclared symbol enabled, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/Debouncer.v:11]
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/debounce_tb.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module tb_debounce

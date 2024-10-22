@@ -1,0 +1,9 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/PART_D/PART_D.sim/sim_1/impl/timing/xsim/tb_FourDigitDriver_time_impl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ConstCounter
+INFO: [VRFC 10-311] analyzing module Debouncer
+INFO: [VRFC 10-311] analyzing module FourDigitLEDdriver
+INFO: [VRFC 10-311] analyzing module Incrementer
+INFO: [VRFC 10-311] analyzing module ScrollCounter
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/PartD_src/FourDigitDriver_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_FourDigitDriver

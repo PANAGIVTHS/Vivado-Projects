@@ -1,0 +1,6 @@
+0.6
+2018.3
+Dec  7 2018
+00:33:28
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/PART_B/PART_B.sim/sim_1/impl/timing/xsim/tb_FourDigitDriver_time_impl.v,1729630185,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/PartB_src/FourDigitDriver_tb.v,,AnodeDecoder;ConstCounter;Debouncer;FourDigitLEDdriver;LEDdecoder;glbl,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/PartB_src/FourDigitDriver_tb.v,1729626764,verilog,,,,tb_FourDigitDriver,,,,,,,,

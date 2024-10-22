@@ -1,0 +1,19 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/PartD_src/AnodeDecoder.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module AnodeDecoder
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/PartD_src/CharacterDecoder.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module CharacterDecoder
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/PartD_src/ConstCounter.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ConstCounter
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/PartD_src/Debouncer.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Debouncer
+INFO: [VRFC 10-2458] undeclared symbol enabled, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/PartD_src/Debouncer.v:11]
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/PartD_src/FourDigitDriver.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module FourDigitLEDdriver
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/PartD_src/Incrementer.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Incrementer
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/PartD_src/LEDdecoder.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module LEDdecoder
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/PartD_src/ScrollCounter.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ScrollCounter
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab1/PartD_src/FourDigitDriver_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_FourDigitDriver
