@@ -1,11 +1,12 @@
 // TODO COMMITS
     [√] Create Incrementer Module
     [√] Create Anode Decoder
-    [!] Update Dataflow
+    [√] Update Dataflow
         [√] reset_debouncer
     [√] Create simple debounce for reset
     [√] Clean Up Mess
     [√] Divide into more Modules
     [√] Rewrite TOP module
     [√] Better module names
+    [x] Make Parts Separately
     - DONE -
