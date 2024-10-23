@@ -7,28 +7,28 @@ module AnodeDecoder (input [3:0] counter, output reg an0, output reg an1, output
     always @(counter) begin
         case (counter)
             AN0_LOW: begin
-                an0 = 1'b0;
+                an3 = 1'b0;
                 an1 = 1'b1;
                 an2 = 1'b1;
-                an3 = 1'b1;
+                an0 = 1'b1;
             end
             AN1_LOW: begin
                 an0 = 1'b1;
-                an1 = 1'b0;
-                an2 = 1'b1;
+                an2 = 1'b0;
+                an1 = 1'b1;
                 an3 = 1'b1;
             end
             AN2_LOW: begin
                 an0 = 1'b1;
-                an1 = 1'b1;
-                an2 = 1'b0;
+                an2 = 1'b1;
+                an1 = 1'b0;
                 an3 = 1'b1;
             end
             AN3_LOW: begin
-                an0 = 1'b1;
+                an3 = 1'b1;
                 an1 = 1'b1;
                 an2 = 1'b1;
-                an3 = 1'b0;
+                an0 = 1'b0;
             end
             default: begin
                 an0 = 1'b1;

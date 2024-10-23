@@ -6,10 +6,10 @@ module FourDigitLEDdriver(reset, clk, an3, an2, an1, an0, a, b, c, d, e, f, g, d
     wire [3:0] counter;
     wire button_debounced, an3, an2, an1, an0, feedback;
     wire new_clk, button_ON, enabled, reset_debounced;
-    wire [4:0] button_presses;
+    wire [3:0] button_presses;
     wire [3:0] char;
     
-    assign dp = 1'b0;
+    assign dp = 1'b1;
     
     MMCME2_BASE #(
        .CLKFBOUT_MULT_F(6.0),     // Multiply value for all CLKOUT (2.000-64.000).
@@ -28,7 +28,7 @@ module FourDigitLEDdriver(reset, clk, an3, an2, an1, an0, a, b, c, d, e, f, g, d
     ConstCounter ConstCounter_inst (.clk(new_clk), .reset(reset_debounced), .counter(counter));
     Debouncer Debouncer_inst_2 (.clk(new_clk), .button(button), .button_debounced(button_debounced));
     Incrementer Incrementer_inst (.clk(new_clk), .reset(reset_debounced), .button_presses(button_presses), .button_debounced(button_debounced));
-    CharacterDecoder CharacterDecoder_inst (.counter(counter), .char(char), .active_mem_offset(button_presses), .reset(reset_debounced));
+    CharacterDecoder CharacterDecoder_inst (.clk(new_clk), .counter(counter), .char(char), .active_mem_offset(button_presses), .reset(reset_debounced));
     LEDdecoder LEDdecoder_inst (.char(char), .LED({a, b, c, d, e, f, g}));
     AnodeDecoder AnodeDecoder_inst (.counter(counter), .an0(an0), .an1(an1), .an2(an2), .an3(an3));
 endmodule

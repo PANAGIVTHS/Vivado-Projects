@@ -1,5 +1,0 @@
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Vivado Code/Lab1/project_1/project_1.sim/sim_1/synth/timing/xsim/tb_FourDigitDriver_time_synth.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module FourDigitLEDdriver
-INFO: [VRFC 10-311] analyzing module glbl
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Vivado Code/Lab1/FourDigitDriver_tb.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module tb_FourDigitDriver
