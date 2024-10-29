@@ -24,7 +24,7 @@ module uart_transmitter (
             bit_counter <= 0;
             Tx_BUSY <= 0;
             TxD <= 1;  // No transmission
-            next_state <= SETUP;
+            next_state <= IDLE;
         end else if begin
             cur_state <= next_state;
         end
@@ -33,7 +33,7 @@ module uart_transmitter (
     always @(*) begin 
         if (Tx_EN && Tx_WR && !Tx_BUSY) begin
             next_state <= SETUP; // Start-SetUp transmission
-        end else if (Tx_BUSY && sample_ENABLE) begin
+        end else if (Tx_EN && Tx_WR && Tx_BUSY && sample_ENABLE) begin
             next_state <= TRANSMITTING; // Transmitting new bit of data
         end else begin
             next_state <= IDLE; // Default state, hold memory 

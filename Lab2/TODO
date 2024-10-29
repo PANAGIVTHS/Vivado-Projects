@@ -1,3 +1,4 @@
 // TODO LAB2
 [x] Refactor code to make FSM-like
 [x] Make dataflow for Part A, Part B 
+[x] Make Part A, B testbench
