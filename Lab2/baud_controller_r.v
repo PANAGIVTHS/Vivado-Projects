@@ -2,7 +2,7 @@
 module baud_controller_r (reset, clk, baud_select, sample_ENABLE);
     input reset, clk;
     input [2:0] baud_select;
-    output sample_ENABLE;
+    output reg sample_ENABLE;
 
     reg [31:0] counter;
     reg [31:0] baud_limit;
