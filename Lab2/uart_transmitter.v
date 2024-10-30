@@ -25,12 +25,12 @@ module uart_transmitter (
             Tx_BUSY <= 0;
             TxD <= 1;  // No transmission
             next_state <= IDLE;
-        end else if begin
+        end else begin
             cur_state <= next_state;
         end
     end
 
-    always @(*) begin 
+    always @(Tx_EN or Tx_WR or Tx_BUSY or sample_ENABLE) begin 
         if (Tx_EN && Tx_WR && !Tx_BUSY) begin
             next_state <= SETUP; // Start-SetUp transmission
         end else if (Tx_EN && Tx_WR && Tx_BUSY && sample_ENABLE) begin
@@ -40,7 +40,7 @@ module uart_transmitter (
         end
     end
 
-    always @(*) begin
+    always @(cur_state) begin
         case(cur_state)
             SETUP: begin
                 shift_reg <= {1'b1, Tx_DATA, 1'b0};  // setup shift register for transmission
@@ -50,13 +50,17 @@ module uart_transmitter (
             TRANSMITTING: begin
                 // Read and send one bit from the buffer
                 TxD <= shift_reg[bit_counter];
-                bit_counter <= bit_counter + 1;
-                if (bit_counter == 10) begin
+                if (bit_counter == 4'b1001) begin
                     Tx_BUSY <= 0;  // Transmission complete no longer busy
-                end    
+                end else begin
+                    bit_counter <= bit_counter + 1'b1;
+                end
             end
             IDLE: begin
                 TxD <= TxD; // For Clarity this is what default does. 'Default' is to be in IDLE state 
+            end
+            default: begin
+            
             end
         endcase
     end
