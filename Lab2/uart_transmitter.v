@@ -9,58 +9,52 @@ module uart_transmitter (
     output reg TxD,              // Output serial data
     output reg Tx_BUSY           // Transmission status
 );
-
-    reg [3:0] bit_counter;        // Shift register bits (0-10 Ξ³ΞΉΞ± Ο„Ξ± 11 bit)
-    reg [9:0] shift_reg;          // Shift register
+    
+    // Shift register bits (0-10 για τα 11 bit)
     wire sample_ENABLE;           // Signal to sample data
-    reg [1:0] cur_state, next_state;
+    reg [3:0] cur_state, next_state;
+    wire [0:9] buffer = {1'b0, Tx_DATA, 1'b1}; // Add start and stop bits to data
 
-    localparam SETUP = 2'b00, IDLE = 2'b01, TRANSMITTING = 2'b10;
+    localparam START_BIT = 4'b0000, IDLE = 4'b1010, DISABLED = 4'b1011, UNUSED1 = 4'b1101, UNUSED2 = 4'b1110, UNUSED3 = 4'b1111;
 
     baud_controller_t baud_controller_t_inst (.reset(reset), .clk(clk), .baud_select(baud_select), .sample_ENABLE(sample_ENABLE));
 
     always @(posedge clk or posedge reset) begin 
         if (reset) begin
-            bit_counter <= 0;
-            Tx_BUSY <= 0;
-            TxD <= 1;  // No transmission
             next_state <= IDLE;
         end else begin
             cur_state <= next_state;
         end
     end
 
-    always @(Tx_EN or Tx_WR or Tx_BUSY or sample_ENABLE) begin 
-        if (Tx_EN && Tx_WR && !Tx_BUSY) begin
-            next_state <= SETUP; // Start-SetUp transmission
-        end else if (Tx_EN && Tx_WR && Tx_BUSY && sample_ENABLE) begin
-            next_state <= TRANSMITTING; // Transmitting new bit of data
+    always @(Tx_EN or Tx_WR or sample_ENABLE) begin 
+        if (!Tx_EN) begin
+            next_state <= DISABLED; // Start-SetUp transmission
+        end else if (!Tx_WR && !Tx_BUSY) begin
+            next_state <= IDLE; // Transmitting new bit of data
+        end else if (Tx_WR && !Tx_BUSY) begin
+            next_state <= START_BIT; // Transmitting new bit of data
+        end else if (sample_ENABLE) begin
+            next_state <= cur_state + 1; // Transmitting next bit
         end else begin
-            next_state <= IDLE; // Default state, hold memory 
+            next_state <= cur_state; // Default state, hold memory 
         end
     end
 
     always @(cur_state) begin
         case(cur_state)
-            SETUP: begin
-                shift_reg <= {1'b1, Tx_DATA, 1'b0};  // setup shift register for transmission
-                bit_counter <= 0;
-                Tx_BUSY <= 1; // Set state to busy
-            end
-            TRANSMITTING: begin
-                // Read and send one bit from the buffer
-                TxD <= shift_reg[bit_counter];
-                if (bit_counter == 4'b1001) begin
-                    Tx_BUSY <= 0;  // Transmission complete no longer busy
-                end else begin
-                    bit_counter <= bit_counter + 1'b1;
-                end
+            DISABLED: begin
+                Tx_BUSY <= 0; // Set state to busy
+                TxD <= 1; // No transmission
             end
             IDLE: begin
-                TxD <= TxD; // For Clarity this is what default does. 'Default' is to be in IDLE state 
+                Tx_BUSY <= 0; // Set state to idle
+                TxD <= 1; // No transmission
             end
+            // TRANSMITTING
             default: begin
-            
+                Tx_BUSY <= 1; // Set state to busy
+                TxD <= buffer[cur_state]; // Transmit data
             end
         endcase
     end
