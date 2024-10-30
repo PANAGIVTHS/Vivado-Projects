@@ -1,35 +1,4 @@
-module uart_receiver (
-    input reset,
-    input clk,
-    input [2:0] baud_select,      // Επιλογή Baud Rate
-    input Rx_EN,                  // Ενεργοποίηση δέκτη
-    input RxD,                    // Σειριακή είσοδος
-    output reg [7:0] Rx_DATA,     // Παραληφθέντα δεδομένα
-    output reg Rx_VALID,          // Έγκυρα δεδομένα
-    output reg Rx_FERROR,         // Σφάλμα πλαισίωσης
-    output reg Rx_PERROR          // Σφάλμα ισοτιμίας
-);
 
-    reg [3:0] bit_counter;
-
-    localparam SETUP = 2'b00, IDLE = 2'b01, TRANSMITTING = 2'b10;
-
-    baud_controller_r baud_controller_r_inst(reset, clk, baud_select, Rx_sample_ENABLE);
-    
-    always @(posedge clk or posedge reset) begin
-        if (reset) begin
-            bit_counter <= 0;
-            Rx_VALID <= 0;
-            Rx_FERROR <= 0;
-            Rx_PERROR <= 0;
-        end else if (Rx_EN && Rx_sample_ENABLE) begin
-            if (bit_counter == 0 && !Rx_EN) begin
-                // Communication Started
-            end
-        end
-    end
-
-endmodule
 
 module uart_receiver (
     input reset,
@@ -114,7 +83,8 @@ module uart_receiver (
                             // Stop bit: Should be 1
                             if (sampled_value != STOP_BIT) Rx_FERROR <= 1;
                             else Rx_FERROR <= 0;
-
+                            // Reset data valid flag when receiver is not enabled
+                            Rx_VALID <= 0;
                             // If no errors, mark data as valid
                             if (~Rx_FERROR && ~Rx_PERROR) begin
                                 Rx_DATA <= data_buffer;
@@ -126,8 +96,7 @@ module uart_receiver (
                     end
                 end
         end else begin
-            // Reset data valid flag when receiver is not enabled
-            Rx_VALID <= 0;
+            // IDLE
         end
     end
 endmodule
