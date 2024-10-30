@@ -2,8 +2,8 @@
 2018.3
 Dec  7 2018
 00:33:28
-C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/UART_controller.v,1730303586,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_t.v,,UART_controller,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/UART_controller.v,1730306102,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_t.v,,UART_controller,,,,,,,,
 C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/UART_controller_tb.v,1730302002,verilog,,,,tb_UART_controller,,,,,,,,
-C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_t.v,1730250577,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/uart_transmitter.v,,baud_controller_t,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_t.v,1730303205,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/uart_transmitter.v,,baud_controller_t,,,,,,,,
 C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/projecttest/projecttest.sim/sim_1/behav/xsim/glbl.v,1544155481,verilog,,,,glbl,,,,,,,,
 C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/uart_transmitter.v,1730302857,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/UART_controller_tb.v,,uart_transmitter,,,,,,,,
