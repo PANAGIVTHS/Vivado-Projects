@@ -5,11 +5,11 @@ module receiver_sampler (sample_ENABLE, reset, clk, RxD, bit_stable, Sx_EN);
     reg sample_bit, sample_bit_old;
     reg overflow;
 
-    localparam LOCK = 5'b11111, MAX = 5'b01111, START = 5'b00000;
+    localparam LOCK = 5'b11111, DISABLED = 5'b10000, MAX = 5'b01111, START = 5'b00000;
 
     always @(posedge clk or posedge reset) begin
         if (reset) begin
-            next_state <= MAX;
+            next_state <= DISABLED;
         end else begin
             cur_state <= next_state;
             sample_bit_old <= sample_bit;
@@ -17,11 +17,11 @@ module receiver_sampler (sample_ENABLE, reset, clk, RxD, bit_stable, Sx_EN);
     end
 
     always @(*) begin
-        if (cur_state == MAX && Sx_EN) begin 
+        if (Sx_EN) begin 
             next_state <= START;
         end else if (!bit_stable) begin
             next_state <= LOCK;
-        end else if (sample_ENABLE) begin
+        end else if (sample_ENABLE && (cur_state != DISABLED)) begin
             next_state <= cur_state + 1;
         end else begin
             next_state <= cur_state;
@@ -33,6 +33,10 @@ module receiver_sampler (sample_ENABLE, reset, clk, RxD, bit_stable, Sx_EN);
             LOCK: begin
                 sample_bit <= RxD;
                 bit_stable <= 1'b0;
+            end
+            START: begin
+                sample_bit <= RxD;
+                bit_stable <= 1'b1;
             end
             default: begin
                 sample_bit <= RxD;

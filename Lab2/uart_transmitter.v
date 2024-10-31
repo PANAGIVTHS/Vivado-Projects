@@ -12,7 +12,7 @@ module uart_transmitter (
     wire sample_ENABLE;
     reg [3:0] cur_state, next_state;
     
-    // State machine states
+    // State machine states. Order is important do not change
     // All from START_BIT to DISABLED are used for the state machine
     localparam START_BIT = 4'b0000, PARITY = 4'b1001, IDLE = 4'b1011, DISABLED = 4'b1100;
 
@@ -27,46 +27,57 @@ module uart_transmitter (
     // State machine state register
     always @(posedge clk or posedge reset) begin
         if (reset) begin
-            next_state <= IDLE;           
+            cur_state <= IDLE;           
         end else begin
             cur_state <= next_state;
         end
     end
 
-    // State machine logic
-    always @(Tx_EN or Tx_WR or sample_ENABLE or Tx_BUSY or cur_state) begin
-        if (!Tx_EN) begin
-            next_state <= DISABLED; // Start-SetUp transmission
-        end else if (!Tx_WR && !Tx_BUSY) begin
-            next_state <= IDLE; // Transmitting new bit of data
-        end else if (Tx_WR && !Tx_BUSY) begin
-            next_state <= START_BIT; // Transmitting new bit of data
-        end else if (sample_ENABLE) begin
-            next_state <= cur_state + 1; // Transmitting next bit
-        end else begin
-            next_state <= cur_state; // Default state, hold state 
-        end
-    end
-
     // State machine output
-    always @(cur_state or Tx_DATA or buffer) begin
+    always @(*) begin
         case(cur_state)
             DISABLED: begin
                 Tx_BUSY <= 0; // Set state to busy
                 TxD <= 1; // No transmission
+                if (!sample_ENABLE) begin
+                    next_state <= cur_state;
+                end else if (!Tx_EN) begin
+                    next_state <= DISABLED;
+                end else begin
+                    next_state <= IDLE;
+                end
             end
             IDLE: begin
                 Tx_BUSY <= 0; // Set state to idle
                 TxD <= 1; // No transmission
+                if (!sample_ENABLE) begin
+                    next_state <= cur_state;
+                end else if (!Tx_EN) begin
+                    next_state <= DISABLED;
+                end else if (Tx_WR) begin
+                    next_state <= START_BIT;
+                end else begin
+                    next_state <= IDLE;
+                end
             end
             PARITY: begin
                 Tx_BUSY <= 1; // Set state to busy
                 TxD <= ^Tx_DATA; // Parity bit
+                if (!sample_ENABLE) begin
+                    next_state <= cur_state;
+                end else begin
+                    next_state <= next_state + 1;
+                end
             end
             // TRANSMITTING
             default: begin
                 Tx_BUSY <= 1; // Set state to busy
                 TxD <= buffer[cur_state]; // Transmit data
+                if (!sample_ENABLE) begin
+                    next_state <= cur_state;
+                end else begin
+                    next_state <= next_state + 1;
+                end
             end
         endcase
     end
