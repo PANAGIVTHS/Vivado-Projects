@@ -3,3 +3,4 @@
 [x] Make dataflow for Part A, Part B 
 [x] Make Part A, B testbench
 [x] Fix buffer output logic to not be C 
+[x] make the part a disable when needed

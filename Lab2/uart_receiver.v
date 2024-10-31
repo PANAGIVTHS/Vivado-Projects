@@ -13,90 +13,114 @@ module uart_receiver (
 );
 
     // Baud rate controller to enable sampling at the required frequency
-    wire sample_ENABLE;
-    baud_controller baud_controller_rx_inst (
-        .reset(reset),
-        .clk(clk),
-        .baud_select(baud_select),
-        .sample_ENABLE(sample_ENABLE)
-    );
+    wire Rx_sample_ENABLE, sample_ENABLE;
+    wire bit_stable;
+    reg [3:0] cur_state, next_state;
+    reg [10:0] buffer; // Buffer to store received data
+    reg [3:0] sample_counter;
 
-    reg [3:0] sample_counter = 0;  // Counts samples per bit (16 samples per bit)
-    reg [3:0] bit_counter = 0;     // Counts bits received (11 bits total)
-    reg [7:0] data_buffer = 0;     // Buffer to store received data bits
-    reg bit_stable;                // Tracks if bit is stable across all samples
-    reg sampled_value;             // Stores the first sample value for comparison
-    reg parity_bit;                // Tracks calculated parity
+    localparam START_BIT = 4'b0000, PARITY = 4'b1001, END_BIT = 4'b1010, IDLE = 4'b1011, DISABLED = 4'b1100, PERROR = 4'b1101, FERROR = 4'b1110;
 
-    localparam START_BIT = 1'b0;   // Start bit value
-    localparam STOP_BIT = 1'b1;    // Stop bit value
+    baud_controller_r baud_controller_r_inst(reset, clk, baud_select, sample_ENABLE);
+    receiver_sampler receiver_sampler_inst(.reset(reset), .clk(clk), .Sx_EN(Rx_EN), .RxD(RxD), .sample_ENABLE(sample_ENABLE), .bit_stable(bit_stable));
 
+    // State machine state register
     always @(posedge clk or posedge reset) begin
         if (reset) begin
+            next_state <= DISABLED;
             sample_counter <= 0;
-            bit_counter <= 0;
-            Rx_DATA <= 8'b0;
-            Rx_VALID <= 0;
-            Rx_FERROR <= 0;
-            Rx_PERROR <= 0;
-            data_buffer <= 0;
-            bit_stable <= 1'b1;
-            sampled_value <= 1'b0;
-            parity_bit <= 1'b0;
-        end else if (Rx_EN && sample_ENABLE) begin
-            // On the first sample, record the sampled value for comparison
-            if (sample_counter == 0) begin
-                sampled_value <= RxD;
-                bit_stable <= 1'b1;
-            end else if (RxD != sampled_value) begin
-                // If any sample differs from the initial, mark as unstable
-                bit_stable <= 1'b0;
-            end
-
-            sample_counter <= sample_counter + 1;
-
-                if (sample_counter == 15) begin
-                    sample_counter <= 0; // Reset sample counter for next bit
-                    
-                    if (!bit_stable) begin
-                        // Error: Bit didn't hold value for all 16 samples
-                        Rx_FERROR <= 1;
-                        bit_counter <= 0;
-                    end else begin
-                        // Process the stable bit value
-                        if (bit_counter == 0) begin
-                            // Start bit: Check if it's 0
-                            if (sampled_value != START_BIT) Rx_FERROR <= 1;
-                            else Rx_FERROR <= 0;
-                            bit_counter <= bit_counter + 1;
-                        end else if (bit_counter >= 1 && bit_counter <= 8) begin
-                            // Data bits: Store in data buffer
-                            data_buffer[bit_counter - 1] <= sampled_value;
-                            parity_bit <= parity_bit ^ sampled_value; // Update parity
-                            bit_counter <= bit_counter + 1;
-                        end else if (bit_counter == 9) begin
-                            // Parity bit: Check if matches computed parity
-                            if (sampled_value != parity_bit) Rx_PERROR <= 1;
-                            else Rx_PERROR <= 0;
-                            bit_counter <= bit_counter + 1;
-                        end else if (bit_counter == 10) begin
-                            // Stop bit: Should be 1
-                            if (sampled_value != STOP_BIT) Rx_FERROR <= 1;
-                            else Rx_FERROR <= 0;
-                            // Reset data valid flag when receiver is not enabled
-                            Rx_VALID <= 0;
-                            // If no errors, mark data as valid
-                            if (~Rx_FERROR && ~Rx_PERROR) begin
-                                Rx_DATA <= data_buffer;
-                                Rx_VALID <= 1;
-                            end
-                            
-                            bit_counter <= 0; // Reset for next byte
-                        end
-                    end
-                end
         end else begin
-            // IDLE
+            cur_state <= next_state;
         end
     end
+
+    // make sample enable 16x slower
+    always @(sample_ENABLE) begin
+        {Rx_sample_ENABLE, sample_counter} <= sample_counter + 1;
+    end
+
+    // State machine logic
+    always @(*) begin
+        if (!Rx_EN) begin
+            next_state <= DISABLED; // Sleep mode
+        end else if (Rx_FERROR) begin
+            next_state <= FERROR; // Error: Framing error Lock
+        end else if (Rx_PERROR) begin
+            next_state <= PERROR; // Error: Parity error Lock
+        end else if (Rx_EN && Rx_sample_ENABLE && !Rx_VALID) begin
+            next_state <= cur_state + 1; // if true but reached end of frame then we have framing error
+        end else begin
+            next_state <= cur_state; // Default state, hold state 
+        end
+    end
+
+    // State machine output
+    always @(cur_state or Tx_DATA or buffer) begin
+        case(cur_state)
+            PERROR: begin
+                Rx_VALID <= 0;
+                Rx_FERROR <= 0;
+                Rx_PERROR <= 1;
+                buffer <= 11'b0;
+            end
+            FERROR: begin
+                Rx_VALID <= 0;
+                Rx_FERROR <= 1;
+                Rx_PERROR <= 0;
+                buffer <= 11'b0;
+            end
+            DISABLED: begin
+                Rx_VALID <= 0;
+                Rx_FERROR <= 0;
+                Rx_PERROR <= 0;
+                buffer <= 11'b0;
+            end
+            START_BIT: begin
+                Rx_VALID <= 0;
+                Rx_PERROR <= 0;
+                if (!RxD) begin
+                    // Error: Start bit not 0
+                    Rx_FERROR <= 1;
+                end else begin
+                    Rx_FERROR <= 0;
+                end
+                buffer[cur_state] <= RxD;
+            end
+            PARITY: begin
+                Rx_VALID <= 0;
+                Rx_FERROR <= 0;
+                if (RxD != ^Rx_DATA) begin
+                    // Error: Parity bit mismatch
+                    Rx_PERROR <= 1;
+                end else begin
+                    Rx_PERROR <= 0;
+                end
+                buffer[cur_state] <= RxD;
+            end
+            END_BIT: begin
+                Rx_PERROR <= 0;
+                if (RxD) begin
+                    // Error: End bit not 1
+                    Rx_VALID <= 0;
+                    Rx_FERROR <= 1;
+                end else begin
+                    Rx_VALID <= 1;
+                    Rx_FERROR <= 0;
+                end
+                buffer[cur_state] <= RxD;
+            end
+            // RECEIVE DATA
+            default: begin
+                Rx_PERROR <= 0;
+                if (bit_stable) begin
+                    Rx_FERROR <= 0;
+                end else begin
+                    Rx_FERROR <= 1;
+                end
+                Rx_VALID <= 0;
+                buffer[cur_state] <= RxD;
+            end
+        endcase
+    end
+
 endmodule

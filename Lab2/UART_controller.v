@@ -15,21 +15,19 @@ module UART_controller (reset, clk, baud_select, Tx_DATA, Tx_WR, Tx_EN, TxD, Tx_
 
     localparam FRAME_END = 4'b1010;
 
-    // Counter for buffer
+    // Fill buffer with data from transmission
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             counter <= 0;
-        end
-    end
-
-    // Fill buffer with data from transmission
-    always @(sample_ENABLE) begin
-        if (Tx_EN && Tx_BUSY && sample_ENABLE) begin
-            Tx_DATA_copy[counter] <= TxD;
-            if (counter == FRAME_END) begin
-                counter <= 0;
-            end else begin
-                counter <= counter + 1;
+            Tx_DATA_copy <= 0;
+        end else begin
+            if (Tx_EN && Tx_BUSY && sample_ENABLE) begin
+                Tx_DATA_copy[counter] <= TxD;
+                if (counter == FRAME_END) begin
+                    counter <= 0;
+                end else begin
+                    counter <= counter + 1;
+                end
             end
         end
     end
