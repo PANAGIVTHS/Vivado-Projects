@@ -35,39 +35,50 @@ module uart_receiver (
     output reg Rx_VALID       // Data valid flag
 );
 
-    reg [3:0] cur_state, next_state;
+    reg [3:0] cur_state;
+    reg [3:0] next_state;
     reg [3:0] sample_counter;
     reg [3:0] buffer_index;
-    wire Rx_sample_ENABLE, sample_ENABLE;
+    wire sample_ENABLE;
+    reg Rx_sample_ENABLE;
     wire bit_stable;
 
     // State machine states. Order is important do not change
     localparam START_BIT = 4'b000, RECEIVING = 4'b001, PARITY = 4'b010, END_BIT = 4'b011;
     localparam DISABLED = 4'b100, IDLE = 4'b101, PERROR = 4'b110, FERROR = 4'b111;
     
-    baud_controller_r baud_controller_r_inst(reset, clk, baud_select, sample_ENABLE);
-    receiver_sampler receiver_sampler_inst(.reset(reset), .clk(clk), .Sx_EN(Rx_sample_ENABLE), .RxD(RxD), .sample_ENABLE(sample_ENABLE), .bit_stable(bit_stable));
+    baud_controller_r baud_controller_r_inst(.reset(reset), .clk(clk), .baud_select(baud_select), .sample_ENABLE(sample_ENABLE), .Enable_controller(Rx_EN));
+    receiver_sampler receiver_sampler_inst(.reset(reset), .clk(clk), .Sx_EN(Rx_EN), .RxD(RxD), .sample_ENABLE(sample_ENABLE), .bit_stable(bit_stable));
 
     // State machine state register
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             cur_state <= DISABLED;
-            sample_counter <= 0;
         end else begin
             cur_state <= next_state;
         end
     end
 
     // make sample enable 16x slower
-    always @(sample_ENABLE) begin
-        {Rx_sample_ENABLE, sample_counter} <= sample_counter + 1;
+    always @(posedge clk or posedge reset) begin
+        Rx_sample_ENABLE <= 0;
+        if (reset) begin
+            sample_counter <= 0;
+            Rx_sample_ENABLE <= 0;
+        end else if (sample_ENABLE) begin
+            {Rx_sample_ENABLE, sample_counter} <= sample_counter + 1;
+        end else if (cur_state == IDLE) begin 
+            sample_counter <= 0;
+        end else begin
+            sample_counter <= sample_counter;
+        end
     end
 
     // Counter to store received data in buffer
     always @(posedge clk or posedge reset) begin
         if (reset)
             buffer_index <= 0; // Reset counter
-        else if (cur_state == TRANSMIT && sample_ENABLE)
+        else if (cur_state == RECEIVING && Rx_sample_ENABLE)
             buffer_index <= buffer_index + 1; // Reset counter
         else begin
             buffer_index <= buffer_index; // Hold counter
@@ -79,7 +90,7 @@ module uart_receiver (
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             Rx_DATA <= 8'b0;
-        end else (cur_state == RECEIVING) begin
+        end else if (cur_state == RECEIVING && sample_ENABLE) begin
             Rx_DATA[buffer_index] <= RxD;
         end else begin
             Rx_DATA <= Rx_DATA;
@@ -90,44 +101,60 @@ module uart_receiver (
     always @(*) begin
         // Highest priority error flags part of each state in the state machine
         // FERROR higher priority than PERROR
-        if (!Rx_EN) begin
-            next_state = DISABLED;
-        end else if (Rx_FERROR) begin
-            next_state = FERROR;
-        end else if (Rx_PERROR) begin
-            next_state = PERROR;
-        end else begin
-            // State chaining
             case(cur_state)
+                PERROR: begin
+                    // If you are here Rx_EN is high
+                    next_state = PERROR;
+                end
+                FERROR: begin
+                    // If you are here Rx_EN is high
+                    next_state = FERROR;
+                end
                 DISABLED: begin
                     // If you are here Rx_EN is high
-                    next_state = IDLE;
+                    next_state = Rx_EN ? IDLE : DISABLED;// Rx_FERROR
                 end
                 IDLE: begin
-                    // TODO -- activate baud controller
                     next_state = (!RxD) ? START_BIT : IDLE;
                 end
                 START_BIT: begin
-                    next_state = Rx_sample_ENABLE ? RECEIVING : START_BIT;
+                    if (Rx_FERROR) begin
+                        next_state = FERROR;
+                    end else begin
+                        next_state = Rx_sample_ENABLE ? RECEIVING : START_BIT;
+                    end
                 end
                 RECEIVING: begin
-                    next_state = (buffer_index == 7 && Rx_sample_ENABLE) ? PARITY : RECEIVING;
+                    if (Rx_FERROR) begin
+                        next_state = FERROR;
+                    end else begin
+                        next_state = (buffer_index == 7 && Rx_sample_ENABLE) ? PARITY : RECEIVING;
+                    end
                 end
                 PARITY: begin
-                    next_state = Rx_sample_ENABLE ? END_BIT : PARITY;
+                    if (Rx_FERROR) begin
+                        next_state = FERROR;
+                    end else if (Rx_PERROR) begin
+                        next_state = PERROR;
+                    end else begin
+                        next_state = Rx_sample_ENABLE ? END_BIT : PARITY;
+                    end
                 end
                 END_BIT: begin
-                    next_state = (Rx_sample_ENABLE && !Rx_EN) ? DISABLED : END_BIT;
+                    if (Rx_FERROR) begin
+                        next_state = FERROR;
+                    end else begin 
+                        next_state = (Rx_sample_ENABLE && !Rx_EN) ? DISABLED : END_BIT;
+                    end
                 end
                 default: begin
                     next_state = DISABLED;
                 end
             endcase
-        end
     end
 
     // State machine output
-    always @(cur_state or Tx_DATA or Rx_DATA) begin
+    always @(*) begin
         
         // Default assignments
         Rx_PERROR = 0;
@@ -138,31 +165,47 @@ module uart_receiver (
             PERROR: begin
                 // Error: Parity error LOCK state
                 Rx_PERROR = 1;
+                Rx_FERROR = 0;
+                Rx_VALID = 0;
             end
             FERROR: begin
                 // Error: Framing error LOCK state
                 Rx_FERROR = 1;
+                Rx_PERROR = 0;
+                Rx_VALID = 0;
             end
             DISABLED: begin
                 // DISABLED state
+                Rx_PERROR = 0;
+                Rx_FERROR = 0;
+                Rx_VALID = 0;
             end
             IDLE: begin
                 // IDLE state
+                Rx_PERROR = 0;
+                Rx_FERROR = 0;
+                Rx_VALID = 0;
             end
             START_BIT: begin
                 Rx_FERROR = !bit_stable;
+                Rx_PERROR = 0;
+                Rx_VALID = 0;
             end
             RECEIVING: begin
                 Rx_FERROR = !bit_stable;
+                Rx_PERROR = 0;
+                Rx_VALID = 0;
             end
             PARITY: begin
                 Rx_FERROR = !bit_stable; 
                 Rx_PERROR = (RxD != ^Rx_DATA); // Check for parity error
+                Rx_VALID = 0;
             end
             END_BIT: begin
                 // Check for framing error
                 Rx_FERROR = !RxD || !bit_stable;
                 Rx_VALID = !Rx_FERROR;
+                Rx_PERROR = 0;
             end
         endcase
     end

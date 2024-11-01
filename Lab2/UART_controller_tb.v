@@ -9,11 +9,12 @@ module tb_UART_controller;
     reg [2:0] baud_select;
     reg Tx_WR, Tx_EN;
     wire TxD, Tx_BUSY;
-    wire [10:0] Tx_DATA_copy;
+    wire [7:0] Tx_DATA_copy;
 
     UART_controller UART_controller_inst (.reset(reset), .clk(clk), .baud_select(baud_select), .Tx_DATA(8'b11001100), .Tx_WR(Tx_WR), .Tx_EN(Tx_EN), .TxD(TxD), .Tx_BUSY(Tx_BUSY), .Tx_DATA_copy(Tx_DATA_copy));
             
     initial begin
+        #100
         reset<=1'bx;
         clk<=1'b0;
         

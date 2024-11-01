@@ -1,7 +1,10 @@
 # compile verilog/system verilog design source files
 verilog xil_defaultlib  \
 "../../../../../UART_controller.v" \
+"../../../../../baud_controller_r.v" \
 "../../../../../baud_controller_t.v" \
+"../../../../../receiver_sampler.v" \
+"../../../../../uart_receiver.v" \
 "../../../../../uart_transmitter.v" \
 "../../../../../UART_controller_tb.v" \
 

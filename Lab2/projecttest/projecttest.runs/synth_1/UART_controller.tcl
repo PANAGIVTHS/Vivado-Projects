@@ -17,7 +17,6 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
-set_msg_config -id {Common 17-41} -limit 10000000
 create_project -in_memory -part xc7a100tcsg324-1
 
 set_param project.singleFileAddWarning.threshold 0
@@ -31,7 +30,10 @@ set_property board_part digilentinc.com:arty-a7-100:part0:1.1 [current_project]
 set_property ip_output_repo c:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/projecttest/projecttest.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 read_verilog -library xil_defaultlib {
+  C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_r.v
   C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_t.v
+  C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/receiver_sampler.v
+  C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/uart_receiver.v
   C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/uart_transmitter.v
   C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/UART_controller.v
 }

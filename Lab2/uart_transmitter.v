@@ -6,8 +6,7 @@ module uart_transmitter (
     input Tx_WR,                 // Signal to write data
     input Tx_EN,                 // Enable transmission
     output reg TxD,              // Output serial data
-    output reg Tx_BUSY,           // Transmission status
-    output [3:0] state
+    output reg Tx_BUSY           // Transmission status    
 );
     wire sample_ENABLE;
     reg [3:0] cur_state;
@@ -15,19 +14,11 @@ module uart_transmitter (
     reg [3:0] counter;
     // State machine states with unique values
     localparam START_BIT = 4'b0000, TRANSMIT = 4'b0001, PARITY = 4'b1001, END_BIT = 4'b1010, IDLE = 4'b1011, DISABLED = 4'b1100;
-
     // swap the order of the bits in the buffer
     wire [0:7] buffer = Tx_DATA;
 
-    assign state = cur_state;
-
     // Instantiate baud rate controller for transmitter
-    baud_controller_t baud_controller_t_inst (
-        .reset(reset), 
-        .clk(clk), 
-        .baud_select(baud_select), 
-        .sample_ENABLE(sample_ENABLE)
-    );
+    baud_controller_t baud_controller_t_inst (.reset(reset), .clk(clk), .baud_select(baud_select), .sample_ENABLE(sample_ENABLE), .Enable_controller(Tx_WR & Tx_EN));
 
     // State transition (sequential) block
     always @(posedge clk or posedge reset) begin

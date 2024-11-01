@@ -25,28 +25,50 @@
         sampled_value: The sampled value
 */
 
-module receiver_sampler (sample_ENABLE, reset, clk, RxD, bit_stable, Sx_EN);
-    reg bit_stable;
-    reg sampled_value;
-    reg [2:0] cur_state, next_state;
+module receiver_sampler (sample_ENABLE, reset, clk, RxD, Sx_EN, bit_stable);
+    input sample_ENABLE, reset, clk, RxD, Sx_EN;
+    output reg bit_stable;
+    reg [2:0] cur_state;
+    reg [2:0] next_state;
     reg sample_bit, sample_bit_old;
-    reg overflow;
+    reg [1:0] sample_counter;
+    reg Sx_sample_ENABLE;
 
     // State definitions
     localparam LOCK = 3'b111;
-    localparam SAMPLE_START = 3'b001, SAMPLE_1 = 3'b010, SAMPLE_2 = 3'b011;
-    localparam SAMPLE_3 = 3'b100, SAMPLE_4 = 3'b101, SAMPLE_END = 3'b110;
+    localparam SAMPLE_START = 3'b000, SAMPLE_1 = 3'b001, SAMPLE_2 = 3'b010;
+    localparam SAMPLE_3 = 3'b011, SAMPLE_4 = 3'b100, SAMPLE_5 = 3'b101, SAMPLE_END = 3'b110;
 
     // State machine state register
     always @(posedge clk or posedge reset) begin
         if (reset) begin
-            next_state <= START_BIT;
+            cur_state <= LOCK;
+            sample_bit_old <= 0;
         end else begin
             cur_state <= next_state;
             sample_bit_old <= sample_bit; // Remember last sampled bit
         end
     end
 
+    // make sample enable 16x slower
+    always @(posedge clk or posedge reset) begin
+        Sx_sample_ENABLE <= 0;
+        if (reset) begin
+            sample_counter <= 0;
+            Sx_sample_ENABLE <= 0;
+        end else if (sample_ENABLE) begin
+            if (sample_counter != 1) begin
+                sample_counter <= sample_counter + 1;
+                Sx_sample_ENABLE <= 0;
+            end else begin 
+                sample_counter <= 0;
+                Sx_sample_ENABLE <= 1;
+            end
+        end else begin 
+            Sx_sample_ENABLE <= 0;
+        end
+    end
+    
     // State machine state transition logic
     always @(*) begin
         case (cur_state)
@@ -55,23 +77,29 @@ module receiver_sampler (sample_ENABLE, reset, clk, RxD, bit_stable, Sx_EN);
                 next_state = Sx_EN ? SAMPLE_START : LOCK;
             end
             SAMPLE_START: begin
-                next_state = Sx_EN ? SAMPLE_1 : SAMPLE_START;
+                next_state = Sx_sample_ENABLE ? SAMPLE_1 : SAMPLE_START;
             end
             SAMPLE_1: begin
-                next_state = sample_ENABLE ? SAMPLE_2 : SAMPLE_1;
+                next_state = Sx_sample_ENABLE ? SAMPLE_2 : SAMPLE_1;
             end
             SAMPLE_2: begin
-                next_state = sample_ENABLE ? SAMPLE_3 : SAMPLE_2;
+                next_state = Sx_sample_ENABLE ? SAMPLE_3 : SAMPLE_2;
             end
             SAMPLE_3: begin
-                next_state = sample_ENABLE ? SAMPLE_4 : SAMPLE_3;
+                next_state = Sx_sample_ENABLE ? SAMPLE_4 : SAMPLE_3;
             end
             SAMPLE_4: begin
-                next_state = sample_ENABLE ? SAMPLE_END : SAMPLE_4;
+                next_state = Sx_sample_ENABLE ? SAMPLE_5 : SAMPLE_4;
+            end
+            SAMPLE_5: begin
+                next_state = Sx_sample_ENABLE ? SAMPLE_END : SAMPLE_5;
             end
             SAMPLE_END: begin
                 // Hold value until next bit needs to be sampled
                 next_state = Sx_EN ? SAMPLE_START : SAMPLE_END;
+            end
+            default: begin
+                next_state = SAMPLE_START;
             end
         endcase
     end
@@ -80,32 +108,40 @@ module receiver_sampler (sample_ENABLE, reset, clk, RxD, bit_stable, Sx_EN);
     always @(*) begin
         case (cur_state)
             LOCK: begin
-                sample_bit <= RxD;
-                bit_stable <= 1'b0;
+                sample_bit = RxD;
+                bit_stable = 1'b0;
             end
             SAMPLE_START: begin
-                sample_bit <= RxD;
-                bit_stable <= 1'b1;
+                sample_bit = RxD;
+                bit_stable = 1'b1;
             end
             SAMPLE_1: begin
-                sample_bit <= RxD;
-                bit_stable <= (sample_bit == sample_bit_old);
+                sample_bit = RxD;
+                bit_stable = (sample_bit == sample_bit_old);
             end
             SAMPLE_2: begin
-                sample_bit <= RxD;
-                bit_stable <= (sample_bit == sample_bit_old);
+                sample_bit = RxD;
+                bit_stable = (sample_bit == sample_bit_old);
             end
             SAMPLE_3: begin
-                sample_bit <= RxD;
-                bit_stable <= (sample_bit == sample_bit_old);
+                sample_bit = RxD;
+                bit_stable = (sample_bit == sample_bit_old);
             end
             SAMPLE_4: begin
-                sample_bit <= RxD;
-                bit_stable <= (sample_bit == sample_bit_old);
+                sample_bit = RxD;
+                bit_stable = (sample_bit == sample_bit_old);
+            end
+            SAMPLE_5: begin
+                sample_bit = RxD;
+                bit_stable = (sample_bit == sample_bit_old);
             end
             SAMPLE_END: begin
-                sample_bit <= RxD;
-                bit_stable <= (sample_bit == sample_bit_old);
+                sample_bit = RxD;
+                bit_stable = 1;
+            end
+            default: begin
+                sample_bit = RxD;
+                bit_stable = 0;
             end
         endcase
     end

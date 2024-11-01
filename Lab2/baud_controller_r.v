@@ -1,8 +1,9 @@
 
-module baud_controller_r (reset, clk, baud_select, sample_ENABLE);
+module baud_controller_r (reset, clk, baud_select, sample_ENABLE, Enable_controller);
     input reset, clk;
     input [2:0] baud_select;
     output reg sample_ENABLE;
+    input Enable_controller;
 
     reg [31:0] counter;
     reg [31:0] baud_limit;
@@ -13,7 +14,7 @@ module baud_controller_r (reset, clk, baud_select, sample_ENABLE);
     // Values for baud rate limit calculated for 100MHz clock
     always @(*) begin
         case(baud_select)
-            BAUD3: baud_limit = 32'd20833;
+            BAUD3: baud_limit = 32'd3;
             BAUD12: baud_limit = 32'd5208;
             BAUD48: baud_limit = 32'd1302;
             BAUD96: baud_limit =  32'd651;
@@ -30,13 +31,19 @@ module baud_controller_r (reset, clk, baud_select, sample_ENABLE);
             counter <= 0;
             sample_ENABLE <= 0;
         end else begin
-            // In C you would do >= here we do == to prevent extra logic
-            if (counter == baud_limit) begin
+            if (Enable_controller) begin
                 counter <= 0;
-                sample_ENABLE <= 1;
-            end else begin
-                counter <= counter + 1;
                 sample_ENABLE <= 0;
+            end
+            else begin
+                // In C you would do >= here we do == to prevent extra logic
+                if (counter == baud_limit) begin
+                    counter <= 0;
+                    sample_ENABLE <= 1;
+                end else begin
+                    counter <= counter + 1;
+                    sample_ENABLE <= 0;
+                end
             end
         end
     end
