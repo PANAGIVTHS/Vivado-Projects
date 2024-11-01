@@ -1,4 +1,27 @@
+/*
+    This module is a UART receiver that receives serial data and outputs the received data
+    along with error flags. The module is implemented using a state machine that samples the
+    received data at the correct baud rate and checks for framing and parity errors.
 
+    *Notice*: This module will enter a LOCK state when met with a framing or parity error.
+    This is done for the convenience of the user to be able to detect the error at the end
+    of frame and not any time during the frame. -NOTE- DO NOT CHANGE THIS BEHAVIOR
+
+    *Danger*: The module will be unresponsive when in LOCK state until either reset by the
+    user or Rx_EN is set to 0.
+
+    Inputs:
+        reset: Reset signal
+        clk: Clock signal
+        baud_select: Baud rate selection
+        Rx_EN: Signal to enable the receiver
+        RxD: Received data
+    Outputs:
+        Rx_DATA: Received data
+        Rx_FERROR: Framing error flag
+        Rx_PERROR: Parity error flag
+        Rx_VALID: Data valid flag
+*/
 
 module uart_receiver (
     input reset,
@@ -52,6 +75,7 @@ module uart_receiver (
     end
 
     // Buffer to store received data
+    // This could be replaced with a memory block
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             Rx_DATA <= 8'b0;
@@ -62,26 +86,26 @@ module uart_receiver (
         end
     end
 
-    // State machine logic
+    // State machine state transition logic
     always @(*) begin
+        // Highest priority error flags part of each state in the state machine
         // FERROR higher priority than PERROR
-        if (Rx_FERROR) begin
+        if (!Rx_EN) begin
+            next_state = DISABLED;
+        end else if (Rx_FERROR) begin
             next_state = FERROR;
         end else if (Rx_PERROR) begin
             next_state = PERROR;
         end else begin
+            // State chaining
             case(cur_state)
-                PERROR: begin 
-                    next_state = PERROR;
-                end
-                FERROR: begin
-                    next_state = FERROR;
-                end
                 DISABLED: begin
-                    next_state = Rx_EN ? IDLE : DISABLED;
+                    // If you are here Rx_EN is high
+                    next_state = IDLE;
                 end
                 IDLE: begin
-                    next_state = (Rx_sample_ENABLE && !RxD) ? START_BIT : IDLE;
+                    // TODO -- activate baud controller
+                    next_state = (!RxD) ? START_BIT : IDLE;
                 end
                 START_BIT: begin
                     next_state = Rx_sample_ENABLE ? RECEIVING : START_BIT;
