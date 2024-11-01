@@ -4,16 +4,4 @@ Running: D:/Vivado/2018.3/bin/unwrapped/win64.o/xelab.exe -wto 9335a4c9271449af8
 Using 2 slave threads.
 Starting static elaboration
 Completed static elaboration
-Starting simulation data flow analysis
-WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/UART_controller.v" Line 1. Module UART_controller doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_t.v" Line 2. Module baud_controller_t doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/uart_transmitter.v" Line 2. Module uart_transmitter doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_t.v" Line 2. Module baud_controller_t doesn't have a timescale but at least one module in design has a timescale.
-Completed simulation data flow analysis
-Time Resolution for simulation is 1ps
-Compiling module xil_defaultlib.baud_controller_t
-Compiling module xil_defaultlib.uart_transmitter
-Compiling module xil_defaultlib.UART_controller
-Compiling module xil_defaultlib.tb_UART_controller
-Compiling module xil_defaultlib.glbl
-Built simulation snapshot tb_UART_controller_behav
+INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel

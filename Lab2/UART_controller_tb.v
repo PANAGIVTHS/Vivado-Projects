@@ -26,13 +26,14 @@ module tb_UART_controller;
 
         // Write data
         Tx_EN<=1;
+
+    
+        #(CLK_PERIOD) baud_select = 3'b000;
+            
+        
         #(CLK_PERIOD) Tx_WR<=0;
         #(CLK_PERIOD) Tx_WR<=1;
         #(CLK_PERIOD) Tx_WR<=0;
-
-        for (baud_select = 3'b000; baud_select < 3'b111; baud_select = baud_select + 1) begin
-            #(CLK_PERIOD*500);
-        end
 
         #(CLK_PERIOD*20) $finish;
     end
