@@ -36,7 +36,7 @@ module uart_receiver (
     output wire parity
 );
 
-    (* fsm_encoding = "none" *) reg [3:0] cur_state; 
+    reg [3:0] cur_state; 
     reg [3:0] next_state;
     reg [3:0] sample_counter;
     reg [3:0] buffer_index;
@@ -80,7 +80,7 @@ module uart_receiver (
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             Rx_FERROR <= 0;
-        end else if (!bit_stable && (cur_state != DISABLED) && (cur_state != IDLE)) begin
+        end else if (!bit_stable && (cur_state != DISABLED) && (cur_state != IDLE) || (cur_state == END_BIT && !RxD)) begin
             Rx_FERROR <= 1;
         end else begin
             Rx_FERROR <= 0;

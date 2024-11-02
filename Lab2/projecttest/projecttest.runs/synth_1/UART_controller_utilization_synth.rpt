@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date         : Sat Nov  2 19:03:55 2024
+| Date         : Sat Nov  2 19:31:44 2024
 | Host         : DESKTOP-922FQ13 running 64-bit major release  (build 9200)
 | Command      : report_utilization -file UART_controller_utilization_synth.rpt -pb UART_controller_utilization_synth.pb
 | Design       : UART_controller
@@ -33,8 +33,8 @@ Table of Contents
 | Slice LUTs*             |  108 |     0 |     63400 |  0.17 |
 |   LUT as Logic          |  108 |     0 |     63400 |  0.17 |
 |   LUT as Memory         |    0 |     0 |     19000 |  0.00 |
-| Slice Registers         |   91 |     0 |    126800 |  0.07 |
-|   Register as Flip Flop |   91 |     0 |    126800 |  0.07 |
+| Slice Registers         |  100 |     0 |    126800 |  0.08 |
+|   Register as Flip Flop |  100 |     0 |    126800 |  0.08 |
 |   Register as Latch     |    0 |     0 |    126800 |  0.00 |
 | F7 Muxes                |    1 |     0 |     31700 | <0.01 |
 | F8 Muxes                |    0 |     0 |     15850 |  0.00 |
@@ -54,8 +54,8 @@ Table of Contents
 | 0     |            _ |         Set |            - |
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
-| 2     |          Yes |           - |          Set |
-| 89    |          Yes |           - |        Reset |
+| 1     |          Yes |           - |          Set |
+| 99    |          Yes |           - |        Reset |
 | 0     |          Yes |         Set |            - |
 | 0     |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
@@ -146,18 +146,18 @@ Table of Contents
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| FDCE     |   89 |        Flop & Latch |
-| LUT4     |   75 |                 LUT |
-| LUT6     |   38 |                 LUT |
+| FDCE     |   99 |        Flop & Latch |
+| LUT4     |   83 |                 LUT |
+| LUT6     |   31 |                 LUT |
 | CARRY4   |   22 |          CarryLogic |
-| LUT3     |   20 |                 LUT |
+| LUT3     |   18 |                 LUT |
 | IBUF     |   15 |                  IO |
 | LUT5     |   11 |                 LUT |
 | OBUF     |   10 |                  IO |
 | LUT2     |    8 |                 LUT |
-| LUT1     |    2 |                 LUT |
-| FDPE     |    2 |        Flop & Latch |
+| LUT1     |    3 |                 LUT |
 | MUXF7    |    1 |               MuxFx |
+| FDPE     |    1 |        Flop & Latch |
 | BUFG     |    1 |               Clock |
 +----------+------+---------------------+
 

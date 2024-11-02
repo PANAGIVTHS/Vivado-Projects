@@ -30,8 +30,8 @@ module tb_receiver;
         Tx_EN<=0;
 
         // Reset
-        #(CLK_PERIOD*2) reset<=1;
-        #(CLK_PERIOD*5) reset<=0;
+        #(CLK_PERIOD*2) reset <= 1;
+        #(CLK_PERIOD*5) reset <= 0;
 
         // Write data
         Tx_EN<=1;
