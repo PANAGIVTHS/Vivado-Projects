@@ -110,7 +110,7 @@ module uart_receiver (
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             Rx_DATA <= 0;
-        end else if ( START_BIT < cur_state && cur_state < DISABLED) begin
+        end else if ( START_BIT < cur_state && cur_state < DISABLED && Rx_sample_ENABLE) begin
             Rx_DATA[cur_state - 1] <= RxD;
         end else begin
             Rx_DATA <= Rx_DATA;
@@ -124,6 +124,8 @@ module uart_receiver (
                 if (SURE) begin
                     next_state = START_BIT;
                 end else if (Rx_EN) begin
+                    next_state = START_BIT;
+                end else if (Rx_EN) begin
                     next_state = IDLE;
                 end else begin
                     next_state = cur_state;
@@ -131,6 +133,8 @@ module uart_receiver (
             end
             IDLE: begin
                 if (SURE) begin
+                    next_state = START_BIT;
+                end else if (Rx_EN) begin
                     next_state = START_BIT;
                 end else if (!Rx_EN) begin 
                     next_state = DISABLED;

@@ -2,3 +2,6 @@ Running: xsim.dir/tb_receiver_time_impl/xsimk.exe -simmode gui -wdb tb_receiver_
 Design successfully loaded
 Design Loading Memory Usage: 6848 KB (Peak: 6848 KB)
 Design Loading CPU Usage: 0 ms
+Simulation completed
+Simulation Memory Usage: 7596 KB (Peak: 7596 KB)
+Simulation CPU Usage: 0 ms

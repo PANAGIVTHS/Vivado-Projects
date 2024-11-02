@@ -1,0 +1,7 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"tb_UART_controller_time_impl.v" \
+"../../../../../../UART_controller_tb.v" \
+
+# Do not sort compile order
+nosort

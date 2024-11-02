@@ -1,4 +1,4 @@
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/projecttest/projecttest.sim/sim_1/synth/func/xsim/tb_receiver_func_synth.v" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/projecttest/projecttest.sim/sim_1/synth/func/xsim/tb_UART_controller_func_synth.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module UART_controller
 INFO: [VRFC 10-311] analyzing module baud_controller_r
 INFO: [VRFC 10-311] analyzing module baud_controller_t
@@ -6,17 +6,5 @@ INFO: [VRFC 10-311] analyzing module receiver_sampler
 INFO: [VRFC 10-311] analyzing module uart_receiver
 INFO: [VRFC 10-311] analyzing module uart_transmitter
 INFO: [VRFC 10-311] analyzing module glbl
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_r.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module baud_controller_r
-WARNING: [VRFC 10-3609] overwriting previous definition of module 'baud_controller_r' [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_r.v:2]
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_t.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module baud_controller_t
-WARNING: [VRFC 10-3609] overwriting previous definition of module 'baud_controller_t' [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_t.v:2]
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/receiver_sampler.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module receiver_sampler
-WARNING: [VRFC 10-3609] overwriting previous definition of module 'receiver_sampler' [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/receiver_sampler.v:28]
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/uart_receiver.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module uart_receiver
-WARNING: [VRFC 10-3609] overwriting previous definition of module 'uart_receiver' [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/uart_receiver.v:26]
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/receive_tb.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module tb_receiver
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/UART_controller_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_UART_controller
