@@ -6,3 +6,5 @@
 [x] make the part a disable when needed
 [x] UPDATE comments
     -> sampling modulw has to be exactly 1 clock cycle
+
+    OSO TO TX_WR EIANI 1 NA MHN KANW START BIT (MESA STO START BIT) ELSE HOLD POSITION

@@ -28,10 +28,10 @@
 module receiver_sampler (sample_ENABLE, reset, clk, RxD, Sx_EN, bit_stable);
     input sample_ENABLE, reset, clk, RxD, Sx_EN;
     output reg bit_stable;
-    reg [2:0] cur_state;
+    (* fsm_encoding = "sequential" *) reg [2:0] cur_state;
     reg [2:0] next_state;
     reg sample_bit, sample_bit_old;
-    reg [1:0] sample_counter;
+    reg sample_counter;
     reg Sx_sample_ENABLE;
 
     // State definitions
@@ -52,23 +52,22 @@ module receiver_sampler (sample_ENABLE, reset, clk, RxD, Sx_EN, bit_stable);
 
     // make sample enable 16x slower
     always @(posedge clk or posedge reset) begin
-        Sx_sample_ENABLE <= 0;
         if (reset) begin
             sample_counter <= 0;
             Sx_sample_ENABLE <= 0;
+        end else if (sample_counter == 2) begin
+            sample_counter <= 0;
+            Sx_sample_ENABLE <= 1;
         end else if (sample_ENABLE) begin
-            if (sample_counter != 1) begin
-                sample_counter <= sample_counter + 1;
-                Sx_sample_ENABLE <= 0;
-            end else begin 
-                sample_counter <= 0;
-                Sx_sample_ENABLE <= 1;
-            end
-        end else begin 
+            sample_counter <= sample_counter + 1;
+            Sx_sample_ENABLE <= 0;
+        end else begin
+            sample_counter <= sample_counter;
             Sx_sample_ENABLE <= 0;
         end
     end
-    
+
+
     // State machine state transition logic
     always @(*) begin
         case (cur_state)

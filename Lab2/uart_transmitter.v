@@ -9,7 +9,7 @@ module uart_transmitter (
     output reg Tx_BUSY           // Transmission status    
 );
     wire sample_ENABLE;
-    reg [3:0] cur_state;
+    (* fsm_encoding = "sequential" *) reg [3:0] cur_state;
     reg [3:0] next_state;
     reg [3:0] counter;
     // State machine states with unique values

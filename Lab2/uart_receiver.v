@@ -32,180 +32,245 @@ module uart_receiver (
     output reg [7:0] Rx_DATA, // Received data
     output reg Rx_FERROR,     // Framing error flag
     output reg Rx_PERROR,     // Parity error flag
-    output reg Rx_VALID       // Data valid flag
+    output reg Rx_VALID,       // Data valid flag
+    output wire parity
 );
 
-    reg [3:0] cur_state;
+    (* fsm_encoding = "none" *) reg [3:0] cur_state; 
     reg [3:0] next_state;
     reg [3:0] sample_counter;
     reg [3:0] buffer_index;
+    reg SURE;
     wire sample_ENABLE;
-    reg Rx_sample_ENABLE;
     wire bit_stable;
-
+    
     // State machine states. Order is important do not change
-    localparam START_BIT = 4'b000, RECEIVING = 4'b001, PARITY = 4'b010, END_BIT = 4'b011;
-    localparam DISABLED = 4'b100, IDLE = 4'b101, PERROR = 4'b110, FERROR = 4'b111;
+    localparam START_BIT = 4'b0000, BIT_0 = 4'b0001, BIT_1 = 4'b0010, BIT_2 = 4'b0011;
+    localparam BIT_3 = 4'b0100, BIT_4 = 4'b0101, BIT_5 = 4'b0110, BIT_6 = 4'b0111, BIT_7 = 4'b1000;
+    localparam PARITY = 4'b1001, END_BIT = 4'b1010, DISABLED = 4'b1011, IDLE = 4'b1100;
     
     baud_controller_r baud_controller_r_inst(.reset(reset), .clk(clk), .baud_select(baud_select), .sample_ENABLE(sample_ENABLE), .Enable_controller(Rx_EN));
     receiver_sampler receiver_sampler_inst(.reset(reset), .clk(clk), .Sx_EN(Rx_EN), .RxD(RxD), .sample_ENABLE(sample_ENABLE), .bit_stable(bit_stable));
-
+    
+    wire Rx_sample_ENABLE = (sample_counter == 4'b1111 && sample_ENABLE);
+    assign parity = ^Rx_DATA;
     // State machine state register
     always @(posedge clk or posedge reset) begin
         if (reset) begin
-            cur_state <= DISABLED;
+            cur_state <= IDLE;
+            sample_counter <= 0;
         end else begin
             cur_state <= next_state;
+            sample_counter = sample_ENABLE ? sample_counter + 1 : sample_counter;
         end
     end
 
-    // make sample enable 16x slower
     always @(posedge clk or posedge reset) begin
-        Rx_sample_ENABLE <= 0;
         if (reset) begin
-            sample_counter <= 0;
-            Rx_sample_ENABLE <= 0;
-        end else if (sample_ENABLE) begin
-            {Rx_sample_ENABLE, sample_counter} <= sample_counter + 1;
-        end else if (cur_state == IDLE) begin 
-            sample_counter <= 0;
+            SURE <= 0;
+        end else if (Rx_EN && !RxD && (cur_state == IDLE || cur_state == DISABLED)) begin
+            SURE <= 1;
+        end else if (cur_state == START_BIT) begin
+            SURE <= 0;
         end else begin
-            sample_counter <= sample_counter;
+            SURE <= SURE;
         end
     end
 
-    // Counter to store received data in buffer
-    always @(posedge clk or posedge reset) begin
-        if (reset)
-            buffer_index <= 0; // Reset counter
-        else if (cur_state == RECEIVING && Rx_sample_ENABLE)
-            buffer_index <= buffer_index + 1; // Reset counter
-        else begin
-            buffer_index <= buffer_index; // Hold counter
-        end
-    end
-
-    // Buffer to store received data
-    // This could be replaced with a memory block
     always @(posedge clk or posedge reset) begin
         if (reset) begin
-            Rx_DATA <= 8'b0;
-        end else if (cur_state == RECEIVING && sample_ENABLE) begin
-            Rx_DATA[buffer_index] <= RxD;
+            Rx_FERROR <= 0;
+        end else if (!bit_stable && (cur_state != DISABLED) && (cur_state != IDLE)) begin
+            Rx_FERROR <= 1;
+        end else begin
+            Rx_FERROR <= 0;
+        end
+    end
+
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            Rx_PERROR <= 0;
+        end else if (cur_state == PARITY && parity != RxD) begin
+            Rx_PERROR <= 1;
+        end else begin
+            Rx_PERROR <= 0;
+        end
+    end
+
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            Rx_VALID <= 0;
+        end else if (cur_state == END_BIT && bit_stable && RxD) begin
+            Rx_VALID <= 1;
+        end else begin
+            Rx_VALID <= 0;
+        end
+    end
+
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            Rx_DATA <= 0;
+        end else if ( START_BIT < cur_state && cur_state < DISABLED) begin
+            Rx_DATA[cur_state - 1] <= RxD;
         end else begin
             Rx_DATA <= Rx_DATA;
         end
     end
 
-    // State machine state transition logic
+    // transition to next state
     always @(*) begin
-        // Highest priority error flags part of each state in the state machine
-        // FERROR higher priority than PERROR
-            case(cur_state)
-                PERROR: begin
-                    // If you are here Rx_EN is high
-                    next_state = PERROR;
-                end
-                FERROR: begin
-                    // If you are here Rx_EN is high
-                    next_state = FERROR;
-                end
-                DISABLED: begin
-                    // If you are here Rx_EN is high
-                    next_state = Rx_EN ? IDLE : DISABLED;// Rx_FERROR
-                end
-                IDLE: begin
-                    next_state = (!RxD) ? START_BIT : IDLE;
-                end
-                START_BIT: begin
-                    if (Rx_FERROR) begin
-                        next_state = FERROR;
-                    end else begin
-                        next_state = Rx_sample_ENABLE ? RECEIVING : START_BIT;
-                    end
-                end
-                RECEIVING: begin
-                    if (Rx_FERROR) begin
-                        next_state = FERROR;
-                    end else begin
-                        next_state = (buffer_index == 7 && Rx_sample_ENABLE) ? PARITY : RECEIVING;
-                    end
-                end
-                PARITY: begin
-                    if (Rx_FERROR) begin
-                        next_state = FERROR;
-                    end else if (Rx_PERROR) begin
-                        next_state = PERROR;
-                    end else begin
-                        next_state = Rx_sample_ENABLE ? END_BIT : PARITY;
-                    end
-                end
-                END_BIT: begin
-                    if (Rx_FERROR) begin
-                        next_state = FERROR;
-                    end else begin 
-                        next_state = (Rx_sample_ENABLE && !Rx_EN) ? DISABLED : END_BIT;
-                    end
-                end
-                default: begin
-                    next_state = DISABLED;
-                end
-            endcase
-    end
-
-    // State machine output
-    always @(*) begin
-        
-        // Default assignments
-        Rx_PERROR = 0;
-        Rx_FERROR = 0;
-        Rx_VALID = 0;
-
-        case(cur_state)
-            PERROR: begin
-                // Error: Parity error LOCK state
-                Rx_PERROR = 1;
-                Rx_FERROR = 0;
-                Rx_VALID = 0;
-            end
-            FERROR: begin
-                // Error: Framing error LOCK state
-                Rx_FERROR = 1;
-                Rx_PERROR = 0;
-                Rx_VALID = 0;
-            end
+        case (cur_state)
             DISABLED: begin
-                // DISABLED state
-                Rx_PERROR = 0;
-                Rx_FERROR = 0;
-                Rx_VALID = 0;
+                if (SURE) begin
+                    next_state = START_BIT;
+                end else if (Rx_EN) begin
+                    next_state = IDLE;
+                end else begin
+                    next_state = cur_state;
+                end
             end
             IDLE: begin
-                // IDLE state
-                Rx_PERROR = 0;
-                Rx_FERROR = 0;
-                Rx_VALID = 0;
+                if (SURE) begin
+                    next_state = START_BIT;
+                end else if (!Rx_EN) begin 
+                    next_state = DISABLED;
+                end else begin
+                    next_state = cur_state;
+                end
             end
             START_BIT: begin
-                Rx_FERROR = !bit_stable;
-                Rx_PERROR = 0;
-                Rx_VALID = 0;
+                // Reset IDLE's decision
+                if (Rx_sample_ENABLE) begin 
+                    if (!RxD && bit_stable) begin
+                        next_state = BIT_0;
+                    end else begin
+                        next_state = IDLE;  
+                    end
+                end else begin
+                    next_state = START_BIT;
+                end
             end
-            RECEIVING: begin
-                Rx_FERROR = !bit_stable;
-                Rx_PERROR = 0;
-                Rx_VALID = 0;
+            BIT_0: begin 
+                if (Rx_sample_ENABLE) begin
+                    if (bit_stable) begin
+                        next_state = BIT_1;
+                        // 8ese to Rx_DATA (To kanei panw ana clk)
+                    end else begin 
+                        next_state = IDLE;
+                    end
+                end else begin
+                    next_state = cur_state;
+                end
+            end
+            BIT_1: begin 
+                if (Rx_sample_ENABLE) begin
+                    if (bit_stable) begin
+                        next_state = BIT_2;
+                        // 8ese to Rx_DATA (To kanei panw ana clk)
+                    end else begin 
+                        next_state = IDLE;
+                    end
+                end else begin
+                    next_state = cur_state;
+                end
+            end
+            BIT_2: begin
+                if (Rx_sample_ENABLE) begin
+                    if (bit_stable) begin
+                        next_state = BIT_3;
+                        // 8ese to Rx_DATA (To kanei panw ana clk)
+                    end else begin 
+                        next_state = IDLE;
+                    end
+                end else begin
+                    next_state = cur_state;
+                end
+            end
+            BIT_3: begin
+                if (Rx_sample_ENABLE) begin
+                    if (bit_stable) begin
+                        next_state = BIT_4;
+                        // 8ese to Rx_DATA (To kanei panw ana clk)
+                    end else begin 
+                        next_state = IDLE;
+                    end
+                end else begin
+                    next_state = cur_state;
+                end
+            end
+            BIT_4: begin
+                if (Rx_sample_ENABLE) begin
+                    if (bit_stable) begin
+                        next_state = BIT_5;
+                        // 8ese to Rx_DATA (To kanei panw ana clk)
+                    end else begin 
+                        next_state = IDLE;
+                    end
+                end else begin
+                    next_state = cur_state;
+                end
+            end
+            BIT_5: begin
+                if (Rx_sample_ENABLE) begin
+                    if (bit_stable) begin
+                        next_state = BIT_6;
+
+                        // 8ese to Rx_DATA (To kanei panw ana clk)
+                    end else begin 
+                        next_state = IDLE;
+                    end
+                end else begin
+                    next_state = cur_state;
+                end
+            end
+            BIT_6: begin
+                if (Rx_sample_ENABLE) begin
+                    if (bit_stable) begin
+                        next_state = BIT_7;
+                        // 8ese to Rx_DATA (To kanei panw ana clk)
+                    end else begin 
+                        next_state = IDLE;
+                    end
+                end else begin
+                    next_state = cur_state;
+                end
+            end
+            BIT_7: begin
+                if (Rx_sample_ENABLE) begin
+                    if (bit_stable) begin
+                        next_state = PARITY;
+                        // 8ese to Rx_DATA (To kanei panw ana clk)
+                    end else begin 
+                        next_state = IDLE;
+                    end
+                end else begin
+                    next_state = cur_state;
+                end
             end
             PARITY: begin
-                Rx_FERROR = !bit_stable; 
-                Rx_PERROR = (RxD != ^Rx_DATA); // Check for parity error
-                Rx_VALID = 0;
+                if (Rx_sample_ENABLE) begin
+                    if (RxD == parity && bit_stable) begin
+                        next_state = END_BIT;
+                    end else begin
+                        next_state = IDLE;
+                    end
+                end else begin
+                    next_state = cur_state;
+                end
             end
             END_BIT: begin
-                // Check for framing error
-                Rx_FERROR = !RxD || !bit_stable;
-                Rx_VALID = !Rx_FERROR;
-                Rx_PERROR = 0;
+                if (Rx_sample_ENABLE) begin
+                    if (bit_stable && RxD) begin
+                        next_state = IDLE;
+                    end else begin
+                        next_state = IDLE;
+                    end
+                end else begin
+                    next_state = cur_state;
+                end
+            end
+            default: begin
+                next_state = DISABLED;
             end
         endcase
     end
