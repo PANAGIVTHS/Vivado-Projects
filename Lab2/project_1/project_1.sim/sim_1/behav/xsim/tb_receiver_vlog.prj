@@ -1,0 +1,12 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../../baud_controller_r.v" \
+"../../../../../baud_controller_t.v" \
+"../../../../../uart_receiver.v" \
+"../../../../../receive_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

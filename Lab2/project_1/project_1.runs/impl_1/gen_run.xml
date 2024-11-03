@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1730636877">
+<GenRun Id="impl_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1730654284">
   <File Type="BITSTR-BMM" Name="UART_controller_bd.bmm"/>
   <File Type="OPT-METHODOLOGY-DRC" Name="UART_controller_methodology_drc_opted.rpt"/>
   <File Type="INIT-TIMING" Name="UART_controller_timing_summary_init.rpt"/>

@@ -1,0 +1,10 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"tb_receiver_time_impl.v" \
+"../../../../../../baud_controller_r.v" \
+"../../../../../../baud_controller_t.v" \
+"../../../../../../uart_receiver.v" \
+"../../../../../../receive_tb.v" \
+
+# Do not sort compile order
+nosort

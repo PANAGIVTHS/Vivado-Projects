@@ -39,7 +39,6 @@ module uart_receiver (
     reg [3:0] cur_state; 
     reg [3:0] next_state;
     reg [3:0] sample_counter;
-    reg [3:0] buffer_index;
     reg SURE;
     wire sample_ENABLE;
     reg bit_stable, prev_bit;
@@ -121,7 +120,7 @@ module uart_receiver (
             Rx_VALID <= 0;
         end else if (cur_state == END_BIT && bit_stable && RxD) begin
             Rx_VALID <= 1;
-        end else if (cur_state == START_BIT)begin
+        end else if (cur_state == START_BIT) begin
             Rx_VALID <= 0;
         end else begin
             Rx_VALID <= Rx_VALID;
