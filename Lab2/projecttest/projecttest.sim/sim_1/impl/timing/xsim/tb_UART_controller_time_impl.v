@@ -1,7 +1,7 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-// Date        : Sat Nov  2 21:05:26 2024
+// Date        : Sun Nov  3 02:38:11 2024
 // Host        : DESKTOP-922FQ13 running 64-bit major release  (build 9200)
 // Command     : write_verilog -mode timesim -nolib -sdf_anno true -force -file
 //               C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/projecttest/projecttest.sim/sim_1/impl/timing/xsim/tb_UART_controller_time_impl.v
@@ -13,7 +13,7 @@
 `timescale 1 ps / 1 ps
 `define XIL_TIMING
 
-(* ECO_CHECKSUM = "10f10d73" *) 
+(* ECO_CHECKSUM = "da8db24b" *) 
 (* NotValidForBitStream *)
 module UART_controller
    (reset,
@@ -49,11 +49,11 @@ module UART_controller
   wire Tx_WR_IBUF;
   wire [2:0]baud_select;
   wire [2:0]baud_select_IBUF;
+  wire bit_stable;
   wire clk;
   wire clk_IBUF;
   wire clk_IBUF_BUFG;
   wire p_0_in2_in;
-  wire [0:0]\receiver_sampler_inst/cur_state ;
   wire reset;
   wire reset_IBUF;
   wire uart_receiver_inst_n_2;
@@ -156,14 +156,11 @@ end
         .Tx_EN_IBUF(Tx_EN_IBUF),
         .Tx_WR_IBUF(Tx_WR_IBUF),
         .baud_select_IBUF(baud_select_IBUF),
-        .cur_state(\receiver_sampler_inst/cur_state ));
+        .bit_stable(bit_stable));
   uart_transmitter uart_transmitter_inst
        (.AR(reset_IBUF),
         .CLK(clk_IBUF_BUFG),
         .\FSM_onehot_cur_state_reg[2] (uart_receiver_inst_n_4),
-        .\FSM_onehot_cur_state_reg[2]_0 (uart_receiver_inst_n_2),
-        .\FSM_onehot_cur_state_reg[2]_1 (uart_receiver_inst_n_3),
-        .\FSM_sequential_cur_state_reg[0]_0 (uart_transmitter_inst_n_0),
         .Q(p_0_in2_in),
         .TxD_OBUF(TxD_OBUF),
         .Tx_BUSY_OBUF(Tx_BUSY_OBUF),
@@ -171,16 +168,20 @@ end
         .Tx_EN_IBUF(Tx_EN_IBUF),
         .Tx_WR_IBUF(Tx_WR_IBUF),
         .baud_select_IBUF(baud_select_IBUF),
-        .cur_state(\receiver_sampler_inst/cur_state ));
+        .bit_stable(bit_stable),
+        .bit_stable_reg(uart_transmitter_inst_n_0),
+        .bit_stable_reg_0(uart_receiver_inst_n_2),
+        .bit_stable_reg_1(uart_receiver_inst_n_3));
 endmodule
 
 module baud_controller_r
    (D,
     sample_ENABLE_reg_0,
     sample_ENABLE_reg_1,
-    sample_ENABLE_reg_2,
-    \FSM_onehot_cur_state_reg[12] ,
     \sample_counter_reg[3] ,
+    sample_ENABLE_reg_2,
+    sample_ENABLE_reg_3,
+    \FSM_onehot_cur_state_reg[12] ,
     E,
     \Rx_DATA_reg[6] ,
     CLK,
@@ -190,23 +191,25 @@ module baud_controller_r
     Q,
     Tx_EN_IBUF,
     Tx_WR_IBUF,
-    TxD_OBUF,
+    Sx_sample_ENABLE_reg,
     \FSM_onehot_cur_state_reg[7] ,
-    \FSM_onehot_cur_state_reg[7]_0 ,
+    TxD_OBUF,
+    \FSM_onehot_cur_state_reg[8] ,
+    \Rx_DATA_reg[0] ,
+    \Rx_DATA_reg[0]_0 ,
     \Rx_DATA_reg[2] ,
     \Rx_DATA_reg[2]_0 ,
     \Rx_DATA_reg[6]_0 ,
     \Rx_DATA_reg[6]_1 ,
-    \Rx_DATA_reg[0] ,
-    \Rx_DATA_reg[0]_0 ,
     baud_select_IBUF,
     Tx_DATA_copy_OBUF);
   output [2:0]D;
   output sample_ENABLE_reg_0;
   output sample_ENABLE_reg_1;
-  output sample_ENABLE_reg_2;
-  output \FSM_onehot_cur_state_reg[12] ;
   output \sample_counter_reg[3] ;
+  output sample_ENABLE_reg_2;
+  output sample_ENABLE_reg_3;
+  output \FSM_onehot_cur_state_reg[12] ;
   output [0:0]E;
   output \Rx_DATA_reg[6] ;
   input CLK;
@@ -216,15 +219,16 @@ module baud_controller_r
   input [5:0]Q;
   input Tx_EN_IBUF;
   input Tx_WR_IBUF;
-  input TxD_OBUF;
+  input Sx_sample_ENABLE_reg;
   input \FSM_onehot_cur_state_reg[7] ;
-  input \FSM_onehot_cur_state_reg[7]_0 ;
+  input TxD_OBUF;
+  input \FSM_onehot_cur_state_reg[8] ;
+  input \Rx_DATA_reg[0] ;
+  input [3:0]\Rx_DATA_reg[0]_0 ;
   input \Rx_DATA_reg[2] ;
   input \Rx_DATA_reg[2]_0 ;
   input \Rx_DATA_reg[6]_0 ;
   input \Rx_DATA_reg[6]_1 ;
-  input \Rx_DATA_reg[0] ;
-  input [3:0]\Rx_DATA_reg[0]_0 ;
   input [2:0]baud_select_IBUF;
   input [0:0]Tx_DATA_copy_OBUF;
 
@@ -235,7 +239,7 @@ module baud_controller_r
   wire \FSM_onehot_cur_state_reg[12] ;
   wire \FSM_onehot_cur_state_reg[6] ;
   wire \FSM_onehot_cur_state_reg[7] ;
-  wire \FSM_onehot_cur_state_reg[7]_0 ;
+  wire \FSM_onehot_cur_state_reg[8] ;
   wire [5:0]Q;
   wire \Rx_DATA_reg[0] ;
   wire [3:0]\Rx_DATA_reg[0]_0 ;
@@ -245,6 +249,7 @@ module baud_controller_r
   wire \Rx_DATA_reg[6]_0 ;
   wire \Rx_DATA_reg[6]_1 ;
   wire SURE;
+  wire Sx_sample_ENABLE_reg;
   wire TxD_OBUF;
   wire [0:0]Tx_DATA_copy_OBUF;
   wire Tx_EN_IBUF;
@@ -371,6 +376,7 @@ module baud_controller_r
   wire sample_ENABLE_reg_0;
   wire sample_ENABLE_reg_1;
   wire sample_ENABLE_reg_2;
+  wire sample_ENABLE_reg_3;
   wire \sample_counter_reg[3] ;
   wire [2:0]NLW_counter0_carry_CO_UNCONNECTED;
   wire [2:0]NLW_counter0_carry__0_CO_UNCONNECTED;
@@ -388,15 +394,6 @@ module baud_controller_r
   wire [3:0]NLW_counter1_carry__1_CO_UNCONNECTED;
   wire [3:0]NLW_counter1_carry__1_O_UNCONNECTED;
 
-  LUT5 #(
-    .INIT(32'h80000000)) 
-    \FSM_onehot_cur_state[12]_i_2 
-       (.I0(sample_ENABLE),
-        .I1(\Rx_DATA_reg[0]_0 [2]),
-        .I2(\Rx_DATA_reg[0]_0 [1]),
-        .I3(\Rx_DATA_reg[0]_0 [0]),
-        .I4(\Rx_DATA_reg[0]_0 [3]),
-        .O(sample_ENABLE_reg_0));
   LUT6 #(
     .INIT(64'hEEE0FFFFEEE0EEE0)) 
     \FSM_onehot_cur_state[6]_i_1 
@@ -413,9 +410,9 @@ module baud_controller_r
        (.I0(Q[3]),
         .I1(Q[5]),
         .I2(sample_ENABLE_reg_0),
-        .I3(\FSM_onehot_cur_state_reg[7]_0 ),
+        .I3(\FSM_onehot_cur_state_reg[7] ),
         .I4(TxD_OBUF),
-        .I5(\FSM_onehot_cur_state_reg[7] ),
+        .I5(\FSM_onehot_cur_state_reg[8] ),
         .O(D[1]));
   LUT5 #(
     .INIT(32'h30AA00AA)) 
@@ -424,8 +421,17 @@ module baud_controller_r
         .I1(TxD_OBUF),
         .I2(Q[2]),
         .I3(sample_ENABLE_reg_0),
-        .I4(\FSM_onehot_cur_state_reg[7] ),
+        .I4(\FSM_onehot_cur_state_reg[8] ),
         .O(D[2]));
+  LUT5 #(
+    .INIT(32'h80000000)) 
+    \FSM_sequential_cur_state[2]_i_2__0 
+       (.I0(sample_ENABLE),
+        .I1(\Rx_DATA_reg[0]_0 [2]),
+        .I2(\Rx_DATA_reg[0]_0 [1]),
+        .I3(\Rx_DATA_reg[0]_0 [0]),
+        .I4(\Rx_DATA_reg[0]_0 [3]),
+        .O(sample_ENABLE_reg_0));
   LUT6 #(
     .INIT(64'hBFFFFFFFFFFFFFFF)) 
     \Rx_DATA[1]_i_2 
@@ -445,14 +451,14 @@ module baud_controller_r
         .I2(\Rx_DATA_reg[2]_0 ),
         .I3(\Rx_DATA_reg[6]_0 ),
         .I4(\Rx_DATA_reg[6]_1 ),
-        .O(sample_ENABLE_reg_1));
+        .O(sample_ENABLE_reg_2));
   LUT5 #(
     .INIT(32'hFFFE0010)) 
     \Rx_DATA[6]_i_1 
        (.I0(\Rx_DATA_reg[6]_0 ),
         .I1(\Rx_DATA_reg[6]_1 ),
         .I2(TxD_OBUF),
-        .I3(sample_ENABLE_reg_2),
+        .I3(sample_ENABLE_reg_3),
         .I4(Tx_DATA_copy_OBUF),
         .O(\Rx_DATA_reg[6] ));
   (* SOFT_HLUTNM = "soft_lutpair0" *) 
@@ -464,7 +470,7 @@ module baud_controller_r
         .I2(\Rx_DATA_reg[6]_0 ),
         .I3(\Rx_DATA_reg[2]_0 ),
         .I4(\Rx_DATA_reg[2] ),
-        .O(sample_ENABLE_reg_2));
+        .O(sample_ENABLE_reg_3));
   LUT5 #(
     .INIT(32'hF018FFFF)) 
     \Rx_DATA[7]_i_4 
@@ -474,6 +480,15 @@ module baud_controller_r
         .I3(\Rx_DATA_reg[2]_0 ),
         .I4(sample_ENABLE_reg_0),
         .O(\FSM_onehot_cur_state_reg[12] ));
+  LUT5 #(
+    .INIT(32'hFFF2F2F2)) 
+    Sx_sample_ENABLE_i_1
+       (.I0(sample_ENABLE),
+        .I1(Sx_sample_ENABLE_reg),
+        .I2(sample_ENABLE_reg_0),
+        .I3(Tx_EN_IBUF),
+        .I4(Tx_WR_IBUF),
+        .O(sample_ENABLE_reg_1));
   (* OPT_MODIFIED = "SWEEP " *) 
   CARRY4 counter0_carry
        (.CI(1'b0),
@@ -644,14 +659,14 @@ module baud_controller_r
         .I5(\counter_reg_n_0_[5] ),
         .O(counter1_carry_i_3__0_n_0));
   LUT6 #(
-    .INIT(64'h4022004008008108)) 
+    .INIT(64'h4024200208000810)) 
     counter1_carry_i_4__0
        (.I0(\counter_reg_n_0_[0] ),
-        .I1(\counter_reg_n_0_[1] ),
-        .I2(baud_select_IBUF[1]),
-        .I3(baud_select_IBUF[0]),
-        .I4(baud_select_IBUF[2]),
-        .I5(\counter_reg_n_0_[2] ),
+        .I1(\counter_reg_n_0_[2] ),
+        .I2(baud_select_IBUF[0]),
+        .I3(baud_select_IBUF[2]),
+        .I4(baud_select_IBUF[1]),
+        .I5(\counter_reg_n_0_[1] ),
         .O(counter1_carry_i_4__0_n_0));
   LUT4 #(
     .INIT(16'h0015)) 
@@ -661,7 +676,7 @@ module baud_controller_r
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(\counter[0]_i_1__1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair3" *) 
+  (* SOFT_HLUTNM = "soft_lutpair1" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[10]_i_1 
@@ -670,7 +685,7 @@ module baud_controller_r
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(\counter[10]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair1" *) 
+  (* SOFT_HLUTNM = "soft_lutpair4" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[11]_i_1 
@@ -679,7 +694,7 @@ module baud_controller_r
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(\counter[11]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+  (* SOFT_HLUTNM = "soft_lutpair3" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[12]_i_1 
@@ -706,7 +721,7 @@ module baud_controller_r
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(\counter[14]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair7" *) 
+  (* SOFT_HLUTNM = "soft_lutpair9" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[15]_i_1 
@@ -715,7 +730,7 @@ module baud_controller_r
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(\counter[15]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair8" *) 
+  (* SOFT_HLUTNM = "soft_lutpair7" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[16]_i_1 
@@ -724,7 +739,7 @@ module baud_controller_r
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(\counter[16]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair9" *) 
+  (* SOFT_HLUTNM = "soft_lutpair8" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[17]_i_1 
@@ -778,7 +793,7 @@ module baud_controller_r
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(\counter[21]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair10" *) 
+  (* SOFT_HLUTNM = "soft_lutpair13" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[22]_i_1 
@@ -787,7 +802,7 @@ module baud_controller_r
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(\counter[22]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair13" *) 
+  (* SOFT_HLUTNM = "soft_lutpair10" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[23]_i_1 
@@ -796,7 +811,7 @@ module baud_controller_r
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(\counter[23]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair11" *) 
+  (* SOFT_HLUTNM = "soft_lutpair14" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[24]_i_1 
@@ -805,7 +820,7 @@ module baud_controller_r
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(\counter[24]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair12" *) 
+  (* SOFT_HLUTNM = "soft_lutpair11" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[25]_i_1 
@@ -814,7 +829,7 @@ module baud_controller_r
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(\counter[25]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair13" *) 
+  (* SOFT_HLUTNM = "soft_lutpair12" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[26]_i_1 
@@ -823,7 +838,7 @@ module baud_controller_r
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(\counter[26]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair14" *) 
+  (* SOFT_HLUTNM = "soft_lutpair13" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[27]_i_1 
@@ -1230,7 +1245,7 @@ module baud_controller_t
     Tx_EN_IBUF,
     Tx_WR_IBUF,
     Q,
-    cur_state_1,
+    cur_state,
     baud_select_IBUF);
   output [0:0]E;
   output \FSM_sequential_cur_state_reg[1] ;
@@ -1241,14 +1256,14 @@ module baud_controller_t
   input Tx_EN_IBUF;
   input Tx_WR_IBUF;
   input [3:0]Q;
-  input [2:0]cur_state_1;
+  input [2:0]cur_state;
   input [2:0]baud_select_IBUF;
 
   wire [0:0]AR;
   wire CLK;
   wire [0:0]E;
   wire \FSM_sequential_cur_state[2]_i_2_n_0 ;
-  wire \FSM_sequential_cur_state[2]_i_3_n_0 ;
+  wire \FSM_sequential_cur_state[2]_i_3__0_n_0 ;
   wire \FSM_sequential_cur_state_reg[0] ;
   wire \FSM_sequential_cur_state_reg[1] ;
   wire \FSM_sequential_cur_state_reg[2] ;
@@ -1279,7 +1294,7 @@ module baud_controller_t
   wire counter1_carry_i_3_n_0;
   wire counter1_carry_i_4_n_0;
   wire counter1_carry_n_0;
-  wire [2:0]cur_state_1;
+  wire [2:0]cur_state;
   wire [31:0]p_0_in;
   wire sample_ENABLE;
   wire sample_ENABLE_i_1__0_n_0;
@@ -1299,32 +1314,32 @@ module baud_controller_t
   wire [3:0]NLW_counter1_carry__1_CO_UNCONNECTED;
   wire [3:0]NLW_counter1_carry__1_O_UNCONNECTED;
 
-  (* SOFT_HLUTNM = "soft_lutpair42" *) 
+  (* SOFT_HLUTNM = "soft_lutpair41" *) 
   LUT4 #(
     .INIT(16'h0F70)) 
     \FSM_sequential_cur_state[0]_i_1 
-       (.I0(cur_state_1[2]),
-        .I1(cur_state_1[1]),
+       (.I0(cur_state[2]),
+        .I1(cur_state[1]),
         .I2(\FSM_sequential_cur_state[2]_i_2_n_0 ),
-        .I3(cur_state_1[0]),
+        .I3(cur_state[0]),
         .O(\FSM_sequential_cur_state_reg[2] ));
-  (* SOFT_HLUTNM = "soft_lutpair42" *) 
+  (* SOFT_HLUTNM = "soft_lutpair41" *) 
   LUT4 #(
     .INIT(16'h1F20)) 
     \FSM_sequential_cur_state[1]_i_1 
-       (.I0(cur_state_1[0]),
-        .I1(cur_state_1[2]),
+       (.I0(cur_state[0]),
+        .I1(cur_state[2]),
         .I2(\FSM_sequential_cur_state[2]_i_2_n_0 ),
-        .I3(cur_state_1[1]),
+        .I3(cur_state[1]),
         .O(\FSM_sequential_cur_state_reg[0] ));
-  (* SOFT_HLUTNM = "soft_lutpair41" *) 
+  (* SOFT_HLUTNM = "soft_lutpair40" *) 
   LUT4 #(
     .INIT(16'h1F80)) 
     \FSM_sequential_cur_state[2]_i_1 
-       (.I0(cur_state_1[1]),
-        .I1(cur_state_1[0]),
+       (.I0(cur_state[1]),
+        .I1(cur_state[0]),
         .I2(\FSM_sequential_cur_state[2]_i_2_n_0 ),
-        .I3(cur_state_1[2]),
+        .I3(cur_state[2]),
         .O(\FSM_sequential_cur_state_reg[1] ));
   LUT6 #(
     .INIT(64'hFFFFFFFF40000000)) 
@@ -1334,18 +1349,18 @@ module baud_controller_t
         .I2(Q[1]),
         .I3(Q[0]),
         .I4(E),
-        .I5(\FSM_sequential_cur_state[2]_i_3_n_0 ),
+        .I5(\FSM_sequential_cur_state[2]_i_3__0_n_0 ),
         .O(\FSM_sequential_cur_state[2]_i_2_n_0 ));
   LUT6 #(
     .INIT(64'h00A000A0FAAC0AAC)) 
-    \FSM_sequential_cur_state[2]_i_3 
+    \FSM_sequential_cur_state[2]_i_3__0 
        (.I0(sample_ENABLE),
         .I1(Tx_WR_IBUF),
-        .I2(cur_state_1[0]),
-        .I3(cur_state_1[2]),
+        .I2(cur_state[0]),
+        .I3(cur_state[2]),
         .I4(Tx_EN_IBUF),
-        .I5(cur_state_1[1]),
-        .O(\FSM_sequential_cur_state[2]_i_3_n_0 ));
+        .I5(cur_state[1]),
+        .O(\FSM_sequential_cur_state[2]_i_3__0_n_0 ));
   (* OPT_MODIFIED = "SWEEP " *) 
   CARRY4 counter0_carry
        (.CI(1'b0),
@@ -1525,7 +1540,7 @@ module baud_controller_t
         .I4(counter[0]),
         .I5(baud_select_IBUF[1]),
         .O(counter1_carry_i_4_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair25" *) 
+  (* SOFT_HLUTNM = "soft_lutpair24" *) 
   LUT4 #(
     .INIT(16'h0015)) 
     \counter[0]_i_1 
@@ -1534,7 +1549,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[0]));
-  (* SOFT_HLUTNM = "soft_lutpair30" *) 
+  (* SOFT_HLUTNM = "soft_lutpair29" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[10]_i_1__0 
@@ -1543,7 +1558,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[10]));
-  (* SOFT_HLUTNM = "soft_lutpair30" *) 
+  (* SOFT_HLUTNM = "soft_lutpair29" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[11]_i_1__0 
@@ -1552,7 +1567,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[11]));
-  (* SOFT_HLUTNM = "soft_lutpair31" *) 
+  (* SOFT_HLUTNM = "soft_lutpair30" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[12]_i_1__0 
@@ -1561,7 +1576,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[12]));
-  (* SOFT_HLUTNM = "soft_lutpair31" *) 
+  (* SOFT_HLUTNM = "soft_lutpair30" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[13]_i_1__0 
@@ -1570,7 +1585,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[13]));
-  (* SOFT_HLUTNM = "soft_lutpair32" *) 
+  (* SOFT_HLUTNM = "soft_lutpair31" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[14]_i_1__0 
@@ -1579,7 +1594,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[14]));
-  (* SOFT_HLUTNM = "soft_lutpair32" *) 
+  (* SOFT_HLUTNM = "soft_lutpair31" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[15]_i_1__0 
@@ -1588,7 +1603,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[15]));
-  (* SOFT_HLUTNM = "soft_lutpair33" *) 
+  (* SOFT_HLUTNM = "soft_lutpair32" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[16]_i_1__0 
@@ -1597,7 +1612,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[16]));
-  (* SOFT_HLUTNM = "soft_lutpair33" *) 
+  (* SOFT_HLUTNM = "soft_lutpair32" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[17]_i_1__0 
@@ -1606,7 +1621,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[17]));
-  (* SOFT_HLUTNM = "soft_lutpair34" *) 
+  (* SOFT_HLUTNM = "soft_lutpair33" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[18]_i_1__0 
@@ -1615,7 +1630,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[18]));
-  (* SOFT_HLUTNM = "soft_lutpair34" *) 
+  (* SOFT_HLUTNM = "soft_lutpair33" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[19]_i_1__0 
@@ -1624,7 +1639,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[19]));
-  (* SOFT_HLUTNM = "soft_lutpair26" *) 
+  (* SOFT_HLUTNM = "soft_lutpair25" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[1]_i_1__0 
@@ -1633,7 +1648,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[1]));
-  (* SOFT_HLUTNM = "soft_lutpair35" *) 
+  (* SOFT_HLUTNM = "soft_lutpair34" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[20]_i_1__0 
@@ -1642,7 +1657,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[20]));
-  (* SOFT_HLUTNM = "soft_lutpair35" *) 
+  (* SOFT_HLUTNM = "soft_lutpair34" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[21]_i_1__0 
@@ -1651,7 +1666,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[21]));
-  (* SOFT_HLUTNM = "soft_lutpair36" *) 
+  (* SOFT_HLUTNM = "soft_lutpair35" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[22]_i_1__0 
@@ -1660,7 +1675,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[22]));
-  (* SOFT_HLUTNM = "soft_lutpair36" *) 
+  (* SOFT_HLUTNM = "soft_lutpair35" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[23]_i_1__0 
@@ -1669,7 +1684,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[23]));
-  (* SOFT_HLUTNM = "soft_lutpair37" *) 
+  (* SOFT_HLUTNM = "soft_lutpair36" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[24]_i_1__0 
@@ -1678,7 +1693,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[24]));
-  (* SOFT_HLUTNM = "soft_lutpair37" *) 
+  (* SOFT_HLUTNM = "soft_lutpair36" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[25]_i_1__0 
@@ -1687,7 +1702,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[25]));
-  (* SOFT_HLUTNM = "soft_lutpair38" *) 
+  (* SOFT_HLUTNM = "soft_lutpair37" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[26]_i_1__0 
@@ -1696,7 +1711,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[26]));
-  (* SOFT_HLUTNM = "soft_lutpair38" *) 
+  (* SOFT_HLUTNM = "soft_lutpair37" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[27]_i_1__0 
@@ -1705,7 +1720,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[27]));
-  (* SOFT_HLUTNM = "soft_lutpair39" *) 
+  (* SOFT_HLUTNM = "soft_lutpair38" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[28]_i_1__0 
@@ -1714,7 +1729,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[28]));
-  (* SOFT_HLUTNM = "soft_lutpair39" *) 
+  (* SOFT_HLUTNM = "soft_lutpair38" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[29]_i_1__0 
@@ -1723,7 +1738,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[29]));
-  (* SOFT_HLUTNM = "soft_lutpair26" *) 
+  (* SOFT_HLUTNM = "soft_lutpair25" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[2]_i_1__0 
@@ -1732,7 +1747,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[2]));
-  (* SOFT_HLUTNM = "soft_lutpair40" *) 
+  (* SOFT_HLUTNM = "soft_lutpair39" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[30]_i_1__0 
@@ -1741,7 +1756,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[30]));
-  (* SOFT_HLUTNM = "soft_lutpair40" *) 
+  (* SOFT_HLUTNM = "soft_lutpair39" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[31]_i_1__0 
@@ -1750,7 +1765,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[31]));
-  (* SOFT_HLUTNM = "soft_lutpair27" *) 
+  (* SOFT_HLUTNM = "soft_lutpair26" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[3]_i_1__0 
@@ -1759,16 +1774,16 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[3]));
-  (* SOFT_HLUTNM = "soft_lutpair41" *) 
+  (* SOFT_HLUTNM = "soft_lutpair40" *) 
   LUT4 #(
     .INIT(16'h1000)) 
     \counter[3]_i_1__1 
-       (.I0(cur_state_1[2]),
-        .I1(cur_state_1[0]),
-        .I2(cur_state_1[1]),
+       (.I0(cur_state[2]),
+        .I1(cur_state[0]),
+        .I2(cur_state[1]),
         .I3(sample_ENABLE),
         .O(E));
-  (* SOFT_HLUTNM = "soft_lutpair27" *) 
+  (* SOFT_HLUTNM = "soft_lutpair26" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[4]_i_1__0 
@@ -1777,7 +1792,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[4]));
-  (* SOFT_HLUTNM = "soft_lutpair25" *) 
+  (* SOFT_HLUTNM = "soft_lutpair24" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[5]_i_1__0 
@@ -1786,7 +1801,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[5]));
-  (* SOFT_HLUTNM = "soft_lutpair28" *) 
+  (* SOFT_HLUTNM = "soft_lutpair27" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[6]_i_1__0 
@@ -1795,7 +1810,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[6]));
-  (* SOFT_HLUTNM = "soft_lutpair28" *) 
+  (* SOFT_HLUTNM = "soft_lutpair27" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[7]_i_1__0 
@@ -1804,7 +1819,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[7]));
-  (* SOFT_HLUTNM = "soft_lutpair29" *) 
+  (* SOFT_HLUTNM = "soft_lutpair28" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[8]_i_1__0 
@@ -1813,7 +1828,7 @@ module baud_controller_t
         .I2(Tx_WR_IBUF),
         .I3(counter1_carry__1_n_1),
         .O(p_0_in[8]));
-  (* SOFT_HLUTNM = "soft_lutpair29" *) 
+  (* SOFT_HLUTNM = "soft_lutpair28" *) 
   LUT4 #(
     .INIT(16'h002A)) 
     \counter[9]_i_1__0 
@@ -2096,31 +2111,43 @@ module baud_controller_t
 endmodule
 
 module receiver_sampler
-   (\FSM_sequential_cur_state_reg[0]_0 ,
+   (Sx_sample_ENABLE_reg_0,
+    bit_stable_reg_0,
+    Tx_EN,
     D,
+    \Tx_DATA[1] ,
+    \Tx_DATA[5] ,
     \FSM_onehot_cur_state_reg[10] ,
+    Sx_sample_ENABLE_reg_1,
     CLK,
     AR,
-    Tx_WR_IBUF,
+    \FSM_sequential_cur_state_reg[0]_0 ,
     Tx_EN_IBUF,
+    Tx_WR_IBUF,
     Q,
     \FSM_onehot_cur_state_reg[2] ,
     TxD_OBUF,
     \FSM_onehot_cur_state_reg[2]_0 ,
-    \FSM_onehot_cur_state_reg[2]_1 ,
+    Tx_DATA_IBUF,
     \FSM_onehot_cur_state[2]_i_2 );
-  output \FSM_sequential_cur_state_reg[0]_0 ;
+  output Sx_sample_ENABLE_reg_0;
+  output bit_stable_reg_0;
+  output Tx_EN;
   output [8:0]D;
+  output \Tx_DATA[1] ;
+  output \Tx_DATA[5] ;
   output \FSM_onehot_cur_state_reg[10] ;
+  input Sx_sample_ENABLE_reg_1;
   input CLK;
   input [0:0]AR;
-  input Tx_WR_IBUF;
+  input \FSM_sequential_cur_state_reg[0]_0 ;
   input Tx_EN_IBUF;
+  input Tx_WR_IBUF;
   input [9:0]Q;
   input \FSM_onehot_cur_state_reg[2] ;
   input TxD_OBUF;
   input \FSM_onehot_cur_state_reg[2]_0 ;
-  input \FSM_onehot_cur_state_reg[2]_1 ;
+  input [7:0]Tx_DATA_IBUF;
   input \FSM_onehot_cur_state[2]_i_2 ;
 
   wire [0:0]AR;
@@ -2130,21 +2157,32 @@ module receiver_sampler
   wire \FSM_onehot_cur_state_reg[10] ;
   wire \FSM_onehot_cur_state_reg[2] ;
   wire \FSM_onehot_cur_state_reg[2]_0 ;
-  wire \FSM_onehot_cur_state_reg[2]_1 ;
   wire \FSM_sequential_cur_state_reg[0]_0 ;
   wire [9:0]Q;
+  wire Sx_sample_ENABLE_reg_0;
+  wire Sx_sample_ENABLE_reg_1;
   wire TxD_OBUF;
+  wire \Tx_DATA[1] ;
+  wire \Tx_DATA[5] ;
+  wire [7:0]Tx_DATA_IBUF;
+  wire Tx_EN;
   wire Tx_EN_IBUF;
   wire Tx_WR_IBUF;
-  wire [0:0]next_state;
+  wire bit_stable1_out;
+  wire bit_stable_i_2_n_0;
+  wire bit_stable_reg_0;
+  wire [2:0]cur_state;
+  wire [2:0]next_state;
+  wire prev_bit;
+  wire prev_bit_i_1_n_0;
 
-  (* SOFT_HLUTNM = "soft_lutpair17" *) 
+  (* SOFT_HLUTNM = "soft_lutpair18" *) 
   LUT4 #(
     .INIT(16'h8F80)) 
     \FSM_onehot_cur_state[0]_i_1 
-       (.I0(\FSM_sequential_cur_state_reg[0]_0 ),
+       (.I0(bit_stable_reg_0),
         .I1(Q[3]),
-        .I2(\FSM_onehot_cur_state_reg[2]_1 ),
+        .I2(\FSM_sequential_cur_state_reg[0]_0 ),
         .I3(Q[0]),
         .O(D[0]));
   (* SOFT_HLUTNM = "soft_lutpair20" *) 
@@ -2152,8 +2190,8 @@ module receiver_sampler
     .INIT(16'hCA0A)) 
     \FSM_onehot_cur_state[10]_i_1 
        (.I0(Q[7]),
-        .I1(\FSM_sequential_cur_state_reg[0]_0 ),
-        .I2(\FSM_onehot_cur_state_reg[2]_1 ),
+        .I1(bit_stable_reg_0),
+        .I2(\FSM_sequential_cur_state_reg[0]_0 ),
         .I3(Q[9]),
         .O(D[6]));
   (* SOFT_HLUTNM = "soft_lutpair19" *) 
@@ -2161,8 +2199,8 @@ module receiver_sampler
     .INIT(16'hCA0A)) 
     \FSM_onehot_cur_state[11]_i_1 
        (.I0(Q[8]),
-        .I1(\FSM_sequential_cur_state_reg[0]_0 ),
-        .I2(\FSM_onehot_cur_state_reg[2]_1 ),
+        .I1(bit_stable_reg_0),
+        .I2(\FSM_sequential_cur_state_reg[0]_0 ),
         .I3(Q[7]),
         .O(D[7]));
   (* SOFT_HLUTNM = "soft_lutpair20" *) 
@@ -2170,17 +2208,17 @@ module receiver_sampler
     .INIT(16'hCA0A)) 
     \FSM_onehot_cur_state[12]_i_1 
        (.I0(Q[9]),
-        .I1(\FSM_sequential_cur_state_reg[0]_0 ),
-        .I2(\FSM_onehot_cur_state_reg[2]_1 ),
+        .I1(bit_stable_reg_0),
+        .I2(\FSM_sequential_cur_state_reg[0]_0 ),
         .I3(Q[2]),
         .O(D[8]));
-  (* SOFT_HLUTNM = "soft_lutpair18" *) 
+  (* SOFT_HLUTNM = "soft_lutpair17" *) 
   LUT4 #(
     .INIT(16'hCA0A)) 
     \FSM_onehot_cur_state[1]_i_1 
        (.I0(Q[1]),
-        .I1(\FSM_sequential_cur_state_reg[0]_0 ),
-        .I2(\FSM_onehot_cur_state_reg[2]_1 ),
+        .I1(bit_stable_reg_0),
+        .I2(\FSM_sequential_cur_state_reg[0]_0 ),
         .I3(Q[0]),
         .O(D[1]));
   LUT6 #(
@@ -2189,9 +2227,9 @@ module receiver_sampler
        (.I0(Q[6]),
         .I1(\FSM_onehot_cur_state_reg[2] ),
         .I2(TxD_OBUF),
-        .I3(\FSM_sequential_cur_state_reg[0]_0 ),
+        .I3(bit_stable_reg_0),
         .I4(\FSM_onehot_cur_state_reg[2]_0 ),
-        .I5(\FSM_onehot_cur_state_reg[2]_1 ),
+        .I5(\FSM_sequential_cur_state_reg[0]_0 ),
         .O(D[2]));
   LUT6 #(
     .INIT(64'h00000000FFFF0001)) 
@@ -2200,25 +2238,25 @@ module receiver_sampler
         .I1(Q[9]),
         .I2(Q[1]),
         .I3(\FSM_onehot_cur_state[2]_i_2 ),
-        .I4(\FSM_sequential_cur_state_reg[0]_0 ),
+        .I4(bit_stable_reg_0),
         .I5(Q[4]),
         .O(\FSM_onehot_cur_state_reg[10] ));
-  (* SOFT_HLUTNM = "soft_lutpair18" *) 
+  (* SOFT_HLUTNM = "soft_lutpair17" *) 
   LUT4 #(
     .INIT(16'hCA0A)) 
     \FSM_onehot_cur_state[3]_i_1 
        (.I0(Q[2]),
-        .I1(\FSM_sequential_cur_state_reg[0]_0 ),
-        .I2(\FSM_onehot_cur_state_reg[2]_1 ),
+        .I1(bit_stable_reg_0),
+        .I2(\FSM_sequential_cur_state_reg[0]_0 ),
         .I3(Q[1]),
         .O(D[3]));
-  (* SOFT_HLUTNM = "soft_lutpair17" *) 
+  (* SOFT_HLUTNM = "soft_lutpair18" *) 
   LUT4 #(
     .INIT(16'h8F80)) 
     \FSM_onehot_cur_state[4]_i_1 
-       (.I0(\FSM_sequential_cur_state_reg[0]_0 ),
+       (.I0(bit_stable_reg_0),
         .I1(Q[5]),
-        .I2(\FSM_onehot_cur_state_reg[2]_1 ),
+        .I2(\FSM_sequential_cur_state_reg[0]_0 ),
         .I3(Q[3]),
         .O(D[4]));
   (* SOFT_HLUTNM = "soft_lutpair19" *) 
@@ -2226,30 +2264,140 @@ module receiver_sampler
     .INIT(16'hCA0A)) 
     \FSM_onehot_cur_state[9]_i_1 
        (.I0(Q[6]),
-        .I1(\FSM_sequential_cur_state_reg[0]_0 ),
-        .I2(\FSM_onehot_cur_state_reg[2]_1 ),
+        .I1(bit_stable_reg_0),
+        .I2(\FSM_sequential_cur_state_reg[0]_0 ),
         .I3(Q[8]),
         .O(D[5]));
-  LUT3 #(
-    .INIT(8'hEA)) 
+  LUT6 #(
+    .INIT(64'h110F0F0FF0F0F0F0)) 
     \FSM_sequential_cur_state[0]_i_1__0 
+       (.I0(Tx_EN),
+        .I1(\FSM_sequential_cur_state_reg[0]_0 ),
+        .I2(Sx_sample_ENABLE_reg_0),
+        .I3(cur_state[2]),
+        .I4(cur_state[1]),
+        .I5(cur_state[0]),
+        .O(next_state[0]));
+  LUT6 #(
+    .INIT(64'h10FFFF001F00FF00)) 
+    \FSM_sequential_cur_state[1]_i_1__0 
+       (.I0(Tx_EN),
+        .I1(\FSM_sequential_cur_state_reg[0]_0 ),
+        .I2(cur_state[2]),
+        .I3(cur_state[1]),
+        .I4(cur_state[0]),
+        .I5(Sx_sample_ENABLE_reg_0),
+        .O(next_state[1]));
+  LUT6 #(
+    .INIT(64'h1FF0F0F010F0F0F0)) 
+    \FSM_sequential_cur_state[2]_i_1__0 
        (.I0(\FSM_sequential_cur_state_reg[0]_0 ),
+        .I1(Tx_EN),
+        .I2(cur_state[2]),
+        .I3(cur_state[1]),
+        .I4(cur_state[0]),
+        .I5(Sx_sample_ENABLE_reg_0),
+        .O(next_state[2]));
+  LUT2 #(
+    .INIT(4'h8)) 
+    \FSM_sequential_cur_state[2]_i_3 
+       (.I0(Tx_EN_IBUF),
         .I1(Tx_WR_IBUF),
-        .I2(Tx_EN_IBUF),
-        .O(next_state));
-  (* FSM_ENCODED_STATES = "LOCK:000,SAMPLE_1:010,SAMPLE_2:011,SAMPLE_3:100,SAMPLE_4:101,SAMPLE_5:110,SAMPLE_END:111,SAMPLE_START:001" *) 
+        .O(Tx_EN));
+  (* FSM_ENCODED_STATES = "SAMPLE_START:000,SAMPLE_1:001,SAMPLE_2:010,SAMPLE_3:011,SAMPLE_4:100,SAMPLE_5:101,END_BIT:110,IDLE:111" *) 
   FDCE #(
     .INIT(1'b0)) 
     \FSM_sequential_cur_state_reg[0] 
        (.C(CLK),
         .CE(1'b1),
         .CLR(AR),
-        .D(next_state),
-        .Q(\FSM_sequential_cur_state_reg[0]_0 ));
+        .D(next_state[0]),
+        .Q(cur_state[0]));
+  (* FSM_ENCODED_STATES = "SAMPLE_START:000,SAMPLE_1:001,SAMPLE_2:010,SAMPLE_3:011,SAMPLE_4:100,SAMPLE_5:101,END_BIT:110,IDLE:111" *) 
+  FDCE #(
+    .INIT(1'b0)) 
+    \FSM_sequential_cur_state_reg[1] 
+       (.C(CLK),
+        .CE(1'b1),
+        .CLR(AR),
+        .D(next_state[1]),
+        .Q(cur_state[1]));
+  (* FSM_ENCODED_STATES = "SAMPLE_START:000,SAMPLE_1:001,SAMPLE_2:010,SAMPLE_3:011,SAMPLE_4:100,SAMPLE_5:101,END_BIT:110,IDLE:111" *) 
+  FDCE #(
+    .INIT(1'b0)) 
+    \FSM_sequential_cur_state_reg[2] 
+       (.C(CLK),
+        .CE(1'b1),
+        .CLR(AR),
+        .D(next_state[2]),
+        .Q(cur_state[2]));
+  FDCE #(
+    .INIT(1'b0)) 
+    Sx_sample_ENABLE_reg
+       (.C(CLK),
+        .CE(1'b1),
+        .CLR(AR),
+        .D(Sx_sample_ENABLE_reg_1),
+        .Q(Sx_sample_ENABLE_reg_0));
+  LUT4 #(
+    .INIT(16'h6996)) 
+    TxD_OBUF_inst_i_3
+       (.I0(Tx_DATA_IBUF[1]),
+        .I1(Tx_DATA_IBUF[0]),
+        .I2(Tx_DATA_IBUF[7]),
+        .I3(Tx_DATA_IBUF[6]),
+        .O(\Tx_DATA[1] ));
+  LUT4 #(
+    .INIT(16'h6996)) 
+    TxD_OBUF_inst_i_4
+       (.I0(Tx_DATA_IBUF[5]),
+        .I1(Tx_DATA_IBUF[4]),
+        .I2(Tx_DATA_IBUF[3]),
+        .I3(Tx_DATA_IBUF[2]),
+        .O(\Tx_DATA[5] ));
+  LUT4 #(
+    .INIT(16'hA88A)) 
+    bit_stable_i_1
+       (.I0(bit_stable_reg_0),
+        .I1(bit_stable_i_2_n_0),
+        .I2(prev_bit),
+        .I3(TxD_OBUF),
+        .O(bit_stable1_out));
+  LUT4 #(
+    .INIT(16'h01FF)) 
+    bit_stable_i_2
+       (.I0(cur_state[0]),
+        .I1(cur_state[2]),
+        .I2(cur_state[1]),
+        .I3(Sx_sample_ENABLE_reg_0),
+        .O(bit_stable_i_2_n_0));
+  FDPE #(
+    .INIT(1'b1)) 
+    bit_stable_reg
+       (.C(CLK),
+        .CE(1'b1),
+        .D(bit_stable1_out),
+        .PRE(AR),
+        .Q(bit_stable_reg_0));
+  LUT3 #(
+    .INIT(8'hB8)) 
+    prev_bit_i_1
+       (.I0(TxD_OBUF),
+        .I1(Sx_sample_ENABLE_reg_0),
+        .I2(prev_bit),
+        .O(prev_bit_i_1_n_0));
+  FDCE #(
+    .INIT(1'b0)) 
+    prev_bit_reg
+       (.C(CLK),
+        .CE(1'b1),
+        .CLR(AR),
+        .D(prev_bit_i_1_n_0),
+        .Q(prev_bit));
 endmodule
 
 module uart_receiver
-   (cur_state,
+   (bit_stable,
     Q,
     \Tx_DATA[1] ,
     \Tx_DATA[5] ,
@@ -2263,7 +2411,7 @@ module uart_receiver
     \FSM_onehot_cur_state_reg[2]_0 ,
     Tx_DATA_IBUF,
     baud_select_IBUF);
-  output [0:0]cur_state;
+  output bit_stable;
   output [0:0]Q;
   output \Tx_DATA[1] ;
   output \Tx_DATA[5] ;
@@ -2282,7 +2430,6 @@ module uart_receiver
   wire CLK;
   wire \FSM_onehot_cur_state[2]_i_7_n_0 ;
   wire \FSM_onehot_cur_state[5]_i_1_n_0 ;
-  wire \FSM_onehot_cur_state[6]_i_2_n_0 ;
   wire \FSM_onehot_cur_state[7]_i_2_n_0 ;
   wire \FSM_onehot_cur_state[7]_i_3_n_0 ;
   wire \FSM_onehot_cur_state_reg[10]_0 ;
@@ -2324,17 +2471,20 @@ module uart_receiver
   wire Tx_WR_IBUF;
   wire baud_controller_r_inst_n_0;
   wire baud_controller_r_inst_n_1;
+  wire baud_controller_r_inst_n_10;
   wire baud_controller_r_inst_n_2;
   wire baud_controller_r_inst_n_3;
   wire baud_controller_r_inst_n_4;
   wire baud_controller_r_inst_n_5;
   wire baud_controller_r_inst_n_6;
   wire baud_controller_r_inst_n_7;
-  wire baud_controller_r_inst_n_9;
+  wire baud_controller_r_inst_n_8;
   wire [2:0]baud_select_IBUF;
-  wire [0:0]cur_state;
+  wire bit_stable;
   wire p_0_in3_in;
-  wire receiver_sampler_inst_n_1;
+  wire receiver_sampler_inst_n_0;
+  wire receiver_sampler_inst_n_10;
+  wire receiver_sampler_inst_n_11;
   wire receiver_sampler_inst_n_2;
   wire receiver_sampler_inst_n_3;
   wire receiver_sampler_inst_n_4;
@@ -2362,7 +2512,6 @@ module uart_receiver
         .I3(\FSM_onehot_cur_state_reg_n_0_[4] ),
         .I4(\FSM_onehot_cur_state_reg_n_0_[11] ),
         .O(\FSM_onehot_cur_state[2]_i_7_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair21" *) 
   LUT5 #(
     .INIT(32'h07070700)) 
     \FSM_onehot_cur_state[5]_i_1 
@@ -2372,13 +2521,6 @@ module uart_receiver
         .I3(\FSM_onehot_cur_state_reg_n_0_[2] ),
         .I4(\FSM_onehot_cur_state_reg_n_0_[5] ),
         .O(\FSM_onehot_cur_state[5]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair21" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    \FSM_onehot_cur_state[6]_i_2 
-       (.I0(Tx_EN_IBUF),
-        .I1(Tx_WR_IBUF),
-        .O(\FSM_onehot_cur_state[6]_i_2_n_0 ));
   LUT5 #(
     .INIT(32'h96696996)) 
     \FSM_onehot_cur_state[7]_i_2 
@@ -2403,7 +2545,7 @@ module uart_receiver
        (.C(CLK),
         .CE(1'b1),
         .CLR(AR),
-        .D(receiver_sampler_inst_n_9),
+        .D(receiver_sampler_inst_n_11),
         .Q(\FSM_onehot_cur_state_reg_n_0_[0] ));
   (* FSM_ENCODED_STATES = "BIT_2:0000000000001,BIT_3:0000000000010,BIT_1:0000000010000,IDLE:0000000000100,DISABLED:0000000100000,END_BIT:0000010000000,BIT_0:0000100000000,START_BIT:0000001000000,BIT_6:0010000000000,PARITY:0001000000000,BIT_5:1000000000000,BIT_7:0100000000000,BIT_4:0000000001000" *) 
   FDCE #(
@@ -2412,7 +2554,7 @@ module uart_receiver
        (.C(CLK),
         .CE(1'b1),
         .CLR(AR),
-        .D(receiver_sampler_inst_n_3),
+        .D(receiver_sampler_inst_n_5),
         .Q(\FSM_onehot_cur_state_reg_n_0_[10] ));
   (* FSM_ENCODED_STATES = "BIT_2:0000000000001,BIT_3:0000000000010,BIT_1:0000000010000,IDLE:0000000000100,DISABLED:0000000100000,END_BIT:0000010000000,BIT_0:0000100000000,START_BIT:0000001000000,BIT_6:0010000000000,PARITY:0001000000000,BIT_5:1000000000000,BIT_7:0100000000000,BIT_4:0000000001000" *) 
   FDCE #(
@@ -2421,7 +2563,7 @@ module uart_receiver
        (.C(CLK),
         .CE(1'b1),
         .CLR(AR),
-        .D(receiver_sampler_inst_n_2),
+        .D(receiver_sampler_inst_n_4),
         .Q(\FSM_onehot_cur_state_reg_n_0_[11] ));
   (* FSM_ENCODED_STATES = "BIT_2:0000000000001,BIT_3:0000000000010,BIT_1:0000000010000,IDLE:0000000000100,DISABLED:0000000100000,END_BIT:0000010000000,BIT_0:0000100000000,START_BIT:0000001000000,BIT_6:0010000000000,PARITY:0001000000000,BIT_5:1000000000000,BIT_7:0100000000000,BIT_4:0000000001000" *) 
   FDCE #(
@@ -2430,7 +2572,7 @@ module uart_receiver
        (.C(CLK),
         .CE(1'b1),
         .CLR(AR),
-        .D(receiver_sampler_inst_n_1),
+        .D(receiver_sampler_inst_n_3),
         .Q(\FSM_onehot_cur_state_reg_n_0_[12] ));
   (* FSM_ENCODED_STATES = "BIT_2:0000000000001,BIT_3:0000000000010,BIT_1:0000000010000,IDLE:0000000000100,DISABLED:0000000100000,END_BIT:0000010000000,BIT_0:0000100000000,START_BIT:0000001000000,BIT_6:0010000000000,PARITY:0001000000000,BIT_5:1000000000000,BIT_7:0100000000000,BIT_4:0000000001000" *) 
   FDCE #(
@@ -2439,7 +2581,7 @@ module uart_receiver
        (.C(CLK),
         .CE(1'b1),
         .CLR(AR),
-        .D(receiver_sampler_inst_n_8),
+        .D(receiver_sampler_inst_n_10),
         .Q(\FSM_onehot_cur_state_reg_n_0_[1] ));
   (* FSM_ENCODED_STATES = "BIT_2:0000000000001,BIT_3:0000000000010,BIT_1:0000000010000,IDLE:0000000000100,DISABLED:0000000100000,END_BIT:0000010000000,BIT_0:0000100000000,START_BIT:0000001000000,BIT_6:0010000000000,PARITY:0001000000000,BIT_5:1000000000000,BIT_7:0100000000000,BIT_4:0000000001000" *) 
   FDPE #(
@@ -2447,7 +2589,7 @@ module uart_receiver
     \FSM_onehot_cur_state_reg[2] 
        (.C(CLK),
         .CE(1'b1),
-        .D(receiver_sampler_inst_n_7),
+        .D(receiver_sampler_inst_n_9),
         .PRE(AR),
         .Q(\FSM_onehot_cur_state_reg_n_0_[2] ));
   (* FSM_ENCODED_STATES = "BIT_2:0000000000001,BIT_3:0000000000010,BIT_1:0000000010000,IDLE:0000000000100,DISABLED:0000000100000,END_BIT:0000010000000,BIT_0:0000100000000,START_BIT:0000001000000,BIT_6:0010000000000,PARITY:0001000000000,BIT_5:1000000000000,BIT_7:0100000000000,BIT_4:0000000001000" *) 
@@ -2457,7 +2599,7 @@ module uart_receiver
        (.C(CLK),
         .CE(1'b1),
         .CLR(AR),
-        .D(receiver_sampler_inst_n_6),
+        .D(receiver_sampler_inst_n_8),
         .Q(\FSM_onehot_cur_state_reg_n_0_[3] ));
   (* FSM_ENCODED_STATES = "BIT_2:0000000000001,BIT_3:0000000000010,BIT_1:0000000010000,IDLE:0000000000100,DISABLED:0000000100000,END_BIT:0000010000000,BIT_0:0000100000000,START_BIT:0000001000000,BIT_6:0010000000000,PARITY:0001000000000,BIT_5:1000000000000,BIT_7:0100000000000,BIT_4:0000000001000" *) 
   FDCE #(
@@ -2466,7 +2608,7 @@ module uart_receiver
        (.C(CLK),
         .CE(1'b1),
         .CLR(AR),
-        .D(receiver_sampler_inst_n_5),
+        .D(receiver_sampler_inst_n_7),
         .Q(\FSM_onehot_cur_state_reg_n_0_[4] ));
   (* FSM_ENCODED_STATES = "BIT_2:0000000000001,BIT_3:0000000000010,BIT_1:0000000010000,IDLE:0000000000100,DISABLED:0000000100000,END_BIT:0000010000000,BIT_0:0000100000000,START_BIT:0000001000000,BIT_6:0010000000000,PARITY:0001000000000,BIT_5:1000000000000,BIT_7:0100000000000,BIT_4:0000000001000" *) 
   FDCE #(
@@ -2511,16 +2653,16 @@ module uart_receiver
        (.C(CLK),
         .CE(1'b1),
         .CLR(AR),
-        .D(receiver_sampler_inst_n_4),
+        .D(receiver_sampler_inst_n_6),
         .Q(p_0_in3_in));
-  (* SOFT_HLUTNM = "soft_lutpair22" *) 
+  (* SOFT_HLUTNM = "soft_lutpair21" *) 
   LUT5 #(
     .INIT(32'hFFEF0020)) 
     \Rx_DATA[0]_i_1 
        (.I0(TxD_OBUF),
         .I1(\Rx_DATA[6]_i_2_n_0 ),
         .I2(\Rx_DATA[6]_i_3_n_0 ),
-        .I3(baud_controller_r_inst_n_7),
+        .I3(baud_controller_r_inst_n_5),
         .I4(Tx_DATA_copy_OBUF[0]),
         .O(\Rx_DATA[0]_i_1_n_0 ));
   LUT5 #(
@@ -2529,7 +2671,7 @@ module uart_receiver
        (.I0(TxD_OBUF),
         .I1(\Rx_DATA[6]_i_3_n_0 ),
         .I2(\Rx_DATA[6]_i_2_n_0 ),
-        .I3(baud_controller_r_inst_n_7),
+        .I3(baud_controller_r_inst_n_5),
         .I4(Tx_DATA_copy_OBUF[1]),
         .O(\Rx_DATA[1]_i_1_n_0 ));
   LUT4 #(
@@ -2544,7 +2686,7 @@ module uart_receiver
     .INIT(8'hB8)) 
     \Rx_DATA[2]_i_1 
        (.I0(TxD_OBUF),
-        .I1(baud_controller_r_inst_n_4),
+        .I1(baud_controller_r_inst_n_6),
         .I2(Tx_DATA_copy_OBUF[2]),
         .O(\Rx_DATA[2]_i_1_n_0 ));
   LUT6 #(
@@ -2566,7 +2708,7 @@ module uart_receiver
         .I3(\FSM_onehot_cur_state_reg_n_0_[12] ),
         .I4(\FSM_onehot_cur_state_reg_n_0_[1] ),
         .O(\Rx_DATA[3]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair22" *) 
+  (* SOFT_HLUTNM = "soft_lutpair21" *) 
   LUT2 #(
     .INIT(4'h8)) 
     \Rx_DATA[3]_i_3 
@@ -2579,7 +2721,7 @@ module uart_receiver
        (.I0(TxD_OBUF),
         .I1(\Rx_DATA[6]_i_2_n_0 ),
         .I2(\Rx_DATA[6]_i_3_n_0 ),
-        .I3(baud_controller_r_inst_n_5),
+        .I3(baud_controller_r_inst_n_7),
         .I4(Tx_DATA_copy_OBUF[4]),
         .O(\Rx_DATA[4]_i_1_n_0 ));
   LUT5 #(
@@ -2588,7 +2730,7 @@ module uart_receiver
        (.I0(TxD_OBUF),
         .I1(\Rx_DATA[6]_i_3_n_0 ),
         .I2(\Rx_DATA[6]_i_2_n_0 ),
-        .I3(baud_controller_r_inst_n_5),
+        .I3(baud_controller_r_inst_n_7),
         .I4(Tx_DATA_copy_OBUF[5]),
         .O(\Rx_DATA[5]_i_1_n_0 ));
   LUT6 #(
@@ -2617,7 +2759,7 @@ module uart_receiver
        (.I0(TxD_OBUF),
         .I1(\Rx_DATA[7]_i_2_n_0 ),
         .I2(\Rx_DATA[7]_i_3_n_0 ),
-        .I3(baud_controller_r_inst_n_6),
+        .I3(baud_controller_r_inst_n_8),
         .I4(Tx_DATA_copy_OBUF[7]),
         .O(\Rx_DATA[7]_i_1_n_0 ));
   LUT6 #(
@@ -2693,7 +2835,7 @@ module uart_receiver
        (.C(CLK),
         .CE(1'b1),
         .CLR(AR),
-        .D(baud_controller_r_inst_n_9),
+        .D(baud_controller_r_inst_n_10),
         .Q(Tx_DATA_copy_OBUF[6]));
   FDCE #(
     .INIT(1'b0)) 
@@ -2708,7 +2850,7 @@ module uart_receiver
     SURE_i_1
        (.I0(SURE_0),
         .I1(TxD_OBUF),
-        .I2(\FSM_onehot_cur_state[6]_i_2_n_0 ),
+        .I2(receiver_sampler_inst_n_2),
         .I3(\FSM_onehot_cur_state_reg_n_0_[2] ),
         .I4(\FSM_onehot_cur_state_reg_n_0_[5] ),
         .I5(SURE),
@@ -2721,40 +2863,25 @@ module uart_receiver
         .CLR(AR),
         .D(SURE_i_1_n_0),
         .Q(SURE));
-  LUT4 #(
-    .INIT(16'h6996)) 
-    TxD_OBUF_inst_i_3
-       (.I0(Tx_DATA_IBUF[1]),
-        .I1(Tx_DATA_IBUF[0]),
-        .I2(Tx_DATA_IBUF[7]),
-        .I3(Tx_DATA_IBUF[6]),
-        .O(\Tx_DATA[1] ));
-  LUT4 #(
-    .INIT(16'h6996)) 
-    TxD_OBUF_inst_i_4
-       (.I0(Tx_DATA_IBUF[5]),
-        .I1(Tx_DATA_IBUF[4]),
-        .I2(Tx_DATA_IBUF[3]),
-        .I3(Tx_DATA_IBUF[2]),
-        .O(\Tx_DATA[5] ));
   baud_controller_r baud_controller_r_inst
        (.AR(AR),
         .CLK(CLK),
         .D({baud_controller_r_inst_n_0,baud_controller_r_inst_n_1,baud_controller_r_inst_n_2}),
         .E(sample_counter),
-        .\FSM_onehot_cur_state_reg[12] (baud_controller_r_inst_n_6),
-        .\FSM_onehot_cur_state_reg[6] (\FSM_onehot_cur_state[6]_i_2_n_0 ),
-        .\FSM_onehot_cur_state_reg[7] (cur_state),
-        .\FSM_onehot_cur_state_reg[7]_0 (\FSM_onehot_cur_state[7]_i_2_n_0 ),
+        .\FSM_onehot_cur_state_reg[12] (baud_controller_r_inst_n_8),
+        .\FSM_onehot_cur_state_reg[6] (receiver_sampler_inst_n_2),
+        .\FSM_onehot_cur_state_reg[7] (\FSM_onehot_cur_state[7]_i_2_n_0 ),
+        .\FSM_onehot_cur_state_reg[8] (bit_stable),
         .Q({p_0_in3_in,\FSM_onehot_cur_state_reg_n_0_[8] ,Q,SURE_0,\FSM_onehot_cur_state_reg_n_0_[5] ,\FSM_onehot_cur_state_reg_n_0_[2] }),
         .\Rx_DATA_reg[0] (\Rx_DATA[1]_i_3_n_0 ),
         .\Rx_DATA_reg[0]_0 ({\sample_counter_reg_n_0_[3] ,\sample_counter_reg_n_0_[2] ,\sample_counter_reg_n_0_[1] ,\sample_counter_reg_n_0_[0] }),
         .\Rx_DATA_reg[2] (\Rx_DATA[7]_i_3_n_0 ),
         .\Rx_DATA_reg[2]_0 (\Rx_DATA[3]_i_2_n_0 ),
-        .\Rx_DATA_reg[6] (baud_controller_r_inst_n_9),
+        .\Rx_DATA_reg[6] (baud_controller_r_inst_n_10),
         .\Rx_DATA_reg[6]_0 (\Rx_DATA[6]_i_2_n_0 ),
         .\Rx_DATA_reg[6]_1 (\Rx_DATA[6]_i_3_n_0 ),
         .SURE(SURE),
+        .Sx_sample_ENABLE_reg(receiver_sampler_inst_n_0),
         .TxD_OBUF(TxD_OBUF),
         .Tx_DATA_copy_OBUF(Tx_DATA_copy_OBUF[6]),
         .Tx_EN_IBUF(Tx_EN_IBUF),
@@ -2762,36 +2889,43 @@ module uart_receiver
         .baud_select_IBUF(baud_select_IBUF),
         .sample_ENABLE_reg_0(baud_controller_r_inst_n_3),
         .sample_ENABLE_reg_1(baud_controller_r_inst_n_4),
-        .sample_ENABLE_reg_2(baud_controller_r_inst_n_5),
-        .\sample_counter_reg[3] (baud_controller_r_inst_n_7));
+        .sample_ENABLE_reg_2(baud_controller_r_inst_n_6),
+        .sample_ENABLE_reg_3(baud_controller_r_inst_n_7),
+        .\sample_counter_reg[3] (baud_controller_r_inst_n_5));
   receiver_sampler receiver_sampler_inst
        (.AR(AR),
         .CLK(CLK),
-        .D({receiver_sampler_inst_n_1,receiver_sampler_inst_n_2,receiver_sampler_inst_n_3,receiver_sampler_inst_n_4,receiver_sampler_inst_n_5,receiver_sampler_inst_n_6,receiver_sampler_inst_n_7,receiver_sampler_inst_n_8,receiver_sampler_inst_n_9}),
+        .D({receiver_sampler_inst_n_3,receiver_sampler_inst_n_4,receiver_sampler_inst_n_5,receiver_sampler_inst_n_6,receiver_sampler_inst_n_7,receiver_sampler_inst_n_8,receiver_sampler_inst_n_9,receiver_sampler_inst_n_10,receiver_sampler_inst_n_11}),
         .\FSM_onehot_cur_state[2]_i_2 (\FSM_onehot_cur_state[2]_i_7_n_0 ),
         .\FSM_onehot_cur_state_reg[10] (\FSM_onehot_cur_state_reg[10]_0 ),
         .\FSM_onehot_cur_state_reg[2] (\FSM_onehot_cur_state[7]_i_2_n_0 ),
         .\FSM_onehot_cur_state_reg[2]_0 (\FSM_onehot_cur_state_reg[2]_0 ),
-        .\FSM_onehot_cur_state_reg[2]_1 (baud_controller_r_inst_n_3),
-        .\FSM_sequential_cur_state_reg[0]_0 (cur_state),
+        .\FSM_sequential_cur_state_reg[0]_0 (baud_controller_r_inst_n_3),
         .Q({\FSM_onehot_cur_state_reg_n_0_[12] ,\FSM_onehot_cur_state_reg_n_0_[11] ,\FSM_onehot_cur_state_reg_n_0_[10] ,p_0_in3_in,\FSM_onehot_cur_state_reg_n_0_[8] ,SURE_0,\FSM_onehot_cur_state_reg_n_0_[4] ,\FSM_onehot_cur_state_reg_n_0_[3] ,\FSM_onehot_cur_state_reg_n_0_[1] ,\FSM_onehot_cur_state_reg_n_0_[0] }),
+        .Sx_sample_ENABLE_reg_0(receiver_sampler_inst_n_0),
+        .Sx_sample_ENABLE_reg_1(baud_controller_r_inst_n_4),
         .TxD_OBUF(TxD_OBUF),
+        .\Tx_DATA[1] (\Tx_DATA[1] ),
+        .\Tx_DATA[5] (\Tx_DATA[5] ),
+        .Tx_DATA_IBUF(Tx_DATA_IBUF),
+        .Tx_EN(receiver_sampler_inst_n_2),
         .Tx_EN_IBUF(Tx_EN_IBUF),
-        .Tx_WR_IBUF(Tx_WR_IBUF));
-  (* SOFT_HLUTNM = "soft_lutpair24" *) 
+        .Tx_WR_IBUF(Tx_WR_IBUF),
+        .bit_stable_reg_0(bit_stable));
+  (* SOFT_HLUTNM = "soft_lutpair23" *) 
   LUT1 #(
     .INIT(2'h1)) 
     \sample_counter[0]_i_1 
        (.I0(\sample_counter_reg_n_0_[0] ),
         .O(\sample_counter[0]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair24" *) 
+  (* SOFT_HLUTNM = "soft_lutpair23" *) 
   LUT2 #(
     .INIT(4'h6)) 
     \sample_counter[1]_i_1 
        (.I0(\sample_counter_reg_n_0_[0] ),
         .I1(\sample_counter_reg_n_0_[1] ),
         .O(\sample_counter[1]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair23" *) 
+  (* SOFT_HLUTNM = "soft_lutpair22" *) 
   LUT3 #(
     .INIT(8'h6A)) 
     \sample_counter[2]_i_1 
@@ -2799,7 +2933,7 @@ module uart_receiver
         .I1(\sample_counter_reg_n_0_[1] ),
         .I2(\sample_counter_reg_n_0_[0] ),
         .O(\sample_counter[2]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair23" *) 
+  (* SOFT_HLUTNM = "soft_lutpair22" *) 
   LUT4 #(
     .INIT(16'h6AAA)) 
     \sample_counter[3]_i_2 
@@ -2843,32 +2977,32 @@ module uart_receiver
 endmodule
 
 module uart_transmitter
-   (\FSM_sequential_cur_state_reg[0]_0 ,
+   (bit_stable_reg,
     TxD_OBUF,
     Tx_BUSY_OBUF,
     CLK,
     AR,
     Tx_EN_IBUF,
     Tx_WR_IBUF,
-    cur_state,
+    bit_stable,
     \FSM_onehot_cur_state_reg[2] ,
     Q,
-    \FSM_onehot_cur_state_reg[2]_0 ,
-    \FSM_onehot_cur_state_reg[2]_1 ,
+    bit_stable_reg_0,
+    bit_stable_reg_1,
     Tx_DATA_IBUF,
     baud_select_IBUF);
-  output \FSM_sequential_cur_state_reg[0]_0 ;
+  output bit_stable_reg;
   output TxD_OBUF;
   output Tx_BUSY_OBUF;
   input CLK;
   input [0:0]AR;
   input Tx_EN_IBUF;
   input Tx_WR_IBUF;
-  input [0:0]cur_state;
+  input bit_stable;
   input \FSM_onehot_cur_state_reg[2] ;
   input [0:0]Q;
-  input \FSM_onehot_cur_state_reg[2]_0 ;
-  input \FSM_onehot_cur_state_reg[2]_1 ;
+  input bit_stable_reg_0;
+  input bit_stable_reg_1;
   input [7:0]Tx_DATA_IBUF;
   input [2:0]baud_select_IBUF;
 
@@ -2878,9 +3012,6 @@ module uart_transmitter
   wire \FSM_onehot_cur_state[2]_i_4_n_0 ;
   wire \FSM_onehot_cur_state[2]_i_5_n_0 ;
   wire \FSM_onehot_cur_state_reg[2] ;
-  wire \FSM_onehot_cur_state_reg[2]_0 ;
-  wire \FSM_onehot_cur_state_reg[2]_1 ;
-  wire \FSM_sequential_cur_state_reg[0]_0 ;
   wire [0:0]Q;
   wire TxD_OBUF;
   wire TxD_OBUF_inst_i_2_n_0;
@@ -2894,11 +3025,14 @@ module uart_transmitter
   wire baud_controller_t_inst_n_2;
   wire baud_controller_t_inst_n_3;
   wire [2:0]baud_select_IBUF;
+  wire bit_stable;
+  wire bit_stable_reg;
+  wire bit_stable_reg_0;
+  wire bit_stable_reg_1;
   wire counter0_0;
   wire \counter[0]_i_1__0_n_0 ;
   wire [3:0]counter_reg__0;
-  wire [0:0]cur_state;
-  wire [2:0]cur_state_1;
+  wire [2:0]cur_state;
   wire [3:1]p_0_in__0;
 
   LUT6 #(
@@ -2907,35 +3041,35 @@ module uart_transmitter
        (.I0(\FSM_onehot_cur_state[2]_i_3_n_0 ),
         .I1(\FSM_onehot_cur_state[2]_i_4_n_0 ),
         .I2(\FSM_onehot_cur_state[2]_i_5_n_0 ),
-        .I3(cur_state),
+        .I3(bit_stable),
         .I4(\FSM_onehot_cur_state_reg[2] ),
         .I5(Q),
-        .O(\FSM_sequential_cur_state_reg[0]_0 ));
+        .O(bit_stable_reg));
   LUT6 #(
     .INIT(64'h9669699600000000)) 
     \FSM_onehot_cur_state[2]_i_3 
-       (.I0(\FSM_onehot_cur_state_reg[2]_0 ),
+       (.I0(bit_stable_reg_0),
         .I1(Tx_DATA_IBUF[5]),
         .I2(Tx_DATA_IBUF[4]),
         .I3(Tx_DATA_IBUF[3]),
         .I4(Tx_DATA_IBUF[2]),
-        .I5(cur_state_1[1]),
+        .I5(cur_state[1]),
         .O(\FSM_onehot_cur_state[2]_i_3_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair44" *) 
+  (* SOFT_HLUTNM = "soft_lutpair43" *) 
   LUT2 #(
     .INIT(4'hB)) 
     \FSM_onehot_cur_state[2]_i_4 
-       (.I0(cur_state_1[2]),
-        .I1(cur_state_1[0]),
+       (.I0(cur_state[2]),
+        .I1(cur_state[0]),
         .O(\FSM_onehot_cur_state[2]_i_4_n_0 ));
   LUT5 #(
     .INIT(32'h4540FFFF)) 
     \FSM_onehot_cur_state[2]_i_5 
-       (.I0(cur_state_1[2]),
+       (.I0(cur_state[2]),
         .I1(TxD_OBUF_inst_i_6_n_0),
         .I2(counter_reg__0[2]),
         .I3(TxD_OBUF_inst_i_5_n_0),
-        .I4(cur_state_1[1]),
+        .I4(cur_state[1]),
         .O(\FSM_onehot_cur_state[2]_i_5_n_0 ));
   (* FSM_ENCODED_STATES = "DISABLED:101,IDLE:000,START_BIT:001,TRANSMIT:010,PARITY:011,END_BIT:100," *) 
   FDCE #(
@@ -2945,7 +3079,7 @@ module uart_transmitter
         .CE(1'b1),
         .CLR(AR),
         .D(baud_controller_t_inst_n_3),
-        .Q(cur_state_1[0]));
+        .Q(cur_state[0]));
   (* FSM_ENCODED_STATES = "DISABLED:101,IDLE:000,START_BIT:001,TRANSMIT:010,PARITY:011,END_BIT:100," *) 
   FDCE #(
     .INIT(1'b0)) 
@@ -2954,7 +3088,7 @@ module uart_transmitter
         .CE(1'b1),
         .CLR(AR),
         .D(baud_controller_t_inst_n_2),
-        .Q(cur_state_1[1]));
+        .Q(cur_state[1]));
   (* FSM_ENCODED_STATES = "DISABLED:101,IDLE:000,START_BIT:001,TRANSMIT:010,PARITY:011,END_BIT:100," *) 
   FDCE #(
     .INIT(1'b0)) 
@@ -2963,16 +3097,16 @@ module uart_transmitter
         .CE(1'b1),
         .CLR(AR),
         .D(baud_controller_t_inst_n_1),
-        .Q(cur_state_1[2]));
+        .Q(cur_state[2]));
   LUT6 #(
     .INIT(64'h02323202CFCFCFCF)) 
     TxD_OBUF_inst_i_1
        (.I0(TxD_OBUF_inst_i_2_n_0),
-        .I1(cur_state_1[2]),
-        .I2(cur_state_1[0]),
-        .I3(\FSM_onehot_cur_state_reg[2]_0 ),
-        .I4(\FSM_onehot_cur_state_reg[2]_1 ),
-        .I5(cur_state_1[1]),
+        .I1(cur_state[2]),
+        .I2(cur_state[0]),
+        .I3(bit_stable_reg_0),
+        .I4(bit_stable_reg_1),
+        .I5(cur_state[1]),
         .O(TxD_OBUF));
   MUXF7 TxD_OBUF_inst_i_2
        (.I0(TxD_OBUF_inst_i_5_n_0),
@@ -2999,13 +3133,13 @@ module uart_transmitter
         .I4(counter_reg__0[0]),
         .I5(Tx_DATA_IBUF[3]),
         .O(TxD_OBUF_inst_i_6_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair44" *) 
+  (* SOFT_HLUTNM = "soft_lutpair43" *) 
   LUT3 #(
     .INIT(8'h54)) 
     Tx_BUSY_OBUF_inst_i_1
-       (.I0(cur_state_1[2]),
-        .I1(cur_state_1[0]),
-        .I2(cur_state_1[1]),
+       (.I0(cur_state[2]),
+        .I1(cur_state[0]),
+        .I2(cur_state[1]),
         .O(Tx_BUSY_OBUF));
   baud_controller_t baud_controller_t_inst
        (.AR(AR),
@@ -3018,21 +3152,21 @@ module uart_transmitter
         .Tx_EN_IBUF(Tx_EN_IBUF),
         .Tx_WR_IBUF(Tx_WR_IBUF),
         .baud_select_IBUF(baud_select_IBUF),
-        .cur_state_1(cur_state_1));
-  (* SOFT_HLUTNM = "soft_lutpair45" *) 
+        .cur_state(cur_state));
+  (* SOFT_HLUTNM = "soft_lutpair44" *) 
   LUT1 #(
     .INIT(2'h1)) 
     \counter[0]_i_1__0 
        (.I0(counter_reg__0[0]),
         .O(\counter[0]_i_1__0_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair45" *) 
+  (* SOFT_HLUTNM = "soft_lutpair44" *) 
   LUT2 #(
     .INIT(4'h6)) 
     \counter[1]_i_1__1 
        (.I0(counter_reg__0[1]),
         .I1(counter_reg__0[0]),
         .O(p_0_in__0[1]));
-  (* SOFT_HLUTNM = "soft_lutpair43" *) 
+  (* SOFT_HLUTNM = "soft_lutpair42" *) 
   LUT3 #(
     .INIT(8'h6A)) 
     \counter[2]_i_1__1 
@@ -3040,7 +3174,7 @@ module uart_transmitter
         .I1(counter_reg__0[0]),
         .I2(counter_reg__0[1]),
         .O(p_0_in__0[2]));
-  (* SOFT_HLUTNM = "soft_lutpair43" *) 
+  (* SOFT_HLUTNM = "soft_lutpair42" *) 
   LUT4 #(
     .INIT(16'h6AAA)) 
     \counter[3]_i_2 

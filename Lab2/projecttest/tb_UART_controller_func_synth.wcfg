@@ -12,14 +12,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="1398000001fs"></ZoomEndTime>
-      <Cursor1Time time="215000000fs"></Cursor1Time>
+      <ZoomEndTime time="2836000001fs"></ZoomEndTime>
+      <Cursor1Time time="210000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="159"></NameColumnWidth>
+      <NameColumnWidth column_width="139"></NameColumnWidth>
       <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="12" />
+   <WVObjectSize size="16" />
    <wvobject fp_name="/tb_UART_controller/reset" type="logic">
       <obj_property name="ElementShortName">reset</obj_property>
       <obj_property name="ObjectShortName">reset</obj_property>
@@ -48,24 +48,40 @@
       <obj_property name="ElementShortName">Tx_BUSY</obj_property>
       <obj_property name="ObjectShortName">Tx_BUSY</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/baud_controller_r_inst/sample_ENABLE" type="logic">
-      <obj_property name="ElementShortName">sample_ENABLE</obj_property>
-      <obj_property name="ObjectShortName">sample_ENABLE</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_transmitter_inst/baud_controller_t_inst/sample_ENABLE" type="logic">
-      <obj_property name="ElementShortName">sample_ENABLE</obj_property>
-      <obj_property name="ObjectShortName">sample_ENABLE</obj_property>
-   </wvobject>
    <wvobject fp_name="/tb_UART_controller/Tx_DATA_copy" type="array">
       <obj_property name="ElementShortName">Tx_DATA_copy[7:0]</obj_property>
       <obj_property name="ObjectShortName">Tx_DATA_copy[7:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_transmitter_inst/cur_state" type="array">
-      <obj_property name="ElementShortName">cur_state[0:0]</obj_property>
-      <obj_property name="ObjectShortName">cur_state[0:0]</obj_property>
+   <wvobject fp_name="/tb_UART_controller/Sx_TERROR" type="logic">
+      <obj_property name="ElementShortName">Sx_TERROR</obj_property>
+      <obj_property name="ObjectShortName">Sx_TERROR</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/cur_state" type="array">
-      <obj_property name="ElementShortName">cur_state[0:0]</obj_property>
-      <obj_property name="ObjectShortName">cur_state[0:0]</obj_property>
+   <wvobject fp_name="/tb_UART_controller/CLK_PERIOD" type="array">
+      <obj_property name="ElementShortName">CLK_PERIOD[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CLK_PERIOD[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/receiver_sampler_inst/next_state" type="array">
+      <obj_property name="ElementShortName">next_state[2:0]</obj_property>
+      <obj_property name="ObjectShortName">next_state[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/receiver_sampler_inst/cur_state" type="array">
+      <obj_property name="ElementShortName">cur_state[2:0]</obj_property>
+      <obj_property name="ObjectShortName">cur_state[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/receiver_sampler_inst/bit_stable" type="logic">
+      <obj_property name="ElementShortName">bit_stable</obj_property>
+      <obj_property name="ObjectShortName">bit_stable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/receiver_sampler_inst/Sx_sample_ENABLE" type="logic">
+      <obj_property name="ElementShortName">Sx_sample_ENABLE</obj_property>
+      <obj_property name="ObjectShortName">Sx_sample_ENABLE</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/receiver_sampler_inst/Tx_EN_IBUF" type="logic">
+      <obj_property name="ElementShortName">Tx_EN_IBUF</obj_property>
+      <obj_property name="ObjectShortName">Tx_EN_IBUF</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/receiver_sampler_inst/\FSM_sequential_cur_state_reg[0]_0 " type="logic">
+      <obj_property name="ElementShortName">\FSM_sequential_cur_state_reg[0]_0 </obj_property>
+      <obj_property name="ObjectShortName">\FSM_sequential_cur_state_reg[0]_0 </obj_property>
    </wvobject>
 </wave_config>

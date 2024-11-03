@@ -10,15 +10,6 @@ WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/
 WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_t.v" Line 2. Module baud_controller_t doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/uart_receiver.v" Line 26. Module uart_receiver doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_r.v" Line 2. Module baud_controller_r doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/receiver_sampler.v" Line 28. Module receiver_sampler doesn't have a timescale but at least one module in design has a timescale.
 Completed simulation data flow analysis
-Time Resolution for simulation is 1ps
-Compiling module xil_defaultlib.baud_controller_t
-Compiling module xil_defaultlib.uart_transmitter
-Compiling module xil_defaultlib.baud_controller_r
-Compiling module xil_defaultlib.receiver_sampler
-Compiling module xil_defaultlib.uart_receiver
-Compiling module xil_defaultlib.UART_controller
-Compiling module xil_defaultlib.tb_UART_controller
-Compiling module xil_defaultlib.glbl
-Built simulation snapshot tb_UART_controller_behav
+ERROR: [XSIM 43-3356]  Could not open file xsim.dir/tb_UART_controller_behav/xsim.type for writing.
+ERROR: [XSIM 43-3915] Encountered a fatal error. Cannot continue. Exiting... 

@@ -2,7 +2,6 @@
 verilog xil_defaultlib  \
 "../../../../../baud_controller_r.v" \
 "../../../../../baud_controller_t.v" \
-"../../../../../receiver_sampler.v" \
 "../../../../../uart_receiver.v" \
 "../../../../../receive_tb.v" \
 

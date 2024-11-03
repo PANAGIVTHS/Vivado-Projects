@@ -1,0 +1,9 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/project_1/project_1.sim/sim_1/impl/timing/xsim/tb_UART_controller_time_impl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module UART_controller
+INFO: [VRFC 10-311] analyzing module baud_controller_r
+INFO: [VRFC 10-311] analyzing module baud_controller_t
+INFO: [VRFC 10-311] analyzing module uart_receiver
+INFO: [VRFC 10-311] analyzing module uart_transmitter
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/UART_controller_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_UART_controller

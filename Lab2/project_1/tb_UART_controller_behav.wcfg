@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_UART_controller_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb_UART_controller" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="27100000001fs"></ZoomEndTime>
+      <Cursor1Time time="7255000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="165"></NameColumnWidth>
+      <ValueColumnWidth column_width="95"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="9" />
+   <wvobject type="divider" fp_name="divider97">
+      <obj_property name="label">Behavioural Sim</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_controller/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_controller/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="group98" type="group">
+      <obj_property name="label">Transmitter Signals</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_UART_controller/baud_select" type="array">
+         <obj_property name="ElementShortName">baud_select[2:0]</obj_property>
+         <obj_property name="ObjectShortName">baud_select[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/Tx_WR" type="logic">
+         <obj_property name="ElementShortName">Tx_WR</obj_property>
+         <obj_property name="ObjectShortName">Tx_WR</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/Tx_EN" type="logic">
+         <obj_property name="ElementShortName">Tx_EN</obj_property>
+         <obj_property name="ObjectShortName">Tx_EN</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/Tx_BUSY" type="logic">
+         <obj_property name="ElementShortName">Tx_BUSY</obj_property>
+         <obj_property name="ObjectShortName">Tx_BUSY</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/TxD" type="logic">
+         <obj_property name="ElementShortName">TxD</obj_property>
+         <obj_property name="ObjectShortName">TxD</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group100" type="group">
+      <obj_property name="label">Sampler SIngals</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/Sx_sample_ENABLE" type="logic">
+         <obj_property name="ElementShortName">Sx_sample_ENABLE</obj_property>
+         <obj_property name="ObjectShortName">Sx_sample_ENABLE</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/Rx_sample_ENABLE" type="logic">
+         <obj_property name="ElementShortName">Rx_sample_ENABLE</obj_property>
+         <obj_property name="ObjectShortName">Rx_sample_ENABLE</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/sample_ENABLE" type="logic">
+         <obj_property name="ElementShortName">sample_ENABLE</obj_property>
+         <obj_property name="ObjectShortName">sample_ENABLE</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/bit_stable" type="logic">
+         <obj_property name="ElementShortName">bit_stable</obj_property>
+         <obj_property name="ObjectShortName">bit_stable</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/prev_bit" type="logic">
+         <obj_property name="ElementShortName">prev_bit</obj_property>
+         <obj_property name="ObjectShortName">prev_bit</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/RxD" type="logic">
+         <obj_property name="ElementShortName">RxD</obj_property>
+         <obj_property name="ObjectShortName">RxD</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/sample_counter" type="array">
+         <obj_property name="ElementShortName">sample_counter[3:0]</obj_property>
+         <obj_property name="ObjectShortName">sample_counter[3:0]</obj_property>
+         <obj_property name="Radix">BINARYRADIX</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group121" type="group">
+      <obj_property name="label">Receiver Signals</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/Rx_EN" type="logic">
+         <obj_property name="ElementShortName">Rx_EN</obj_property>
+         <obj_property name="ObjectShortName">Rx_EN</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/Rx_FERROR" type="logic">
+         <obj_property name="ElementShortName">Rx_FERROR</obj_property>
+         <obj_property name="ObjectShortName">Rx_FERROR</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/Rx_PERROR" type="logic">
+         <obj_property name="ElementShortName">Rx_PERROR</obj_property>
+         <obj_property name="ObjectShortName">Rx_PERROR</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/Rx_VALID" type="logic">
+         <obj_property name="ElementShortName">Rx_VALID</obj_property>
+         <obj_property name="ObjectShortName">Rx_VALID</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/SURE" type="logic">
+         <obj_property name="ElementShortName">SURE</obj_property>
+         <obj_property name="ObjectShortName">SURE</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/RxD" type="logic">
+         <obj_property name="ElementShortName">RxD</obj_property>
+         <obj_property name="ObjectShortName">RxD</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/cur_state" type="array">
+         <obj_property name="ElementShortName">cur_state[3:0]</obj_property>
+         <obj_property name="ObjectShortName">cur_state[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/next_state" type="array">
+         <obj_property name="ElementShortName">next_state[3:0]</obj_property>
+         <obj_property name="ObjectShortName">next_state[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/Rx_sample_ENABLE" type="logic">
+         <obj_property name="ElementShortName">Rx_sample_ENABLE</obj_property>
+         <obj_property name="ObjectShortName">Rx_sample_ENABLE</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/Sx_sample_ENABLE" type="logic">
+         <obj_property name="ElementShortName">Sx_sample_ENABLE</obj_property>
+         <obj_property name="ObjectShortName">Sx_sample_ENABLE</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/sample_ENABLE" type="logic">
+         <obj_property name="ElementShortName">sample_ENABLE</obj_property>
+         <obj_property name="ObjectShortName">sample_ENABLE</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/Rx_DATA" type="array">
+         <obj_property name="ElementShortName">Rx_DATA[7:0]</obj_property>
+         <obj_property name="ObjectShortName">Rx_DATA[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/Dx_sample_ENABLE" type="logic">
+         <obj_property name="ElementShortName">Dx_sample_ENABLE</obj_property>
+         <obj_property name="ObjectShortName">Dx_sample_ENABLE</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_UART_controller/UART_controller_inst/uart_receiver_inst/parity" type="logic">
+         <obj_property name="ElementShortName">parity</obj_property>
+         <obj_property name="ObjectShortName">parity</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider101">
+      <obj_property name="label">Test Out</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#F0E68C</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_controller/Tx_DATA_copy" type="array">
+      <obj_property name="ElementShortName">Tx_DATA_copy[7:0]</obj_property>
+      <obj_property name="ObjectShortName">Tx_DATA_copy[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_UART_controller/UART_controller_inst/Tx_DATA" type="array">
+      <obj_property name="ElementShortName">Tx_DATA[7:0]</obj_property>
+      <obj_property name="ObjectShortName">Tx_DATA[7:0]</obj_property>
+   </wvobject>
+</wave_config>

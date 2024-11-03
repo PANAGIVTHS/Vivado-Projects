@@ -1,0 +1,11 @@
+0.6
+2018.3
+Dec  7 2018
+00:33:28
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/UART_controller.v,1730628293,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_r.v,,UART_controller,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/UART_controller_tb.v,1730627274,verilog,,,,tb_UART_controller,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_r.v,1730634449,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_t.v,,baud_controller_r,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_t.v,1730634267,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/uart_receiver.v,,baud_controller_t,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/project_1/project_1.sim/sim_1/behav/xsim/glbl.v,1544155481,verilog,,,,glbl,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/uart_receiver.v,1730635361,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/uart_transmitter.v,,uart_receiver,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/uart_transmitter.v,1730596482,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/UART_controller_tb.v,,uart_transmitter,,,,,,,,

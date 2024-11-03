@@ -1,4 +1,5 @@
 
+
 module baud_controller_t (reset, clk, baud_select, sample_ENABLE, Enable_controller);
     input reset, clk;
     input [2:0] baud_select;
@@ -10,20 +11,19 @@ module baud_controller_t (reset, clk, baud_select, sample_ENABLE, Enable_control
 
     localparam BAUD3 = 3'b000, BAUD12 = 3'b001, BAUD48 = 3'b010, BAUD96 = 3'b011;
     localparam BAUD192 = 3'b100, BAUD384 = 3'b101, BAUD576 = 3'b110, BAUD1152 = 3'b111;
-
+    
     // Values for baud rate limit calculated for 100MHz clock
     always @(*) begin
         case(baud_select)
-            BAUD3: baud_limit = 32'd63; //32'd333333;
-            //BAUD12: baud_limit = 32'd83333; REAL VALUES
-            //BAUD48: baud_limit = 32'd20833;
-            BAUD12: baud_limit = 32'd8;
-            BAUD48: baud_limit = 32'd2;
-            BAUD96: baud_limit = 32'd10416;
-            BAUD192: baud_limit = 32'd5208;
-            BAUD384: baud_limit = 32'd2604;
-            BAUD576: baud_limit = 32'd1736;
-            BAUD1152: baud_limit = 32'd868;
+            // (receiver + 1) * 16 - 1
+            BAUD3: baud_limit = 32'd333343;
+            BAUD12: baud_limit = 32'd83343;
+            BAUD48: baud_limit = 32'd20847;
+            BAUD96: baud_limit = 32'd10431;
+            BAUD192: baud_limit = 32'd5215;
+            BAUD384: baud_limit = 32'd2623;
+            BAUD576: baud_limit = 32'd1759;
+            BAUD1152: baud_limit = 32'd879;
             default: baud_limit = 32'd0;
         endcase
     end

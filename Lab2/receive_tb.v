@@ -21,7 +21,7 @@ module tb_receiver;
     baud_controller_t baud_controller_t_inst(.reset(reset), .clk(clk), .baud_select(baud_select), .sample_ENABLE(sample_ENABLE1), .Enable_controller(Tx_EN & Tx_WR));
     
     initial begin
-        Tx_DATA = 11'b01100110001;
+        Tx_DATA = 11'b01010101001;
         #100
         reset<=1'bx;
         clk<=1'b0;
@@ -36,18 +36,16 @@ module tb_receiver;
         // Write data
         Tx_EN<=1;
 
-
         #(CLK_PERIOD) baud_select = 3'b000;
-            
-        
+                    
         #(CLK_PERIOD) Tx_WR<=0;
         #(CLK_PERIOD) Tx_WR<=1;
         #(CLK_PERIOD) Tx_WR<=0;
 
-
         #(CLK_PERIOD*20) $finish;
     end
 
+    // SIMULATE TRANSMITTER
     always @(posedge clk or posedge reset) begin
         $display(parity);
         if (reset) begin

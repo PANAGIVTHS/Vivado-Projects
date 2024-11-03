@@ -14,9 +14,9 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 25268 
+INFO: Helper process launched with PID 29168 
 ---------------------------------------------------------------------------------
-Starting Synthesize : Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 388.551 ; gain = 98.180
+Starting Synthesize : Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 388.820 ; gain = 98.941
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'UART_controller' [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/UART_controller.v:1]
 INFO: [Synth 8-6157] synthesizing module 'uart_transmitter' [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/uart_transmitter.v:1]
@@ -26,7 +26,6 @@ INFO: [Synth 8-6157] synthesizing module 'uart_transmitter' [C:/Users/panag/Desk
 	Parameter END_BIT bound to: 4'b1010 
 	Parameter IDLE bound to: 4'b1011 
 	Parameter DISABLED bound to: 4'b1100 
-INFO: [Synth 8-5534] Detected attribute (* fsm_encoding = "sequential" *) [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/uart_transmitter.v:12]
 INFO: [Synth 8-6157] synthesizing module 'baud_controller_t' [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_t.v:2]
 	Parameter BAUD3 bound to: 3'b000 
 	Parameter BAUD12 bound to: 3'b001 
@@ -53,6 +52,7 @@ INFO: [Synth 8-6157] synthesizing module 'uart_receiver' [C:/Users/panag/Desktop
 	Parameter END_BIT bound to: 4'b1010 
 	Parameter DISABLED bound to: 4'b1011 
 	Parameter IDLE bound to: 4'b1100 
+INFO: [Synth 8-5534] Detected attribute (* fsm_encoding = "none" *) [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/uart_receiver.v:40]
 INFO: [Synth 8-6157] synthesizing module 'baud_controller_r' [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_r.v:2]
 	Parameter BAUD3 bound to: 3'b000 
 	Parameter BAUD12 bound to: 3'b001 
@@ -65,107 +65,51 @@ INFO: [Synth 8-6157] synthesizing module 'baud_controller_r' [C:/Users/panag/Des
 INFO: [Synth 8-226] default block is never used [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_r.v:16]
 INFO: [Synth 8-6155] done synthesizing module 'baud_controller_r' (3#1) [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/baud_controller_r.v:2]
 INFO: [Synth 8-6157] synthesizing module 'receiver_sampler' [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/receiver_sampler.v:28]
-	Parameter LOCK bound to: 3'b111 
 	Parameter SAMPLE_START bound to: 3'b000 
 	Parameter SAMPLE_1 bound to: 3'b001 
 	Parameter SAMPLE_2 bound to: 3'b010 
 	Parameter SAMPLE_3 bound to: 3'b011 
 	Parameter SAMPLE_4 bound to: 3'b100 
 	Parameter SAMPLE_5 bound to: 3'b101 
-	Parameter SAMPLE_END bound to: 3'b110 
-INFO: [Synth 8-5534] Detected attribute (* fsm_encoding = "sequential" *) [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/receiver_sampler.v:31]
-INFO: [Synth 8-226] default block is never used [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/receiver_sampler.v:73]
-INFO: [Synth 8-226] default block is never used [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/receiver_sampler.v:108]
-WARNING: [Synth 8-6014] Unused sequential element sample_counter_reg was removed.  [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/receiver_sampler.v:56]
+	Parameter IDLE bound to: 3'b111 
+	Parameter END_BIT bound to: 3'b110 
+INFO: [Synth 8-5534] Detected attribute (* fsm_encoding = "none" *) [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/receiver_sampler.v:31]
 INFO: [Synth 8-6155] done synthesizing module 'receiver_sampler' (4#1) [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/receiver_sampler.v:28]
 INFO: [Synth 8-6155] done synthesizing module 'uart_receiver' (5#1) [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/uart_receiver.v:26]
 INFO: [Synth 8-6155] done synthesizing module 'UART_controller' (6#1) [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/UART_controller.v:1]
-WARNING: [Synth 8-3331] design receiver_sampler has unconnected port sample_ENABLE
 ---------------------------------------------------------------------------------
-Finished Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 444.738 ; gain = 154.367
+Finished Synthesize : Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 444.281 ; gain = 154.402
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 444.738 ; gain = 154.367
+Finished Constraint Validation : Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 444.281 ; gain = 154.402
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a100tcsg324-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 444.738 ; gain = 154.367
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 444.281 ; gain = 154.402
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7a100tcsg324-1
 INFO: [Synth 8-802] inferred FSM for state register 'cur_state_reg' in module 'uart_transmitter'
 INFO: [Synth 8-5544] ROM "Tx_BUSY" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "next_state" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
-INFO: [Synth 8-802] inferred FSM for state register 'cur_state_reg' in module 'receiver_sampler'
-INFO: [Synth 8-5544] ROM "next_state0" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "next_state0" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "next_state0" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "next_state0" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "next_state0" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "next_state0" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "next_state0" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "next_state0" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-802] inferred FSM for state register 'cur_state_reg' in module 'uart_receiver'
+INFO: [Synth 8-4490] FSM extraction disabled for register 'cur_state_reg' through user attribute
+INFO: [Synth 8-4490] FSM extraction disabled for register 'cur_state_reg' through user attribute
 INFO: [Synth 8-5544] ROM "SURE" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "next_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "next_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "next_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "next_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "next_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "next_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "next_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "next_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "next_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "next_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "next_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "next_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "next_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
 ---------------------------------------------------------------------------------------------------
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
-                    IDLE |                              000 |                             1011
-               START_BIT |                              001 |                             0000
-                TRANSMIT |                              010 |                             0001
-                  PARITY |                              011 |                             1001
-                 END_BIT |                              100 |                             1010
-                DISABLED |                              101 |                             1100
+                    IDLE |                           000001 |                             1011
+               START_BIT |                           000010 |                             0000
+                TRANSMIT |                           000100 |                             0001
+                  PARITY |                           001000 |                             1001
+                 END_BIT |                           010000 |                             1010
+                DISABLED |                           100000 |                             1100
 ---------------------------------------------------------------------------------------------------
-INFO: [Synth 8-3354] encoded FSM with state register 'cur_state_reg' using encoding 'sequential' in module 'uart_transmitter'
----------------------------------------------------------------------------------------------------
-                   State |                     New Encoding |                Previous Encoding 
----------------------------------------------------------------------------------------------------
-                    LOCK |                              000 |                              111
-            SAMPLE_START |                              001 |                              000
-                SAMPLE_1 |                              010 |                              001
-                SAMPLE_2 |                              011 |                              010
-                SAMPLE_3 |                              100 |                              011
-                SAMPLE_4 |                              101 |                              100
-                SAMPLE_5 |                              110 |                              101
-              SAMPLE_END |                              111 |                              110
----------------------------------------------------------------------------------------------------
-INFO: [Synth 8-3354] encoded FSM with state register 'cur_state_reg' using encoding 'sequential' in module 'receiver_sampler'
----------------------------------------------------------------------------------------------------
-                   State |                     New Encoding |                Previous Encoding 
----------------------------------------------------------------------------------------------------
-                    IDLE |                    0000000000100 |                             1100
-                DISABLED |                    0000000100000 |                             1011
-               START_BIT |                    0000001000000 |                             0000
-                   BIT_0 |                    0000100000000 |                             0001
-                   BIT_1 |                    0000000010000 |                             0010
-                   BIT_2 |                    0000000000001 |                             0011
-                   BIT_3 |                    0000000000010 |                             0100
-                   BIT_4 |                    0000000001000 |                             0101
-                   BIT_5 |                    1000000000000 |                             0110
-                   BIT_6 |                    0010000000000 |                             0111
-                   BIT_7 |                    0100000000000 |                             1000
-                  PARITY |                    0001000000000 |                             1001
-                 END_BIT |                    0000010000000 |                             1010
----------------------------------------------------------------------------------------------------
-INFO: [Synth 8-3354] encoded FSM with state register 'cur_state_reg' using encoding 'one-hot' in module 'uart_receiver'
+INFO: [Synth 8-3354] encoded FSM with state register 'cur_state_reg' using encoding 'one-hot' in module 'uart_transmitter'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 444.738 ; gain = 154.367
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 444.281 ; gain = 154.402
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -186,22 +130,21 @@ Detailed RTL Component Info :
 +---Registers : 
 	               32 Bit    Registers := 2     
 	                8 Bit    Registers := 1     
-	                4 Bit    Registers := 2     
-	                1 Bit    Registers := 8     
+	                4 Bit    Registers := 3     
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 10    
 +---Muxes : 
 	   2 Input     32 Bit        Muxes := 4     
 	   8 Input     14 Bit        Muxes := 1     
 	   8 Input     13 Bit        Muxes := 1     
-	  13 Input     13 Bit        Muxes := 1     
-	   2 Input     13 Bit        Muxes := 25    
 	   2 Input      8 Bit        Muxes := 1     
-	  13 Input      4 Bit        Muxes := 1     
-	   6 Input      3 Bit        Muxes := 1     
-	   8 Input      3 Bit        Muxes := 1     
-	   2 Input      3 Bit        Muxes := 8     
+	   2 Input      4 Bit        Muxes := 4     
+	   3 Input      4 Bit        Muxes := 9     
+	   2 Input      3 Bit        Muxes := 3     
+	   2 Input      2 Bit        Muxes := 1     
 	   6 Input      1 Bit        Muxes := 3     
-	   2 Input      1 Bit        Muxes := 4     
-	   8 Input      1 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 3     
+	   3 Input      1 Bit        Muxes := 1     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -228,9 +171,7 @@ Detailed RTL Component Info :
 +---Registers : 
 	                4 Bit    Registers := 1     
 +---Muxes : 
-	   6 Input      3 Bit        Muxes := 1     
 	   6 Input      1 Bit        Muxes := 3     
-	   2 Input      1 Bit        Muxes := 1     
 Module baud_controller_r 
 Detailed RTL Component Info : 
 +---Adders : 
@@ -244,11 +185,12 @@ Detailed RTL Component Info :
 Module receiver_sampler 
 Detailed RTL Component Info : 
 +---Registers : 
-	                1 Bit    Registers := 2     
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 4     
 +---Muxes : 
-	   8 Input      3 Bit        Muxes := 1     
-	   2 Input      3 Bit        Muxes := 8     
-	   8 Input      1 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 3     
+	   2 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 3     
 Module uart_receiver 
 Detailed RTL Component Info : 
 +---Adders : 
@@ -258,14 +200,13 @@ Detailed RTL Component Info :
 	                8 Bit    Wide XORs := 1     
 +---Registers : 
 	                8 Bit    Registers := 1     
-	                4 Bit    Registers := 1     
+	                4 Bit    Registers := 2     
 	                1 Bit    Registers := 4     
 +---Muxes : 
-	  13 Input     13 Bit        Muxes := 1     
-	   2 Input     13 Bit        Muxes := 25    
 	   2 Input      8 Bit        Muxes := 1     
-	  13 Input      4 Bit        Muxes := 1     
-	   2 Input      1 Bit        Muxes := 3     
+	   2 Input      4 Bit        Muxes := 4     
+	   3 Input      4 Bit        Muxes := 9     
+	   3 Input      1 Bit        Muxes := 1     
 ---------------------------------------------------------------------------------
 Finished RTL Hierarchical Component Statistics
 ---------------------------------------------------------------------------------
@@ -283,11 +224,8 @@ No constraint files found.
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 Warning: Parallel synthesis criteria is not met 
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (\uart_receiver_inst/receiver_sampler_inst/Sx_sample_ENABLE_reg )
-WARNING: [Synth 8-3332] Sequential element (uart_receiver_inst/receiver_sampler_inst/FSM_sequential_cur_state_reg[2]) is unused and will be removed from module UART_controller.
-WARNING: [Synth 8-3332] Sequential element (uart_receiver_inst/receiver_sampler_inst/FSM_sequential_cur_state_reg[1]) is unused and will be removed from module UART_controller.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 602.863 ; gain = 312.492
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 602.789 ; gain = 312.910
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -300,7 +238,7 @@ No constraint files found.
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 602.863 ; gain = 312.492
+Finished Timing Optimization : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 602.789 ; gain = 312.910
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -312,7 +250,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 602.863 ; gain = 312.492
+Finished Technology Mapping : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 604.348 ; gain = 314.469
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -336,7 +274,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 602.863 ; gain = 312.492
+Finished IO Insertion : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 604.348 ; gain = 314.469
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -349,7 +287,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 602.863 ; gain = 312.492
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 604.348 ; gain = 314.469
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -361,25 +299,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 602.863 ; gain = 312.492
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 604.348 ; gain = 314.469
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 602.863 ; gain = 312.492
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 604.348 ; gain = 314.469
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 602.863 ; gain = 312.492
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 604.348 ; gain = 314.469
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 602.863 ; gain = 312.492
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 604.348 ; gain = 314.469
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -398,51 +336,51 @@ Report Cell Usage:
 |1     |BUFG   |     1|
 |2     |CARRY4 |    22|
 |3     |LUT1   |     2|
-|4     |LUT2   |     8|
-|5     |LUT3   |    17|
-|6     |LUT4   |    82|
-|7     |LUT5   |    17|
-|8     |LUT6   |    27|
+|4     |LUT2   |    10|
+|5     |LUT3   |    19|
+|6     |LUT4   |    87|
+|7     |LUT5   |    12|
+|8     |LUT6   |    34|
 |9     |MUXF7  |     1|
-|10    |FDCE   |    99|
-|11    |FDPE   |     1|
+|10    |FDCE   |    96|
+|11    |FDPE   |     4|
 |12    |IBUF   |    15|
-|13    |OBUF   |    10|
+|13    |OBUF   |    11|
 +------+-------+------+
 
 Report Instance Areas: 
 +------+---------------------------+------------------+------+
 |      |Instance                   |Module            |Cells |
 +------+---------------------------+------------------+------+
-|1     |top                        |                  |   302|
-|2     |  uart_receiver_inst       |uart_receiver     |   162|
-|3     |    baud_controller_r_inst |baud_controller_r |    98|
-|4     |    receiver_sampler_inst  |receiver_sampler  |    12|
-|5     |  uart_transmitter_inst    |uart_transmitter  |   114|
-|6     |    baud_controller_t_inst |baud_controller_t |    94|
+|1     |top                        |                  |   314|
+|2     |  uart_receiver_inst       |uart_receiver     |   172|
+|3     |    baud_controller_r_inst |baud_controller_r |   104|
+|4     |    receiver_sampler_inst  |receiver_sampler  |    25|
+|5     |  uart_transmitter_inst    |uart_transmitter  |   115|
+|6     |    baud_controller_t_inst |baud_controller_t |    92|
 +------+---------------------------+------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 602.863 ; gain = 312.492
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 604.348 ; gain = 314.469
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 4 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 602.863 ; gain = 312.492
-Synthesis Optimization Complete : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 602.863 ; gain = 312.492
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 604.348 ; gain = 314.469
+Synthesis Optimization Complete : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 604.348 ; gain = 314.469
 INFO: [Project 1-571] Translating synthesized netlist
 INFO: [Netlist 29-17] Analyzing 23 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 699.914 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 703.621 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 INFO: [Common 17-83] Releasing license: Synthesis
-58 Infos, 4 Warnings, 0 Critical Warnings and 0 Errors encountered.
+32 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 699.914 ; gain = 421.805
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 699.914 ; gain = 0.000
+synth_design: Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 703.621 ; gain = 425.668
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 703.621 ; gain = 0.000
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
 INFO: [Common 17-1381] The checkpoint 'C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/projecttest/projecttest.runs/synth_1/UART_controller.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file UART_controller_utilization_synth.rpt -pb UART_controller_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Sat Nov  2 21:03:21 2024...
+INFO: [Common 17-206] Exiting Vivado at Sun Nov  3 03:42:51 2024...
