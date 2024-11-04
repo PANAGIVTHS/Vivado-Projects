@@ -16,6 +16,5 @@ module Sender (input clk, input reset, input Enable, input Send, input [2:0] BAU
     Hold_to_step Hold_to_step_inst (.clk(clk), .reset(reset), .button(Send_debounced), .spike(button_step));
     
     uart_transmitter uart_transmitter_inst (.reset(reset), .clk(clk), .baud_select(BAUD_RATE), .Tx_EN(Enable_debounced), .Tx_WR(button_step), .Tx_DATA(Tx_DATA), .TxD(TxD), .Tx_BUSY(Tx_BUSY));
-    // change baud hz
 endmodule
 

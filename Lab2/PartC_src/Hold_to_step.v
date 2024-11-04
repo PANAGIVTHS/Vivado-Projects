@@ -1,7 +1,7 @@
 
-module Hold_to_step (input clk, input reset, input button, output wire spike);
+module Hold_to_step (input clk, input reset, input button, output spike);
     reg [1:0] FF;
-    
+    wire spike;
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             FF[1] <= 0;
@@ -12,6 +12,6 @@ module Hold_to_step (input clk, input reset, input button, output wire spike);
         end
     end
 
-    assign spike = ~FF[1] & FF[0];
+    assign spike = ~FF[0] & FF[1];
 
 endmodule

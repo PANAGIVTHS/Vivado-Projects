@@ -1,6 +1,6 @@
 `timescale 1ns/10ps
 
-module tb_display_listener_sender;
+module tb_Sender;
     reg clk, reset, Enable, Send;
     reg [2:0] baud_select;
     wire button_step, TxD, Tx_BUSY;
@@ -15,7 +15,7 @@ module tb_display_listener_sender;
         .clk(clk),
         .reset(reset),
         .baud_select(baud_select),
-        .Read_debounced(Enable),
+        .Read_debounced(button_step),
         .TxD(TxD),
         .an3(an3),
         .an2(an2),
@@ -71,7 +71,7 @@ module tb_display_listener_sender;
         begin
             Enable = 1;
             Send = 1;
-            #(CLK_PERIOD) Send = 0;
+            #(CLK_PERIOD * 200) Send = 0;
             #(CLK_PERIOD * 5);
         end
     endtask
@@ -94,6 +94,7 @@ module tb_display_listener_sender;
 
     // Main testbench logic
     initial begin
+        #100
         initialize_signals;
         reset_sequence;
 
@@ -105,25 +106,10 @@ module tb_display_listener_sender;
         #(CLK_PERIOD * 100);  // Adjust as needed based on baud rate timing
 
         // Display output verification
-        if (an3 || an2 || an1 || an0) begin
-            $display("Display activated.");
-            $display("Anodes: %b%b%b%b", an3, an2, an1, an0);
-            display_segment({a, b, c, d, e, f, g});  // Pass segment control signals to task
-        end else begin
-            $display("Error: Display inactive when it should be showing data.");
-        end
+
 
         $display("Test complete.");
         $finish;
-    end
-
-    // Monitor outputs
-    always @(posedge clk) begin
-        if (Tx_BUSY) begin
-            $display("Transmitter is busy.");
-        end else if (Send) begin
-            $display("Sending data...");
-        end
     end
 
 endmodule

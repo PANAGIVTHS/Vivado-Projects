@@ -4,7 +4,7 @@ module display_listener (input clk, input reset, input [2:0] baud_select, input 
     wire [3:0] Rx_DATA;
     wire [3:0] append_char_to_mem;
     wire Rx_FERROR, Rx_PERROR, Rx_VALID, parity;
-    wire TxD;
+    wire TxD, Rx_EN;
 
     uart_receiver uart_receiver_inst (.reset(reset), .clk(clk), .baud_select(baud_select), .Rx_EN(Read_debounced), .RxD(TxD), .Rx_DATA(Rx_DATA), .Rx_FERROR(Rx_FERROR), .Rx_PERROR(Rx_PERROR), .Rx_VALID(Rx_VALID), .parity(parity));
     Hold_to_step Hold_to_step_inst (.clk(clk), .reset(reset), .button(Rx_VALID), .spike(append_char));
