@@ -11,7 +11,7 @@ module uart_transmitter (
     wire sample_ENABLE;
     reg [3:0] cur_state;
     reg [3:0] next_state;
-    reg [3:0] counter;
+    reg [2:0] counter;
     // State machine states with unique values
     localparam START_BIT = 4'b0000, TRANSMIT = 4'b0001, PARITY = 4'b1001, END_BIT = 4'b1010, IDLE = 4'b1011, DISABLED = 4'b1100;
     // swap the order of the bits in the buffer
