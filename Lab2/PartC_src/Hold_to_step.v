@@ -1,5 +1,5 @@
 
-module Hold_to_step (input clk, input reset, input button, output reg spike);
+module Hold_to_step (input clk, input reset, input button, output wire spike);
     reg [1:0] FF;
     
     always @(posedge clk or posedge reset) begin

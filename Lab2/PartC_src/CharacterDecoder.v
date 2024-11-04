@@ -1,6 +1,6 @@
 
-module CharacterDecoder (input clk, input [2:0] append_char_to_mem, input append_char, input [3:0] counter, output reg [3:0] char, input reset);
-    reg [3:0] shift_reg [2:0];
+module CharacterDecoder (input clk, input [3:0] append_char_to_mem, input append_char, input [3:0] counter, output reg [3:0] char, input reset);
+    reg [3:0] shift_reg [3:0];
     
     parameter AN0_SETUP_BUS = 4'b0010;
     parameter AN1_SETUP_BUS = 4'b0110;

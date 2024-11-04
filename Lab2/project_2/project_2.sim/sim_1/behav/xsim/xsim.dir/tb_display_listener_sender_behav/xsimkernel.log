@@ -1,0 +1,4 @@
+Running: xsim.dir/tb_display_listener_sender_behav/xsimk.exe -simmode gui -wdb tb_display_listener_sender_behav.wdb -simrunnum 0 -socket 49448
+Design successfully loaded
+Design Loading Memory Usage: 7224 KB (Peak: 7224 KB)
+Design Loading CPU Usage: 0 ms
