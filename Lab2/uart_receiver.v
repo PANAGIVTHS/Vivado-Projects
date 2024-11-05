@@ -42,6 +42,7 @@ module uart_receiver (
     reg SURE;
     wire sample_ENABLE;
     reg bit_stable, prev_bit;
+    reg start_sequence, end_sequence, check_parity, disabled, idle;
 
     // State machine states. Order is important do not change
     localparam START_BIT = 4'b0000, BIT_0 = 4'b0001, BIT_1 = 4'b0010, BIT_2 = 4'b0011;
@@ -51,9 +52,9 @@ module uart_receiver (
     wire Rx_sample_ENABLE = (sample_counter == 4'b1111 && sample_ENABLE);
     wire Sx_sample_ENABLE = !Rx_sample_ENABLE && (sample_counter[0] == 1'b1 && sample_ENABLE);
     wire Dx_sample_ENABLE = (sample_counter == 4'b0111 && sample_ENABLE);
-    baud_controller_r baud_controller_r_inst(.reset(reset), .clk(clk), .baud_select(baud_select), .sample_ENABLE(sample_ENABLE), .Disable_controller(Rx_EN || cur_state == DISABLED));
+    baud_controller_r baud_controller_r_inst(.reset(reset), .clk(clk), .baud_select(baud_select), .sample_ENABLE(sample_ENABLE), .Disable_controller(Rx_EN || disabled));
     
-    assign parity = ^Rx_DATA;
+    assign parity = /*!*/ (^Rx_DATA);
     // State machine state register
     always @(posedge clk or posedge reset) begin
         if (reset) begin
@@ -68,9 +69,9 @@ module uart_receiver (
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             SURE <= 0;
-        end else if (Rx_EN && !RxD && (cur_state == IDLE || cur_state == DISABLED)) begin
+        end else if (Rx_EN && !RxD && (idle || disabled)) begin
             SURE <= 1;
-        end else if (cur_state == START_BIT) begin
+        end else if (start_sequence) begin
             SURE <= 0;
         end else begin
             SURE <= SURE;
@@ -98,29 +99,33 @@ module uart_receiver (
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             Rx_FERROR <= 0;
-        end else if (!bit_stable && (cur_state != DISABLED) && (cur_state != IDLE) || (cur_state == END_BIT && !RxD)) begin
+        end else if (!bit_stable && !disabled && !idle || (end_sequence && !RxD)) begin
             Rx_FERROR <= 1;
-        end else begin
+        end else if (start_sequence) begin
             Rx_FERROR <= 0;
+        end else begin
+            Rx_FERROR <= Rx_FERROR;
         end
     end
 
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             Rx_PERROR <= 0;
-        end else if (cur_state == PARITY && parity != RxD) begin
+        end else if (check_parity && parity != RxD) begin
             Rx_PERROR <= 1;
-        end else begin
+        end else if (start_sequence) begin
             Rx_PERROR <= 0;
+        end else begin
+            Rx_PERROR <= Rx_PERROR;
         end
     end
 
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             Rx_VALID <= 0;
-        end else if (cur_state == END_BIT && bit_stable && RxD) begin
+        end else if (end_sequence && bit_stable && RxD) begin
             Rx_VALID <= 1;
-        end else if (cur_state == START_BIT) begin
+        end else if (start_sequence) begin
             Rx_VALID <= 0;
         end else begin
             Rx_VALID <= Rx_VALID;
@@ -130,7 +135,7 @@ module uart_receiver (
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             Rx_DATA <= 0;
-        end else if ( START_BIT < cur_state && cur_state < PARITY && Dx_sample_ENABLE) begin
+        end else if (!(check_parity || start_sequence || end_sequence || idle || disabled) && Dx_sample_ENABLE) begin
             Rx_DATA <= {Rx_DATA[6:0], RxD}; // Shift left and add RxD to LSB
         end else begin
             Rx_DATA <= Rx_DATA;
@@ -139,6 +144,11 @@ module uart_receiver (
 
     // transition to next state
     always @(*) begin
+        start_sequence = 0;
+        end_sequence = 0;
+        check_parity = 0;
+        disabled = 0;
+        idle = 0;
         case (cur_state)
             DISABLED: begin
                 if (SURE) begin
@@ -148,6 +158,7 @@ module uart_receiver (
                 end else begin
                     next_state = cur_state;
                 end
+                disabled = 1;
             end
             IDLE: begin
                 if (SURE) begin
@@ -159,6 +170,7 @@ module uart_receiver (
                 end else begin
                     next_state = cur_state;
                 end
+                idle = 1;
             end
             START_BIT: begin
                 // Reset IDLE's decision
@@ -171,6 +183,7 @@ module uart_receiver (
                 end else begin
                     next_state = START_BIT;
                 end
+                start_sequence = 1;
             end
             BIT_0: begin 
                 if (Rx_sample_ENABLE) begin
@@ -279,6 +292,7 @@ module uart_receiver (
                 end else begin
                     next_state = cur_state;
                 end
+                check_parity = 1;
             end
             END_BIT: begin
                 if (Rx_sample_ENABLE) begin
@@ -290,6 +304,7 @@ module uart_receiver (
                 end else begin
                     next_state = cur_state;
                 end
+                end_sequence = 1;
             end
             default: begin
                 next_state = DISABLED;

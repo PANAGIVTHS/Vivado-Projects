@@ -14,6 +14,7 @@ module tb_receiver;
     // Hardcoded baud rate selection for this testbench
     localparam BAUD_RATE = 3'b111;  // Set to BAUD1152
     localparam CLK_PERIOD = 10;  // Clock period for a 100MHz clock
+    localparam BYTES_UNTIL_NEXT_TRANSMIT = 11;
 
     // Baud rate limits for each mode (for 100MHz clock, as per the system's design)
     integer baud_limits [0:7];
@@ -56,7 +57,7 @@ module tb_receiver;
     // Task to initialize signals
     task initialize_signals;
         begin
-            Tx_DATA = 11'b01010111001;  // Sample data for transmission
+            Tx_DATA = 11'b01010111011;  // Sample data for transmission
             reset = 1;
             clk = 0;
             Tx_WR = 0;
@@ -79,9 +80,9 @@ module tb_receiver;
     task transmit_data;
         begin
             Tx_EN = 1;
-            Tx_WR = 1;
+            #(CLK_PERIOD) Tx_WR = 1; // after enabled wr = 1
             #(CLK_PERIOD) Tx_WR = 0;
-            #(baud_limits[BAUD_RATE] * CLK_PERIOD);  // Wait for the transmission time based on BAUD1152 limit
+            #(baud_limits[BAUD_RATE] * CLK_PERIOD * BYTES_UNTIL_NEXT_TRANSMIT);  // Wait for the transmission time based on BAUD1152 limit
         end
     endtask
 
@@ -103,8 +104,14 @@ module tb_receiver;
 
         // Transmit data at hardcoded baud rate
         transmit_data();
-        
         // Check synchronization
+        check_synchronization();
+        
+        Tx_DATA = 11'b01110110011;  // Sample data for transmission
+        // Transmit data at hardcoded baud rate
+        check_synchronization();
+
+        transmit_data();
         check_synchronization();
         
         // End the testbench

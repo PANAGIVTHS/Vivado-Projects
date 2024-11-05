@@ -10,7 +10,7 @@ module tb_transmitter;
     // Hardcoded baud rate selection for this testbench
     localparam BAUD_RATE = 3'b111;  // Set to BAUD1152
     localparam CLK_PERIOD = 10;     // Clock period for a 100MHz clock
-
+    localparam BITS_UNTIL_NEXT_BYTE = 11; // 11 is exactly after, 10 should do nothing 11+ normal
     // Baud rate limits for each mode (for 100MHz clock, +1 as needed)
     integer baud_limits [0:7];
     initial begin
@@ -71,7 +71,6 @@ module tb_transmitter;
     // Task to initiate a transmission for the selected baud rate
     task transmit_data;
         begin
-            Tx_EN = 1;
             Tx_WR = 1;
             #(CLK_PERIOD) Tx_WR = 0;
             #(baud_limits[BAUD_RATE] * CLK_PERIOD);  // Wait for the transmission time based on the selected baud rate
@@ -94,16 +93,24 @@ module tb_transmitter;
         initialize_signals;
         #100 reset_sequence;
 
+        // Enable transmitter and initiate transmission
+        Tx_EN = 1;
+
         // Transmit data at hardcoded baud rate
         $display("Starting transmission with BAUD_RATE %0d", BAUD_RATE);
-        transmit_data();
         
-        // Check if transmitter indicates busy state during transmission
+        transmit_data();
         check_tx_busy();
+        #(baud_limits[BAUD_RATE] * CLK_PERIOD * BITS_UNTIL_NEXT_BYTE);  // Wait for the transmission time based on the selected baud rate
+        check_tx_busy();
+        Tx_DATA = 8'b10001110;  // Example data for second transmission
+        if (!Tx_BUSY) transmit_data();
+        check_tx_busy();
+        // Check if transmitter indicates busy state during transmission
         
         // End the testbench
         $display("Transmitter Testbench completed.");
-        $finish;
+        #(baud_limits[BAUD_RATE] * CLK_PERIOD * 100) $finish;
     end
 
     // Optional: Monitor the TxD line and display data bits

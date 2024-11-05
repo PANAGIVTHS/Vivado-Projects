@@ -2,3 +2,6 @@ Running: xsim.dir/tb_Sender_behav/xsimk.exe -simmode gui -wdb tb_Sender_behav.wd
 Design successfully loaded
 Design Loading Memory Usage: 7276 KB (Peak: 7276 KB)
 Design Loading CPU Usage: 0 ms
+Simulation completed
+Simulation Memory Usage: 9060 KB (Peak: 9060 KB)
+Simulation CPU Usage: 250 ms

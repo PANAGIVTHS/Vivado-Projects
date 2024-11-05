@@ -1,17 +1,17 @@
 
-module FourDigitLEDdriver(reset, clk, append_char_to_mem, append_char, an3, an2, an1, an0, a, b, c, d, e, f, g, dp);
+module FourDigitLEDdriver(reset, clk, appended_byte, append_sig, error, an3, an2, an1, an0, a, b, c, d, e, f, g, dp);
     input clk, reset;
     output an3, an2, an1, an0;
     output wire a, b, c, d, e, f, g, dp;
     wire [3:0] counter;
     wire button_debounced, an3, an2, an1, an0, feedback;
     wire button_ON, enabled, reset_debounced;
-    wire [7:0] char;
-    input append_char;
-    input [7:0] append_char_to_mem;
+    wire [3:0] char;
+    input append_sig;
+    input wire error;
+    input [7:0] appended_byte;
     
-    assign dp = 1'b1;
-
+    assign dp = !error;
     
     MMCME2_BASE #(
        .CLKFBOUT_MULT_F(6.0),     // Multiply value for all CLKOUT (2.000-64.000).
@@ -30,7 +30,7 @@ module FourDigitLEDdriver(reset, clk, append_char_to_mem, append_char, an3, an2,
     Debouncer Debouncer_inst (.clk(new_clk), .button(reset), .button_debounced(reset_debounced));
     ConstCounter ConstCounter_inst (.clk(new_clk), .reset(reset_debounced), .counter(counter));
     Debouncer Debouncer_inst_2 (.clk(new_clk), .button(button), .button_debounced(button_debounced));
-    CharacterDecoder CharacterDecoder_inst (.clk(clk), .append_char_to_mem(append_char_to_mem), .append_char(append_char), .counter(counter), .char(char), .reset(reset));
+    CharacterDecoder CharacterDecoder_inst (.clk(clk), .appended_byte(appended_byte), .append_sig(append_sig), .counter(counter), .char(char), .reset(reset));
     AnodeDecoder AnodeDecoder_inst (.counter(counter), .an0(an0), .an1(an1), .an2(an2), .an3(an3));
-    LEDdecoder LEDdecoder_inst (.char(char), .LED({a, b, c, d, e, f, g})); <--- this should be 7 bits and do it 
+    LEDdecoder LEDdecoder_inst (.char(char), .LED({a, b, c, d, e, f, g}));
 endmodule

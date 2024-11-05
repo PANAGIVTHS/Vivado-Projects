@@ -13,7 +13,9 @@ module uart_transmitter (
     reg [3:0] next_state;
     reg [2:0] counter;
     // State machine states with unique values
-    localparam START_BIT = 4'b0000, TRANSMIT = 4'b0001, PARITY = 4'b1001, END_BIT = 4'b1010, IDLE = 4'b1011, DISABLED = 4'b1100;
+    localparam START_BIT = 4'b0000, BIT_0 = 4'b0001, BIT_1 = 4'b0010, BIT_2 = 4'b0011;
+    localparam BIT_3 = 4'b0100, BIT_4 = 4'b0101, BIT_5 = 4'b0110, BIT_6 = 4'b0111, BIT_7 = 4'b1000;
+    localparam PARITY = 4'b1001, END_BIT = 4'b1010, IDLE = 4'b1011, DISABLED = 4'b1100;
     // swap the order of the bits in the buffer
     wire [0:7] buffer = Tx_DATA;
 
@@ -28,71 +30,80 @@ module uart_transmitter (
             cur_state <= next_state;
     end
 
-    always @(posedge clk or posedge reset) begin
-        if (reset)
-            counter <= 0; // Reset counter
-        else if (cur_state == TRANSMIT && sample_ENABLE)
-            counter <= counter + 1; // Reset counter
-        else begin
-            counter <= counter; // Hold counter
-        end
-    end
-
     // Next state logic and output control (combinational) block
     always @(*) begin
-        // Default assignments
-        next_state = cur_state;
-        TxD = 1'b1;            // Idle output (default high for UART)
-        Tx_BUSY = 1'b0;        // Not busy by default
-
         case (cur_state)
             DISABLED: begin
                 TxD = 1;       // Tx line idle
                 Tx_BUSY = 0;   // Not busy
-                if (Tx_EN) 
-                    next_state = IDLE;
+                next_state = Tx_EN ? IDLE : DISABLED;
             end
-
             IDLE: begin
                 TxD = 1;       // Idle state for Tx line
                 Tx_BUSY = 0;
-                if (Tx_WR)
-                    next_state = START_BIT;
+                next_state = Tx_WR ? START_BIT : IDLE;
             end
-
             START_BIT: begin    
                 TxD = 0;       // Start bit
                 Tx_BUSY = 1;
-                if (sample_ENABLE)
-                    next_state = TRANSMIT;
+                next_state = sample_ENABLE ? BIT_0 : START_BIT;
             end
-
-            TRANSMIT: begin
-                TxD = buffer[counter];  // Transmit data bits in sequence
+            BIT_0: begin 
+                TxD = buffer[0];
                 Tx_BUSY = 1;
-                if (counter == 7 && sample_ENABLE) begin
-                    next_state = PARITY; // Next state is PARITY
-                end
+                next_state = sample_ENABLE ? BIT_1 : BIT_0;
             end
-
+            BIT_1: begin
+                TxD = buffer[1];
+                Tx_BUSY = 1;
+                next_state = sample_ENABLE ? BIT_2 : BIT_1;
+            end
+            BIT_2: begin
+                TxD = buffer[2];
+                Tx_BUSY = 1;
+                next_state = sample_ENABLE ? BIT_3 : BIT_2;
+            end
+            BIT_3: begin
+                TxD = buffer[3];
+                Tx_BUSY = 1;
+                next_state = sample_ENABLE ? BIT_4 : BIT_3;
+            end
+            BIT_4: begin
+                TxD = buffer[4];
+                Tx_BUSY = 1;
+                next_state = sample_ENABLE ? BIT_5 : BIT_4;
+            end
+            BIT_5: begin
+                TxD = buffer[5];
+                Tx_BUSY = 1;
+                next_state = sample_ENABLE ? BIT_6 : BIT_5;
+            end
+            BIT_6: begin
+                TxD = buffer[6];
+                Tx_BUSY = 1;
+                next_state = sample_ENABLE ? BIT_7 : BIT_6;
+            end
+            BIT_7: begin
+                TxD = buffer[7];
+                Tx_BUSY = 1;
+                next_state = sample_ENABLE ? PARITY : BIT_7;
+            end
             PARITY: begin
-                TxD = 0;
                 TxD = ^Tx_DATA;  // Parity bit calculation
                 Tx_BUSY = 1;
-                if (sample_ENABLE)
-                    next_state = END_BIT; // Return to disabled or stop state
+                next_state = sample_ENABLE ? END_BIT : PARITY;
             end
-
             END_BIT: begin
                 TxD = 1;       // Stop bit
                 Tx_BUSY = 1;
-                if (sample_ENABLE)
-                    next_state = DISABLED; // Return to disabled or stop state
+                next_state = sample_ENABLE ? DISABLED : END_BIT;
             end
-
             default: begin
+                TxD = 1;
+                Tx_BUSY = 0;
                 next_state = DISABLED; // Fallback to DISABLED state
             end
         endcase
+
     end
 endmodule

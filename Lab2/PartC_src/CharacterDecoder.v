@@ -1,6 +1,7 @@
 
-module CharacterDecoder (input clk, input [7:0] append_char_to_mem, input append_char, input [3:0] counter, output reg [7:0] char, input reset);
+module CharacterDecoder (input clk, input [7:0] appended_byte, input append_sig, input [3:0] counter, output reg [7:0] char, input reset);
     reg [7:0] shift_reg [3:0];
+    reg [1:0] shift_times;
     
     parameter AN0_SETUP_BUS = 4'b0010;
     parameter AN1_SETUP_BUS = 4'b0110;
@@ -11,17 +12,18 @@ module CharacterDecoder (input clk, input [7:0] append_char_to_mem, input append
     always @(posedge clk or posedge reset) begin
         // Add 3 spaces to make the transition smoother 
         if (reset) begin
-            shift_reg[0] = 4'b1011; // -
-            shift_reg[1] = 4'b1011; // -
-            shift_reg[2] = 4'b1011; // -
-            shift_reg[3] = 4'b1011; // -
+            shift_reg[0] <= 4'b1011; // -
+            shift_reg[1] <= 4'b1011; // -
+            shift_reg[2] <= 4'b1011; // -
+            shift_reg[3] <= 4'b1011; // -
         end else begin
-            if (append_char) begin
-                // Shift memory
-                shift_reg[0] = append_char_to_mem;
-                shift_reg[1] = shift_reg[0];
-                shift_reg[2] = shift_reg[1];
-                shift_reg[3] = shift_reg[2];
+            shift_times <= append_sig ? 2'b10 : shift_times;            
+            // Shift memory
+            if (shift_times != 0) begin
+                shift_reg[0] = (shift_times == 2'b10) ? appended_byte[7:3] : appended_byte[3:0];
+                shift_reg[1] <= shift_reg[0];
+                shift_reg[2] <= shift_reg[1];
+                shift_reg[3] <= shift_reg[2];
             end
         end
     end

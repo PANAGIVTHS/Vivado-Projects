@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date         : Sun Nov  3 19:18:37 2024
+| Date         : Tue Nov  5 04:15:19 2024
 | Host         : DESKTOP-922FQ13 running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file UART_controller_control_sets_placed.rpt
 | Design       : UART_controller
@@ -24,7 +24,7 @@ Table of Contents
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
 | Number of unique control sets                            |     5 |
-| Unused register locations in slices containing registers |    16 |
+| Unused register locations in slices containing registers |    17 |
 +----------------------------------------------------------+-------+
 
 
@@ -34,8 +34,9 @@ Table of Contents
 +--------+--------------+
 | Fanout | Control Sets |
 +--------+--------------+
-|      4 |            2 |
-|      6 |            1 |
+|      2 |            1 |
+|      4 |            1 |
+|      8 |            1 |
 |    16+ |            2 |
 +--------+--------------+
 
@@ -47,10 +48,10 @@ Table of Contents
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | No           | No                    | No                     |               0 |            0 |
-| No           | No                    | Yes                    |              82 |           22 |
+| No           | No                    | Yes                    |              91 |           29 |
 | No           | Yes                   | No                     |               0 |            0 |
 | Yes          | No                    | No                     |               0 |            0 |
-| Yes          | No                    | Yes                    |              30 |           12 |
+| Yes          | No                    | Yes                    |              28 |           10 |
 | Yes          | Yes                   | No                     |               0 |            0 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
@@ -58,14 +59,14 @@ Table of Contents
 4. Detailed Control Set Information
 -----------------------------------
 
-+----------------+-----------------------------------------------------------------------------+------------------+------------------+----------------+
-|  Clock Signal  |                                Enable Signal                                | Set/Reset Signal | Slice Load Count | Bel Load Count |
-+----------------+-----------------------------------------------------------------------------+------------------+------------------+----------------+
-|  clk_IBUF_BUFG | uart_receiver_inst/baud_controller_r_inst/sample_ENABLE_reg_0[0]            | reset_IBUF       |                2 |              4 |
-|  clk_IBUF_BUFG | uart_transmitter_inst/baud_controller_t_inst/FSM_onehot_cur_state_reg[2][0] | reset_IBUF       |                2 |              4 |
-|  clk_IBUF_BUFG | uart_transmitter_inst/baud_controller_t_inst/E[0]                           | reset_IBUF       |                3 |              6 |
-|  clk_IBUF_BUFG | uart_receiver_inst/baud_controller_r_inst/E[0]                              | reset_IBUF       |                5 |             16 |
-|  clk_IBUF_BUFG |                                                                             | reset_IBUF       |               22 |             82 |
-+----------------+-----------------------------------------------------------------------------+------------------+------------------+----------------+
++----------------+--------------------------------------------------------------------+-------------------------------------------------+------------------+----------------+
+|  Clock Signal  |                            Enable Signal                           |                 Set/Reset Signal                | Slice Load Count | Bel Load Count |
++----------------+--------------------------------------------------------------------+-------------------------------------------------+------------------+----------------+
+|  clk_IBUF_BUFG |                                                                    | reset_IBUF                                      |                1 |              2 |
+|  clk_IBUF_BUFG | uart_receiver_inst/baud_controller_r_inst/E[0]                     | uart_receiver_inst/baud_controller_r_inst/AR[0] |                2 |              4 |
+|  clk_IBUF_BUFG | uart_receiver_inst/E[0]                                            | reset_IBUF                                      |                3 |              8 |
+|  clk_IBUF_BUFG | uart_receiver_inst/baud_controller_r_inst/sample_counter_reg[3][0] | uart_receiver_inst/baud_controller_r_inst/AR[0] |                5 |             16 |
+|  clk_IBUF_BUFG |                                                                    | uart_receiver_inst/baud_controller_r_inst/AR[0] |               28 |             89 |
++----------------+--------------------------------------------------------------------+-------------------------------------------------+------------------+----------------+
 
 
