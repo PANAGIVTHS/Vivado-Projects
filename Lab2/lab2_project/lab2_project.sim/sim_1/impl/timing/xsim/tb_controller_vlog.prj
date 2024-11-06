@@ -1,0 +1,9 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"tb_controller_time_impl.v" \
+"../../../../../../Source Code/Controller src/baud_controller_r.v" \
+"../../../../../../Source Code/Controller src/baud_controller_t.v" \
+"../../../../../../Source Code/Testbenches/baud_controller_tb.v" \
+
+# Do not sort compile order
+nosort

@@ -1,0 +1,8 @@
+0.6
+2018.3
+Dec  7 2018
+00:33:28
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/Testbenches/UART_controller_tb.v,1730848933,verilog,,,,tb_UART_controller,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/Testbenches/baud_controller_tb.v,1730653031,verilog,,,,tb_controller,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/Testbenches/transmitter_tb.v,1730748722,verilog,,,,tb_transmitter,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/lab2_project/lab2_project.sim/sim_1/impl/timing/xsim/tb_UART_controller_time_impl.v,1730849042,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/Testbenches/UART_controller_tb.v,,UART_controller;baud_controller_r;baud_controller_t;glbl;uart_receiver;uart_transmitter,,,,,,,,

@@ -1,0 +1,14 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../../Source Code/UART src/UART_controller.v" \
+"../../../../../Source Code/Controller src/baud_controller_r.v" \
+"../../../../../Source Code/Controller src/baud_controller_t.v" \
+"../../../../../Source Code/UART src/uart_receiver.v" \
+"../../../../../Source Code/UART src/uart_transmitter.v" \
+"../../../../../Source Code/Testbenches/UART_controller_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

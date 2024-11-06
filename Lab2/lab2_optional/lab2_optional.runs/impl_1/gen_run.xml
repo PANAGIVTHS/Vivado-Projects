@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="impl_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1730852139">
+  <File Type="BITSTR-BMM" Name="SSD_Transmittor_Driver_bd.bmm"/>
+  <File Type="OPT-METHODOLOGY-DRC" Name="SSD_Transmittor_Driver_methodology_drc_opted.rpt"/>
+  <File Type="INIT-TIMING" Name="SSD_Transmittor_Driver_timing_summary_init.rpt"/>
+  <File Type="ROUTE-PWR" Name="SSD_Transmittor_Driver_power_routed.rpt"/>
+  <File Type="PA-TCL" Name="SSD_Transmittor_Driver.tcl"/>
+  <File Type="OPT-TIMING" Name="SSD_Transmittor_Driver_timing_summary_opted.rpt"/>
+  <File Type="OPT-DCP" Name="SSD_Transmittor_Driver_opt.dcp"/>
+  <File Type="ROUTE-PWR-SUM" Name="SSD_Transmittor_Driver_power_summary_routed.pb"/>
+  <File Type="REPORTS-TCL" Name="SSD_Transmittor_Driver_reports.tcl"/>
+  <File Type="OPT-DRC" Name="SSD_Transmittor_Driver_drc_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="SSD_Transmittor_Driver.hwdef"/>
+  <File Type="PWROPT-DCP" Name="SSD_Transmittor_Driver_pwropt.dcp"/>
+  <File Type="PWROPT-DRC" Name="SSD_Transmittor_Driver_drc_pwropted.rpt"/>
+  <File Type="PWROPT-TIMING" Name="SSD_Transmittor_Driver_timing_summary_pwropted.rpt"/>
+  <File Type="PLACE-DCP" Name="SSD_Transmittor_Driver_placed.dcp"/>
+  <File Type="PLACE-IO" Name="SSD_Transmittor_Driver_io_placed.rpt"/>
+  <File Type="PLACE-CLK" Name="SSD_Transmittor_Driver_clock_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL" Name="SSD_Transmittor_Driver_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="SSD_Transmittor_Driver_utilization_placed.pb"/>
+  <File Type="PLACE-CTRL" Name="SSD_Transmittor_Driver_control_sets_placed.rpt"/>
+  <File Type="PLACE-SIMILARITY" Name="SSD_Transmittor_Driver_incremental_reuse_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="SSD_Transmittor_Driver_incremental_reuse_pre_placed.rpt"/>
+  <File Type="BG-BGN" Name="SSD_Transmittor_Driver.bgn"/>
+  <File Type="PLACE-TIMING" Name="SSD_Transmittor_Driver_timing_summary_placed.rpt"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="SSD_Transmittor_Driver_postplace_pwropt.dcp"/>
+  <File Type="BG-BIN" Name="SSD_Transmittor_Driver.bin"/>
+  <File Type="POSTPLACE-PWROPT-TIMING" Name="SSD_Transmittor_Driver_timing_summary_postplace_pwropted.rpt"/>
+  <File Type="PHYSOPT-DCP" Name="SSD_Transmittor_Driver_physopt.dcp"/>
+  <File Type="PHYSOPT-DRC" Name="SSD_Transmittor_Driver_drc_physopted.rpt"/>
+  <File Type="BITSTR-MSK" Name="SSD_Transmittor_Driver.msk"/>
+  <File Type="PHYSOPT-TIMING" Name="SSD_Transmittor_Driver_timing_summary_physopted.rpt"/>
+  <File Type="ROUTE-ERROR-DCP" Name="SSD_Transmittor_Driver_routed_error.dcp"/>
+  <File Type="ROUTE-DCP" Name="SSD_Transmittor_Driver_routed.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="SSD_Transmittor_Driver_routed_bb.dcp"/>
+  <File Type="ROUTE-DRC" Name="SSD_Transmittor_Driver_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-PB" Name="SSD_Transmittor_Driver_drc_routed.pb"/>
+  <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
+  <File Type="BITSTR-LTX" Name="SSD_Transmittor_Driver.ltx"/>
+  <File Type="ROUTE-DRC-RPX" Name="SSD_Transmittor_Driver_drc_routed.rpx"/>
+  <File Type="BITSTR-MMI" Name="SSD_Transmittor_Driver.mmi"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="SSD_Transmittor_Driver_methodology_drc_routed.rpt"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="SSD_Transmittor_Driver_methodology_drc_routed.rpx"/>
+  <File Type="BITSTR-SYSDEF" Name="SSD_Transmittor_Driver.sysdef"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="SSD_Transmittor_Driver_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-PWR-RPX" Name="SSD_Transmittor_Driver_power_routed.rpx"/>
+  <File Type="ROUTE-STATUS" Name="SSD_Transmittor_Driver_route_status.rpt"/>
+  <File Type="ROUTE-STATUS-PB" Name="SSD_Transmittor_Driver_route_status.pb"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="SSD_Transmittor_Driver_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-TIMING-PB" Name="SSD_Transmittor_Driver_timing_summary_routed.pb"/>
+  <File Type="ROUTE-TIMING-RPX" Name="SSD_Transmittor_Driver_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-SIMILARITY" Name="SSD_Transmittor_Driver_incremental_reuse_routed.rpt"/>
+  <File Type="ROUTE-CLK" Name="SSD_Transmittor_Driver_clock_utilization_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW" Name="SSD_Transmittor_Driver_bus_skew_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW-PB" Name="SSD_Transmittor_Driver_bus_skew_routed.pb"/>
+  <File Type="ROUTE-BUS-SKEW-RPX" Name="SSD_Transmittor_Driver_bus_skew_routed.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="SSD_Transmittor_Driver_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="SSD_Transmittor_Driver_postroute_physopt_bb.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="SSD_Transmittor_Driver_timing_summary_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="SSD_Transmittor_Driver_timing_summary_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="SSD_Transmittor_Driver_timing_summary_postroute_physopted.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="SSD_Transmittor_Driver_bus_skew_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="SSD_Transmittor_Driver_bus_skew_postroute_physopted.pb"/>
+  <File Type="BG-BIT" Name="SSD_Transmittor_Driver.bit"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="SSD_Transmittor_Driver_bus_skew_postroute_physopted.rpx"/>
+  <File Type="BITSTR-RBT" Name="SSD_Transmittor_Driver.rbt"/>
+  <File Type="BITSTR-NKY" Name="SSD_Transmittor_Driver.nky"/>
+  <File Type="BG-DRC" Name="SSD_Transmittor_Driver.drc"/>
+  <File Type="RDI-RDI" Name="SSD_Transmittor_Driver.vdi"/>
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PPRDIR/../Optional Source Code/SSD src/AnodeDecoder.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../Optional Source Code/SSD src/CharacterDecoder.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../Optional Source Code/SSD src/ConstCounter.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../Optional Source Code/SSD src/Debouncer.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../Optional Source Code/SSD src/FourDigitDriver.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../Optional Source Code/Optional src/Hold_to_step.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../Optional Source Code/SSD src/LEDdecoder.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../Optional Source Code/Optional src/Listener.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../Optional Source Code/Optional src/Sender.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../Source Code/Controller src/baud_controller_r.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../Source Code/Controller src/baud_controller_t.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../Source Code/UART src/uart_receiver.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../Source Code/UART src/uart_transmitter.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../Optional Source Code/Optional src/SSD_Transmittor_Driver.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="SSD_Transmittor_Driver"/>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <File Path="$PPRDIR/../constraints.xdc">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="utils" Type="Utils" RelSrcDir="$PSRCDIR/utils_1">
+    <Filter Type="Utils"/>
+    <Config>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018">
+      <Desc>Default settings for Implementation.</Desc>
+    </StratHandle>
+    <Step Id="init_design"/>
+    <Step Id="opt_design"/>
+    <Step Id="power_opt_design"/>
+    <Step Id="place_design"/>
+    <Step Id="post_place_power_opt_design"/>
+    <Step Id="phys_opt_design"/>
+    <Step Id="route_design"/>
+    <Step Id="post_route_phys_opt_design"/>
+    <Step Id="write_bitstream"/>
+  </Strategy>
+</GenRun>

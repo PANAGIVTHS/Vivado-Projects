@@ -1,0 +1,9 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"tb_transmitter_time_impl.v" \
+"../../../../../../Source Code/Controller src/baud_controller_t.v" \
+"../../../../../../Source Code/UART src/uart_transmitter.v" \
+"../../../../../../Source Code/Testbenches/transmitter_tb.v" \
+
+# Do not sort compile order
+nosort

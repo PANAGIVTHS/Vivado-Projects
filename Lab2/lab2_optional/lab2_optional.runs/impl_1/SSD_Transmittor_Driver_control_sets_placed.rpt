@@ -1,0 +1,81 @@
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
+| Date         : Wed Nov  6 02:16:22 2024
+| Host         : DESKTOP-922FQ13 running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file SSD_Transmittor_Driver_control_sets_placed.rpt
+| Design       : SSD_Transmittor_Driver
+| Device       : xc7a100t
+---------------------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Number of unique control sets                            |    11 |
+| Unused register locations in slices containing registers |    33 |
++----------------------------------------------------------+-------+
+
+
+2. Histogram
+------------
+
++--------+--------------+
+| Fanout | Control Sets |
++--------+--------------+
+|      2 |            2 |
+|      4 |            2 |
+|      8 |            1 |
+|     10 |            1 |
+|     11 |            1 |
+|     15 |            1 |
+|    16+ |            3 |
++--------+--------------+
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |              11 |            9 |
+| No           | No                    | Yes                    |             101 |           33 |
+| No           | Yes                   | No                     |              25 |            6 |
+| Yes          | No                    | No                     |               0 |            0 |
+| Yes          | No                    | Yes                    |              30 |           10 |
+| Yes          | Yes                   | No                     |               0 |            0 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++-----------------------------------------------------+--------------------------------------------------------------------------------+-------------------------------------+------------------+----------------+
+|                     Clock Signal                    |                                  Enable Signal                                 |           Set/Reset Signal          | Slice Load Count | Bel Load Count |
++-----------------------------------------------------+--------------------------------------------------------------------------------+-------------------------------------+------------------+----------------+
+|  clk_IBUF_BUFG                                      |                                                                                | reset_debouncer/AR[0]               |                1 |              2 |
+|  clk_IBUF_BUFG                                      | Hold_to_step_inst/E[0]                                                         | reset_IBUF                          |                1 |              2 |
+|  clk_IBUF_BUFG                                      | Listener_inst/uart_receiver_inst/baud_controller_r_inst/sample_ENABLE_reg_0[0] | Listener_inst/reset_debouncer/AR[0] |                2 |              4 |
+|  Listener_inst/FourDigitLEDdriver_inst/new_clk_BUFG |                                                                                | Listener_inst/reset_debouncer/AR[0] |                1 |              4 |
+|  clk_IBUF_BUFG                                      | Listener_inst/uart_receiver_inst/baud_controller_r_inst/E[0]                   | Listener_inst/reset_debouncer/AR[0] |                2 |              8 |
+|  clk_IBUF_BUFG                                      |                                                                                | sender_inst/write_debouncer/SR[0]   |                3 |             10 |
+|  clk_IBUF_BUFG                                      |                                                                                |                                     |                9 |             11 |
+|  clk_IBUF_BUFG                                      |                                                                                | Listener_inst/reset_debouncer/SR[0] |                3 |             15 |
+|  clk_IBUF_BUFG                                      | Listener_inst/Hold_to_step_inst/E[0]                                           | Listener_inst/reset_debouncer/AR[0] |                5 |             16 |
+|  clk_IBUF_BUFG                                      |                                                                                | sender_inst/reset_debouncer/AR[0]   |               16 |             39 |
+|  clk_IBUF_BUFG                                      |                                                                                | Listener_inst/reset_debouncer/AR[0] |               15 |             56 |
++-----------------------------------------------------+--------------------------------------------------------------------------------+-------------------------------------+------------------+----------------+
+
+
