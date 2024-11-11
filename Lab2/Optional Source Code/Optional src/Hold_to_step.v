@@ -1,4 +1,9 @@
 
+/*
+    This module takes a signal and generates a spike when the signal is released. 
+    It is used to generate a spike when a button is released.
+*/
+
 module Hold_to_step (input clk, input reset, input button, output spike);
     reg [1:0] FF;
     

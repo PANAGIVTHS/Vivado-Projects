@@ -8,7 +8,7 @@
     of frame and not any time during the frame. -NOTE- DO NOT CHANGE THIS BEHAVIOR
 
     *Danger*: The module will be unresponsive when in LOCK state until either reset by the
-    user or Rx_EN is set to 0.
+    *user or Rx_EN is set to 0.
 
     Inputs:
         reset: Reset signal
@@ -47,12 +47,12 @@ module uart_receiver (
     // State machine states. Order is important do not change
     localparam START_BIT = 4'b0000, BIT_0 = 4'b0001, BIT_1 = 4'b0010, BIT_2 = 4'b0011;
     localparam BIT_3 = 4'b0100, BIT_4 = 4'b0101, BIT_5 = 4'b0110, BIT_6 = 4'b0111, BIT_7 = 4'b1000;
-    localparam PARITY = 4'b1001, END_BIT = 4'b1010, DISABLED = 4'b1011, IDLE = 4'b1100;
+    localparam PARITY = 4'b1001, END_BIT = 4'b1010, DISABLED = 4'b1011, IDLE = 4'b1100, LOCK = 4'b1101;
     
     wire Rx_sample_ENABLE = (sample_counter == 4'b1111 && sample_ENABLE);
     wire Sx_sample_ENABLE = !Rx_sample_ENABLE && (sample_counter[0] == 1'b1 && sample_ENABLE);
     wire Dx_sample_ENABLE = (sample_counter == 4'b0111 && sample_ENABLE);
-    wire Ex_sample_ENABLE = (sample_counter == 4'b1000 && sample_ENABLE);
+    wire Ex_sample_ENABLE = (Sx_sample_ENABLE && sample_counter[3] == 1'b1);
     baud_controller_r baud_controller_r_inst(.reset(reset), .clk(clk), .baud_select(baud_select), .sample_ENABLE(sample_ENABLE), .Enable_controller(disabled || idle));
     synchronizer synchronizer_inst(.clk(clk), .async_signal(RxD), .sync_signal(sync_RxD));
     
@@ -81,12 +81,12 @@ module uart_receiver (
         end else if (sample_counter == 4'b0001 && Sx_sample_ENABLE) begin
             bit_stable <= 1;
             prev_bit <= sync_RxD;
-        end else if (!bit_stable || (Sx_sample_ENABLE && prev_bit != sync_RxD)) begin
+        end else if (!bit_stable || ((Sx_sample_ENABLE && prev_bit != sync_RxD) && sample_counter != 4'b0010)) begin
             bit_stable <= 0;
         end else if (Sx_sample_ENABLE && prev_bit == sync_RxD) begin
             prev_bit <= sync_RxD;
             bit_stable <= 1;
-        end else begin
+        end else if (Sx_sample_ENABLE) begin
             prev_bit <= sync_RxD;
             bit_stable <= 1;
         end
@@ -95,9 +95,9 @@ module uart_receiver (
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             Rx_FERROR <= 0;
-        end else if (Ex_sample_ENABLE && !bit_stable && !disabled && !idle || (Ex_sample_ENABLE && end_sequence && !cur_bit)) begin
+        end else if (Ex_sample_ENABLE && !bit_stable && !disabled && !idle || (Ex_sample_ENABLE && end_sequence && !cur_bit) || (Ex_sample_ENABLE && start_sequence && cur_bit)) begin
             Rx_FERROR <= 1;
-        end else if (start_sequence) begin
+        end else if (start_sequence && bit_stable) begin
             Rx_FERROR <= 0;
         end else begin
             Rx_FERROR <= Rx_FERROR;
@@ -156,6 +156,9 @@ module uart_receiver (
         disabled = 0;
         idle = 0;
         case (cur_state)
+            LOCK: begin
+                next_state = LOCK;
+            end
             DISABLED: begin
                 if (Rx_EN) begin
                     next_state = IDLE;
@@ -180,7 +183,7 @@ module uart_receiver (
                     if (!cur_bit && bit_stable) begin
                         next_state = BIT_0;
                     end else begin
-                        next_state = IDLE;  
+                        next_state = LOCK;  
                     end
                 end else begin
                     next_state = START_BIT;
@@ -192,7 +195,7 @@ module uart_receiver (
                     if (bit_stable) begin
                         next_state = BIT_1;
                     end else begin 
-                        next_state = IDLE;
+                        next_state = LOCK;
                     end
                 end else begin
                     next_state = BIT_0;
@@ -203,7 +206,7 @@ module uart_receiver (
                     if (bit_stable) begin
                         next_state = BIT_2;
                     end else begin 
-                        next_state = IDLE;
+                        next_state = LOCK;
                     end
                 end else begin
                     next_state = BIT_1;
@@ -214,7 +217,7 @@ module uart_receiver (
                     if (bit_stable) begin
                         next_state = BIT_3;
                     end else begin 
-                        next_state = IDLE;
+                        next_state = LOCK;
                     end
                 end else begin
                     next_state = BIT_2;
@@ -225,7 +228,7 @@ module uart_receiver (
                     if (bit_stable) begin
                         next_state = BIT_4;
                     end else begin 
-                        next_state = IDLE;
+                        next_state = LOCK;
                     end
                 end else begin
                     next_state = BIT_3;
@@ -236,7 +239,7 @@ module uart_receiver (
                     if (bit_stable) begin
                         next_state = BIT_5;
                     end else begin 
-                        next_state = IDLE;
+                        next_state = LOCK;
                     end
                 end else begin
                     next_state = BIT_4;
@@ -247,7 +250,7 @@ module uart_receiver (
                     if (bit_stable) begin
                         next_state = BIT_6;
                     end else begin 
-                        next_state = IDLE;
+                        next_state = LOCK;
                     end
                 end else begin
                     next_state = BIT_5;
@@ -258,7 +261,7 @@ module uart_receiver (
                     if (bit_stable) begin
                         next_state = BIT_7;
                     end else begin 
-                        next_state = IDLE;
+                        next_state = LOCK;
                     end
                 end else begin
                     next_state = BIT_6;
@@ -269,7 +272,7 @@ module uart_receiver (
                     if (bit_stable) begin
                         next_state = PARITY;
                     end else begin 
-                        next_state = IDLE;
+                        next_state = LOCK;
                     end
                 end else begin
                     next_state = BIT_7;
@@ -280,7 +283,7 @@ module uart_receiver (
                     if (cur_bit == parity && bit_stable) begin
                         next_state = END_BIT;
                     end else begin
-                        next_state = IDLE;
+                        next_state = LOCK;
                     end
                 end else begin
                     next_state = PARITY;

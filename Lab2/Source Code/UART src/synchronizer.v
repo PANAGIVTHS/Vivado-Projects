@@ -1,4 +1,9 @@
 
+/*
+    This module is a synchronizer that synchronizes an asynchronous signal to a target clock.
+    It uses a two-stage synchronizer to prevent metastability issues.   
+*/
+
 module synchronizer (
     input wire clk,          // Target clock
     input wire async_signal, // Asynchronous input signal

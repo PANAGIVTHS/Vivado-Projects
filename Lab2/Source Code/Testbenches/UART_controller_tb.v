@@ -33,7 +33,7 @@ module tb_UART_controller;
         Tx_EN<=0;
         // Reset
         #(CLK_PERIOD*2) reset<=1;
-        #(CLK_PERIOD*5) reset<=0;
+        #(CLK_PERIOD*500) reset<=0;
 
         // Write data
         Tx_EN <= 1;
@@ -44,7 +44,7 @@ module tb_UART_controller;
              
         #(CLK_PERIOD) Tx_WR<=0;
         #(CLK_PERIOD) Tx_WR<=1;
-        #(CLK_PERIOD) Tx_WR<=0;
+        #(CLK_PERIOD*500) Tx_WR<=0;
         
         while (Tx_BUSY) begin
             #(CLK_PERIOD*2000);

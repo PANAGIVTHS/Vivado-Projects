@@ -2,8 +2,8 @@
 # Vivado v2018.3 (64-bit)
 # SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
 # IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
-# Start of session at: Wed Nov  6 22:32:33 2024
-# Process ID: 12684
+# Start of session at: Mon Nov 11 18:05:59 2024
+# Process ID: 17776
 # Current directory: C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/lab2_optional/lab2_optional.runs/synth_1
 # Command line: vivado.exe -log SSD_Transmittor_Driver.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source SSD_Transmittor_Driver.tcl
 # Log file: C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/lab2_optional/lab2_optional.runs/synth_1/SSD_Transmittor_Driver.vds

@@ -1,20 +1,29 @@
 Vivado Simulator 2018.3
 Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
-Running: D:/Vivado/2018.3/bin/unwrapped/win64.o/xelab.exe -wto 2df9349e2a714f858fcb18aa86210396 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_receiver_behav xil_defaultlib.tb_receiver xil_defaultlib.glbl -log elaborate.log 
+Running: D:/Vivado/2018.3/bin/unwrapped/win64.o/xelab.exe -wto 2df9349e2a714f858fcb18aa86210396 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_UART_controller_behav xil_defaultlib.tb_UART_controller xil_defaultlib.glbl -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
 Completed static elaboration
 Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/UART src/UART_controller.v" Line 27. Module UART_controller doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/SSD src/Debouncer.v" Line 1. Module Debouncer doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/SSD src/Debouncer.v" Line 1. Module Debouncer doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/Hold_to_step.v" Line 7. Module Hold_to_step doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/UART src/uart_transmitter.v" Line 20. Module uart_transmitter doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/Controller src/baud_controller_t.v" Line 18. Module baud_controller_t doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/UART src/uart_receiver.v" Line 26. Module uart_receiver doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/Controller src/baud_controller_r.v" Line 2. Module baud_controller_r doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/Controller src/baud_controller_r.v" Line 19. Module baud_controller_r doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/synchronizer.v" Line 2. Module synchronizer doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/Controller src/baud_controller_t.v" Line 2. Module baud_controller_t doesn't have a timescale but at least one module in design has a timescale.
 Completed simulation data flow analysis
 Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.Debouncer
+Compiling module xil_defaultlib.Hold_to_step
+Compiling module xil_defaultlib.baud_controller_t
+Compiling module xil_defaultlib.uart_transmitter
 Compiling module xil_defaultlib.baud_controller_r
 Compiling module xil_defaultlib.synchronizer
 Compiling module xil_defaultlib.uart_receiver
-Compiling module xil_defaultlib.baud_controller_t
-Compiling module xil_defaultlib.tb_receiver
+Compiling module xil_defaultlib.UART_controller
+Compiling module xil_defaultlib.tb_UART_controller
 Compiling module xil_defaultlib.glbl
-Built simulation snapshot tb_receiver_behav
+Built simulation snapshot tb_UART_controller_behav

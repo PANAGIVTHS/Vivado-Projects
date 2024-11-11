@@ -1,7 +1,7 @@
 (DELAYFILE 
 (SDFVERSION "3.0" )
 (DESIGN "UART_controller")
-(DATE "Mon Nov 11 03:10:31 2024")
+(DATE "Mon Nov 11 14:11:14 2024")
 (VENDOR "XILINX")
 (PROGRAM "Vivado")
 (VERSION "2018.3")

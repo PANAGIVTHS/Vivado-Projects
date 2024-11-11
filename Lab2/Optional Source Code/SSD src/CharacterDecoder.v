@@ -1,3 +1,12 @@
+/*
+*Notice* These modules where explained in REPORT I.
+* Some changes have been made to CharacterDecoder to suit the second Lab.
+* These changes are mentioned briefly in LAB Report II. To add to that,
+* the module now has a way to append a character to its memory by outside 
+* sources. An input bus is now provided in order to set a new byte of memory.
+* The CharacterDecoder module now works with a different clock than the rest of
+* the FourDigitDriver components but this can be changed with no real effect.
+*/
 
 module CharacterDecoder (input clk, input [7:0] appended_byte, input append_sig, input [3:0] counter, output reg [3:0] char, input reset);
     reg [3:0] shift_reg [3:0];

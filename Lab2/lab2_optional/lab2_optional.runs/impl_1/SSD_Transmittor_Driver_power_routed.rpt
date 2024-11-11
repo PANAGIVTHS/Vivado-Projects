@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date             : Wed Nov  6 22:33:36 2024
+| Date             : Mon Nov 11 18:06:59 2024
 | Host             : DESKTOP-922FQ13 running 64-bit major release  (build 9200)
 | Command          : report_power -file SSD_Transmittor_Driver_power_routed.rpt -pb SSD_Transmittor_Driver_power_summary_routed.pb -rpx SSD_Transmittor_Driver_power_routed.rpx
 | Design           : SSD_Transmittor_Driver
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.185        |
+| Total On-Chip Power (W)  | 0.187        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.087        |
+| Dynamic (W)              | 0.089        |
 | Device Static (W)        | 0.097        |
 | Effective TJA (C/W)      | 4.6          |
-| Max Ambient (C)          | 84.2         |
-| Junction Temperature (C) | 25.8         |
+| Max Ambient (C)          | 84.1         |
+| Junction Temperature (C) | 25.9         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -53,16 +53,16 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.002 |        5 |       --- |             --- |
-| Slice Logic    |    <0.001 |      418 |       --- |             --- |
+| Slice Logic    |    <0.001 |      427 |       --- |             --- |
 |   LUT as Logic |    <0.001 |      150 |     63400 |            0.24 |
-|   Register     |    <0.001 |      169 |    126800 |            0.13 |
+|   Register     |    <0.001 |      178 |    126800 |            0.14 |
 |   CARRY4       |    <0.001 |       22 |     15850 |            0.14 |
 |   Others       |     0.000 |       26 |       --- |             --- |
-| Signals        |    <0.001 |      305 |       --- |             --- |
+| Signals        |    <0.001 |      313 |       --- |             --- |
 | MMCM           |     0.084 |        1 |         6 |           16.67 |
-| I/O            |    <0.001 |       20 |       210 |            9.52 |
+| I/O            |     0.002 |       20 |       210 |            9.52 |
 | Static Power   |     0.097 |          |           |                 |
-| Total          |     0.185 |          |           |                 |
+| Total          |     0.187 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -74,7 +74,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Vccint    |       1.000 |     0.018 |       0.003 |      0.015 |
 | Vccaux    |       1.800 |     0.065 |       0.047 |      0.018 |
-| Vcco33    |       3.300 |     0.004 |       0.000 |      0.004 |
+| Vcco33    |       3.300 |     0.005 |       0.001 |      0.004 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
@@ -143,7 +143,7 @@ Table of Contents
 +-----------------------------+-----------+
 | Name                        | Power (W) |
 +-----------------------------+-----------+
-| SSD_Transmittor_Driver      |     0.087 |
+| SSD_Transmittor_Driver      |     0.089 |
 |   Listener_inst             |     0.086 |
 |     FourDigitLEDdriver_inst |     0.085 |
 |   sender_inst               |     0.001 |

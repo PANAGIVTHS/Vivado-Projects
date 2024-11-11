@@ -1,7 +1,7 @@
-Running: xsim.dir/SenderTestModule_tb_time_impl/xsimk.exe -simmode gui -wdb SenderTestModule_tb_time_impl.wdb -simrunnum 0 -socket 53870
+Running: xsim.dir/SenderTestModule_tb_time_impl/xsimk.exe -simmode gui -wdb SenderTestModule_tb_time_impl.wdb -simrunnum 0 -socket 51389
 Design successfully loaded
-Design Loading Memory Usage: 13220 KB (Peak: 13220 KB)
+Design Loading Memory Usage: 13412 KB (Peak: 13412 KB)
 Design Loading CPU Usage: 15 ms
 Simulation completed
-Simulation Memory Usage: 20740 KB (Peak: 20740 KB)
-Simulation CPU Usage: 21202 ms
+Simulation Memory Usage: 21248 KB (Peak: 21248 KB)
+Simulation CPU Usage: 24077 ms

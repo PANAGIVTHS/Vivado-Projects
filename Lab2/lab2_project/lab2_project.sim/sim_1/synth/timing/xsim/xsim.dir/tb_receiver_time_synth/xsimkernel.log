@@ -1,7 +1,7 @@
-Running: xsim.dir/tb_receiver_time_synth/xsimk.exe -simmode gui -wdb tb_receiver_time_synth.wdb -simrunnum 0 -socket 52952
+Running: xsim.dir/tb_receiver_time_synth/xsimk.exe -simmode gui -wdb tb_receiver_time_synth.wdb -simrunnum 0 -socket 50500
 Design successfully loaded
-Design Loading Memory Usage: 7392 KB (Peak: 7392 KB)
+Design Loading Memory Usage: 6876 KB (Peak: 6876 KB)
 Design Loading CPU Usage: 0 ms
 Simulation completed
-Simulation Memory Usage: 8096 KB (Peak: 8096 KB)
+Simulation Memory Usage: 7320 KB (Peak: 7320 KB)
 Simulation CPU Usage: 0 ms

@@ -1,3 +1,9 @@
+/*
+    This module is a debouncer that debounces a button signal.
+    After the button is pressed, the debouncer will make sure that the 
+    signal stays high for some time before it is considered as a valid press.
+*/
+
 module Debouncer (input clk, input button, output reg button_debounced);
     reg [2:0] FF_wire;
     reg [4:0] counter;

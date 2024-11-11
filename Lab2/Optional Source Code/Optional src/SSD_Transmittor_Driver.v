@@ -1,4 +1,26 @@
 
+/*
+    This module is a transmittor driver that sends a message to the listener.
+    The message is stored in a memory and is sent to the listener when the Tx_WR signal is high.
+    Further component instances are used to debounce the write signal and reset signal.
+    The module also instantiates the Listener module to handle the reception of data and
+    display it on the 4-digit 7-segment display.
+    As is the module will cycle through the message "FF_15_55_55"
+    Inputs:
+    - clk: Clock signal
+    - reset: Reset signal
+    - baud_select: Baud Rate Selection
+    - Tx_EN: Enable transmission
+    - Rx_EN: Enable reception
+    - Tx_WR: Signal to write data
+
+    Outputs:
+    - anodes: 7-segment display anodes
+    - a, b, c, d, e, f, g: 7-segment display segments
+    - dp: 7-segment display decimal point
+    - LED: 7-segment display LEDs
+*/
+
 module SSD_Transmittor_Driver (input clk, input reset, input [2:0] baud_select, input Tx_EN, input Rx_EN, input Tx_WR, output [3:0] anodes, output [6:0] LED, output dp);
     reg [7:0] mem [3:0];
     reg [1:0] counter;

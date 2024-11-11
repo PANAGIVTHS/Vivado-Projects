@@ -1,3 +1,20 @@
+/*
+    This module is a UART transmitter that transmits data over a serial line.
+    Further component instances are used to debounce the write signal and reset signal.
+    The module also instantiates the uart_transmitter module to handle the transmission of data.
+
+    Inputs:
+    - clk: Clock signal
+    - reset: Reset signal
+    - Tx_EN: Enable transmission
+    - Tx_DATA: Data to be transmitted
+    - Tx_WR: Signal to write data
+    - BAUD_RATE: Baud Rate Selection
+
+    Outputs:
+    - TxD: Output serial data
+    - Tx_BUSY: Transmission status
+*/
 
 module Sender (input clk, input reset, input Tx_EN, input [7:0] Tx_DATA, input Tx_WR, input [2:0] BAUD_RATE, output TxD, output Tx_BUSY);
     wire Tx_WR_DS; //debounced,step

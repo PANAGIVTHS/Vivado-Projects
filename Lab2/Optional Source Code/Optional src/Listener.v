@@ -1,3 +1,22 @@
+/*
+    This module is depected in the corispoding diagram in the lab report.
+    It is a top-level module that instantiates the debouncer, uart_receiver, and FourDigitLEDdriver modules.
+    It also instantiates the Hold_to_step module to generate a spike when a button is released.
+    It is used to receive UART data and display it on the 4-digit 7-segment display.
+    This module uses the decimal point to indicate a framing error or a parity error.
+    
+    Inputs:
+    - clk: Clock signal
+    - reset: Reset signal
+    - baud_select: Baud Rate Selection
+    - Rx_EN: Enable reception
+    - RxD: Received data
+    Outputs:
+    - anodes: 7-segment display anodes
+    - a, b, c, d, e, f, g: 7-segment display segments
+    - dp: 7-segment display decimal point
+*/
+
 
 module Listener (input clk, input reset, input [2:0] baud_select, input Rx_EN, input RxD, output an3, output an2, output an1, output an0, output a, output b, output c, output d, output e, output f, output g, output dp);
     wire append_char;

@@ -33,7 +33,7 @@ module tb_receiver;
     uart_receiver uart_receiver_inst (
         .reset(reset),
         .clk(clk),
-        .baud_select(BAUD_RATE),
+        .baud_select(3'b110),
         .Rx_EN(1'b1),
         .RxD(TxD),
         .Rx_DATA(Rx_DATA),
@@ -113,7 +113,7 @@ module tb_receiver;
 
         transmit_data();
         check_synchronization();
-        
+        #1000 reset_sequence;
         // End the testbench
         $display("Testbench completed.");
         $finish;

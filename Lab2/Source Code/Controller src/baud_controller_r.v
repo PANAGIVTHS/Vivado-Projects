@@ -1,4 +1,21 @@
 
+/*
+    This module is a baud rate controller that generates a sample enable signal for a UART module.
+    It uses a counter to count the number of clock cycles and generates a sample enable signal when the counter reaches the baud rate limit.
+    The baud rate limit is calculated based on the baud rate selection input and the clock frequency.
+
+    *Notice* this module will keep counting even if the controller is disabled. If the Enable_controller signal isn't set up correctly.
+
+    Inputs:
+    - reset: Reset signal
+    - clk: Clock signal
+    - baud_select: Baud rate selection
+    - Enable_controller: Enable signal for the controller (start counting from 0)
+
+    Outputs:
+    - sample_ENABLE: Sample enable signal
+*/
+
 module baud_controller_r (reset, clk, baud_select, sample_ENABLE, Enable_controller);
     input reset, clk;
     input [2:0] baud_select;

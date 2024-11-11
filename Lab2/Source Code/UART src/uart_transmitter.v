@@ -1,3 +1,22 @@
+/*
+    This module is a UART transmitter that sends data serially. It uses a state machine to control the transmission of data.
+    The module has inputs for the data to be transmitted, the baud rate selection, a write signal, and an enable signal. It
+    also has an output for the serial data and a busy signal to indicate the transmission status.
+
+    *Notice* The Trasmitter doesnt handle value changes in the Tx_DATA input while transmitting. It will only transmit the 
+    *value that was present at the time of the write signal.
+
+    Inputs:
+    - Tx_DATA: Data to be transmitted
+    - baud_select: Baud Rate Selection
+    - Tx_WR: Signal to write data
+    - Tx_EN: Enable transmission
+
+    Outputs:
+    - TxD: Output serial data
+    - Tx_BUSY: Transmission status
+*/
+
 module uart_transmitter (
     input reset,
     input clk,
