@@ -15,6 +15,7 @@ INFO: [VRFC 10-311] analyzing module SSD_Transmittor_Driver
 INFO: [VRFC 10-311] analyzing module Sender
 INFO: [VRFC 10-311] analyzing module baud_controller_r
 INFO: [VRFC 10-311] analyzing module baud_controller_t
+INFO: [VRFC 10-311] analyzing module synchronizer
 INFO: [VRFC 10-311] analyzing module uart_receiver
 INFO: [VRFC 10-311] analyzing module uart_transmitter
 INFO: [VRFC 10-311] analyzing module glbl

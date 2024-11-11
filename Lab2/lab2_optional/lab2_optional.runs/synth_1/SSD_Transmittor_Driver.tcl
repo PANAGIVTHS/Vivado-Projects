@@ -17,7 +17,6 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
-set_msg_config -id {Common 17-41} -limit 10000000
 create_project -in_memory -part xc7a100tcsg324-1
 
 set_param project.singleFileAddWarning.threshold 0
@@ -42,6 +41,7 @@ read_verilog -library xil_defaultlib {
   {C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/Sender.v}
   {C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/Controller src/baud_controller_r.v}
   {C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/Controller src/baud_controller_t.v}
+  {C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/synchronizer.v}
   {C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/UART src/uart_receiver.v}
   {C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/UART src/uart_transmitter.v}
   {C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/SSD_Transmittor_Driver.v}

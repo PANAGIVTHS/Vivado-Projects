@@ -1,3 +1,16 @@
 Vivado Simulator 2018.3
 Time resolution is 1 ps
-$finish called at time : 20240 ns : File "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/Testbenches/UART_controller_tb.v" Line 51
+Starting transmission with BAUD_RATE 7
+Transmitting bit on TxD: 0
+Transmitter is busy! Time:              8980000
+Transmitting bit on TxD: 1
+Transmitting bit on TxD: 0
+Transmitting bit on TxD: 1
+Transmitting bit on TxD: 1
+Transmitting bit on TxD: 1
+Transmitting bit on TxD: 0
+Transmitting bit on TxD: 1
+Transmitting bit on TxD: 0
+Transmitting bit on TxD: 1
+Transmitting bit on TxD: 1
+Transmitter is idle! Time:             96992000

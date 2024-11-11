@@ -31,7 +31,7 @@ module uart_transmitter (
     end
 
     // Next state logic and output control (combinational) block
-    always @(*) begin
+    always @(cur_state, Tx_EN, Tx_WR, sample_ENABLE, buffer, Tx_DATA) begin
         case (cur_state)
             DISABLED: begin
                 TxD = 1;       // Tx line idle
@@ -97,6 +97,13 @@ module uart_transmitter (
                 TxD = 1;       // Stop bit
                 Tx_BUSY = 1;
                 next_state = sample_ENABLE ? DISABLED : END_BIT;
+                if (sample_ENABLE && !Tx_EN) begin
+                    next_state = DISABLED;
+                end else if (sample_ENABLE && Tx_EN) begin
+                    next_state = IDLE;
+                end else begin
+                    next_state = END_BIT;
+                end
             end
             default: begin
                 TxD = 1;

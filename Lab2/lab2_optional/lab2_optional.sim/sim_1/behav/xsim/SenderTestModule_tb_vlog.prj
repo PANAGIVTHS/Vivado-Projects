@@ -12,6 +12,7 @@ verilog xil_defaultlib  \
 "../../../../../Optional Source Code/Optional src/Sender.v" \
 "../../../../../Source Code/Controller src/baud_controller_r.v" \
 "../../../../../Source Code/Controller src/baud_controller_t.v" \
+"../../../../../Optional Source Code/Optional src/synchronizer.v" \
 "../../../../../Source Code/UART src/uart_receiver.v" \
 "../../../../../Source Code/UART src/uart_transmitter.v" \
 "../../../../../Optional Source Code/Optional src/Testbenches/Display_tb.v" \

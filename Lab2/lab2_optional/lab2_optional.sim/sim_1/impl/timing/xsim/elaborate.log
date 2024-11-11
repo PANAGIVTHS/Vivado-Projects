@@ -10,8 +10,6 @@ INFO: [XSIM 43-3451] SDF backannotation process started with SDF file "SenderTes
 INFO: [XSIM 43-3452] SDF backannotation was successful for SDF file "SenderTestModule_tb_time_impl.sdf", for root module "SenderTestModule_tb/SSD_Transmittor_Driver_inst".
 Time Resolution for simulation is 1ps
 Compiling module simprims_ver.FDCE_default
-Compiling module simprims_ver.x_lut2_mux4
-Compiling module simprims_ver.LUT2
 Compiling module xil_defaultlib.Hold_to_step
 Compiling module simprims_ver.OBUF
 Compiling module simprims_ver.LUT4
@@ -19,6 +17,8 @@ Compiling module simprims_ver.LUT6
 Compiling module xil_defaultlib.CharacterDecoder
 Compiling module simprims_ver.x_lut1_mux2
 Compiling module simprims_ver.LUT1
+Compiling module simprims_ver.x_lut2_mux4
+Compiling module simprims_ver.LUT2
 Compiling module simprims_ver.x_lut3_mux8
 Compiling module simprims_ver.LUT3
 Compiling module xil_defaultlib.ConstCounter
@@ -32,6 +32,7 @@ Compiling module xil_defaultlib.Debouncer_5
 Compiling module simprims_ver.FDPE_default
 Compiling module simprims_ver.CARRY4
 Compiling module xil_defaultlib.baud_controller_r
+Compiling module xil_defaultlib.synchronizer
 Compiling module xil_defaultlib.uart_receiver
 Compiling module xil_defaultlib.Listener
 Compiling module simprims_ver.IBUF

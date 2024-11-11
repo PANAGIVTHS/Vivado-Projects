@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_receiver_time_impl.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb_receiver" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="2806000001fs"></ZoomEndTime>
+      <Cursor1Time time="418000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="154"></NameColumnWidth>
+      <ValueColumnWidth column_width="58"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="20" />
+   <wvobject fp_name="/tb_receiver/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_receiver/Tx_WR" type="logic">
+      <obj_property name="ElementShortName">Tx_WR</obj_property>
+      <obj_property name="ObjectShortName">Tx_WR</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_receiver/Tx_EN" type="logic">
+      <obj_property name="ElementShortName">Tx_EN</obj_property>
+      <obj_property name="ObjectShortName">Tx_EN</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_receiver/counter" type="array">
+      <obj_property name="ElementShortName">counter[3:0]</obj_property>
+      <obj_property name="ObjectShortName">counter[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_receiver/Tx_DATA" type="array">
+      <obj_property name="ElementShortName">Tx_DATA[0:10]</obj_property>
+      <obj_property name="ObjectShortName">Tx_DATA[0:10]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_receiver/Rx_DATA" type="array">
+      <obj_property name="ElementShortName">Rx_DATA[7:0]</obj_property>
+      <obj_property name="ObjectShortName">Rx_DATA[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_receiver/TxD" type="logic">
+      <obj_property name="ElementShortName">TxD</obj_property>
+      <obj_property name="ObjectShortName">TxD</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_receiver/uart_receiver_inst/sync_RxD" type="logic">
+      <obj_property name="ElementShortName">sync_RxD</obj_property>
+      <obj_property name="ObjectShortName">sync_RxD</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_receiver/uart_receiver_inst/cur_state" type="array">
+      <obj_property name="ElementShortName">cur_state[3:0]</obj_property>
+      <obj_property name="ObjectShortName">cur_state[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_receiver/uart_receiver_inst/next_state" type="array">
+      <obj_property name="ElementShortName">next_state[3:0]</obj_property>
+      <obj_property name="ObjectShortName">next_state[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_receiver/uart_receiver_inst/sample_ENABLE" type="logic">
+      <obj_property name="ElementShortName">sample_ENABLE</obj_property>
+      <obj_property name="ObjectShortName">sample_ENABLE</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_receiver/uart_receiver_inst/bit_stable" type="logic">
+      <obj_property name="ElementShortName">bit_stable</obj_property>
+      <obj_property name="ObjectShortName">bit_stable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_receiver/uart_receiver_inst/prev_bit" type="logic">
+      <obj_property name="ElementShortName">prev_bit</obj_property>
+      <obj_property name="ObjectShortName">prev_bit</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_receiver/Rx_FERROR" type="logic">
+      <obj_property name="ElementShortName">Rx_FERROR</obj_property>
+      <obj_property name="ObjectShortName">Rx_FERROR</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_receiver/Rx_PERROR" type="logic">
+      <obj_property name="ElementShortName">Rx_PERROR</obj_property>
+      <obj_property name="ObjectShortName">Rx_PERROR</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_receiver/Rx_VALID" type="logic">
+      <obj_property name="ElementShortName">Rx_VALID</obj_property>
+      <obj_property name="ObjectShortName">Rx_VALID</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_receiver/uart_receiver_inst/Rx_sample_ENABLE" type="logic">
+      <obj_property name="ElementShortName">Rx_sample_ENABLE</obj_property>
+      <obj_property name="ObjectShortName">Rx_sample_ENABLE</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_receiver/uart_receiver_inst/Sx_sample_ENABLE" type="logic">
+      <obj_property name="ElementShortName">Sx_sample_ENABLE</obj_property>
+      <obj_property name="ObjectShortName">Sx_sample_ENABLE</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_receiver/uart_receiver_inst/Dx_sample_ENABLE" type="logic">
+      <obj_property name="ElementShortName">Dx_sample_ENABLE</obj_property>
+      <obj_property name="ObjectShortName">Dx_sample_ENABLE</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_receiver/uart_receiver_inst/Ex_sample_ENABLE" type="logic">
+      <obj_property name="ElementShortName">Ex_sample_ENABLE</obj_property>
+      <obj_property name="ObjectShortName">Ex_sample_ENABLE</obj_property>
+   </wvobject>
+</wave_config>

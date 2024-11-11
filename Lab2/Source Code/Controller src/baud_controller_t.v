@@ -1,5 +1,4 @@
 
-
 module baud_controller_t (reset, clk, baud_select, sample_ENABLE, Enable_controller);
     input reset, clk;
     input [2:0] baud_select;

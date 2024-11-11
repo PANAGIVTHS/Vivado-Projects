@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date         : Wed Nov  6 02:15:58 2024
+| Date         : Wed Nov  6 22:32:51 2024
 | Host         : DESKTOP-922FQ13 running 64-bit major release  (build 9200)
 | Command      : report_utilization -file SSD_Transmittor_Driver_utilization_synth.rpt -pb SSD_Transmittor_Driver_utilization_synth.pb
 | Design       : SSD_Transmittor_Driver
@@ -30,11 +30,11 @@ Table of Contents
 +-------------------------+------+-------+-----------+-------+
 |        Site Type        | Used | Fixed | Available | Util% |
 +-------------------------+------+-------+-----------+-------+
-| Slice LUTs*             |  154 |     0 |     63400 |  0.24 |
-|   LUT as Logic          |  154 |     0 |     63400 |  0.24 |
+| Slice LUTs*             |  150 |     0 |     63400 |  0.24 |
+|   LUT as Logic          |  150 |     0 |     63400 |  0.24 |
 |   LUT as Memory         |    0 |     0 |     19000 |  0.00 |
-| Slice Registers         |  167 |     0 |    126800 |  0.13 |
-|   Register as Flip Flop |  167 |     0 |    126800 |  0.13 |
+| Slice Registers         |  169 |     0 |    126800 |  0.13 |
+|   Register as Flip Flop |  169 |     0 |    126800 |  0.13 |
 |   Register as Latch     |    0 |     0 |    126800 |  0.00 |
 | F7 Muxes                |    0 |     0 |     31700 |  0.00 |
 | F8 Muxes                |    0 |     0 |     15850 |  0.00 |
@@ -57,7 +57,7 @@ Table of Contents
 | 4     |          Yes |           - |          Set |
 | 127   |          Yes |           - |        Reset |
 | 0     |          Yes |         Set |            - |
-| 36    |          Yes |       Reset |            - |
+| 38    |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -147,16 +147,16 @@ Table of Contents
 |  Ref Name  | Used | Functional Category |
 +------------+------+---------------------+
 | FDCE       |  127 |        Flop & Latch |
-| LUT4       |   71 |                 LUT |
-| LUT5       |   50 |                 LUT |
-| FDRE       |   36 |        Flop & Latch |
-| LUT6       |   33 |                 LUT |
-| LUT2       |   22 |                 LUT |
+| LUT4       |   69 |                 LUT |
+| LUT5       |   49 |                 LUT |
+| FDRE       |   38 |        Flop & Latch |
+| LUT6       |   34 |                 LUT |
 | CARRY4     |   22 |          CarryLogic |
-| LUT3       |   20 |                 LUT |
+| LUT3       |   21 |                 LUT |
+| LUT2       |   21 |                 LUT |
 | OBUF       |   12 |                  IO |
-| LUT1       |    8 |                 LUT |
 | IBUF       |    8 |                  IO |
+| LUT1       |    7 |                 LUT |
 | FDPE       |    4 |        Flop & Latch |
 | MMCME2_ADV |    1 |               Clock |
 | BUFG       |    1 |               Clock |

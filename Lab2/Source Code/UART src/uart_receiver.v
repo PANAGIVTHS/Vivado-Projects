@@ -42,7 +42,8 @@ module uart_receiver (
     wire sample_ENABLE;
     reg bit_stable, prev_bit;
     reg start_sequence, end_sequence, check_parity, disabled, idle, cur_bit;
-
+    wire sync_RxD;
+    
     // State machine states. Order is important do not change
     localparam START_BIT = 4'b0000, BIT_0 = 4'b0001, BIT_1 = 4'b0010, BIT_2 = 4'b0011;
     localparam BIT_3 = 4'b0100, BIT_4 = 4'b0101, BIT_5 = 4'b0110, BIT_6 = 4'b0111, BIT_7 = 4'b1000;
@@ -53,15 +54,22 @@ module uart_receiver (
     wire Dx_sample_ENABLE = (sample_counter == 4'b0111 && sample_ENABLE);
     wire Ex_sample_ENABLE = (sample_counter == 4'b1000 && sample_ENABLE);
     baud_controller_r baud_controller_r_inst(.reset(reset), .clk(clk), .baud_select(baud_select), .sample_ENABLE(sample_ENABLE), .Enable_controller(disabled || idle));
+    synchronizer synchronizer_inst(.clk(clk), .async_signal(RxD), .sync_signal(sync_RxD));
     
     assign parity = /*!*/ (^Rx_DATA);
     // State machine state register
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             cur_state <= IDLE;
-            sample_counter <= 0;
         end else begin
             cur_state <= next_state;
+        end
+    end
+
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            sample_counter <= 0;
+        end else begin 
             sample_counter = sample_ENABLE ? sample_counter + 1 : sample_counter;
         end
     end
@@ -72,14 +80,14 @@ module uart_receiver (
             prev_bit <= 0;
         end else if (sample_counter == 4'b0001 && Sx_sample_ENABLE) begin
             bit_stable <= 1;
-            prev_bit <= RxD;
-        end else if (!bit_stable || (Sx_sample_ENABLE && prev_bit != RxD)) begin
+            prev_bit <= sync_RxD;
+        end else if (!bit_stable || (Sx_sample_ENABLE && prev_bit != sync_RxD)) begin
             bit_stable <= 0;
-        end else if (Sx_sample_ENABLE && prev_bit == RxD) begin
-            prev_bit <= RxD;
+        end else if (Sx_sample_ENABLE && prev_bit == sync_RxD) begin
+            prev_bit <= sync_RxD;
             bit_stable <= 1;
         end else begin
-            prev_bit <= RxD;
+            prev_bit <= sync_RxD;
             bit_stable <= 1;
         end
     end
@@ -124,7 +132,7 @@ module uart_receiver (
         if (reset) begin
             Rx_DATA <= 0;
         end else if (!(check_parity || start_sequence || end_sequence || idle || disabled) && Dx_sample_ENABLE) begin
-            Rx_DATA <= {Rx_DATA[6:0], RxD}; // Shift left and add RxD to LSB
+            Rx_DATA <= {Rx_DATA[6:0], sync_RxD}; // Shift left and add sync_RxD to LSB
         end else begin
             Rx_DATA <= Rx_DATA;
         end
@@ -134,14 +142,14 @@ module uart_receiver (
         if (reset) begin
             cur_bit <= 0;
         end else if (Dx_sample_ENABLE) begin 
-            cur_bit <= RxD;
+            cur_bit <= sync_RxD;
         end else begin
             cur_bit <= cur_bit;
         end
     end 
 
     // transition to next state
-    always @(*) begin
+    always @(cur_state, Rx_EN, sync_RxD, Rx_sample_ENABLE, bit_stable, cur_bit, parity) begin
         start_sequence = 0;
         end_sequence = 0;
         check_parity = 0;
@@ -157,7 +165,7 @@ module uart_receiver (
                 disabled = 1;
             end
             IDLE: begin
-                if (Rx_EN && !RxD) begin
+                if (Rx_EN && !sync_RxD) begin
                     next_state = START_BIT;
                 end else if (!Rx_EN) begin 
                     next_state = DISABLED;
@@ -183,7 +191,6 @@ module uart_receiver (
                 if (Rx_sample_ENABLE) begin
                     if (bit_stable) begin
                         next_state = BIT_1;
-                        // 8ese to Rx_DATA (To kanei panw ana clk)
                     end else begin 
                         next_state = IDLE;
                     end
@@ -195,7 +202,6 @@ module uart_receiver (
                 if (Rx_sample_ENABLE) begin
                     if (bit_stable) begin
                         next_state = BIT_2;
-                        // 8ese to Rx_DATA (To kanei panw ana clk)
                     end else begin 
                         next_state = IDLE;
                     end
@@ -207,7 +213,6 @@ module uart_receiver (
                 if (Rx_sample_ENABLE) begin
                     if (bit_stable) begin
                         next_state = BIT_3;
-                        // 8ese to Rx_DATA (To kanei panw ana clk)
                     end else begin 
                         next_state = IDLE;
                     end
@@ -219,7 +224,6 @@ module uart_receiver (
                 if (Rx_sample_ENABLE) begin
                     if (bit_stable) begin
                         next_state = BIT_4;
-                        // 8ese to Rx_DATA (To kanei panw ana clk)
                     end else begin 
                         next_state = IDLE;
                     end
@@ -231,7 +235,6 @@ module uart_receiver (
                 if (Rx_sample_ENABLE) begin
                     if (bit_stable) begin
                         next_state = BIT_5;
-                        // 8ese to Rx_DATA (To kanei panw ana clk)
                     end else begin 
                         next_state = IDLE;
                     end
@@ -243,8 +246,6 @@ module uart_receiver (
                 if (Rx_sample_ENABLE) begin
                     if (bit_stable) begin
                         next_state = BIT_6;
-
-                        // 8ese to Rx_DATA (To kanei panw ana clk)
                     end else begin 
                         next_state = IDLE;
                     end
@@ -256,7 +257,6 @@ module uart_receiver (
                 if (Rx_sample_ENABLE) begin
                     if (bit_stable) begin
                         next_state = BIT_7;
-                        // 8ese to Rx_DATA (To kanei panw ana clk)
                     end else begin 
                         next_state = IDLE;
                     end
@@ -268,7 +268,6 @@ module uart_receiver (
                 if (Rx_sample_ENABLE) begin
                     if (bit_stable) begin
                         next_state = PARITY;
-                        // 8ese to Rx_DATA (To kanei panw ana clk)
                     end else begin 
                         next_state = IDLE;
                     end
@@ -290,7 +289,7 @@ module uart_receiver (
             end
             END_BIT: begin
                 if (Rx_sample_ENABLE) begin
-                    if (bit_stable && cur_bit && !RxD) begin
+                    if (bit_stable && cur_bit && !sync_RxD) begin
                         next_state = START_BIT;
                     end else begin
                         next_state = IDLE;

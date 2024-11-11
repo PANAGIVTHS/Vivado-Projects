@@ -34,7 +34,7 @@ module tb_receiver;
         .reset(reset),
         .clk(clk),
         .baud_select(BAUD_RATE),
-        .Rx_EN(1),
+        .Rx_EN(1'b1),
         .RxD(TxD),
         .Rx_DATA(Rx_DATA),
         .Rx_FERROR(Rx_FERROR),

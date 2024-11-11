@@ -1,0 +1,11 @@
+0.6
+2018.3
+Dec  7 2018
+00:33:28
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/synchronizer.v,1731247246,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/UART src/uart_receiver.v,,synchronizer,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/Controller src/baud_controller_r.v,1731258662,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/Controller src/baud_controller_t.v,,baud_controller_r,,,,,,,,
+,,,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/synchronizer.v,,baud_controller_t,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/Testbenches/receive_tb.v,1730848570,verilog,,,,tb_receiver,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/Testbenches/transmitter_tb.v,1731270652,verilog,,,,tb_transmitter,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/UART src/uart_receiver.v,1730924256,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/Testbenches/receive_tb.v,,uart_receiver,,,,,,,,
+,,,,,,Debouncer;Debouncer_0;UART_controller;glbl;uart_transmitter,,,,,,,,

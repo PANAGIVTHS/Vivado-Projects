@@ -11,10 +11,10 @@ set_property -dict { PACKAGE_PIN P15 IOSTANDARD LVCMOS33 } [get_ports { LED[2] }
 set_property -dict { PACKAGE_PIN T11 IOSTANDARD LVCMOS33 } [get_ports { LED[1] }];
 set_property -dict { PACKAGE_PIN L18 IOSTANDARD LVCMOS33 } [get_ports { LED[0] }];
 set_property -dict { PACKAGE_PIN H15 IOSTANDARD LVCMOS33 } [get_ports { dp }];
-set_property -dict { PACKAGE_PIN J17 IOSTANDARD LVCMOS33 } [get_ports { anodes[0] }];
-set_property -dict { PACKAGE_PIN J18 IOSTANDARD LVCMOS33 } [get_ports { anodes[1] }];
-set_property -dict { PACKAGE_PIN T9 IOSTANDARD LVCMOS33 } [get_ports { anodes[2] }];
-set_property -dict { PACKAGE_PIN J14 IOSTANDARD LVCMOS33 } [get_ports { anodes[3] }];
+set_property -dict { PACKAGE_PIN J17 IOSTANDARD LVCMOS33 } [get_ports { anodes[3] }];
+set_property -dict { PACKAGE_PIN J18 IOSTANDARD LVCMOS33 } [get_ports { anodes[2] }];
+set_property -dict { PACKAGE_PIN T9 IOSTANDARD LVCMOS33 } [get_ports { anodes[1] }];
+set_property -dict { PACKAGE_PIN J14 IOSTANDARD LVCMOS33 } [get_ports { anodes[0] }];
 ### Button(s)
 set_property -dict { PACKAGE_PIN N17 IOSTANDARD LVCMOS33 } [get_ports { reset }];
 set_property -dict { PACKAGE_PIN P18 IOSTANDARD LVCMOS33 } [get_ports { Tx_WR }];

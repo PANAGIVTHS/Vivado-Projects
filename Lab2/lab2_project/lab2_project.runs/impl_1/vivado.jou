@@ -2,8 +2,8 @@
 # Vivado v2018.3 (64-bit)
 # SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
 # IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
-# Start of session at: Wed Nov  6 00:42:44 2024
-# Process ID: 17940
+# Start of session at: Mon Nov 11 02:40:10 2024
+# Process ID: 19204
 # Current directory: C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/lab2_project/lab2_project.runs/impl_1
 # Command line: vivado.exe -log UART_controller.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source UART_controller.tcl -notrace
 # Log file: C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/lab2_project/lab2_project.runs/impl_1/UART_controller.vdi

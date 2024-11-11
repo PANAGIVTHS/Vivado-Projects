@@ -4,4 +4,47 @@ Running: D:/Vivado/2018.3/bin/unwrapped/win64.o/xelab.exe -wto fd6583d90e4a4e9b9
 Using 2 slave threads.
 Starting static elaboration
 Completed static elaboration
-INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/SSD_Transmittor_Driver.v" Line 2. Module SSD_Transmittor_Driver doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/SSD src/Debouncer.v" Line 1. Module Debouncer doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/SSD src/Debouncer.v" Line 1. Module Debouncer doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/Hold_to_step.v" Line 2. Module Hold_to_step doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/Listener.v" Line 2. Module Listener doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/SSD src/Debouncer.v" Line 1. Module Debouncer doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/UART src/uart_receiver.v" Line 26. Module uart_receiver doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/Controller src/baud_controller_r.v" Line 2. Module baud_controller_r doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/synchronizer.v" Line 2. Module synchronizer doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/Hold_to_step.v" Line 2. Module Hold_to_step doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/SSD src/FourDigitDriver.v" Line 2. Module FourDigitLEDdriver doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/SSD src/ConstCounter.v" Line 1. Module ConstCounter doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/SSD src/CharacterDecoder.v" Line 2. Module CharacterDecoder doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/SSD src/AnodeDecoder.v" Line 1. Module AnodeDecoder doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/SSD src/LEDdecoder.v" Line 2. Module LEDdecoder doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/Sender.v" Line 2. Module Sender doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/SSD src/Debouncer.v" Line 1. Module Debouncer doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/Hold_to_step.v" Line 2. Module Hold_to_step doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/SSD src/Debouncer.v" Line 1. Module Debouncer doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/UART src/uart_transmitter.v" Line 1. Module uart_transmitter doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/Controller src/baud_controller_t.v" Line 3. Module baud_controller_t doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.Debouncer
+Compiling module xil_defaultlib.Hold_to_step
+Compiling module xil_defaultlib.baud_controller_r
+Compiling module xil_defaultlib.synchronizer
+Compiling module xil_defaultlib.uart_receiver
+Compiling module unisims_ver.MMCME2_ADV(CLKFBOUT_MULT_F=6.0,C...
+Compiling module unisims_ver.MMCME2_BASE(CLKFBOUT_MULT_F=6.0,...
+Compiling module xil_defaultlib.ConstCounter
+Compiling module xil_defaultlib.CharacterDecoder
+Compiling module xil_defaultlib.AnodeDecoder
+Compiling module xil_defaultlib.LEDdecoder
+Compiling module xil_defaultlib.FourDigitLEDdriver
+Compiling module xil_defaultlib.Listener
+Compiling module xil_defaultlib.baud_controller_t
+Compiling module xil_defaultlib.uart_transmitter
+Compiling module xil_defaultlib.Sender
+Compiling module xil_defaultlib.SSD_Transmittor_Driver
+Compiling module xil_defaultlib.SenderTestModule_tb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot SenderTestModule_tb_behav

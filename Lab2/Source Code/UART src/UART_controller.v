@@ -12,30 +12,34 @@ module UART_controller (reset, clk, baud_select, Tx_DATA, Tx_WR, Tx_EN, Rx_EN, T
     reg [1:0] cur_state;
     reg [1:0] next_state;
     wire Rx_FERROR, Rx_PERROR, Rx_VALID;
-    wire parity;
+    wire parity, reset_debounced, Tx_WR_debounced;
 
     localparam DISABLED = 2'b00, ENABLED = 2'b01, PERROR = 2'b10, FERROR = 2'b11; 
 
-    always @(posedge clk or posedge reset) begin
-        if (reset) begin
+    // This is a Simple Debouncer to prevent any noise in the reset, write buttons
+    Debouncer reset_debouncer (.clk(clk), .button(reset), .button_debounced(reset_debounced));
+    Debouncer write_debouncer (.clk(clk), .button(Tx_WR), .button_debounced(Tx_WR_debounced));
+
+    always @(posedge clk or posedge reset_debounced) begin
+        if (reset_debounced) begin
             buffer <= 0;
         end else begin
             if ((Tx_WR_UART && Tx_EN_UART && !Tx_BUSY && !Rx_FERROR && !Rx_PERROR) || Rx_VALID) buffer <= Tx_DATA;
         end
     end
 
-    always @(posedge clk or posedge reset) begin
-        if (reset) begin
+    always @(posedge clk or posedge reset_debounced) begin
+        if (reset_debounced) begin
             cur_state <= ENABLED;
         end else begin
             cur_state <= next_state;
         end
     end
 
-    always @(*) begin
+    always @(cur_state, Rx_FERROR, Rx_PERROR, Tx_EN, Tx_WR_debounced, reset_debounced, Rx_EN) begin
         Tx_EN_UART = Tx_EN;
-        Tx_WR_UART = Tx_WR;
-        Reset_UART = reset;
+        Tx_WR_UART = Tx_WR_debounced;
+        Reset_UART = reset_debounced;
         Rx_EN_UART = Rx_EN;
         case (cur_state)
             ENABLED: begin
@@ -66,6 +70,7 @@ module UART_controller (reset, clk, baud_select, Tx_DATA, Tx_WR, Tx_EN, Rx_EN, T
             end
         endcase
     end
+
 
     // Instantiate baud rate controller for transmitter to enable sampling at the required frequency
     uart_transmitter uart_transmitter_inst (.reset(Reset_UART), .clk(clk), .Tx_DATA(buffer), .baud_select(baud_select), .Tx_WR(Tx_WR_UART), .Tx_EN(Tx_EN_UART), .TxD(TxD), .Tx_BUSY(Tx_BUSY));

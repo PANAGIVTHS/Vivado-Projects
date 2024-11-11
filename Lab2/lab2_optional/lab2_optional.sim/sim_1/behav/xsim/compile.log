@@ -1,0 +1,45 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/SSD src/AnodeDecoder.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module AnodeDecoder
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/SSD src/CharacterDecoder.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module CharacterDecoder
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/SSD src/ConstCounter.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ConstCounter
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/SSD src/Debouncer.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Debouncer
+INFO: [VRFC 10-2458] undeclared symbol enabled, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/SSD src/Debouncer.v:11]
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/SSD src/FourDigitDriver.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module FourDigitLEDdriver
+INFO: [VRFC 10-2458] undeclared symbol new_clk, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/SSD src/FourDigitDriver.v:23]
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/Hold_to_step.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Hold_to_step
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/SSD src/LEDdecoder.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module LEDdecoder
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/Listener.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Listener
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/SSD_Transmittor_Driver.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module SSD_Transmittor_Driver
+INFO: [VRFC 10-2458] undeclared symbol an3, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/SSD_Transmittor_Driver.v:35]
+INFO: [VRFC 10-2458] undeclared symbol an2, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/SSD_Transmittor_Driver.v:36]
+INFO: [VRFC 10-2458] undeclared symbol an1, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/SSD_Transmittor_Driver.v:37]
+INFO: [VRFC 10-2458] undeclared symbol an0, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/SSD_Transmittor_Driver.v:38]
+INFO: [VRFC 10-2458] undeclared symbol a, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/SSD_Transmittor_Driver.v:39]
+INFO: [VRFC 10-2458] undeclared symbol b, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/SSD_Transmittor_Driver.v:40]
+INFO: [VRFC 10-2458] undeclared symbol c, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/SSD_Transmittor_Driver.v:41]
+INFO: [VRFC 10-2458] undeclared symbol d, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/SSD_Transmittor_Driver.v:42]
+INFO: [VRFC 10-2458] undeclared symbol e, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/SSD_Transmittor_Driver.v:43]
+INFO: [VRFC 10-2458] undeclared symbol f, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/SSD_Transmittor_Driver.v:44]
+INFO: [VRFC 10-2458] undeclared symbol g, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/SSD_Transmittor_Driver.v:45]
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/Sender.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Sender
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/Controller src/baud_controller_r.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module baud_controller_r
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/Controller src/baud_controller_t.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module baud_controller_t
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/synchronizer.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module synchronizer
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/UART src/uart_receiver.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module uart_receiver
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Source Code/UART src/uart_transmitter.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module uart_transmitter
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab2/Optional Source Code/Optional src/Testbenches/Display_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module SenderTestModule_tb

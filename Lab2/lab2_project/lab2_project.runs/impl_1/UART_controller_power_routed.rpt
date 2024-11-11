@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date             : Wed Nov  6 00:43:22 2024
+| Date             : Mon Nov 11 02:40:49 2024
 | Host             : DESKTOP-922FQ13 running 64-bit major release  (build 9200)
 | Command          : report_power -file UART_controller_power_routed.rpt -pb UART_controller_power_summary_routed.pb -rpx UART_controller_power_routed.rpx
 | Design           : UART_controller
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.795        |
+| Total On-Chip Power (W)  | 1.020        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.702        |
-| Device Static (W)        | 0.093        |
+| Dynamic (W)              | 0.926        |
+| Device Static (W)        | 0.094        |
 | Effective TJA (C/W)      | 4.6          |
-| Max Ambient (C)          | 81.4         |
-| Junction Temperature (C) | 28.6         |
+| Max Ambient (C)          | 80.3         |
+| Junction Temperature (C) | 29.7         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,16 +52,16 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Slice Logic    |     0.238 |      296 |       --- |             --- |
-|   LUT as Logic |     0.195 |      119 |     63400 |            0.19 |
-|   CARRY4       |     0.020 |       22 |     15850 |            0.14 |
-|   Register     |     0.018 |      119 |    126800 |            0.09 |
+| Slice Logic    |     0.322 |      348 |       --- |             --- |
+|   LUT as Logic |     0.279 |      131 |     63400 |            0.21 |
+|   Register     |     0.021 |      148 |    126800 |            0.12 |
+|   CARRY4       |     0.017 |       22 |     15850 |            0.14 |
 |   BUFG         |     0.006 |        1 |        32 |            3.13 |
-|   Others       |     0.000 |        7 |       --- |             --- |
-| Signals        |     0.295 |      250 |       --- |             --- |
-| I/O            |     0.168 |       26 |       210 |           12.38 |
-| Static Power   |     0.093 |          |           |                 |
-| Total          |     0.795 |          |           |                 |
+|   Others       |     0.000 |       13 |       --- |             --- |
+| Signals        |     0.323 |      284 |       --- |             --- |
+| I/O            |     0.280 |       26 |       210 |           12.38 |
+| Static Power   |     0.094 |          |           |                 |
+| Total          |     1.020 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -71,11 +71,11 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.610 |       0.593 |      0.017 |
-| Vccaux    |       1.800 |     0.027 |       0.009 |      0.018 |
+| Vccint    |       1.000 |     0.727 |       0.709 |      0.018 |
+| Vccaux    |       1.800 |     0.036 |       0.018 |      0.018 |
 | Vcco33    |       3.300 |     0.000 |       0.000 |      0.000 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
-| Vcco18    |       1.800 |     0.055 |       0.051 |      0.004 |
+| Vcco18    |       1.800 |     0.107 |       0.103 |      0.004 |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |
@@ -138,11 +138,14 @@ Table of Contents
 +----------------------------+-----------+
 | Name                       | Power (W) |
 +----------------------------+-----------+
-| UART_controller            |     0.702 |
-|   uart_receiver_inst       |     0.115 |
-|     baud_controller_r_inst |     0.102 |
-|   uart_transmitter_inst    |     0.321 |
-|     baud_controller_t_inst |     0.315 |
+| UART_controller            |     0.926 |
+|   reset_debouncer          |     0.078 |
+|   uart_receiver_inst       |     0.140 |
+|     baud_controller_r_inst |     0.090 |
+|     synchronizer_inst      |     0.008 |
+|   uart_transmitter_inst    |     0.258 |
+|     baud_controller_t_inst |     0.251 |
+|   write_debouncer          |     0.073 |
 +----------------------------+-----------+
 
 

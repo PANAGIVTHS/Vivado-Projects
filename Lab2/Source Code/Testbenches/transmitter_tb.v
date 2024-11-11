@@ -102,6 +102,8 @@ module tb_transmitter;
         transmit_data();
         check_tx_busy();
         #(baud_limits[BAUD_RATE] * CLK_PERIOD * BITS_UNTIL_NEXT_BYTE);  // Wait for the transmission time based on the selected baud rate
+        //        #(baud_limits[BAUD_RATE] * CLK_PERIOD * BITS_UNTIL_NEXT_BYTE + 12);  // Change very close to old transmittion *set BITS_UNTIL to 10 first
+
         check_tx_busy();
         Tx_DATA = 8'b10001110;  // Example data for second transmission
         if (!Tx_BUSY) transmit_data();
