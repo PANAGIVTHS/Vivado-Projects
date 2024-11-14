@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2018.3 (64-bit)
+# SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+# IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+# Start of session at: Thu Nov 14 04:29:17 2024
+# Process ID: 12716
+# Current directory: C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/lab3_project/lab3_project.runs/synth_1
+# Command line: vivado.exe -log VRAM.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source VRAM.tcl
+# Log file: C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/lab3_project/lab3_project.runs/synth_1/VRAM.vds
+# Journal file: C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/lab3_project/lab3_project.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source VRAM.tcl -notrace

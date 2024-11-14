@@ -1,0 +1,8 @@
+Vivado Simulator 2018.3
+Time resolution is 1 ps
+Pixel address: [  0,  0] -> RGB value: 010
+Pixel address: [  0,  1] -> RGB value: 100
+Pixel address: [  0,  2] -> RGB value: 001
+Pixel address: [ 95,127] -> RGB value: 000
+Pixel address: [ 96,  0] is out of bounds
+Pixel address: [ 96, 64] is out of bounds

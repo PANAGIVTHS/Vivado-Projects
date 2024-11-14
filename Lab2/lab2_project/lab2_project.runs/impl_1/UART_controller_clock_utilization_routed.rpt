@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date         : Mon Nov 11 18:02:40 2024
+| Date         : Wed Nov 13 01:02:24 2024
 | Host         : DESKTOP-922FQ13 running 64-bit major release  (build 9200)
 | Command      : report_clock_utilization -file UART_controller_clock_utilization_routed.rpt
 | Design       : UART_controller

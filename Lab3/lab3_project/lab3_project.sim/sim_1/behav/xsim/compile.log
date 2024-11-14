@@ -1,0 +1,10 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/B_BRAM.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module B_BRAM
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/G_BRAM.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module G_BRAM
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/R_BRAM.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module R_BRAM
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/getPixelTLB.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module getPixelTLB
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Testbenches/VRAM_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module VRAM_tb

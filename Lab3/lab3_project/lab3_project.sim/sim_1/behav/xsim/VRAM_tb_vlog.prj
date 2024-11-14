@@ -1,0 +1,13 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../../Source/B_BRAM.v" \
+"../../../../../Source/G_BRAM.v" \
+"../../../../../Source/R_BRAM.v" \
+"../../../../../Source/getPixelTLB.v" \
+"../../../../../Testbenches/VRAM_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

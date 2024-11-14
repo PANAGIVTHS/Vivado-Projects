@@ -27,4 +27,3 @@ set_property -dict { PACKAGE_PIN R17 IOSTANDARD LVCMOS33 } [get_ports { Tx_EN }]
 ## Make Vivado Shut Up
 set_property CFGBVS VCCO [current_design];          #Set CFGBVS to VCCO
 set_property CONFIG_VOLTAGE 3.3 [current_design];   #Set CONFIG_VOLTAGE to 3.3V (or another value if your setup is different)
-

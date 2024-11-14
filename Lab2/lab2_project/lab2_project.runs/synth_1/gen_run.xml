@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1731340906">
   <File Type="PA-TCL" Name="UART_controller.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="UART_controller_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="UART_controller_reports.tcl"/>
   <File Type="RDS-RDS" Name="UART_controller.vds"/>
   <File Type="RDS-UTIL" Name="UART_controller_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="UART_controller_utilization_synth.pb"/>
   <File Type="RDS-DCP" Name="UART_controller.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="UART_controller_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="UART_controller_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PPRDIR/../Optional Source Code/SSD src/Debouncer.v">
