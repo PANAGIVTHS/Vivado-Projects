@@ -1,4 +1,4 @@
-module clockDivider (
+module ClockGenerator (
     input clk,                    // Input clock (100 MHz)
     output new_clk,               // Output clock (5 MHz)
     output locked                 // LOCK signal to indicate the MMCM has locked
@@ -16,7 +16,7 @@ module clockDivider (
     .CLKFBOUT(feedback),          // feedback clock
     .CLKIN1(clk),                 // Input clock (100 MHz)
     .CLKFBIN(feedback),           // Feedback clock input
-    .LOCKED(lock)                 // Locked signal indicating stable output
+    .LOCKED(locked)               // Locked signal indicating stable output
     );
 
 endmodule
