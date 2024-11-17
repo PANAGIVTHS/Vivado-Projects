@@ -7,15 +7,19 @@ module PixelAddrGenerator (input clk, input reset, input [9:0] HPIXEL, input [18
     localparam VGA_WIDTH = 640;
     localparam VGA_HEIGHT = 480;
 
-   // Temporary wires to hold intermediate subtraction results
-    wire [9:0] tempHPIXELResult;  // Adjust width as needed for subtraction
-    wire [18:0] tempVPIXELResult;  // Adjust width as needed for subtraction
+    wire HEN, VEN;
 
-    // Perform subtraction and store the result in temporary variables
-    assign tempHPIXELResult = HPIXEL - H_DISP_START;
-    assign tempVPIXELResult = VPIXEL - V_DISP_START;
+    // Incriment upscaled pixel counters
+    GUCounter #(.BITS(2)) HPIXEL_counter_inst (.clk(clk), .reset_in({reset, 1'b0}), .enable(HEN), .count(incHPIXEL), .overflow(HENADDR));
+    GUCounter #(.BITS(2)) VPIXEL_counter_inst (.clk(clk), .reset_in({reset, 1'b0}), .enable(VEN), .count(incVPIXEL), .overflow(VENADDR));
 
-    // Assign the lower 7 bits to the xPixelAddr and yPixelAddr
-    assign xPixelAddr = tempHPIXELResult[6:0];
-    assign yPixelAddr = tempVPIXELResult[6:0];
+    // Incriement BRAM pixel counters after 5 Bram pixel on 1 VGA pixel
+    GUCounter #(.BITS(7)) HPIXEL_counter_inst (.clk(clk), .reset_in({reset, user_reset}), .enable(HENADDR), .count(xPixelAddr));
+    GUCounter #(.BITS(7)) VPIXEL_counter_inst (.clk(clk), .reset_in({reset, user_reset}), .enable(VENADDR), .count(yPixelAddr));
+
+    // Reset the counters every frame
+    assign user_reset = !HPIXEL && !VPIXEL;
+
+    assign HEN = H_DISP_START <= HPIXEL && HPIXEL < H_DISP_START + VGA_WIDTH;
+    assign VEN = HPIXEL == H_DISP_START + VGA_WIDTH;
 endmodule
