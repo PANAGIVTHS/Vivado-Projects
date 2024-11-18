@@ -27,9 +27,8 @@ module PAPUnit(
     // Chache for storing recently accessed pixel addresses and data (18-bit total)
     reg [9:0] cache_address; // Cached address (14 bits for {line, offset})
     reg [2:0] cache_pixel_data [15:0]; // Pixel data in cache (3-bit RGB data)
-    reg cache_hit;
     integer i;
-
+    wire cache_hit;
     // BRAM signals
     wire [5:0] bram_row;
     wire [7:0] bram_offset;
@@ -40,15 +39,7 @@ module PAPUnit(
     assign bram_row = line[6:1];  // Divide line by 2 for BRAM addressing
     assign bram_offset = {line[0], offset}; // Concatenate line LSB with offset
 
-    // Check if address is in the Cache (hit or miss)
-    // on miss give 1 cycle time to fetch data from BRAM
-    always @(posedge clk or posedge reset) begin 
-        if (reset) begin
-            cache_hit <= 0;
-        end else if (enable) begin
-            cache_hit <= (cache_address == {bram_row, bram_offset[7:4]});
-        end
-    end
+    assign cache_hit = (cache_address == {bram_row, bram_offset[7:4]});
 
     // Fetch pixel data from Cache if there is a hit
     assign pixel_data = cache_hit ? cache_pixel_data[bram_offset[3:0]] : {red_val[bram_offset[3:0]], green_val[bram_offset[3:0]], blue_val[bram_offset[3:0]]};

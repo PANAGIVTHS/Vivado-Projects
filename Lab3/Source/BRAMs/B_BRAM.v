@@ -5,7 +5,7 @@ module B_BRAM (
     input [1:0] write_enable,
     input reg_enable,
     input [13:0] address,
-    output [15:0] blue_val // Adjusted to 16-bit output to match `DOADO` width
+    output blue_val // Adjusted to 16-bit output to match `DOADO` width
 );
    wire [15:0] doa_data;
 
@@ -70,7 +70,7 @@ module B_BRAM (
       .INIT_B(18'h00000),
       .INIT_FILE("NONE"),
       .RAM_MODE("TDP"),
-      .READ_WIDTH_A(18), 
+      .READ_WIDTH_A(1), 
       .READ_WIDTH_B(0), 
       .WRITE_WIDTH_A(0), 
       .WRITE_WIDTH_B(0), 
@@ -94,6 +94,6 @@ module B_BRAM (
       // Unconnected ports removed
    );
 
-   assign blue_val = doa_data;
+   assign blue_val = doa_data[0];
 
 endmodule

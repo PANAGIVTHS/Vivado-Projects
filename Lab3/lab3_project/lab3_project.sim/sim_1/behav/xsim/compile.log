@@ -1,10 +1,24 @@
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/B_BRAM.v" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/BRAMs/B_BRAM.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module B_BRAM
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/G_BRAM.v" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/ClockGenerator.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ClockGenerator
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/GUCounter.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module GUCounter
+INFO: [VRFC 10-2458] undeclared symbol reset, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/GUCounter.v:19]
+INFO: [VRFC 10-2458] undeclared symbol user_reset, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/GUCounter.v:20]
+WARNING: [VRFC 10-3676] redeclaration of ansi port 'overflow' is not allowed [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/GUCounter.v:21]
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/BRAMs/G_BRAM.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module G_BRAM
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/R_BRAM.v" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/VGA/PixelAddrGenerator.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module PixelAddrGenerator
+INFO: [VRFC 10-2458] undeclared symbol HENADDR, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/VGA/PixelAddrGenerator.v:15]
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/BRAMs/R_BRAM.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module R_BRAM
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/getPixelTLB.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module getPixelTLB
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Testbenches/VRAM_tb.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module VRAM_tb
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/_Testing/VGA.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module VGAC
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/_Testing/VGASync.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module VGASync
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/_Testing/getPixel.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module getPixel
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Testbenches/VGA_tb_2.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module VGA_tb_2

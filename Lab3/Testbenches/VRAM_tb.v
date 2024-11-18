@@ -61,6 +61,5 @@ module VRAM_tb;
         line = 7'b1100000;
         offset = 7'b1000000;
         #(CLK_PERIOD*10) check_pixel;
-
     end
 endmodule

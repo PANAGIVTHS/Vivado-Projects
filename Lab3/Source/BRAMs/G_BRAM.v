@@ -5,7 +5,7 @@ module G_BRAM (
     input [1:0] write_enable,
     input reg_enable,
     input [13:0] address,
-    output [15:0] green_val // Adjusted to 16-bit output to match `DOADO` width
+    output green_val // Adjusted to 16-bit output to match `DOADO` width
 );
 
    wire [15:0] doa_data;
@@ -19,7 +19,7 @@ module G_BRAM (
       .SIM_COLLISION_CHECK("ALL"),
       .DOA_REG(0),
       .DOB_REG(0),
-      .INIT_00(256'h0000000000000000000000000000000000000000000000000000000000000001),
+      .INIT_00(256'h0000000000000000000000000000000000000000000000000000000000000002),
       .INIT_01(256'h0000000000000000000000000000000000000000000000000000000000000000),
       .INIT_02(256'h0000000000000000000000000000000000000000000000000000000000000000),
       .INIT_03(256'h0000000000000000000000000000000000000000000000000000000000000000),
@@ -71,7 +71,7 @@ module G_BRAM (
       .INIT_B(18'h00000),
       .INIT_FILE("NONE"),
       .RAM_MODE("TDP"),
-      .READ_WIDTH_A(18), 
+      .READ_WIDTH_A(1), 
       .READ_WIDTH_B(0), 
       .WRITE_WIDTH_A(0), 
       .WRITE_WIDTH_B(0), 
@@ -95,5 +95,5 @@ module G_BRAM (
       // Unconnected ports removed
    );
 
-   assign green_val = doa_data;
+   assign green_val = doa_data[0];
 endmodule

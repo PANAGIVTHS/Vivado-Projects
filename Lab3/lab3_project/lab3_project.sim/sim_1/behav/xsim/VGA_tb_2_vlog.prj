@@ -1,0 +1,18 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../../Source/BRAMs/B_BRAM.v" \
+"../../../../../Source/Generic/ClockGenerator.v" \
+"../../../../../Source/Generic/GUCounter.v" \
+"../../../../../Source/BRAMs/G_BRAM.v" \
+"../../../../../Source/VGA/PixelAddrGenerator.v" \
+"../../../../../Source/BRAMs/R_BRAM.v" \
+"../../../../../Source/_Testing/VGA.v" \
+"../../../../../Source/_Testing/VGASync.v" \
+"../../../../../Source/_Testing/getPixel.v" \
+"../../../../../Testbenches/VGA_tb_2.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
