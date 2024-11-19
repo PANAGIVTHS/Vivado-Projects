@@ -4,11 +4,12 @@ verilog xil_defaultlib  \
 "../../../../../Source/Generic/ClockGenerator.v" \
 "../../../../../Source/Generic/GUCounter.v" \
 "../../../../../Source/BRAMs/G_BRAM.v" \
-"../../../../../Source/VGA/PixelAddrGenerator.v" \
+"../../../../../Source/_Testing/NextDesign/Hold_to_step.v" \
+"../../../../../Source/_Testing/NextDesign/PixelAddrGen.v" \
 "../../../../../Source/BRAMs/R_BRAM.v" \
-"../../../../../Source/_Testing/VGA.v" \
-"../../../../../Source/_Testing/VGASync.v" \
-"../../../../../Source/_Testing/getPixel.v" \
+"../../../../../Source/_Testing/NextDesign/SSyncFSM.v" \
+"../../../../../Source/_Testing/NextDesign/VGA.v" \
+"../../../../../Source/_Testing/NextDesign/getPixel.v" \
 "../../../../../Testbenches/VGA_tb_2.v" \
 
 # compile glbl module

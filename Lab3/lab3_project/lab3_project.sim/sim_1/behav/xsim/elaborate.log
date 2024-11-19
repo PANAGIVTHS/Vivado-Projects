@@ -16,10 +16,15 @@ WARNING: [XSIM 43-4100] "/wrk/2018.3/continuous/2018_12_06_2405991/data/verilog/
 WARNING: [XSIM 43-4100] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/lab3_project/lab3_project.sim/sim_1/behav/xsim/glbl.v" Line 6. Module glbl has a timescale but at least one module in design doesn't have timescale.
 Completed simulation data flow analysis
 Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.GUCounter
+Compiling module xil_defaultlib.SSyncFSM
+Compiling module xil_defaultlib.GUCounter(BITS=19)
+Compiling module xil_defaultlib.SSyncFSM(DISPLAY_TIME=384000,SHO...
+Compiling module xil_defaultlib.Hold_to_step
 Compiling module xil_defaultlib.GUCounter(BITS=2)
 Compiling module xil_defaultlib.GUCounter(BITS=3)
 Compiling module xil_defaultlib.GUCounter(BITS=7)
-Compiling module xil_defaultlib.PixelAddrGenerator
+Compiling module xil_defaultlib.PixelAddrGen
 Compiling module unisims_ver.RB18_INTERNAL_VLOG(READ_WIDTH_A=...
 Compiling module unisims_ver.RAMB18E1(INIT_00=256'b010,READ_W...
 Compiling module xil_defaultlib.G_BRAM
@@ -30,13 +35,10 @@ Compiling module unisims_ver.RB18_INTERNAL_VLOG(READ_WIDTH_A=...
 Compiling module unisims_ver.RAMB18E1(INIT_00=256'b0100,READ_...
 Compiling module xil_defaultlib.B_BRAM
 Compiling module xil_defaultlib.getPixel
-Compiling module xil_defaultlib.GUCounter
-Compiling module xil_defaultlib.GUCounter(BITS=19)
-Compiling module xil_defaultlib.VGASync
 Compiling module unisims_ver.MMCME2_ADV(CLKFBOUT_MULT_F=6.0,C...
 Compiling module unisims_ver.MMCME2_BASE(CLKFBOUT_MULT_F=6.0,...
 Compiling module xil_defaultlib.ClockGenerator
-Compiling module xil_defaultlib.VGAC
+Compiling module xil_defaultlib.VGA
 Compiling module xil_defaultlib.VGA_tb_2
 Compiling module xil_defaultlib.glbl
 Built simulation snapshot VGA_tb_2_behav

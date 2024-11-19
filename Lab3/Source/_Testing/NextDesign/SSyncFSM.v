@@ -1,30 +1,33 @@
-module VGASyncFSM #(
-    parameter integer DISPLAY_TIME = 640,  // Display Width in pixels
-    parameter integer SHOLD = 96,          // Signal Hold time
-    parameter integer SBP = 48,            // Signal Back Porch time
-    parameter integer SFP = 16,            // Signal Front Porch time
-    parameter integer COUNTER_BITS = 10    // Number of bits in the GUCounter
+module SSyncFSM #(
+    parameter DISPLAY_TIME = 640,  // Display time in pixels
+    parameter SHOLD = 96,          // Signal Hold time
+    parameter SBP = 48,            // Signal Back Porch time
+    parameter SFP = 16,            // Signal Front Porch time
+    parameter COUNTER_BITS = 10    // Number of bits in the GUCounter
 )(
     input reset,             // Reset signal
     input clk,               // Clock signal
     input enable,            // Enable signal
     input ACTIVE_SIG,        // Active signal to determine whether the sync should be inverted
     output VGA_SIG,        // VGA Horizontal Sync signal
-    output state,
-    output valid_pixel
+    output reg displaying
 );
-
+    
     reg [1:0] cur_state, next_state;
-    reg user_reset;
+    reg [COUNTER_BITS - 1:0] max;
+    wire [COUNTER_BITS - 1:0] CPIXEL;
+    wire user_reset;
+    reg VGA_SIG_temp;
 
-    localparam BACK_PORCH = 2'b01, FRONT_PORCH = 2'b11, HSYNC_PULSE = 2'b00, DISPLAYING  = 2'b10;
-
-    // GUCounter instantiation with parameterized bit width
+    localparam HSYNC_PULSE = 2'b00, BACK_PORCH = 2'b01, DISPLAYING  = 2'b10, FRONT_PORCH = 2'b11;
+    
+    // GUCounter instantiation with parameterized bits
     GUCounter #(.BITS(COUNTER_BITS)) CPIXEL_counter_inst (.clk(clk), .reset_in({reset, user_reset}), .enable(enable), .count(CPIXEL), .stall(1'b0));
+    assign user_reset = CPIXEL == max - 1;
 
     always @(posedge clk or posedge reset) begin
         if (reset) begin
-            cur_state <= BACK_PORCH;
+            cur_state <= HSYNC_PULSE;
         end else begin
             cur_state <= next_state;
         end
@@ -33,41 +36,48 @@ module VGASyncFSM #(
     always @(*) begin
         case (cur_state)
             HSYNC_PULSE: begin
-                if (CPIXEL == HHOLD - 1) begin
+                displaying = 1'b0;
+                VGA_SIG_temp = 1;
+                max = SHOLD;
+                if (CPIXEL == SHOLD - 1) begin
                     next_state = BACK_PORCH;
-                    user_reset = 1'b1;
                 end else begin
                     next_state = HSYNC_PULSE;
-                    user_reset = 1'b0;
                 end
             end
             BACK_PORCH: begin
-                if (CPIXEL == HBP - 1) begin
+                displaying = 1'b0;
+                VGA_SIG_temp = 0;
+                max = SBP;
+                if (CPIXEL == SBP - 1) begin
                     next_state = DISPLAYING;
-                    user_reset = 1'b1;
                 end else begin
                     next_state = BACK_PORCH;
-                    user_reset = 1'b0;
                 end
             end
             DISPLAYING: begin
-                if (CPIXEL == DISPLAY_WIDTH - 1) begin
+                displaying = 1'b1;
+                VGA_SIG_temp = 0;
+                max = DISPLAY_TIME;
+                if (CPIXEL == DISPLAY_TIME - 1) begin
                     next_state = FRONT_PORCH;
-                    user_reset = 1'b1;
                 end else begin
                     next_state = DISPLAYING;
-                    user_reset = 1'b0;
                 end
             end
             FRONT_PORCH: begin
-                if (CPIXEL == HFP - 1) begin
+                displaying = 1'b0;
+                VGA_SIG_temp = 0;
+                max = SFP;
+                if (CPIXEL == SFP - 1) begin
                     next_state = HSYNC_PULSE;
-                    user_reset = 1'b1;
                 end else begin
                     next_state = FRONT_PORCH;
-                    user_reset = 1'b0;
                 end
             end
         endcase
     end
+
+    assign VGA_SIG = ACTIVE_SIG ? VGA_SIG_temp : !VGA_SIG_temp;
+
 endmodule
