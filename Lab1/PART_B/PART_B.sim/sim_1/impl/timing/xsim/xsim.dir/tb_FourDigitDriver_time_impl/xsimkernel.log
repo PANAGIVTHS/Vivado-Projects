@@ -1,7 +1,0 @@
-Running: xsim.dir/tb_FourDigitDriver_time_impl/xsimk.exe -simmode gui -wdb tb_FourDigitDriver_time_impl.wdb -simrunnum 0 -socket 60824
-Design successfully loaded
-Design Loading Memory Usage: 7584 KB (Peak: 7584 KB)
-Design Loading CPU Usage: 0 ms
-Simulation completed
-Simulation Memory Usage: 10488 KB (Peak: 10488 KB)
-Simulation CPU Usage: 781 ms

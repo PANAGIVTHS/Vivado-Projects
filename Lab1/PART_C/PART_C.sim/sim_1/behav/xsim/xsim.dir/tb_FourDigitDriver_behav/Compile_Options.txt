@@ -1,1 +1,0 @@
--wto "888954cc050d4db7b9389f60ff1c644a" --incr --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "unisims_ver" -L "unimacro_ver" -L "secureip" --snapshot "tb_FourDigitDriver_behav" "xil_defaultlib.tb_FourDigitDriver" "xil_defaultlib.glbl" -log "elaborate.log" 

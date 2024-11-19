@@ -1,7 +1,0 @@
-# compile verilog/system verilog design source files
-verilog xil_defaultlib  \
-"SenderTestModule_tb_time_impl.v" \
-"../../../../../../Optional Source Code/Optional src/Testbenches/Display_tb.v" \
-
-# Do not sort compile order
-nosort
