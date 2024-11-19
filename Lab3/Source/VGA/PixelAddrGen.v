@@ -11,8 +11,8 @@ module PixelAddrGen (input clk, input reset, input HDISP, input VDISP, output [6
         end
     end 
     
-    // Upscale the pixel counters
-    UpscallingUnit UpUnit_inst (.clk(clk), .reset(reset), .HDISP(HDISP), .VDISP(VDISP), .HENADDR(HENADDR), .VENADDR(VENADDR));
+    // Upscale the pixel counters. For lines 5 * a_line = 4000pxls, a_line = 800pxls.
+    UpscallingUnit #(.H_COUNTER_BITS(3), .V_COUNTER_BITS(12), .pixelScaling(5), .lineScaling(4000)) UpUnit_inst (.clk(clk), .reset(reset), .HDISP(HDISP), .VDISP(VDISP), .HENADDR(HENADDR), .VENADDR(VENADDR));
 
     // Incriement BRAM pixel counters after 5 Bram pixel on 1 VGA pixel
     GUCounter #(.BITS(7)) HPIXEL_counter_inst (.clk(clk), .reset_in({reset, user_reset}), .enable(HENADDR), .count(xPixelAddr), .stall(1'b0), .overflow());

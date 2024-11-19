@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date             : Tue Nov 19 17:23:08 2024
+| Date             : Tue Nov 19 23:40:55 2024
 | Host             : DESKTOP-922FQ13 running 64-bit major release  (build 9200)
 | Command          : report_power -file VGA_power_routed.rpt -pb VGA_power_summary_routed.pb -rpx VGA_power_routed.rpx
 | Design           : VGA
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 3.344        |
+| Total On-Chip Power (W)  | 3.190        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 3.239        |
+| Dynamic (W)              | 3.085        |
 | Device Static (W)        | 0.105        |
 | Effective TJA (C/W)      | 4.6          |
-| Max Ambient (C)          | 69.7         |
-| Junction Temperature (C) | 40.3         |
+| Max Ambient (C)          | 70.4         |
+| Junction Temperature (C) | 39.6         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,18 +52,18 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Slice Logic    |     0.224 |      232 |       --- |             --- |
-|   LUT as Logic |     0.195 |       88 |     63400 |            0.14 |
-|   CARRY4       |     0.014 |       15 |     15850 |            0.09 |
-|   Register     |     0.009 |       70 |    126800 |            0.06 |
+| Slice Logic    |     0.186 |      232 |       --- |             --- |
+|   LUT as Logic |     0.148 |       82 |     63400 |            0.13 |
+|   CARRY4       |     0.019 |       18 |     15850 |            0.11 |
+|   Register     |     0.012 |       77 |    126800 |            0.06 |
 |   BUFG         |     0.006 |        1 |        32 |            3.13 |
-|   Others       |     0.000 |       25 |       --- |             --- |
-| Signals        |     0.194 |      163 |       --- |             --- |
-| Block RAM      |     0.165 |      1.5 |       135 |            1.11 |
+|   Others       |     0.000 |       20 |       --- |             --- |
+| Signals        |     0.195 |      167 |       --- |             --- |
+| Block RAM      |     0.096 |      1.5 |       135 |            1.11 |
 | MMCM           |     2.113 |        1 |         6 |           16.67 |
-| I/O            |     0.542 |        9 |       210 |            4.29 |
+| I/O            |     0.496 |        9 |       210 |            4.29 |
 | Static Power   |     0.105 |          |           |                 |
-| Total          |     3.344 |          |           |                 |
+| Total          |     3.190 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -73,16 +73,16 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.634 |       0.607 |      0.027 |
-| Vccaux    |       1.800 |     1.222 |       1.203 |      0.019 |
+| Vccint    |       1.000 |     0.534 |       0.508 |      0.026 |
+| Vccaux    |       1.800 |     1.218 |       1.199 |      0.019 |
 | Vcco33    |       3.300 |     0.000 |       0.000 |      0.000 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
-| Vcco18    |       1.800 |     0.255 |       0.251 |      0.004 |
+| Vcco18    |       1.800 |     0.233 |       0.229 |      0.004 |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |
-| Vccbram   |       1.000 |     0.015 |       0.014 |      0.001 |
+| Vccbram   |       1.000 |     0.008 |       0.007 |      0.001 |
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |
 | Vccadc    |       1.800 |     0.020 |       0.000 |      0.020 |
@@ -140,19 +140,19 @@ Table of Contents
 +-------------------------+-----------+
 | Name                    | Power (W) |
 +-------------------------+-----------+
-| VGA                     |     3.239 |
-|   HSyncFSM              |     0.103 |
-|     CPIXEL_counter_inst |     0.092 |
-|   PAPUnit_inst          |     0.165 |
-|     B_BRAM_inst         |     0.055 |
-|     G_BRAM_inst         |     0.055 |
-|     R_BRAM_inst         |     0.055 |
-|   PixelAddrGen_inst     |     0.004 |
-|     UpUnit_inst         |     0.003 |
-|       HEN_inst          |     0.001 |
-|   PixelClk_inst         |     2.125 |
-|   VSyncFSM              |     0.280 |
-|     CPIXEL_counter_inst |     0.272 |
+| VGA                     |     3.085 |
+|   HSyncFSM              |     0.084 |
+|     CPIXEL_counter_inst |     0.079 |
+|   PAPUnit_inst          |     0.142 |
+|     B_BRAM_inst         |     0.035 |
+|     G_BRAM_inst         |     0.035 |
+|     R_BRAM_inst         |     0.035 |
+|   PixelAddrGen_inst     |     0.075 |
+|     UpUnit_inst         |     0.069 |
+|     VPIXEL_counter_inst |     0.006 |
+|   PixelClk_inst         |     2.132 |
+|   VSyncFSM              |     0.137 |
+|     CPIXEL_counter_inst |     0.130 |
 +-------------------------+-----------+
 
 

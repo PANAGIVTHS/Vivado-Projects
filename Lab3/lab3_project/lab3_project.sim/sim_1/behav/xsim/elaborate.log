@@ -12,12 +12,9 @@ WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/
 WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/GUCounter.v" Line 18. Module GUCounter(BITS=19) doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/VGA/PixelAddrGen.v" Line 1. Module PixelAddrGen doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/UpscallingUnit.v" Line 1. Module UpscallingUnit doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/Hold_to_step.v" Line 6. Module Hold_to_step doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/GUCounter.v" Line 18. Module GUCounter(BITS=2) doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/GUCounter.v" Line 18. Module GUCounter(BITS=3) doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/GUCounter.v" Line 18. Module GUCounter(BITS=7) doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/GUCounter.v" Line 18. Module GUCounter(BITS=7) doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/VGA/PAPUnit.v" Line 1. Module PAPUnit doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/_Testing/vram.v" Line 1. Module PAPUnit1 doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/BRAMs/G_BRAM.v" Line 1. Module G_BRAM doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/BRAMs/R_BRAM.v" Line 1. Module R_BRAM doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/BRAMs/B_BRAM.v" Line 1. Module B_BRAM doesn't have a timescale but at least one module in design has a timescale.
@@ -28,9 +25,6 @@ Compiling module xil_defaultlib.GUCounter
 Compiling module xil_defaultlib.SSyncFSM
 Compiling module xil_defaultlib.GUCounter(BITS=19)
 Compiling module xil_defaultlib.SSyncFSM(DISPLAY_TIME=384000,SHO...
-Compiling module xil_defaultlib.Hold_to_step
-Compiling module xil_defaultlib.GUCounter(BITS=2)
-Compiling module xil_defaultlib.GUCounter(BITS=3)
 Compiling module xil_defaultlib.UpscallingUnit
 Compiling module xil_defaultlib.GUCounter(BITS=7)
 Compiling module xil_defaultlib.PixelAddrGen
@@ -43,7 +37,7 @@ Compiling module xil_defaultlib.R_BRAM
 Compiling module unisims_ver.RB18_INTERNAL_VLOG(READ_WIDTH_A=...
 Compiling module unisims_ver.RAMB18E1(INIT_00=256'b0100,READ_...
 Compiling module xil_defaultlib.B_BRAM
-Compiling module xil_defaultlib.PAPUnit
+Compiling module xil_defaultlib.PAPUnit1
 Compiling module unisims_ver.MMCME2_ADV(CLKFBOUT_MULT_F=6.0,C...
 Compiling module unisims_ver.MMCME2_BASE(CLKFBOUT_MULT_F=6.0,...
 Compiling module xil_defaultlib.ClockGenerator

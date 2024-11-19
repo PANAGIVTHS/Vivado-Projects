@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date         : Tue Nov 19 17:23:08 2024
+| Date         : Tue Nov 19 23:40:54 2024
 | Host         : DESKTOP-922FQ13 running 64-bit major release  (build 9200)
 | Command      : report_methodology -file VGA_methodology_drc_routed.rpt -pb VGA_methodology_drc_routed.pb -rpx VGA_methodology_drc_routed.rpx
 | Design       : VGA
@@ -23,11 +23,11 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 73
+             Violations found: 80
 +-----------+----------+-----------------------------+------------+
 | Rule      | Severity | Description                 | Violations |
 +-----------+----------+-----------------------------+------------+
-| TIMING-17 | Warning  | Non-clocked sequential cell | 73         |
+| TIMING-17 | Warning  | Non-clocked sequential cell | 80         |
 +-----------+----------+-----------------------------+------------+
 
 2. REPORT DETAILS
@@ -214,185 +214,220 @@ Related violations: <none>
 
 TIMING-17#37 Warning
 Non-clocked sequential cell  
-The clock pin PixelAddrGen_inst/UpUnit_inst/HEN_inst/FF_reg[0]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/UpUnit_inst/HCounter_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#38 Warning
 Non-clocked sequential cell  
-The clock pin PixelAddrGen_inst/UpUnit_inst/HEN_inst/FF_reg[1]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/UpUnit_inst/HCounter_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#39 Warning
 Non-clocked sequential cell  
-The clock pin PixelAddrGen_inst/UpUnit_inst/H_upscale_counter_inst/count_reg[0]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/UpUnit_inst/HCounter_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#40 Warning
 Non-clocked sequential cell  
-The clock pin PixelAddrGen_inst/UpUnit_inst/H_upscale_counter_inst/count_reg[1]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/UpUnit_inst/VCounter_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#41 Warning
 Non-clocked sequential cell  
-The clock pin PixelAddrGen_inst/UpUnit_inst/H_upscale_counter_inst/overflow_reg/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/UpUnit_inst/VCounter_reg[10]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#42 Warning
 Non-clocked sequential cell  
-The clock pin PixelAddrGen_inst/UpUnit_inst/V_upscale_counter_inst/count_reg[0]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/UpUnit_inst/VCounter_reg[11]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#43 Warning
 Non-clocked sequential cell  
-The clock pin PixelAddrGen_inst/UpUnit_inst/V_upscale_counter_inst/count_reg[1]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/UpUnit_inst/VCounter_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#44 Warning
 Non-clocked sequential cell  
-The clock pin PixelAddrGen_inst/UpUnit_inst/V_upscale_counter_inst/count_reg[2]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/UpUnit_inst/VCounter_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#45 Warning
 Non-clocked sequential cell  
-The clock pin PixelAddrGen_inst/VPIXEL_counter_inst/count_reg[0]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/UpUnit_inst/VCounter_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#46 Warning
 Non-clocked sequential cell  
-The clock pin PixelAddrGen_inst/VPIXEL_counter_inst/count_reg[1]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/UpUnit_inst/VCounter_reg[4]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#47 Warning
 Non-clocked sequential cell  
-The clock pin PixelAddrGen_inst/VPIXEL_counter_inst/count_reg[2]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/UpUnit_inst/VCounter_reg[5]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#48 Warning
 Non-clocked sequential cell  
-The clock pin PixelAddrGen_inst/VPIXEL_counter_inst/count_reg[3]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/UpUnit_inst/VCounter_reg[6]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#49 Warning
 Non-clocked sequential cell  
-The clock pin PixelAddrGen_inst/VPIXEL_counter_inst/count_reg[4]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/UpUnit_inst/VCounter_reg[7]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#50 Warning
 Non-clocked sequential cell  
-The clock pin PixelAddrGen_inst/VPIXEL_counter_inst/count_reg[5]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/UpUnit_inst/VCounter_reg[8]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#51 Warning
 Non-clocked sequential cell  
-The clock pin PixelAddrGen_inst/VPIXEL_counter_inst/count_reg[6]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/UpUnit_inst/VCounter_reg[9]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#52 Warning
 Non-clocked sequential cell  
-The clock pin PixelAddrGen_inst/user_reset_reg/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/VPIXEL_counter_inst/count_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#53 Warning
 Non-clocked sequential cell  
-The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[0]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/VPIXEL_counter_inst/count_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#54 Warning
 Non-clocked sequential cell  
-The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[10]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/VPIXEL_counter_inst/count_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#55 Warning
 Non-clocked sequential cell  
-The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[11]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/VPIXEL_counter_inst/count_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#56 Warning
 Non-clocked sequential cell  
-The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[12]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/VPIXEL_counter_inst/count_reg[4]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#57 Warning
 Non-clocked sequential cell  
-The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[13]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/VPIXEL_counter_inst/count_reg[5]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#58 Warning
 Non-clocked sequential cell  
-The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[14]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/VPIXEL_counter_inst/count_reg[6]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#59 Warning
 Non-clocked sequential cell  
-The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[15]/C is not reached by a timing clock
+The clock pin PixelAddrGen_inst/user_reset_reg/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#60 Warning
 Non-clocked sequential cell  
-The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[16]/C is not reached by a timing clock
+The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#61 Warning
 Non-clocked sequential cell  
-The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[17]/C is not reached by a timing clock
+The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[10]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#62 Warning
 Non-clocked sequential cell  
-The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[18]/C is not reached by a timing clock
+The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[11]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#63 Warning
 Non-clocked sequential cell  
-The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[1]/C is not reached by a timing clock
+The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[12]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#64 Warning
 Non-clocked sequential cell  
-The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[2]/C is not reached by a timing clock
+The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[13]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#65 Warning
 Non-clocked sequential cell  
-The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[3]/C is not reached by a timing clock
+The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[14]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#66 Warning
 Non-clocked sequential cell  
-The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[4]/C is not reached by a timing clock
+The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[15]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#67 Warning
 Non-clocked sequential cell  
-The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[5]/C is not reached by a timing clock
+The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[16]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#68 Warning
 Non-clocked sequential cell  
-The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[6]/C is not reached by a timing clock
+The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[17]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#69 Warning
 Non-clocked sequential cell  
-The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[7]/C is not reached by a timing clock
+The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[18]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#70 Warning
 Non-clocked sequential cell  
-The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[8]/C is not reached by a timing clock
+The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#71 Warning
 Non-clocked sequential cell  
-The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[9]/C is not reached by a timing clock
+The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#72 Warning
 Non-clocked sequential cell  
-The clock pin VSyncFSM/FSM_sequential_cur_state_reg[0]/C is not reached by a timing clock
+The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#73 Warning
+Non-clocked sequential cell  
+The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[4]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#74 Warning
+Non-clocked sequential cell  
+The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[5]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#75 Warning
+Non-clocked sequential cell  
+The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[6]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#76 Warning
+Non-clocked sequential cell  
+The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[7]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#77 Warning
+Non-clocked sequential cell  
+The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[8]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#78 Warning
+Non-clocked sequential cell  
+The clock pin VSyncFSM/CPIXEL_counter_inst/count_reg[9]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#79 Warning
+Non-clocked sequential cell  
+The clock pin VSyncFSM/FSM_sequential_cur_state_reg[0]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#80 Warning
 Non-clocked sequential cell  
 The clock pin VSyncFSM/FSM_sequential_cur_state_reg[1]/C is not reached by a timing clock
 Related violations: <none>

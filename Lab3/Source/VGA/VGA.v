@@ -21,7 +21,7 @@ module VGA (
     SSyncFSM #(.COUNTER_BITS(10), .SHOLD(96), .SBP(48), .DISPLAY_TIME(640), .SFP(16)) HSyncFSM (.reset(reset), .clk(new_clk), .enable(internal_enable), .ACTIVE_SIG(ACTIVE_SIG), .VGA_SIG(VGA_HSYNC), .displaying(HDISP));
     SSyncFSM #(.COUNTER_BITS(19), .SHOLD(1600), .SBP(23200), .DISPLAY_TIME(384000), .SFP(8000)) VSyncFSM (.reset(reset), .clk(new_clk), .enable(internal_enable), .ACTIVE_SIG(ACTIVE_SIG), .VGA_SIG(VGA_VSYNC), .displaying(VDISP));
     PixelAddrGen PixelAddrGen_inst (.clk(new_clk), .reset(reset), .HDISP(HDISP), .VDISP(VDISP), .xPixelAddr(xPixelAddr), .yPixelAddr(yPixelAddr));
-    PAPUnit PAPUnit_inst (.clk(new_clk), .reset(reset), .line(yPixelAddr), .offset(xPixelAddr), .pixel_data({red_val, green_val, blue_val}), .valid_pixel(valid_pixel));
+    PAPUnit PAPUnit_inst (.clk(new_clk), .reset(reset), .enable(internal_enable), .line(yPixelAddr), .offset(xPixelAddr), .pixel_data({red_val, green_val, blue_val}), .valid_pixel(valid_pixel));
     ClockGenerator PixelClk_inst (.clk(clk), .new_clk(new_clk), .locked(locked));
     
     // Assign the pixel data to the VGA output signals if the pixel is valid, otherwise output black

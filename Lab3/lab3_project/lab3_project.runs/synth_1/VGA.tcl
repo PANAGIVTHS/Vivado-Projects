@@ -17,7 +17,6 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
-set_msg_config -id {Common 17-41} -limit 10000000
 create_project -in_memory -part xc7a100tcsg324-1
 
 set_param project.singleFileAddWarning.threshold 0
@@ -35,7 +34,6 @@ read_verilog -library xil_defaultlib {
   C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/ClockGenerator.v
   C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/GUCounter.v
   C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/BRAMs/G_BRAM.v
-  C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/Hold_to_step.v
   C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/VGA/PAPUnit.v
   C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/VGA/PixelAddrGen.v
   C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/BRAMs/R_BRAM.v

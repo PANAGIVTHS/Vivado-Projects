@@ -20,7 +20,7 @@ module GUCounter #(parameter BITS = 10) (input clk, input [1:0] reset_in, input 
     wire user_reset = reset_in[0]; 
     
     // Counter logic
-    always @(posedge clk or posedge reset) begin
+    always @(posedge clk) begin
         if (reset) begin
             count <= 0; 
             overflow <= 0; 

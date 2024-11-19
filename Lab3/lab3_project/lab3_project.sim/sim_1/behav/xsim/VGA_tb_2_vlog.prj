@@ -4,13 +4,12 @@ verilog xil_defaultlib  \
 "../../../../../Source/Generic/ClockGenerator.v" \
 "../../../../../Source/Generic/GUCounter.v" \
 "../../../../../Source/BRAMs/G_BRAM.v" \
-"../../../../../Source/Generic/Hold_to_step.v" \
-"../../../../../Source/VGA/PAPUnit.v" \
 "../../../../../Source/VGA/PixelAddrGen.v" \
 "../../../../../Source/BRAMs/R_BRAM.v" \
 "../../../../../Source/VGA/SSyncFSM.v" \
 "../../../../../Source/Generic/UpscallingUnit.v" \
 "../../../../../Source/VGA/VGA.v" \
+"../../../../../Source/_Testing/vram.v" \
 "../../../../../Testbenches/VGA_tb.v" \
 
 # compile glbl module

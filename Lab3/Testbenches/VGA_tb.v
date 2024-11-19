@@ -20,10 +20,11 @@ module VGA_tb_2;
         clk = 0;
         reset = 0;
         enable = 1;
+        #1000
         #(CLK_PERIOD*100) reset = 1;
-        #(CLK_PERIOD*10) reset = 0;
+        #(CLK_PERIOD*200) reset = 0;
 
-        //  VIOLATIONS?????
+        // VIOLATIONS?????
         // #(CLK_PERIOD*16) enable = 1'b1;
 
     end

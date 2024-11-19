@@ -1,6 +1,7 @@
 module PAPUnit(
     input clk,                   // Clock signal
     input reset,                 // Reset signal
+    input enable,                // Enable signal
     input [6:0] line,            // Line number (0 to 95 for screen, 7 bits)
     input [6:0] offset,          // Pixel offset (0 to 127 for screen, 7 bits)
     output [2:0] pixel_data,     // 3-bit combined pixel data (RGB)
@@ -17,7 +18,7 @@ module PAPUnit(
         if (reset) begin
             bram_row <= 0;
             bram_offset <= 0;
-        end else begin
+        end else if (enable) begin
             bram_row <= line[6:1];               // Divide line by 2 for BRAM addressing
             bram_offset <= {line[0], offset};    // Concatenate line LSB with offset
         end
@@ -27,7 +28,7 @@ module PAPUnit(
     G_BRAM G_BRAM_inst (
         .clk(clk),
         .reset(reset),
-        .read_enable(1'b1),
+        .read_enable(enable),
         .write_enable(2'b00),
         .reg_enable(1'b0),
         .address({bram_row, bram_offset}), // Stable address generation
@@ -37,7 +38,7 @@ module PAPUnit(
     R_BRAM R_BRAM_inst (
         .clk(clk),
         .reset(reset),
-        .read_enable(1'b1),
+        .read_enable(enable),
         .write_enable(2'b00),
         .reg_enable(1'b0),
         .address({bram_row, bram_offset}), // Stable address generation
@@ -47,7 +48,7 @@ module PAPUnit(
     B_BRAM B_BRAM_inst (
         .clk(clk),
         .reset(reset),
-        .read_enable(1'b1),
+        .read_enable(enable),
         .write_enable(2'b00),
         .reg_enable(1'b0),
         .address({bram_row, bram_offset}), // Stable address generation

@@ -9,7 +9,7 @@ module SSyncFSM #(
     input clk,               // Clock signal
     input enable,            // Enable signal
     input ACTIVE_SIG,        // Active signal to determine whether the sync should be inverted
-    output VGA_SIG,        // VGA Horizontal Sync signal
+    output VGA_SIG,          // VGA Horizontal Sync signal
     output reg displaying
 );
     
@@ -26,7 +26,7 @@ module SSyncFSM #(
     
     assign user_reset = CPIXEL == max - 1;
 
-    always @(posedge clk or posedge reset) begin
+    always @(posedge clk) begin
         if (reset) begin
             cur_state <= HSYNC_PULSE;
         end else begin

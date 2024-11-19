@@ -6,10 +6,6 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repos
 INFO: [VRFC 10-311] analyzing module GUCounter
 INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/BRAMs/G_BRAM.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module G_BRAM
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/Hold_to_step.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module Hold_to_step
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/VGA/PAPUnit.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module PAPUnit
 INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/VGA/PixelAddrGen.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module PixelAddrGen
 INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/BRAMs/R_BRAM.v" into library xil_defaultlib
@@ -20,5 +16,7 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repos
 INFO: [VRFC 10-311] analyzing module UpscallingUnit
 INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/VGA/VGA.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module VGA
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/_Testing/vram.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module PAPUnit1
 INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Testbenches/VGA_tb.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module VGA_tb_2
