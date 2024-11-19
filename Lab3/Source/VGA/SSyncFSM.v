@@ -16,7 +16,7 @@ module SSyncFSM #(
     reg [1:0] cur_state, next_state;
     reg [COUNTER_BITS - 1:0] max;
     wire [COUNTER_BITS - 1:0] CPIXEL;
-    reg user_reset;
+    wire user_reset;
     reg VGA_SIG_temp;
 
     localparam HSYNC_PULSE = 2'b00, BACK_PORCH = 2'b01, DISPLAYING  = 2'b10, FRONT_PORCH = 2'b11;
@@ -24,14 +24,8 @@ module SSyncFSM #(
     // GUCounter instantiation with parameterized bits
     GUCounter #(.BITS(COUNTER_BITS)) CPIXEL_counter_inst (.clk(clk), .reset_in({reset, user_reset}), .enable(enable), .count(CPIXEL), .stall(1'b0), .overflow());
     
-    always @(posedge clk or posedge reset) begin
-        if (reset) begin
-            user_reset = 0;
-        end else begin
-            user_reset = CPIXEL == max - 1;
-        end
-    end
-    
+    assign user_reset = CPIXEL == max - 1;
+
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             cur_state <= HSYNC_PULSE;

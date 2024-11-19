@@ -14,9 +14,9 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 19092 
+INFO: Helper process launched with PID 15296 
 ---------------------------------------------------------------------------------
-Starting Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:01 . Memory (MB): peak = 388.348 ; gain = 99.000
+Starting Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:01 . Memory (MB): peak = 388.672 ; gain = 99.891
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'VGA' [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/VGA/VGA.v:1]
 INFO: [Synth 8-6157] synthesizing module 'SSyncFSM' [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/VGA/SSyncFSM.v:1]
@@ -62,7 +62,7 @@ INFO: [Synth 8-6157] synthesizing module 'GUCounter__parameterized3' [C:/Users/p
 	Parameter BITS bound to: 7 - type: integer 
 INFO: [Synth 8-6155] done synthesizing module 'GUCounter__parameterized3' (4#1) [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/GUCounter.v:18]
 INFO: [Synth 8-6155] done synthesizing module 'PixelAddrGen' (5#1) [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/VGA/PixelAddrGen.v:1]
-INFO: [Synth 8-6157] synthesizing module 'PAPUnit' [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/VGA/PAPUnit.v:19]
+INFO: [Synth 8-6157] synthesizing module 'PAPUnit' [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/VGA/PAPUnit.v:1]
 INFO: [Synth 8-6157] synthesizing module 'G_BRAM' [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/BRAMs/G_BRAM.v:1]
 INFO: [Synth 8-6157] synthesizing module 'RAMB18E1' [D:/Vivado/2018.3/scripts/rt/data/unisim_comp.v:49848]
 	Parameter DOA_REG bound to: 0 - type: integer 
@@ -375,7 +375,7 @@ INFO: [Synth 8-6157] synthesizing module 'RAMB18E1__parameterized1' [D:/Vivado/2
 INFO: [Synth 8-6155] done synthesizing module 'RAMB18E1__parameterized1' (8#1) [D:/Vivado/2018.3/scripts/rt/data/unisim_comp.v:49848]
 WARNING: [Synth 8-350] instance 'RAMB18E1_inst' of module 'RAMB18E1' requires 22 connections, but only 8 given [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/BRAMs/B_BRAM.v:85]
 INFO: [Synth 8-6155] done synthesizing module 'B_BRAM' (9#1) [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/BRAMs/B_BRAM.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'PAPUnit' (10#1) [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/VGA/PAPUnit.v:19]
+INFO: [Synth 8-6155] done synthesizing module 'PAPUnit' (10#1) [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/VGA/PAPUnit.v:1]
 INFO: [Synth 8-6157] synthesizing module 'ClockGenerator' [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/ClockGenerator.v:1]
 INFO: [Synth 8-6157] synthesizing module 'MMCME2_BASE' [D:/Vivado/2018.3/scripts/rt/data/unisim_comp.v:26837]
 	Parameter BANDWIDTH bound to: OPTIMIZED - type: string 
@@ -412,17 +412,17 @@ WARNING: [Synth 8-350] instance 'MMCME2_BASE_inst' of module 'MMCME2_BASE' requi
 INFO: [Synth 8-6155] done synthesizing module 'ClockGenerator' (12#1) [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/ClockGenerator.v:1]
 INFO: [Synth 8-6155] done synthesizing module 'VGA' (13#1) [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/VGA/VGA.v:1]
 ---------------------------------------------------------------------------------
-Finished Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 444.383 ; gain = 155.035
+Finished Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 444.590 ; gain = 155.809
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 444.383 ; gain = 155.035
+Finished Constraint Validation : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 444.590 ; gain = 155.809
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a100tcsg324-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 444.383 ; gain = 155.035
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 444.590 ; gain = 155.809
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7a100tcsg324-1
 INFO: [Synth 8-802] inferred FSM for state register 'cur_state_reg' in module 'SSyncFSM'
@@ -460,7 +460,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'cur_state_reg' using encod
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'cur_state_reg' using encoding 'sequential' in module 'SSyncFSM__parameterized0'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 444.383 ; gain = 155.035
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 445.750 ; gain = 156.969
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -483,10 +483,12 @@ Detailed RTL Component Info :
 +---Registers : 
 	               19 Bit    Registers := 1     
 	               10 Bit    Registers := 1     
+	                8 Bit    Registers := 1     
 	                7 Bit    Registers := 2     
+	                6 Bit    Registers := 1     
 	                3 Bit    Registers := 1     
 	                2 Bit    Registers := 2     
-	                1 Bit    Registers := 10    
+	                1 Bit    Registers := 7     
 +---Muxes : 
 	   2 Input     19 Bit        Muxes := 2     
 	   4 Input     19 Bit        Muxes := 1     
@@ -519,8 +521,6 @@ Module SSyncFSM
 Detailed RTL Component Info : 
 +---Adders : 
 	   2 Input     32 Bit       Adders := 1     
-+---Registers : 
-	                1 Bit    Registers := 1     
 +---Muxes : 
 	   4 Input     10 Bit        Muxes := 1     
 	   4 Input      2 Bit        Muxes := 1     
@@ -541,8 +541,6 @@ Module SSyncFSM__parameterized0
 Detailed RTL Component Info : 
 +---Adders : 
 	   2 Input     32 Bit       Adders := 1     
-+---Registers : 
-	                1 Bit    Registers := 1     
 +---Muxes : 
 	   4 Input     19 Bit        Muxes := 1     
 	   4 Input      2 Bit        Muxes := 1     
@@ -583,10 +581,15 @@ Detailed RTL Component Info :
 +---Muxes : 
 	   2 Input      7 Bit        Muxes := 2     
 	   2 Input      1 Bit        Muxes := 4     
+Module PixelAddrGen 
+Detailed RTL Component Info : 
++---Registers : 
+	                1 Bit    Registers := 1     
 Module PAPUnit 
 Detailed RTL Component Info : 
 +---Registers : 
-	                1 Bit    Registers := 2     
+	                8 Bit    Registers := 1     
+	                6 Bit    Registers := 1     
 ---------------------------------------------------------------------------------
 Finished RTL Hierarchical Component Statistics
 ---------------------------------------------------------------------------------
@@ -619,7 +622,7 @@ INFO: [Synth 8-5546] ROM "VSyncFSM/next_state" won't be mapped to RAM because it
 INFO: [Synth 8-5546] ROM "VSyncFSM/next_state" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "VSyncFSM/next_state" won't be mapped to RAM because it is too sparse
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 598.273 ; gain = 308.926
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 600.020 ; gain = 311.238
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -632,7 +635,7 @@ No constraint files found.
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 598.273 ; gain = 308.926
+Finished Timing Optimization : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 600.020 ; gain = 311.238
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -644,7 +647,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 598.492 ; gain = 309.145
+Finished Technology Mapping : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 600.457 ; gain = 311.676
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -668,7 +671,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 598.492 ; gain = 309.145
+Finished IO Insertion : Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 600.457 ; gain = 311.676
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -681,7 +684,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 598.492 ; gain = 309.145
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 600.457 ; gain = 311.676
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -693,25 +696,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 598.492 ; gain = 309.145
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 600.457 ; gain = 311.676
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 598.492 ; gain = 309.145
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 600.457 ; gain = 311.676
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 598.492 ; gain = 309.145
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 600.457 ; gain = 311.676
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 598.492 ; gain = 309.145
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 600.457 ; gain = 311.676
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -729,15 +732,15 @@ Report Cell Usage:
 +------+------------+------+
 |1     |BUFG        |     1|
 |2     |CARRY4      |    15|
-|3     |LUT2        |    46|
-|4     |LUT3        |    14|
-|5     |LUT4        |    12|
-|6     |LUT5        |     9|
+|3     |LUT2        |    48|
+|4     |LUT3        |    17|
+|5     |LUT4        |    14|
+|6     |LUT5        |    10|
 |7     |LUT6        |    32|
 |8     |MMCME2_BASE |     1|
 |9     |RAMB18E1    |     3|
-|10    |FDCE        |    51|
-|11    |FDRE        |     2|
+|10    |FDCE        |    55|
+|11    |FDRE        |    15|
 |12    |IBUF        |     4|
 |13    |OBUF        |     5|
 +------+------------+------+
@@ -746,36 +749,36 @@ Report Instance Areas:
 +------+-----------------------------+----------------------------+------+
 |      |Instance                     |Module                      |Cells |
 +------+-----------------------------+----------------------------+------+
-|1     |top                          |                            |   195|
-|2     |  HSyncFSM                   |SSyncFSM                    |    37|
+|1     |top                          |                            |   220|
+|2     |  HSyncFSM                   |SSyncFSM                    |    36|
 |3     |    CPIXEL_counter_inst      |GUCounter                   |    31|
-|4     |  PAPUnit_inst               |PAPUnit                     |     5|
+|4     |  PAPUnit_inst               |PAPUnit                     |    17|
 |5     |    B_BRAM_inst              |B_BRAM                      |     1|
 |6     |    G_BRAM_inst              |G_BRAM                      |     1|
 |7     |    R_BRAM_inst              |R_BRAM                      |     1|
-|8     |  PixelAddrGen_inst          |PixelAddrGen                |    34|
-|9     |    HPIXEL_counter_inst      |GUCounter__parameterized3   |     1|
+|8     |  PixelAddrGen_inst          |PixelAddrGen                |    50|
+|9     |    HPIXEL_counter_inst      |GUCounter__parameterized3   |    15|
 |10    |    UpUnit_inst              |UpscallingUnit              |    16|
 |11    |      HEN_inst               |Hold_to_step                |     2|
 |12    |      H_upscale_counter_inst |GUCounter__parameterized1   |     7|
 |13    |      V_upscale_counter_inst |GUCounter__parameterized2   |     7|
-|14    |    VPIXEL_counter_inst      |GUCounter__parameterized3_0 |    17|
+|14    |    VPIXEL_counter_inst      |GUCounter__parameterized3_0 |    18|
 |15    |  PixelClk_inst              |ClockGenerator              |     3|
-|16    |  VSyncFSM                   |SSyncFSM__parameterized0    |   106|
-|17    |    CPIXEL_counter_inst      |GUCounter__parameterized0   |    69|
+|16    |  VSyncFSM                   |SSyncFSM__parameterized0    |   104|
+|17    |    CPIXEL_counter_inst      |GUCounter__parameterized0   |    81|
 +------+-----------------------------+----------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 598.492 ; gain = 309.145
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 600.457 ; gain = 311.676
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 4 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 598.492 ; gain = 309.145
-Synthesis Optimization Complete : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 598.492 ; gain = 309.145
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 600.457 ; gain = 311.676
+Synthesis Optimization Complete : Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 600.457 ; gain = 311.676
 INFO: [Project 1-571] Translating synthesized netlist
 INFO: [Netlist 29-17] Analyzing 19 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 698.641 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 702.668 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 1 instances were transformed.
   MMCME2_BASE => MMCME2_ADV: 1 instances
@@ -783,10 +786,10 @@ INFO: [Project 1-111] Unisim Transformation Summary:
 INFO: [Common 17-83] Releasing license: Synthesis
 81 Infos, 4 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 698.641 ; gain = 421.590
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 698.641 ; gain = 0.000
+synth_design: Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 702.668 ; gain = 425.719
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 702.668 ; gain = 0.000
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
 INFO: [Common 17-1381] The checkpoint 'C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/lab3_project/lab3_project.runs/synth_1/VGA.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file VGA_utilization_synth.rpt -pb VGA_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Tue Nov 19 03:59:27 2024...
+INFO: [Common 17-206] Exiting Vivado at Tue Nov 19 17:22:24 2024...

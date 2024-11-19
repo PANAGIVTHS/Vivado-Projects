@@ -4,9 +4,6 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repos
 INFO: [VRFC 10-311] analyzing module ClockGenerator
 INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/GUCounter.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module GUCounter
-INFO: [VRFC 10-2458] undeclared symbol reset, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/GUCounter.v:19]
-INFO: [VRFC 10-2458] undeclared symbol user_reset, assumed default net type wire [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/GUCounter.v:20]
-WARNING: [VRFC 10-3676] redeclaration of ansi port 'overflow' is not allowed [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/GUCounter.v:21]
 INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/BRAMs/G_BRAM.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module G_BRAM
 INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/Hold_to_step.v" into library xil_defaultlib
@@ -21,10 +18,7 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repos
 INFO: [VRFC 10-311] analyzing module SSyncFSM
 INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/UpscallingUnit.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module UpscallingUnit
-WARNING: [VRFC 10-3676] redeclaration of ansi port 'HENADDR' is not allowed [C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/Generic/UpscallingUnit.v:2]
 INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Source/VGA/VGA.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module VGA
 INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Testbenches/VGA_tb.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module VGA_tb_2
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/lab3_project/lab3_project.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module glbl

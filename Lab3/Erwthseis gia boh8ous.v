@@ -60,3 +60,5 @@ end
     *erwthsh 9: posh wra pernei na paroume info apo bram ke posh wra pernei to enableing kai disableing
 
 */
+
+[DRC REQP-1840] RAMB18 async control check: The RAMB18E1 PAPUnit_inst/B_BRAM_inst/RAMB18E1_inst has an input control pin PAPUnit_inst/B_BRAM_inst/RAMB18E1_inst/ADDRARDADDR[0] (net: PAPUnit_inst/B_BRAM_inst/ADDRARDADDR[0]) which is driven by a register (PixelAddrGen_inst/HPIXEL_counter_inst/count_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.

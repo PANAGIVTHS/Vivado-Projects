@@ -1,9 +1,15 @@
 module PixelAddrGen (input clk, input reset, input HDISP, input VDISP, output [6:0] xPixelAddr, output [6:0] yPixelAddr);
     wire HENADDR, VENADDR;
-    wire user_reset;
+    reg user_reset;
 
     // Reset the counters every frame
-    assign user_reset = !VDISP;
+    always @(posedge clk) begin 
+        if (reset) begin
+            user_reset <= 0;
+        end else begin
+            user_reset <= !VDISP;
+        end
+    end 
     
     // Upscale the pixel counters
     UpscallingUnit UpUnit_inst (.clk(clk), .reset(reset), .HDISP(HDISP), .VDISP(VDISP), .HENADDR(HENADDR), .VENADDR(VENADDR));

@@ -1,3 +1,4 @@
+`timescale 1ns/10ps
 
 module VGA_tb_2;
     reg clk;
@@ -18,12 +19,12 @@ module VGA_tb_2;
         #100
         clk = 0;
         reset = 0;
-        enable = 0;
+        enable = 1;
         #(CLK_PERIOD*100) reset = 1;
         #(CLK_PERIOD*10) reset = 0;
 
-        // Test VGA_constoller module
-        enable = 1'b1;
+        //  VIOLATIONS?????
+        // #(CLK_PERIOD*16) enable = 1'b1;
 
     end
 endmodule
