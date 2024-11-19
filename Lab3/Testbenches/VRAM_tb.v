@@ -10,7 +10,7 @@ module VRAM_tb;
     reg [6:0] line, offset;
 
     // VRAM VRAM_inst (.clk(clk), .reset(reset), .pixel_val(pixel_val));
-    getPixelTLB getPixel_inst (.clk(clk), .reset(reset), .line(line), .offset(offset), .pixel_data(pixel_val), .valid_pixel(pixel_valid));
+    getPixel getPixel_inst (.clk(clk), .reset(reset), .line(line), .offset(offset), .pixel_data(pixel_val), .valid_pixel(pixel_valid));
 
     // Task to check if a pixel is valid and print the pixel value and address accordingly
     task check_pixel;

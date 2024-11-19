@@ -4,13 +4,14 @@ verilog xil_defaultlib  \
 "../../../../../Source/Generic/ClockGenerator.v" \
 "../../../../../Source/Generic/GUCounter.v" \
 "../../../../../Source/BRAMs/G_BRAM.v" \
-"../../../../../Source/_Testing/NextDesign/Hold_to_step.v" \
-"../../../../../Source/_Testing/NextDesign/PixelAddrGen.v" \
+"../../../../../Source/Generic/Hold_to_step.v" \
+"../../../../../Source/VGA/PAPUnit.v" \
+"../../../../../Source/VGA/PixelAddrGen.v" \
 "../../../../../Source/BRAMs/R_BRAM.v" \
-"../../../../../Source/_Testing/NextDesign/SSyncFSM.v" \
-"../../../../../Source/_Testing/NextDesign/VGA.v" \
-"../../../../../Source/_Testing/NextDesign/getPixel.v" \
-"../../../../../Testbenches/VGA_tb_2.v" \
+"../../../../../Source/VGA/SSyncFSM.v" \
+"../../../../../Source/Generic/UpscallingUnit.v" \
+"../../../../../Source/VGA/VGA.v" \
+"../../../../../Testbenches/VGA_tb.v" \
 
 # compile glbl module
 verilog xil_defaultlib "glbl.v"

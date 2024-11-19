@@ -92,7 +92,6 @@ module G_BRAM (
       .RSTRAMARSTRAM(reset),              // 1-bit input: A port set/reset
       .RSTREGARSTREG(reset),              // 1-bit input: A port register set/reset
       .WEA(write_enable)                  // 2-bit input: A port write enable
-      // Unconnected ports removed
    );
 
    assign green_val = doa_data[0];

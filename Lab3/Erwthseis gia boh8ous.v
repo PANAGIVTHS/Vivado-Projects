@@ -57,5 +57,6 @@ end
     *erwthsh 6: borw na balw allo roloi gia ta Vertical?
     *erwthsh 7: pws 8etw parameterized counters? counter <= BITS'd(num) einai syntax error
     *erwthsh 8: ginete na agnoisw edelws ta timing apo to Vertical ke na kanw increment otan EOL;
+    *erwthsh 9: posh wra pernei na paroume info apo bram ke posh wra pernei to enableing kai disableing
 
 */

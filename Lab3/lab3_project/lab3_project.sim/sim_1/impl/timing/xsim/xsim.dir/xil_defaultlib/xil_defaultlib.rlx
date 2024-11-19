@@ -1,0 +1,6 @@
+0.6
+2018.3
+Dec  7 2018
+00:33:28
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Testbenches/VGA_tb.v,1731976309,verilog,,,,VGA_tb_2,,,,,,,,
+C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/lab3_project/lab3_project.sim/sim_1/impl/timing/xsim/VGA_tb_2_time_impl.v,1731979323,verilog,,C:/Users/panag/Desktop/GitHub/Repositories/Vivado-Code/Lab3/Testbenches/VGA_tb.v,,B_BRAM;ClockGenerator;GUCounter;GUCounter__parameterized0;GUCounter__parameterized1;GUCounter__parameterized2;GUCounter__parameterized3;GUCounter__parameterized3_0;G_BRAM;Hold_to_step;PAPUnit;PixelAddrGen;R_BRAM;SSyncFSM;SSyncFSM__parameterized0;UpscallingUnit;VGA;glbl,,,,,,,,

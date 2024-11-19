@@ -1,0 +1,1 @@
+-wto "db15e8fe2be543199f0214136dff0d54" --incr --debug "typical" --relax --mt "2" --maxdelay -L "xil_defaultlib" -L "simprims_ver" -L "secureip" --snapshot "VGA_tb_2_time_impl" -transport_int_delays -pulse_r "0" -pulse_int_r "0" -pulse_e "0" -pulse_int_e "0" "xil_defaultlib.VGA_tb_2" "xil_defaultlib.glbl" -log "elaborate.log" 

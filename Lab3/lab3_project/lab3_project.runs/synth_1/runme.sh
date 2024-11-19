@@ -40,4 +40,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log VRAM.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source VRAM.tcl
+EAStep vivado -log VGA.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source VGA.tcl
