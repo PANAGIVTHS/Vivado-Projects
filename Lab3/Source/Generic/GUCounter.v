@@ -15,7 +15,7 @@
     - overflow: Overflow flag to indicate when the counter has reached the maximum value
 */
 
-module GUCounter #(parameter BITS = 10) (input clk, input [1:0] reset_in, input enable, input stall, output reg [BITS-1:0] count, output reg overflow);
+module GUCounter #(parameter BITS = 10) (input clk, input [1:0] reset_in, input enable, output reg [BITS-1:0] count, output reg overflow);
     wire reset = reset_in[1]; 
     wire user_reset = reset_in[0]; 
     
@@ -25,9 +25,6 @@ module GUCounter #(parameter BITS = 10) (input clk, input [1:0] reset_in, input 
             count <= 0; 
             overflow <= 0; 
         end else if (user_reset) begin 
-            count <= 0; 
-            overflow <= 0; 
-        end else if (stall && overflow) begin
             count <= 0; 
             overflow <= 0; 
         end else if (enable) begin

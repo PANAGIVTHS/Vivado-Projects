@@ -1,6 +1,6 @@
 `timescale 1ns/10ps
 
-module VGA_tb_2;
+module VGA_tb;
     reg clk;
     reg reset;
     wire [2:0] pixel_data;
@@ -11,7 +11,7 @@ module VGA_tb_2;
     always #(CLK_PERIOD/2) clk=~clk;
 
     // Instantiate the VGA controller with active sig set to 0
-    VGA VGA_inst(reset, clk, enable, 1'b0, VGA_RED, VGA_GREEN, VGA_BLUE, VGA_HSYNC, VGA_VSYNC);
+    VGAController VGA_inst(reset, clk, enable, 1'b0, VGA_RED, VGA_GREEN, VGA_BLUE, VGA_HSYNC, VGA_VSYNC);
 
     assign pixel_data = {VGA_RED, VGA_GREEN, VGA_BLUE};
 

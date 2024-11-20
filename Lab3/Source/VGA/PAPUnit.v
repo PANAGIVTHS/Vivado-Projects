@@ -1,3 +1,24 @@
+/*
+    The Pixel Acquisition Processing Unit (PAPUnit) module is responsible for processing the pixel data from the VRAMs and outputting the RGB values.
+    It uses the line and offset signals to generate the BRAM address for the red, green, and blue channels. The module uses the G_BRAM, R_BRAM, and
+    B_BRAM modules to read the pixel data from the BRAMs. The PAPUnit will output the combined pixel data (RGB) and a signal to indicate the pixel data
+    validity. The module will only output valid pixel data when the line and offset signals are within the BRAM (file) boundaries.
+
+    *Notice: The BRAM modules are instantiated in the PAPUnit module, which has to be enabled for them to also be enabled.
+    !Danger: Do not concatenate the pixel data outside the always block. This will cause Timing Violaions.
+    
+    Inputs:
+    - clk: Clock signal.
+    - reset: Reset signal.
+    - enable: Enable signal to start the PAPUnit.
+    - line: Line number (0 to 95 for BRAM, 7 bits).
+    - offset: Pixel offset (0 to 127 for BRAM, 7 bits).
+
+    Outputs:
+    - pixel_data: 3-bit combined pixel data (RGB).
+    - valid_pixel: Signal to indicate pixel data validity.
+*/
+
 module PAPUnit(
     input clk,                   // Clock signal
     input reset,                 // Reset signal
@@ -8,19 +29,15 @@ module PAPUnit(
     output valid_pixel           // Signal to indicate pixel data validity
 );
 
-    // Registers for stable BRAM address generation
-    reg [5:0] bram_row;      
-    reg [7:0] bram_offset;
+    reg [13:0] address;
     wire green_val, red_val, blue_val;
 
     // Synchronous generation of BRAM row and offset. Why is it needed tho?
     always @(posedge clk) begin
         if (reset) begin
-            bram_row <= 0;
-            bram_offset <= 0;
+            address <= 0;
         end else if (enable) begin
-            bram_row <= line[6:1];               // Divide line by 2 for BRAM addressing
-            bram_offset <= {line[0], offset};    // Concatenate line LSB with offset
+            address <= {line, offset};
         end
     end
 
@@ -30,8 +47,8 @@ module PAPUnit(
         .reset(reset),
         .read_enable(enable),
         .write_enable(2'b00),
-        .reg_enable(1'b0),
-        .address({bram_row, bram_offset}), // Stable address generation
+        .reg_enable(1'b1),
+        .address(address), 
         .green_val(green_val)
     );
 
@@ -40,8 +57,8 @@ module PAPUnit(
         .reset(reset),
         .read_enable(enable),
         .write_enable(2'b00),
-        .reg_enable(1'b0),
-        .address({bram_row, bram_offset}), // Stable address generation
+        .reg_enable(1'b1),
+        .address(address), 
         .red_val(red_val)
     );
 
@@ -50,8 +67,8 @@ module PAPUnit(
         .reset(reset),
         .read_enable(enable),
         .write_enable(2'b00),
-        .reg_enable(1'b0),
-        .address({bram_row, bram_offset}), // Stable address generation
+        .reg_enable(1'b1),
+        .address(address),
         .blue_val(blue_val)
     );
 
