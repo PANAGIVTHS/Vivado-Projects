@@ -1,47 +1,34 @@
 
-// called only when pixel was in a sprite
-// you need a bram that has depicts sprite domains
-
-// this will return the pixel and also return the next frame
-module SpriteParser (
-    input clk,
-    input reset,
-    input enable,
-    input [13:0] address,
-    output pixel_data
+module Sprite #(
+    parameter WIDTH = 7'b0,
+    parameter HEIGHT = 7'b0,
+    parameter COLLIDABLE = 1'b0
+    parameter DATA_ADDR = 14'b0,
+    parameter NEXT_SPRITE_ADDR = 14'b0
+)(
+    input [6:0] xPos,
+    input [6:0] yPos,
+    input [13:0] addr,
+    output isCollidable,
+    output [13:0] nextAddr,
+    output non_sprite_pixel
 );
-    localparam BLOCK_LENGTH = 16;
-    wire [15:0] OUTA, OUTB;
-    wire [13:0] sprite_data_addr;
 
-    GUCounter #(.BITS(8)) SpriteCoutner (.clk(clk), .reset_in({reset, address == 14'b0}), .enable(enable), .count(SpriteCount), .overflow());
+    wire [15:0] O, A0, A1, A2, A3, A4, A5;
+    wire [15:0] dimensions;
+    wire [13:0] dataAddr, pixel_data_addr;
 
-    SpriteBRAM SpriteBRAM_inst (
-        .clk(clk),
-        .reset(reset),
-        .RENA(enable),
-        .RENB(enable),
-        .ADDRA(ADDRA),
-        .ADDRB(ADDRA + BLOCK_LENGTH),
-        .OUTA(OUTA),
-        .OUTB(OUTB)
-    );
+    ROM64X1 #(.WIDTH(WIDTH), .HEIGHT(HEIGHT), .COLLIDABLE(COLLIDABLE), .DATA_ADDR(DATA_ADDR), .NEXT_SPRITE_ADDR(NEXT_SPRITE_ADDR)) 
+        ROM_inst (.isCollidable(isCollidable), .nextAddr(nextAddr), .dataAddr(dataAddr), .dimensions(dimensions));
 
-    assign next_sprite = OUTA[13:0];
-    assign sprite_data_addr = OUTA[15:0];
-    assign in_sprite = address
-    
-    SDATABram SDATABram_inst (
-        .clk(clk),
-        .reset(reset),
-        .RENA(enable),
-        .RENB(1'b0),
-        .ADDRA(address - sprite_data_addr),
-        .ADDRB(14'b0),
-        .OUTA(pixel_data),
-        .OUTB()
-    );
+    ROM256X5 #(
+        .INIT_00(256'hffffffffffffffffaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb0000000000000000), 
+        .INIT_01(256'h0),
+        .INIT_02(256'h0),
+        .INIT_03(256'h0),
+        .INIT_04(256'h0)
+    ) ROM256X5_inst (.addr(pixel_data_addr), .out(pixel_data));
 
-
-
+    assign pixel_data_addr = addr - {yPos, xPos};
+    assign non_sprite_pixel = addr[6:0] < xPos || addr[6:0] >= xPos + WIDTH || addr[13:7] < yPos || addr[13:7] >= yPos + HEIGHT || pixel_data;
 endmodule

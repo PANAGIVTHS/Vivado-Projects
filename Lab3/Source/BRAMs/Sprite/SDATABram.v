@@ -1,13 +1,13 @@
 
-module SpriteBRAM (
+module SDATABram (
    input clk,
    input reset,
    input RENA,
-   input RENB,
+   input WENB,
    input [13:0] ADDRA,
    input [13:0] ADDRB,
-   output PXLA,
-   output PXLB
+   output DATAOUT,
+   input DATAIN
 );
    wire [15:0] doa_data;
    wire [15:0] dob_data;      // Unused output for port B
@@ -113,30 +113,30 @@ module SpriteBRAM (
    )
    RAMB18E1_inst (
       // Port A
-      .DOADO(doa_data),                   // 16-bit output: A port data/LSB data
+      .DOADO(DATAOUT),                   // 16-bit output: A port data/LSB data
       .DOPADOP(dopa_unused),              // 2-bit output: A port parity data
-      .ADDRARDADDR(address),      // 15-bit input: A port address (with MSB padding)
+      .ADDRARDADDR(ADDRA),      // 15-bit input: A port address (with MSB padding)
       .CLKARDCLK(clk),                    // 1-bit input: A port clock/Read clock
-      .ENARDEN(read_enable),              // 1-bit input: A port enable/Read enable
-      .REGCEAREGCE(reg_enable),           // 1-bit input: A port register enable/Register enable
+      .ENARDEN(RENA),              // 1-bit input: A port enable/Read enable
+      .REGCEAREGCE(1'b0),           // 1-bit input: A port register enable/Register enable
       .RSTRAMARSTRAM(reset),              // 1-bit input: A port set/reset
       .RSTREGARSTREG(reset),              // 1-bit input: A port register set/reset
       .DIADI(16'h0000),                   // 16-bit input: A port data input
       .DIPADIP(dipa_unused),              // 2-bit input: A port parity input
-      .WEA(write_enable),                 // 2-bit input: A port write enable
+      .WEA(2'b0),                 // 2-bit input: A port write enable
 
       // Port B (Unused)
       .DOBDO(dob_data),                   // 16-bit output: B port data
       .DOPBDOP(dopb_unused),              // 2-bit output: B port parity data
-      .ADDRBWRADDR(14'b0),             // 15-bit input: B port address
-      .CLKBWRCLK(1'b0),                   // 1-bit input: B port clock
-      .ENBWREN(1'b0),                     // 1-bit input: B port enable
+      .ADDRBWRADDR(ADDRB),             // 15-bit input: B port address
+      .CLKBWRCLK(clk),                   // 1-bit input: B port clock
+      .ENBWREN(WENB),                     // 1-bit input: B port enable
       .REGCEB(1'b0),                      // 1-bit input: B port register enable
-      .RSTRAMB(1'b0),                     // 1-bit input: B port set/reset
-      .RSTREGB(1'b0),                     // 1-bit input: B port register set/reset
-      .DIBDI(16'h0000),                   // 16-bit input: B port data input
+      .RSTRAMB(reset),                     // 1-bit input: B port set/reset
+      .RSTREGB(reset),                     // 1-bit input: B port register set/reset
+      .DIBDI(DATAIN),                   // 16-bit input: B port data input
       .DIPBDIP(dipb_unused),              // 2-bit input: B port parity input
-      .WEBWE(4'b0000)                     // 4-bit input: B port write enable
+      .WEBWE(WENB)                     // 4-bit input: B port write enable
    );
 
    assign pixel_val = doa_data[0];
