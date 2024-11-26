@@ -11,7 +11,7 @@ module VGA_tb;
     always #(CLK_PERIOD/2) clk=~clk;
 
     // Instantiate the VGA controller with active sig set to 0
-    VGAController VGA_inst(reset, clk, enable, 1'b0, VGA_RED, VGA_GREEN, VGA_BLUE, VGA_HSYNC, VGA_VSYNC);
+    VGAController VGA_inst(reset, clk, enable, 1'b1, 1'b0, VGA_RED, VGA_GREEN, VGA_BLUE, VGA_HSYNC, VGA_VSYNC);
 
     assign pixel_data = {VGA_RED, VGA_GREEN, VGA_BLUE};
 
@@ -23,9 +23,6 @@ module VGA_tb;
         #1000
         #(CLK_PERIOD*100) reset = 1;
         #(CLK_PERIOD*200) reset = 0;
-
-        // VIOLATIONS?????
-        // #(CLK_PERIOD*16) enable = 1'b1;
 
     end
 endmodule

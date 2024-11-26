@@ -45,7 +45,7 @@ module SSyncFSM #(
         end
     end
 
-    always @(*) begin
+    always @(cur_state or CPIXEL) begin
         case (cur_state)
             SSYNC_PULSE: begin
                 displaying = 1'b0;

@@ -1,12 +1,13 @@
 
-module G_BRAM (
-    input clk,
-    input reset,
-    input read_enable,
-    input [1:0] write_enable,
-    input reg_enable,
-    input [13:0] address,
-    output green_val
+module SpriteBRAM (
+   input clk,
+   input reset,
+   input RENA,
+   input RENB,
+   input [13:0] ADDRA,
+   input [13:0] ADDRB,
+   output [15:0] OUTA,
+   output [15:0] OUTB
 );
    wire [15:0] doa_data;
    wire [15:0] dob_data;      // Unused output for port B
@@ -18,18 +19,19 @@ module G_BRAM (
    // RAMB18E1: 18K-bit Configurable Synchronous Block RAM
    //           Artix-7
    // Xilinx HDL Language Template, version 2020.2.
-
+   
    assign dipa_unused = 2'h00;
    assign dipb_unused = 2'h00;
    assign dopa_unused = 2'h00;
    assign dopb_unused = 2'h00;
-      
+
    RAMB18E1 #(
       .RDADDR_COLLISION_HWCONFIG("DELAYED_WRITE"),
       .SIM_COLLISION_CHECK("ALL"),
       .DOA_REG(0),
       .DOB_REG(0),
-      .INIT_00(256'h0000000000000000000000000000000000000000000000000000000000000004),
+      //! Sprite at address 0x0 is always a NULL Sprite (64'b0)
+      .INIT_00(256'hffffffffffffffffaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb0000000000000000),
       .INIT_01(256'h0000000000000000000000000000000000000000000000000000000000000000),
       .INIT_02(256'h0000000000000000000000000000000000000000000000000000000000000000),
       .INIT_03(256'h0000000000000000000000000000000000000000000000000000000000000000),
@@ -81,8 +83,8 @@ module G_BRAM (
       .INIT_B(18'h00000),
       .INIT_FILE("NONE"),
       .RAM_MODE("TDP"),
-      .READ_WIDTH_A(1), 
-      .READ_WIDTH_B(0), 
+      .READ_WIDTH_A(16), 
+      .READ_WIDTH_B(16), 
       .WRITE_WIDTH_A(0), 
       .WRITE_WIDTH_B(0), 
       .RSTREG_PRIORITY_A("RSTREG"),
@@ -95,32 +97,30 @@ module G_BRAM (
    )
    RAMB18E1_inst (
       // Port A
-      .DOADO(doa_data),                   // 16-bit output: A port data/LSB data
+      .DOADO(OUTA),                   // 16-bit output: A port data/LSB data
       .DOPADOP(dopa_unused),              // 2-bit output: A port parity data
-      .ADDRARDADDR(address),      // 15-bit input: A port address (with MSB padding)
+      .ADDRARDADDR(ADDRA),      // 15-bit input: A port address (with MSB padding)
       .CLKARDCLK(clk),                    // 1-bit input: A port clock/Read clock
-      .ENARDEN(read_enable),              // 1-bit input: A port enable/Read enable
-      .REGCEAREGCE(reg_enable),           // 1-bit input: A port register enable/Register enable
+      .ENARDEN(RENA),              // 1-bit input: A port enable/Read enable
+      .REGCEAREGCE(1'b0),           // 1-bit input: A port register enable/Register enable
       .RSTRAMARSTRAM(reset),              // 1-bit input: A port set/reset
       .RSTREGARSTREG(reset),              // 1-bit input: A port register set/reset
       .DIADI(16'h0000),                   // 16-bit input: A port data input
-      .DIPADIP(dipa_unused),              // 2-bit input: A port parity input
-      .WEA(write_enable),                  // 2-bit input: A port write enable
+      .DIPADIP(2'b00),              // 2-bit input: A port parity input
+      .WEA(2'b00),                 // 2-bit input: A port write enable
 
       // Port B (Unused)
-      .DOBDO(dob_data),                   // 16-bit output: B port data
+      .DOBDO(OUTB),                   // 16-bit output: B port data
       .DOPBDOP(dopb_unused),              // 2-bit output: B port parity data
-      .ADDRBWRADDR(15'h0000),             // 15-bit input: B port address
-      .CLKBWRCLK(1'b0),                   // 1-bit input: B port clock
-      .ENBWREN(1'b0),                     // 1-bit input: B port enable
+      .ADDRBWRADDR(ADDRb),             // 15-bit input: B port address
+      .CLKBWRCLK(clk),                   // 1-bit input: B port clock
+      .ENBWREN(RENB),                     // 1-bit input: B port enable
       .REGCEB(1'b0),                      // 1-bit input: B port register enable
-      .RSTRAMB(1'b0),                     // 1-bit input: B port set/reset
-      .RSTREGB(1'b0),                     // 1-bit input: B port register set/reset
+      .RSTRAMB(reset),                     // 1-bit input: B port set/reset
+      .RSTREGB(reset),                     // 1-bit input: B port register set/reset
       .DIBDI(16'h0000),                   // 16-bit input: B port data input
-      .DIPBDIP(dipb_unused),              // 2-bit input: B port parity input
+      .DIPBDIP(2'b00),              // 2-bit input: B port parity input
       .WEBWE(4'b0000)                     // 4-bit input: B port write enable
    );
-
-   assign green_val = doa_data[0];
 
 endmodule

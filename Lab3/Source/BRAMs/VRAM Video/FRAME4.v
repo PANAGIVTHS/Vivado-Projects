@@ -1,12 +1,12 @@
 
-module B_BRAM (
+module FRAME4 (
     input clk,
     input reset,
     input read_enable,
     input [1:0] write_enable,
     input reg_enable,
     input [13:0] address,
-    output blue_val
+    output pixel_val
 );
    wire [15:0] doa_data;
    wire [15:0] dob_data;      // Unused output for port B
@@ -18,7 +18,7 @@ module B_BRAM (
    // RAMB18E1: 18K-bit Configurable Synchronous Block RAM
    //           Artix-7
    // Xilinx HDL Language Template, version 2020.2.
-
+   
    assign dipa_unused = 2'h00;
    assign dipb_unused = 2'h00;
    assign dopa_unused = 2'h00;
@@ -29,7 +29,7 @@ module B_BRAM (
       .SIM_COLLISION_CHECK("ALL"),
       .DOA_REG(0),
       .DOB_REG(0),
-      .INIT_00(256'h0000000000000000000000000000000000000000000000000000000000000001),
+      .INIT_00(256'h0000000000000000000000000000000000000000000000000000000000000003),
       .INIT_01(256'h0000000000000000000000000000000000000000000000000000000000000000),
       .INIT_02(256'h0000000000000000000000000000000000000000000000000000000000000000),
       .INIT_03(256'h0000000000000000000000000000000000000000000000000000000000000000),
@@ -105,12 +105,12 @@ module B_BRAM (
       .RSTREGARSTREG(reset),              // 1-bit input: A port register set/reset
       .DIADI(16'h0000),                   // 16-bit input: A port data input
       .DIPADIP(dipa_unused),              // 2-bit input: A port parity input
-      .WEA(write_enable),                  // 2-bit input: A port write enable
+      .WEA(write_enable),                 // 2-bit input: A port write enable
 
       // Port B (Unused)
       .DOBDO(dob_data),                   // 16-bit output: B port data
       .DOPBDOP(dopb_unused),              // 2-bit output: B port parity data
-      .ADDRBWRADDR(15'h0000),             // 15-bit input: B port address
+      .ADDRBWRADDR(14'b0),             // 15-bit input: B port address
       .CLKBWRCLK(1'b0),                   // 1-bit input: B port clock
       .ENBWREN(1'b0),                     // 1-bit input: B port enable
       .REGCEB(1'b0),                      // 1-bit input: B port register enable
@@ -121,6 +121,6 @@ module B_BRAM (
       .WEBWE(4'b0000)                     // 4-bit input: B port write enable
    );
 
-   assign blue_val = doa_data[0];
+   assign pixel_val = doa_data[0];
 
 endmodule

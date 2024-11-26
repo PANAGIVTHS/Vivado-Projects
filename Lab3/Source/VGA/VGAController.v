@@ -24,7 +24,7 @@
     - VGA_VSYNC: Vertical sync signal.
 */
 
-module VGAController (input reset, input clk, input enable, input ACTIVE_SIG, output VGA_RED, output VGA_GREEN, output VGA_BLUE, output VGA_HSYNC, output VGA_VSYNC);
+module VGAController (input reset, input clk, input enable, input data_src, input ACTIVE_SIG, output VGA_RED, output VGA_GREEN, output VGA_BLUE, output VGA_HSYNC, output VGA_VSYNC);
     wire new_clk, locked;
     wire HDISP, VDISP;
     wire [6:0] xPixelAddr, yPixelAddr;
@@ -46,7 +46,8 @@ module VGAController (input reset, input clk, input enable, input ACTIVE_SIG, ou
     PixelAddrGen PixelAddrGen_inst (.clk(new_clk), .reset(reset), .HDISP(HDISP), .VDISP(VDISP), .xPixelAddr(xPixelAddr), .yPixelAddr(yPixelAddr));
 
     // Instantiate the Pixel Address Processor Unit whose job is to calculate the right address and output the RGB values stored in the VRAMs
-    PAPUnit PAPUnit_inst (.clk(new_clk), .reset(reset), .enable(internal_enable), .line(yPixelAddr), .offset(xPixelAddr), .pixel_data({red_val, green_val, blue_val}), .valid_pixel(valid_pixel));
+    PAPUnit #(.HOLD_FRAME(4), .BITS(3)) 
+        PAPUnit_inst (.clk(new_clk), .reset(reset), .enable(internal_enable), .data_src(data_src), .line(yPixelAddr), .offset(xPixelAddr), .pixel_data({red_val, green_val, blue_val}), .valid_pixel(valid_pixel));
     
     // Instantiate the Clock Generator to generate the new clock signal for the VGA timing (Slower than a counter but cleaner)
     ClockGenerator PixelClk_inst (.clk(clk), .new_clk(new_clk), .locked(locked));
