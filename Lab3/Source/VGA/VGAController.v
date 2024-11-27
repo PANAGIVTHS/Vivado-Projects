@@ -24,7 +24,7 @@
     - VGA_VSYNC: Vertical sync signal.
 */
 
-module VGAController (input reset, input clk, input enable, input data_src, input ACTIVE_SIG, output reg VGA_RED, output reg VGA_GREEN, output reg VGA_BLUE, output VGA_HSYNC, output VGA_VSYNC);
+module VGAController (input reset, input clk, input enable, input data_src, input sprite_enable, input ACTIVE_SIG, output reg VGA_RED, output reg VGA_GREEN, output reg VGA_BLUE, output VGA_HSYNC, output VGA_VSYNC);
     wire new_clk, locked;
     wire HDISP, VDISP;
     wire [6:0] xPixelAddr, yPixelAddr;
@@ -40,6 +40,8 @@ module VGAController (input reset, input clk, input enable, input data_src, inpu
         Debouncer_activeSig (.clk(clk), .button(ACTIVE_SIG), .button_debounced(ACTIVE_SIG_debounced));
     Debouncer #(.HOLD_SIGNAL(25000), .BITS(15)) 
         Debouncer_dataSrc (.clk(clk), .button(data_src), .button_debounced(data_src_debounced));
+    Debouncer #(.HOLD_SIGNAL(25000), .BITS(15)) 
+        Debouncer_dataSrc (.clk(clk), .button(sprite_enable), .button_debounced(sprite_enable_debounced));
 
     // Debounce reset and enable signals
     Debouncer #(.HOLD_SIGNAL(25000), .BITS(15)) 
@@ -73,14 +75,14 @@ module VGAController (input reset, input clk, input enable, input data_src, inpu
 
     // REMOVE IF FAIL START
     // REMOVE IF FAIL  reg from the output of the top module
-    MovementController #(.INIT_X(60), .INIT_Y(45), .INIT_X_VEL(1), .INIT_Y_VEL(1), .WIDTH(32), .HEIGHT(32), .FRAMES_TO_UPDATE(1))
-        MovementController_inst (.clk(clk), .reset(reset), .isCollidable(isCollidable), .xPos(xPos), .yPos(yPos));
+    MovementController #(.INIT_X(94), .INIT_Y(45), .INIT_X_VEL(1), .INIT_Y_VEL(1), .WIDTH(32), .HEIGHT(32), .FRAMES_TO_UPDATE(3))
+        MovementController_inst (.clk(clk), .reset(reset), .enable(enable), .isCollidable(isCollidable), .xPos(xPos), .yPos(yPos));
 
     Sprite #(.WIDTH(32), .HEIGHT(32), .COLLIDABLE(1), .DATA_ADDR(14'b0), .NEXT_SPRITE_ADDR(14'b0))
         Sprite_inst (.xPos(xPos), .yPos(yPos), .addr({yPixelAddr, xPixelAddr}), .isCollidable(isCollidable), .nextAddr(nextAddr), .non_sprite_pixel(non_sprite_pixel), .pixel_data(sout));
 
     always @(*) begin
-        if (!non_sprite_pixel) begin
+        if (!non_sprite_pixel && sprite_enable_debounced) begin
             VGA_RED <= sout;
             VGA_GREEN <= sout;
             VGA_BLUE <= sout;

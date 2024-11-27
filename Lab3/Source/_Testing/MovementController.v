@@ -5,7 +5,7 @@ module MovementController #(
     parameter INIT_Y_VEL = 7'b0,    // Initial Y velocity
     parameter WIDTH = 7'b0,        // Width of the object
     parameter HEIGHT = 7'b0,        // Height of the object
-    parameter FRAMES_TO_UPDATE = 60  // lower = faster velocity UP TO 2,576
+    parameter FRAMES_TO_UPDATE = 60  // lower = faster velocity UP TO 2,576 minimum value of 3
 )(
     input clk,                      // Clock input
     input reset,                    // Reset signal
@@ -15,7 +15,7 @@ module MovementController #(
     output reg [6:0] yPos           // Current Y position
 );
 
-    // Internal velocity registers
+    // Internal velocity registerss
     reg signed [7:0] xVel;
     reg signed [7:0] yVel;
     
@@ -23,9 +23,21 @@ module MovementController #(
     localparam SCREEN_WIDTH = 128;
     localparam SCREEN_HEIGHT = 96;
     localparam TICKS_TO_UPDATE = FRAMES_TO_UPDATE * 416750;
+    wire [29:0] gameTicks;
+    wire update;
+    reg [29:0] ticks_passed;
 
-    GUCounter #(.BITS(30)) GameTickCounter (.clk(clk), .reset_in({reset, gameTicks == TICKS_TO_UPDATE - 1}), .enable(enable), .count(gameTicks), .overflow());
-    assign update = gameTicks == TICKS_TO_UPDATE - 10;
+    GUCounter #(.BITS(30)) GameTickCounter (.clk(clk), .reset_in({reset, ticks_passed == TICKS_TO_UPDATE - 1}), .enable(enable), .count(gameTicks), .overflow());
+    assign update = ticks_passed == TICKS_TO_UPDATE - 2;
+    
+    // Prevent violations by large adder
+    always @(posedge clk) begin
+        if (reset) begin
+            ticks_passed <= 0;
+        end else begin 
+            ticks_passed <= gameTicks;
+        end
+    end
 
     always @(posedge clk) begin
         if (reset) begin
