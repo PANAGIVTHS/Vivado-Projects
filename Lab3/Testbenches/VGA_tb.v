@@ -1,6 +1,6 @@
 `timescale 1ns/10ps
 
-module VGA_tb;
+module VGA_tb();
     reg clk;
     reg reset;
     wire [2:0] pixel_data;
@@ -21,8 +21,8 @@ module VGA_tb;
         reset = 0;
         enable = 1;
         #1000
-        #(CLK_PERIOD*100) reset = 1;
-        #(CLK_PERIOD*200) reset = 0;
+        #(CLK_PERIOD*1000) reset = 1;
+        #(CLK_PERIOD*30000) reset = 0;
 
     end
 endmodule

@@ -110,7 +110,7 @@ module B_BRAM (
       // Port B (Unused)
       .DOBDO(dob_data),                   // 16-bit output: B port data
       .DOPBDOP(dopb_unused),              // 2-bit output: B port parity data
-      .ADDRBWRADDR(15'h0000),             // 15-bit input: B port address
+      .ADDRBWRADDR(14'h0000),             // 15-bit input: B port address
       .CLKBWRCLK(1'b0),                   // 1-bit input: B port clock
       .ENBWREN(1'b0),                     // 1-bit input: B port enable
       .REGCEB(1'b0),                      // 1-bit input: B port register enable

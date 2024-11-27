@@ -1,7 +1,7 @@
 module ROM64X1 #(
     parameter WIDTH = 7'b0,
     parameter HEIGHT = 7'b0,
-    parameter COLLIDABLE = 1'b0
+    parameter COLLIDABLE = 1'b0,
     parameter DATA_ADDR = 14'b0,
     parameter NEXT_SPRITE_ADDR = 14'b0 
 )(

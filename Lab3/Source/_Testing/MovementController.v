@@ -2,7 +2,7 @@ module MovementController #(
     parameter INIT_X = 7'b0,        // Initial X position
     parameter INIT_Y = 7'b0,        // Initial Y position
     parameter INIT_X_VEL = 7'b0,    // Initial X velocity
-    parameter INIT_Y_VEL = 7'b0,    // Initial Y velocity
+    parameter INIT_Y_VEL = 7'b0    // Initial Y velocity
 )(
     input clk,                      // Clock input
     input reset,                    // Reset signal

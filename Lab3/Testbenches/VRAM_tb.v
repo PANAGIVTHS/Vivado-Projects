@@ -10,8 +10,8 @@ module VRAM_tb;
     wire pixel_valid;
     reg [6:0] line, offset;
 
-    // VRAM VRAM_inst (.clk(clk), .reset(reset), .pixel_val(pixel_val));
-    PAPUnit PAPUnit_inst (.clk(clk), .reset(reset), .line(line), .offset(offset), .pixel_data(pixel_val), .valid_pixel(pixel_valid));
+    PAPUnit #(.HOLD_FRAME(15), .BITS(4))
+        PAPUnit_inst (.clk(clk), .reset(reset), .enable(enable), .data_src(data_src), .line(line), .offset(offset), .pixel_data(pixel_val), .valid_pixel(valid_pixel));
 
     // Task to check if a pixel is valid and print the pixel value and address accordingly
     task check_pixel;
@@ -31,10 +31,12 @@ module VRAM_tb;
         #100
         clk = 0;
         reset = 0;
+        enable = 1;
+        data_src = 0;
         #(CLK_PERIOD*10) reset = 1;
         #(CLK_PERIOD*10) reset = 0;
 
-        // Test getPixel module
+        // Test PAPU module
 
         // Test case 1: valid pixel
         line = 7'b0000000;

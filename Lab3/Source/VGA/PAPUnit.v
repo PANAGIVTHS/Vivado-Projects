@@ -20,8 +20,8 @@
 */
 
 module PAPUnit #(
-    parameter HOLD_FRAME = 4,
-    parameter BITS = 3
+    parameter HOLD_FRAME = 25,
+    parameter BITS = 5
 )(
     input clk,                   // Clock signal
     input reset,                 // Reset signal
@@ -30,7 +30,7 @@ module PAPUnit #(
     input [6:0] offset,          // Pixel offset (0 to 127 for screen, 7 bits)
     input data_src,              // Data source (0 for frame, 1 for BRAM)
     output reg [2:0] pixel_data,     // 3-bit combined pixel data (RGB)
-    output valid_pixel           // Signal to indicate pixel data validity
+    output valid_pixel           // Signal to indicate pixel data validity.
 );
 
     reg [13:0] address;
@@ -46,7 +46,9 @@ module PAPUnit #(
     SSyncFSM #(.COUNTER_BITS(19), .SHOLD(1600), .SBP(23200), .DISPLAY_TIME(384000), .SFP(8000))
         VSyncFSM (.reset(reset), .clk(clk), .enable(enable), .ACTIVE_SIG(1'b1), .VGA_SIG(next_frame_hold), .displaying());
 
-    Debouncer Debouncer_inst (.clk(clk), .button(next_frame_hold), .button_debounced(next_frame_debounced));
+    Debouncer #(.HOLD_SIGNAL(3), .BITS(4)) 
+        Debouncer_inst (.clk(clk), .button(next_frame_hold), .button_debounced(next_frame_debounced));
+
     Hold_to_step Hold_to_step_inst (.clk(clk), .reset(reset), .button(next_frame_debounced), .spike(frameSig));
     GUCounter #(.BITS(BITS)) HFRAMECounter_inst (.clk(clk), .reset_in({reset, HFRAMECounter == HOLD_FRAME}), .enable(frameSig), .count(HFRAMECounter), .overflow());
     
@@ -55,7 +57,7 @@ module PAPUnit #(
             frame <= 0;
         end else if (frame > NUM_FRAMES - 1) begin
             frame <= 0;
-        end else if (HFRAMECounter == HOLD_FRAME - 1) begin
+        end else if ((HFRAMECounter == HOLD_FRAME - 1) && frameSig && enable) begin
             frame <= frame + 1;
         end
     end
@@ -230,8 +232,8 @@ module PAPUnit #(
         .pixel_val(frame_data[12])
     );
 
-    // Combine the pixel data
-    always @(red_val or green_val or blue_val or frame) begin 
+    // Combine the pixel datA
+    always @(*) begin 
         if (data_src) begin
             pixel_data = {3{frame_data[frame]}};
         end else begin
@@ -241,6 +243,5 @@ module PAPUnit #(
 
     // Set valid_pixel when reading valid pixel from BRAM
     assign valid_pixel = (line < 96 && offset < 128);
-
 endmodule
 
