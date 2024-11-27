@@ -41,7 +41,7 @@ module VGAController (input reset, input clk, input enable, input data_src, inpu
     Debouncer #(.HOLD_SIGNAL(25000), .BITS(15)) 
         Debouncer_dataSrc (.clk(clk), .button(data_src), .button_debounced(data_src_debounced));
     Debouncer #(.HOLD_SIGNAL(25000), .BITS(15)) 
-        Debouncer_dataSrc (.clk(clk), .button(sprite_enable), .button_debounced(sprite_enable_debounced));
+        Debouncer_sprite (.clk(clk), .button(sprite_enable), .button_debounced(sprite_enable_debounced));
 
     // Debounce reset and enable signals
     Debouncer #(.HOLD_SIGNAL(25000), .BITS(15)) 
@@ -68,14 +68,13 @@ module VGAController (input reset, input clk, input enable, input data_src, inpu
 
     // Instantiate the Movement Controller to handle the movement of the sprite
     wire [6:0] xPos, yPos;
-    wire isCollidable;
     wire [13:0] nextAddr;
     wire non_sprite_pixel;
-    wire sout;
+    wire sout, isCollidable;
 
     // REMOVE IF FAIL START
     // REMOVE IF FAIL  reg from the output of the top module
-    MovementController #(.INIT_X(94), .INIT_Y(45), .INIT_X_VEL(1), .INIT_Y_VEL(1), .WIDTH(32), .HEIGHT(32), .FRAMES_TO_UPDATE(3))
+    MovementController #(.INIT_X(94), .INIT_Y(45), .INIT_X_VEL(1), .INIT_Y_VEL(1), .WIDTH(32), .HEIGHT(32), .FRAMES_TO_UPDATE(60))
         MovementController_inst (.clk(clk), .reset(reset), .enable(enable), .isCollidable(isCollidable), .xPos(xPos), .yPos(yPos));
 
     Sprite #(.WIDTH(32), .HEIGHT(32), .COLLIDABLE(1), .DATA_ADDR(14'b0), .NEXT_SPRITE_ADDR(14'b0))

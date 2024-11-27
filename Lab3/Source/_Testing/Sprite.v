@@ -20,7 +20,7 @@ module Sprite #(
     wire [6:0] line, offset;
 
 
-    ROM64X1 #(.WIDTH(WIDTH), .HEIGHT(HEIGHT), .COLLIDABLE(COLLIDABLE), .DATA_ADDR(DATA_ADDR), .NEXT_SPRITE_ADDR(NEXT_SPRITE_ADDR)) 
+    ROM64X1M #(.WIDTH(WIDTH), .HEIGHT(HEIGHT), .COLLIDABLE(COLLIDABLE), .DATA_ADDR(DATA_ADDR), .NEXT_SPRITE_ADDR(NEXT_SPRITE_ADDR)) 
         ROM_inst (.isCollidable(isCollidable), .nextAddr(nextAddr), .dataAddr(dataAddr), .dimensions(dimensions));
 
     ROM256X5 #(

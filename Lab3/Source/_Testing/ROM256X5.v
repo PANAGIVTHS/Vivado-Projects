@@ -21,24 +21,24 @@ module ROM256X5 #(
     input [6:0] offset,
     output reg out
 );
-    wire [255:0] mem [15:0];
+    reg [255:0] mem [15:0];
 
-    assign mem[0] = INIT_00; 
-    assign mem[1] = INIT_01;
-    assign mem[2] = INIT_02;
-    assign mem[3] = INIT_03; 
-    assign mem[4] = INIT_04;
-    assign mem[5] = INIT_05;
-    assign mem[6] = INIT_06;
-    assign mem[7] = INIT_07;
-    assign mem[8] = INIT_08;
-    assign mem[9] = INIT_09;
-    assign mem[10] = INIT_0A;
-    assign mem[11] = INIT_0B;
-    assign mem[12] = INIT_0C;
-    assign mem[13] = INIT_0D;
-    assign mem[14] = INIT_0E;
-    assign mem[15] = INIT_0F;
+    initial mem[0] = INIT_00; 
+    initial mem[1] = INIT_01;
+    initial mem[2] = INIT_02;
+    initial mem[3] = INIT_03; 
+    initial mem[4] = INIT_04;
+    initial mem[5] = INIT_05;
+    initial mem[6] = INIT_06;
+    initial mem[7] = INIT_07;
+    initial mem[8] = INIT_08;
+    initial mem[9] = INIT_09;
+    initial mem[10] = INIT_0A;
+    initial mem[11] = INIT_0B;
+    initial mem[12] = INIT_0C;
+    initial mem[13] = INIT_0D;
+    initial mem[14] = INIT_0E;
+    initial mem[15] = INIT_0F;
     
     // Out corresponds to one bit indexed by addr:
     always @* begin
