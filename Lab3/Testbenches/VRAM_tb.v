@@ -7,7 +7,8 @@ module VRAM_tb;
     localparam CLK_PERIOD = 10;
     always #(CLK_PERIOD/2) clk=~clk;
     wire [2:0] pixel_val;
-    wire pixel_valid;
+    reg enable, data_src;
+    wire valid_pixel;
     reg [6:0] line, offset;
 
     PAPUnit #(.HOLD_FRAME(15), .BITS(4))
@@ -16,7 +17,7 @@ module VRAM_tb;
     // Task to check if a pixel is valid and print the pixel value and address accordingly
     task check_pixel;
         begin
-            if (pixel_valid) begin
+            if (valid_pixel) begin
                 // Print pixel address and its RGB value
                 $display("Pixel address: [%d,%d] -> RGB value: %b", line, offset, pixel_val);
             end

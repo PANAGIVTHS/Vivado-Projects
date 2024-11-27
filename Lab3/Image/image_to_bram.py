@@ -66,7 +66,7 @@ def save_rgb_values(image, output_prefix="pixel_data", binary_line_length=256):
     write_hex_values(blue_values, f"out/init/{output_prefix}_blue.txt")
 
 # Example usage:
-image_path = "frame1.png"  # Replace with your image path
-output_size = (128, 96)       # Replace with desired resolution (width, height)
+image_path = "Sprite.png"  # Replace with your image path
+output_size = (128, 32)       # Replace with desired resolution (width, height)
 downscaled_image = downscale_image(image_path, output_size)
 save_rgb_values(downscaled_image)

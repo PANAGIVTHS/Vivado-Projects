@@ -24,7 +24,7 @@
     - VGA_VSYNC: Vertical sync signal.
 */
 
-module VGAController (input reset, input clk, input enable, input data_src, input ACTIVE_SIG, output VGA_RED, output VGA_GREEN, output VGA_BLUE, output VGA_HSYNC, output VGA_VSYNC);
+module VGAController (input reset, input clk, input enable, input data_src, input ACTIVE_SIG, output reg VGA_RED, output reg VGA_GREEN, output reg VGA_BLUE, output VGA_HSYNC, output VGA_VSYNC);
     wire new_clk, locked;
     wire HDISP, VDISP;
     wire [6:0] xPixelAddr, yPixelAddr;
@@ -64,8 +64,36 @@ module VGAController (input reset, input clk, input enable, input data_src, inpu
     // Instantiate the Clock Generator to generate the new clock signal for the VGA timing (Slower than a counter but cleaner)
     ClockGenerator PixelClk_inst (.clk(clk), .new_clk(new_clk), .locked(locked));
 
+    // Instantiate the Movement Controller to handle the movement of the sprite
+    wire [6:0] xPos, yPos;
+    wire isCollidable;
+    wire [13:0] nextAddr;
+    wire non_sprite_pixel;
+    wire sout;
+
+    // REMOVE IF FAIL START
+    // REMOVE IF FAIL  reg from the output of the top module
+    MovementController #(.INIT_X(60), .INIT_Y(45), .INIT_X_VEL(1), .INIT_Y_VEL(1), .WIDTH(32), .HEIGHT(32), .FRAMES_TO_UPDATE(1))
+        MovementController_inst (.clk(clk), .reset(reset), .isCollidable(isCollidable), .xPos(xPos), .yPos(yPos));
+
+    Sprite #(.WIDTH(32), .HEIGHT(32), .COLLIDABLE(1), .DATA_ADDR(14'b0), .NEXT_SPRITE_ADDR(14'b0))
+        Sprite_inst (.xPos(xPos), .yPos(yPos), .addr({yPixelAddr, xPixelAddr}), .isCollidable(isCollidable), .nextAddr(nextAddr), .non_sprite_pixel(non_sprite_pixel), .pixel_data(sout));
+
+    always @(*) begin
+        if (!non_sprite_pixel) begin
+            VGA_RED <= sout;
+            VGA_GREEN <= sout;
+            VGA_BLUE <= sout;
+        end else begin
+            VGA_RED <= (valid_pixel && HDISP && VDISP) ? red_val : 0;
+            VGA_GREEN <= (valid_pixel && HDISP && VDISP) ? green_val : 0;
+            VGA_BLUE <= (valid_pixel && HDISP && VDISP) ? blue_val : 0;
+        end
+    end
+    // REMOVE IF FAIL END
+
     // Assign the pixel data to the VGA output signals if the pixel is valid, otherwise output black
-    assign VGA_RED = (valid_pixel && HDISP && VDISP) ? red_val : 0;
-    assign VGA_GREEN = (valid_pixel && HDISP && VDISP) ? green_val : 0;
-    assign VGA_BLUE = (valid_pixel && HDISP && VDISP) ? blue_val : 0;
+    // assign VGA_RED = (valid_pixel && HDISP && VDISP) ? red_val : 0;
+    // assign VGA_GREEN = (valid_pixel && HDISP && VDISP) ? green_val : 0;
+    // assign VGA_BLUE = (valid_pixel && HDISP && VDISP) ? blue_val : 0;
 endmodule
