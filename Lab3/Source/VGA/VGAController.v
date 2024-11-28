@@ -72,15 +72,13 @@ module VGAController (input reset, input clk, input enable, input data_src, inpu
     wire non_sprite_pixel;
     wire sout, isCollidable;
 
-    // REMOVE IF FAIL START
-    // REMOVE IF FAIL  reg from the output of the top module
-    MovementController #(.INIT_X(94), .INIT_Y(45), .INIT_X_VEL(1), .INIT_Y_VEL(1), .WIDTH(32), .HEIGHT(32), .FRAMES_TO_UPDATE(60))
-        MovementController_inst (.clk(clk), .reset(reset), .enable(enable), .isCollidable(isCollidable), .xPos(xPos), .yPos(yPos));
+    MovementController #(.INIT_X(94), .INIT_Y(45), .INIT_X_VEL(1), .INIT_Y_VEL(1), .WIDTH(32), .HEIGHT(32), .FRAMES_TO_UPDATE(3))
+        MovementController_inst (.clk(new_clk), .reset(reset), .enable(enable), .isCollidable(isCollidable), .xPos(xPos), .yPos(yPos));
 
     Sprite #(.WIDTH(32), .HEIGHT(32), .COLLIDABLE(1), .DATA_ADDR(14'b0), .NEXT_SPRITE_ADDR(14'b0))
         Sprite_inst (.xPos(xPos), .yPos(yPos), .addr({yPixelAddr, xPixelAddr}), .isCollidable(isCollidable), .nextAddr(nextAddr), .non_sprite_pixel(non_sprite_pixel), .pixel_data(sout));
 
-    always @(*) begin
+    always @(sout or valid_pixel or HDISP or VDISP or non_sprite_pixel or sprite_enable_debounced or red_val or green_val or blue_val) begin
         if (!non_sprite_pixel && sprite_enable_debounced) begin
             VGA_RED <= sout;
             VGA_GREEN <= sout;
@@ -91,10 +89,4 @@ module VGAController (input reset, input clk, input enable, input data_src, inpu
             VGA_BLUE <= (valid_pixel && HDISP && VDISP) ? blue_val : 0;
         end
     end
-    // REMOVE IF FAIL END
-
-    // Assign the pixel data to the VGA output signals if the pixel is valid, otherwise output black
-    // assign VGA_RED = (valid_pixel && HDISP && VDISP) ? red_val : 0;
-    // assign VGA_GREEN = (valid_pixel && HDISP && VDISP) ? green_val : 0;
-    // assign VGA_BLUE = (valid_pixel && HDISP && VDISP) ? blue_val : 0;
 endmodule

@@ -28,4 +28,3 @@ set_property -dict { PACKAGE_PIN M13 IOSTANDARD LVCMOS33 } [get_ports { sprite_e
 ## Make Vivado Shut Up
 set_property CFGBVS VCCO [current_design];          #Set CFGBVS to VCCO
 set_property CONFIG_VOLTAGE 3.3 [current_design];   #Set CONFIG_VOLTAGE to 3.3V
-

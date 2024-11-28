@@ -1,3 +1,14 @@
+/*
+    This module is a ROM that stores the pixel data for a sprite.
+
+    Inputs:
+        - line: The line of the sprite to read from
+        - offset: The offset of the sprite to read from
+
+    Outputs:
+        - out: The pixel data at the given line and offset
+*/
+
 module ROM256X5 #(
     parameter INIT_00 = 256'h0,
     parameter INIT_01 = 256'h0,

@@ -1,3 +1,22 @@
+/*
+    This module is responsible for controlling the movement of a singular sprite on the screen.
+    It takes in some initial values for the sprite's position and velocity, as well as the width
+    and height of the sprite. IsCollidable is a signal that can be used to prevent the sprite from
+    moving. The module will update the sprite's position every FRAMES_TO_UPDATE frames, and will
+    invert the sprite's velocity if it hits the boundaries of the screen. The sprite's position
+    is output as xPos and yPos.
+
+    Inputs:
+        - clk: Clock input
+        - reset: Reset signal
+        - enable: Enable signal
+        - isCollidable: Prevents movement if high
+
+    Outputs:
+        - xPos: Current X position
+        - yPos: Current Y position
+*/
+
 module MovementController #(
     parameter INIT_X = 7'b0,        // Initial X position
     parameter INIT_Y = 7'b0,        // Initial Y position

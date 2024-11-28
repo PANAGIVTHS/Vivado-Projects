@@ -1,4 +1,20 @@
-//sprite
+/*
+    This module is a Sprite that can be displayed on the screen. It contains the width and height of the sprite,
+    as well as the address of the next sprite in memory and the address of the sprite's data. The module
+    outputs these values when given an address to read from.
+
+    Inputs:
+        - xPos: Current X position
+        - yPos: Current Y position
+        - addr: Address of the sprite's data
+
+    Outputs:
+        - isCollidable: Whether the sprite can collide with the borders of the screen
+        - nextAddr: Address of the next sprite in memory
+        - non_sprite_pixel: Whether the pixel is part of the sprite
+        - pixel_data: The pixel data at the given line and offset
+*/
+
 module Sprite #(
     parameter WIDTH = 7'b0,
     parameter HEIGHT = 7'b0,
