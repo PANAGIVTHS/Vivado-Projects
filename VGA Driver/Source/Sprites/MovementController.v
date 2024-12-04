@@ -67,15 +67,15 @@ module MovementController #(
             yVel <= INIT_Y_VEL;
         end else if (isCollidable && update) begin
             // Check for boundary collisions and invert velocity if out of bounds
-            if (xPos + WIDTH >= SCREEN_WIDTH && xVel > 0) begin
+            if (xPos + WIDTH >= SCREEN_WIDTH) begin
                 xVel <= -xVel; // Bounce back when hitting the right boundary
-            end else if (xPos <= 0 && xVel < 0) begin
+            end else if (xPos <= 0) begin
                 xVel <= -xVel; // Bounce back when hitting the left boundary
             end
 
-            if (yPos + HEIGHT >= SCREEN_HEIGHT && yVel > 0) begin
+            if (yPos + HEIGHT >= SCREEN_HEIGHT) begin
                 yVel <= -yVel; // Bounce back when hitting the bottom boundary
-            end else if (yPos <= 0 && yVel < 0) begin
+            end else if (yPos <= 0) begin
                 yVel <= -yVel; // Bounce back when hitting the top boundary
             end
 
