@@ -4,8 +4,8 @@
 module tb_bin2bdcN();
 
     // Parameters for the DUT (Design Under Test)
-    parameter BIN_WIDTH = 24;
-    parameter BCD_DIGITS = 8;
+    parameter BIN_WIDTH = 13;
+    parameter BCD_DIGITS = 4;
 
     // Testbench signals
     reg clk;
@@ -21,8 +21,8 @@ module tb_bin2bdcN();
 
     // Instantiate the DUT (Design Under Test)
     bin2bdcN #(
-        .BIN_WIDTH(BIN_WIDTH),
-        .BCD_DIGITS(BCD_DIGITS)
+        .BIN_WIDTH(13),
+        .BCD_DIGITS(4)
     ) uut (
         .clk(clk),
         .reset(reset),
@@ -54,14 +54,14 @@ module tb_bin2bdcN();
     task decimal_to_bcd;
         // Parameters
         input [BIN_WIDTH-1:0] decimal_num; // Input decimal number
-        output reg [BCD_DIGITS*4-1:0] bcd_out; // Output BCD (4 bits per digit)
+        output reg [BCD_DIGITS*4-1:0] res1; // Output BCD (4 bits per digit)
 
         integer i, digit;
         reg [3:0] bcd_digit;  // 4-bit BCD digit
         reg [BIN_WIDTH-1:0] temp_decimal_num;  // Temporary variable to process decimal number
         begin
             // Initialize the output BCD value to 0
-            bcd_out = 0;
+            res1 = 0;
             temp_decimal_num = decimal_num;
 
             // Process each decimal digit from right to left
@@ -71,13 +71,15 @@ module tb_bin2bdcN();
                 bcd_digit = digit;  // Convert the decimal digit to 4-bit BCD
 
                 // Shift the BCD digits to the left to make room for the new digit
-                bcd_out = {bcd_digit, bcd_out[BCD_DIGITS*4-1:4]};  // Insert the new 4-bit BCD digit
+                res1 = {bcd_digit, bcd_out[BCD_DIGITS*4-1:4]};  // Insert the new 4-bit BCD digit
                 
                 // Update the decimal number by removing the least significant digit
                 temp_decimal_num = temp_decimal_num / 10;
             end
         end
     endtask
+
+
 
     // Stimulus
     initial begin
@@ -97,9 +99,6 @@ module tb_bin2bdcN();
         reset = 0;
         #10;
 
-        bin = 8'h00;
-        #(CLK_PERIOD*2);
-
     end
 
     // Always block to check the ready signal and increment the counter
@@ -108,26 +107,26 @@ module tb_bin2bdcN();
             // Increment the counter on each `ready` signal
             case(counter)
                 -1: begin
-                    bin = 8'h00;  // Set bin value for test case 4
+                    bin = 0;  // Set bin value for test case 4
                 end
                 0: begin
                     res = 0;
                     decimal_to_bcd(0, res);
                     check_result(bin, res, ready);
-                    bin = 153;  // Set bin value for test case 1
+                    bin = 13'd153;  // Set bin value for test case 1
                 end
                 1: begin
                     res = 0;
                     decimal_to_bcd(153, res);
                     check_result(bin, res, ready);  // Check if BCD output is correct for input 8'h99
-                    bin = 69;  // Set bin value for test case 2
+                    bin = 13'd69;  // Set bin value for test case 2
                 end
                 2: begin
                     res = 0;
                     decimal_to_bcd(69, res);
                     $display("res: %b", res);
                     check_result(bin, res, ready);  // Check if BCD output is correct for input 8'h45
-                    bin = 255;  // Set bin value for test case 3
+                    bin = 13'd255;  // Set bin value for test case 3
                 end
                 3: begin
                     res = 0;
@@ -139,19 +138,19 @@ module tb_bin2bdcN();
                     res = 0;
                     decimal_to_bcd(bin, res);
                     check_result(bin, res, ready);           // Check if BCD output is correct for input 8'h00
-                    bin = 171;  // Set bin value for test case 5
+                    bin = 13'd171;  // Set bin value for test case 5
                 end
                 5: begin
                     res = 0;
                     decimal_to_bcd(bin, res);
                     check_result(bin, res, ready);  // Check if BCD output is correct for input 8'hAB
-                    bin = 16'b0100_0000_0000_1000;  // Set bin value for test case 6
+                    bin = 0100_0000_0000_1000;  // Set bin value for test case 6
                 end
                 6: begin
                     res = 0;
                     decimal_to_bcd(bin, res);
                     check_result(bin, res, ready);  // Check if BCD output is correct for input 8'hAB
-                    bin = 112604;  // Set bin value for test case 7
+                    bin = 13'd112604;
                 end
                 7: begin
                     res = 0;

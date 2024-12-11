@@ -1,11 +1,7 @@
 
 module bin2bdcN #(
-    parameter BIN_WIDTH = 8,                       
-    // The following is a failsafe to prevent the BCD_DIGITS parameter from being too small
-    // This is a rough estimate of the number of BCD digits required to represent a binary number
-    // user SHOULD calculate and override this parameter by doing the following:
-    // BCD_DIGITS = ceil(BIN_WIDHT*log10(2))
-    parameter BCD_DIGITS = (BIN_WIDTH * 30103) / 100000 + 1  // Approximate BCD digit count
+    parameter BIN_WIDTH = 13,                       
+    parameter BCD_DIGITS = 4  // Approximate BCD digit count
 ) (
     input clk,
     input reset,
@@ -15,13 +11,25 @@ module bin2bdcN #(
     output reg ready
 );
     
-    reg [1:0] cur_state, next_state;
+    reg [1:0] cur_state;
+    reg [1:0] next_state;
+    reg [2:0] counter2;
     reg [BIN_WIDTH-1:0] binary;
     reg [BIN_WIDTH-1:0] count;
     reg shifting, adding, done, idle;
     integer i;
 
     localparam IDLE = 2'b00, SHIFT = 2'b01, CHECK_ADD = 2'b11, DONE = 2'b10;
+
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            counter2 <= 0;
+        end else begin
+            counter2 <= counter2 + 1;
+        end
+    end
+
+    assign new_clk = counter2 == 3'b111;
 
     always @(posedge clk or posedge reset) begin
         if (reset) begin
@@ -87,13 +95,14 @@ module bin2bdcN #(
                 shifting = 1;
             end
             CHECK_ADD: begin
-                next_state <= SHIFT;
+                next_state = SHIFT;
                 adding = 1;
             end
             DONE: begin
                 next_state = IDLE;
                 done = 1;
             end
+            default: next_state = IDLE;
         endcase
     end
 endmodule
