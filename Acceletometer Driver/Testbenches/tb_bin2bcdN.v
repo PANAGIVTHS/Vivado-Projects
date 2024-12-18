@@ -20,10 +20,7 @@ module tb_bin2bdcN();
     localparam CLK_PERIOD = 10;
 
     // Instantiate the DUT (Design Under Test)
-    bin2bdcN #(
-        .BIN_WIDTH(13),
-        .BCD_DIGITS(4)
-    ) uut (
+    bin2bdcN uut (
         .clk(clk),
         .reset(reset),
         .enable(enable),
@@ -78,8 +75,6 @@ module tb_bin2bdcN();
             end
         end
     endtask
-
-
 
     // Stimulus
     initial begin

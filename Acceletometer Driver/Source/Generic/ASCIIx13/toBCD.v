@@ -1,19 +1,20 @@
 
-module bin2bdcN #(
+module binary_to_bcd #(
     parameter BIN_WIDTH = 13,                       
     parameter BCD_DIGITS = 4  // Approximate BCD digit count
-) (
+)(
     input clk,
     input reset,
     input enable,
+    input start,
     input [BIN_WIDTH-1:0] bin,
     output reg [(BCD_DIGITS * 4)-1:0] bcd,
+    output is_negative,
     output reg ready
 );
     
     reg [1:0] cur_state;
     reg [1:0] next_state;
-    reg [2:0] counter2;
     reg [BIN_WIDTH-1:0] binary;
     reg [BIN_WIDTH-1:0] count;
     reg shifting, adding, done, idle;
@@ -21,15 +22,8 @@ module bin2bdcN #(
 
     localparam IDLE = 2'b00, SHIFT = 2'b01, CHECK_ADD = 2'b11, DONE = 2'b10;
 
-    always @(posedge clk or posedge reset) begin
-        if (reset) begin
-            counter2 <= 0;
-        end else begin
-            counter2 <= counter2 + 1;
-        end
-    end
-
-    assign new_clk = counter2 == 3'b111;
+    // check if number is negative
+    assign is_negative = bin[BIN_WIDTH-1];
 
     always @(posedge clk or posedge reset) begin
         if (reset) begin
@@ -59,7 +53,7 @@ module bin2bdcN #(
             bcd <= 0;
             ready <= 0;
         end else if (enable && idle) begin
-            binary <= bin;
+            binary <= is_negative ? ~bin + 1 : bin;
             bcd <= 0;
             ready <= 0;
         end else if (enable && shifting) begin
@@ -87,7 +81,7 @@ module bin2bdcN #(
         done = 0;
         case (cur_state)
             IDLE: begin
-                next_state = SHIFT;
+                next_state = start ? SHIFT : IDLE;
                 idle = 1;
             end
             SHIFT: begin
