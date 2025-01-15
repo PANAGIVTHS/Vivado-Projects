@@ -46,23 +46,19 @@ module ClockGenerator (
     );
 
     // Output the locked signal (from the MMCM)
+// 5 MHz Clock using Divider
+reg clk_5MHz_reg;  // Output 5 MHz clock signal
 
-    // 5 MHz Clock using Counter (Dividing by 2)
-    reg [1:0] counter;  // 2-bit counter for counting up to 2
-    reg clk_5MHz_reg;   // Output 5 MHz clock signal
-
-    always @(posedge clk_10MHz or posedge reset) begin
-        if (reset) begin 
-            counter <= 0;
-            clk_5MHz_reg <= 0;
-        end else if (counter == 1) begin
-            counter <= 0;
-            clk_5MHz_reg <= ~clk_5MHz_reg;  // Toggle the 5 MHz clock signal
-        end else begin
-            counter <= counter + 1;
-        end
+always @(posedge clk_10MHz or posedge reset) begin
+    if (reset) begin
+        clk_5MHz_reg <= 0;
+    end else begin
+        clk_5MHz_reg <= ~clk_5MHz_reg;  // Toggle on every 10 MHz clock edge
     end
+end
 
-    assign clk_5MHz = clk_5MHz_reg;  // Assign the generated 5 MHz clock
+assign clk_5MHz = clk_5MHz_reg;  // Correctly assign the generated 5 MHz clock
+
+
 
 endmodule

@@ -19,14 +19,31 @@ module GUCounter #(parameter BITS = 10) (input clk, input [1:0] reset_in, input 
     wire reset = reset_in[1]; 
     wire user_reset = reset_in[0]; 
     
-    // Counter logic
-    always @(posedge clk) begin
-        if (reset) begin
-            count <= 0; 
-        end else if (user_reset) begin 
-            count <= 0; 
-        end else if (enable) begin
-            count <= count + 1; 
+    localparam SYNCH_RESET = 1;
+
+    generate
+        if (SYNCH_RESET == 0) begin
+            // Counter logic
+            always @(posedge clk) begin
+                if (reset) begin
+                    count <= 0; 
+                end else if (user_reset) begin 
+                    count <= 0; 
+                end else if (enable) begin
+                    count <= count + 1; 
+                end
+            end
+        end else begin 
+            // Counter logic
+            always @(posedge clk or posedge reset) begin
+                if (reset) begin
+                    count <= 0; 
+                end else if (user_reset) begin 
+                    count <= 0; 
+                end else if (enable) begin
+                    count <= count + 1; 
+                end
+            end
         end
-    end
+    endgenerate
 endmodule

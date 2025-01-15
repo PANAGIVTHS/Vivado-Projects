@@ -22,14 +22,12 @@ module SPISlave #(
             // Shift data on clock edge when chip select is asserted
             shiftReg <= {shiftReg[SHIFT_REG_WIDTH-2:0], i_SPI_Mosi}; // Shift in MOSI data
             o_SPI_Miso <= txReg[SHIFT_REG_WIDTH-1];                  // Shift out MSB
-            txReg <= {txReg[SHIFT_REG_WIDTH-2:0], 1'b0};             // Prepare next bit for transmission
+            txReg <= {txReg[SHIFT_REG_WIDTH-2:0], i_SPI_Mosi};             // Prepare next bit for transmission
             bitCounter <= bitCounter + 1;
         end
     end
 
-    always @(posedge i_SPI_CSLow) begin
-        if (i_SPI_CSLow) begin
-            o_Rx_Byte <= shiftReg; // Latch received byte when transmission ends
-        end
+    always @(posedge i_SPI_Clk) begin
+        o_Rx_Byte <= shiftReg; // Latch received byte when transmission ends
     end
 endmodule

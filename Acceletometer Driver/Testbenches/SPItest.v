@@ -56,7 +56,7 @@ module SPIMaster_tb;
         i_Tx_Valid = 1;
         # (CLK_PERIOD*450)
         i_Tx_Valid = 0;
-        #300
+        #300;
 
         
         // Apply some more tests for receiving and transmitting in different modes

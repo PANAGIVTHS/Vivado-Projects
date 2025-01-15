@@ -25,7 +25,7 @@ module SPIM;
         .i_Tx_Valid(i_Tx_Valid),
         .o_Tx_Ready(),
         .o_Rx_Byte(o_Rx_Byte),
-        .o_Rx_Ready(o_Rx_Ready),
+        .o_Rx_Hold(o_Rx_Ready),
         .i_SPI_Miso(i_SPI_Miso),
         .o_SPI_CSLow(o_SPI_CSLow),
         .o_SPI_Mosi(o_SPI_Mosi),
@@ -59,15 +59,15 @@ module SPIM;
         i_Tx_Valid = 0;
 
         // Apply reset
-        #20;
+        #200;
         reset = 0;
 
         // Test for SPI Mode 0 (CPOL = 0, CPHA = 0)
         // Transmission of first byte
         i_Tx_Byte = 8'hA5; // Master sends 0xA5
-        #20;
+        #1120;
         i_Tx_Valid = 1;
-        # (CLK_PERIOD * 340); // Wait for the transmission to complete
+        # (CLK_PERIOD * 34); // Wait for the transmission to complete
         i_Tx_Valid = 0;
 
         // Transmission of second byte
