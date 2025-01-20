@@ -6,7 +6,7 @@ module convertAccelOut (
     input [12:0] accel_X_buf,
     input [12:0] accel_Y_buf,
     input [12:0] accel_Z_buf,
-    input [12:0] accel_T_buf,
+    input [19:0] accel_T_buf,
     
     output [7:0] ascii_X1,
     output [7:0] ascii_X2,
@@ -40,14 +40,12 @@ module convertAccelOut (
     wire ready_X, ready_Y, ready_Z, ready_T;
     wire start_X, start_Y, start_Z, start_T;
     
-    assign start_X = accel_X_buf == accel_X;
-    assign start_Y = accel_Y_buf == accel_Y;
-    assign start_Z = accel_Z_buf == accel_Z;
-    assign start_T = accel_T_buf == accel_T;
+    assign start_X = accel_X_buf != accel_X;
+    assign start_Y = accel_Y_buf != accel_Y;
+    assign start_Z = accel_Z_buf != accel_Z;
+    assign start_T = accel_T_buf != accel_T;
 
     assign ready = ready_X & ready_Y & ready_Z & ready_T;
-    
-    // TODO maybe all 16 bit and check for zeros
     
     always @(posedge clk or posedge reset) begin
         if (reset) begin
@@ -63,7 +61,8 @@ module convertAccelOut (
         end
     end
 
-    binary_to_ascii binary_to_ascii_X (
+    binary_to_ascii #(.BIN_WIDTH(12), .BCD_DIGITS(4))
+    binary_to_ascii_X (
         .clk(clk),
         .reset(reset),
         .enable(enable),
@@ -74,7 +73,8 @@ module convertAccelOut (
         .is_negative(is_negative_X)
     );
 
-    binary_to_ascii binary_to_ascii_Y (
+    binary_to_ascii #(.BIN_WIDTH(12), .BCD_DIGITS(4))
+    binary_to_ascii_Y (
         .clk(clk),
         .reset(reset),
         .enable(enable),
@@ -85,7 +85,8 @@ module convertAccelOut (
         .is_negative(is_negative_Y)
     );
 
-    binary_to_ascii binary_to_ascii_Z (
+    binary_to_ascii #(.BIN_WIDTH(12), .BCD_DIGITS(4))
+    binary_to_ascii_Z (
         .clk(clk),
         .reset(reset),
         .enable(enable),
@@ -96,13 +97,14 @@ module convertAccelOut (
         .is_negative(is_negative_Z)
     );
 
-    binary_to_ascii binary_to_ascii_T (
+    binary_to_ascii #(.BIN_WIDTH(19), .BCD_DIGITS(6)) 
+    binary_to_ascii_T (
         .clk(clk),
         .reset(reset),
         .enable(enable),
         .start(start_T),
         .bin(accel_T),
-        .ascii_out({ascii_T1, ascii_T2, ascii_T3, ascii_T4/*, ascii_T5, ascii_T6*/}), //TODO: Fix this
+        .ascii_out({ascii_T1, ascii_T2, ascii_T3, ascii_T4, ascii_T5, ascii_T6}),
         .ready(ready_T),
         .is_negative(is_negative_T)
     );

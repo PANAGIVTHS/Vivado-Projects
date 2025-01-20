@@ -9,29 +9,36 @@ module CMDHandler #(
     localparam POWER_CTL = 8'h2D,
     localparam TIMEOUT_BITS = 18
 )(
+    //? Global Interface
     input clk,
     input reset,
     input enable,
+
+    //? SPI Master Interface
+    input i_SPI_Miso,
+    output o_SPI_Clk,
+    output o_SPI_Mosi,
+    output o_SPI_CSLow,
+
+    //? CMDHandler Interface
     input [CMDLENGTH - 1:0] i_CMD_Instruction,
     input [CMDLENGTH - 1:0] i_CMD_Address,
     input [CMDLENGTH - 1:0] i_CMD_Data,
     output reg [CMDLENGTH - 1:0] o_CMD_Data,
     output o_CMD_Stall,
-    output o_CMD_Ready
+    output o_CMD_Ready,
+    output reg o_Rx_ByteValid
 );
     //? Master Signals
     wire [CMDLENGTH-1:0] o_Rx_Byte;
     reg [CMDLENGTH-1:0] i_Tx_Byte;
     reg i_Tx_Valid;
-    wire o_Tx_Hold, o_Tx_holdValid;
-    wire i_SPI_Miso, o_SPI_CSLow, o_SPI_Mosi, o_SPI_Clk;
 
     //? FSM Signals
     reg [2:0] curState;
     reg [2:0] nextState;
     reg data, idle, timer;
     wire [17:0] countTimeout;
-    reg o_Rx_ByteValid;
     reg [CMDLENGTH - 1:0] internalAddress;
     reg [CMDLENGTH - 1:0] internalInstr;
     reg [CMDLENGTH - 1:0] internalData;
@@ -65,9 +72,9 @@ module CMDHandler #(
         .o_Rx_Byte(o_Rx_Byte),
         .i_Tx_Byte(i_Tx_Byte),
         .i_Tx_Valid(i_Tx_Valid),
-        .o_Tx_Hold(o_Tx_Hold),
-        .o_Tx_holdValid(o_Tx_holdValid),
-        .i_SPI_Miso(1'b1),
+        .o_Tx_Hold(),
+        .o_Tx_holdValid(),
+        .i_SPI_Miso(i_SPI_Miso),
         .o_SPI_CSLow(o_SPI_CSLow),
         .o_SPI_Mosi(o_SPI_Mosi),
         .o_SPI_Clk(o_SPI_Clk),
@@ -94,7 +101,7 @@ module CMDHandler #(
     end
 
     GUCounter #(.BITS(TIMEOUT_BITS), .SYNCH_RESET(0))
-        GUCounterTimeoutInst (.clk(o_SPI_Clk), .reset_in({reset, countTimeout == timeout || !timer}), .enable(enable && timer), .count(countTimeout));
+        GUCounterTimeoutInst (.clk(o_SPI_Clk), .reset_in({reset, countTimeout == timeout || !timer}), .enable(enable), .count(countTimeout));
 
     always @(posedge o_SPI_Clk or posedge reset) begin
         if (reset) begin
@@ -150,11 +157,9 @@ module CMDHandler #(
             end
             TIMEOUT: begin
                 timer = 1;
-                
                 if (internalInstr == READ) begin
                     o_Rx_ByteValid = 1;
                 end
-
                 if (countTimeout == timeout - 1) begin 
                     nextState = IDLE;
                 end else begin
