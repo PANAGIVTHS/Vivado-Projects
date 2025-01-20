@@ -1,7 +1,8 @@
-// Top module for accelerometer driver //
-// TODO: add your modules instantiations here //
-// TODO: add SPI communication ports here //
 
+
+// TODO Add debounce logic and stuff
+
+// Top module for accelerometer driver //
 module accelerometer_driver (clk, reset, enable, TxD, mosi, miso, sclk, cs);
     input clk, reset;
     output TxD;
