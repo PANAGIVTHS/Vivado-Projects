@@ -1,7 +1,7 @@
 
-module binary_to_bcd #(
-    parameter BIN_WIDTH = 13,                       
-    parameter BCD_DIGITS = 4  // Approximate BCD digit count
+module binary_to_bcd_x19 #(
+    parameter BIN_WIDTH = 19,                       
+    parameter BCD_DIGITS = 6  // Approximate BCD digit count
 )(
     input clk,
     input reset,

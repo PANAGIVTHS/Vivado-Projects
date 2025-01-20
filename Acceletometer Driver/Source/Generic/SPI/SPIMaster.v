@@ -34,24 +34,22 @@
  */
 
 module SPIMaster #(
-    parameter CPOL = 0,
-    parameter CPHA = 0,
-    localparam SHIFT_REG_WIDTH = 8,
-    localparam SRWIDTH_LOG2 = 3,
-    localparam LOCK_IN_BEHAVIOUR = 1
+    parameter SHIFT_REG_WIDTH = 8,
+    parameter SRWIDTH_LOG2 = 3
 )(
     //? Control Signals
     input clk,
     input reset,
+    output locked,
     
     //? Tx Signals
     input [SHIFT_REG_WIDTH-1:0] i_Tx_Byte,
     input i_Tx_Valid,
-    output reg o_Tx_Ready,
+    output o_Tx_holdValid,
+    output o_Tx_Hold,
 
     //? Rx Signals
     output reg [SHIFT_REG_WIDTH-1:0] o_Rx_Byte,
-    output o_Rx_Hold,
 
     //? MSI Signals
     input i_SPI_Miso,
@@ -59,11 +57,8 @@ module SPIMaster #(
     output reg o_SPI_Mosi,
     output o_SPI_Clk
 );
-    wire [4:0] FSMCount;
-    wire [4:0] curFsmMax;
-    wire [4:0] transCount;
-    wire changeState;
-    wire clk_5MHz;
+    reg [4:0] FSMCount;
+    wire [SRWIDTH_LOG2-1:0] transCount;
     reg [1:0] nextState;
     reg [1:0] curState;
     reg transfer;
@@ -71,19 +66,26 @@ module SPIMaster #(
 
     localparam IDLE = 2'b00, TRANSFER = 2'b01;
 
-    ClockGenerator ClockGeneratorInst (.clk(clk), .reset(reset), .clk_5MHz(clk_5MHz), .clk_10MHz(), .locked(locked));
+    ClockGenerator ClockGeneratorInst (.clk(clk), .reset(reset), .clk_5MHz(o_SPI_Clk), .clk_10MHz(), .locked(locked));
 
-    GUCounter #(.BITS(5))
-        FSMCounter (.clk(clk), .reset_in({reset, FSMCount == 5'd9}), .enable(locked && !o_SPI_CSLow), .count(FSMCount));
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            FSMCount <= 0;
+        end else if (FSMCount == 5'd19) begin
+            FSMCount <= 0;
+        end else if (locked && !o_SPI_CSLow) begin
+            FSMCount <= FSMCount + 1;
+        end
+    end
 
-    assign shiftIn = (FSMCount == 5'd9) && clk_5MHz && locked && transfer;
-    assign shiftOut = (FSMCount == 5'd5) && !clk_5MHz && locked && transfer;
-    assign newByte = (FSMCount == 5'd3) && !clk_5MHz && locked && transfer && transCount == 0;
-    assign o_Rx_Hold = ((FSMCount == 5'd2) || (FSMCount == 5'd3)) && !clk_5MHz && locked && transCount == 0;
-    assign o_SPI_Clk = clk_5MHz;
-
-    GUCounter #(.BITS(5))
-            transCounter (.clk(clk_5MHz), .reset_in({reset, transCount == SHIFT_REG_WIDTH - 1}), .enable(locked && !o_SPI_CSLow), .count(transCount));
+    assign shiftIn = (FSMCount == 5'd19) && locked && transfer;
+    assign shiftOut = (FSMCount == 5'd5) && locked && transfer;
+    assign newByte = (FSMCount == 5'd3) && locked && transfer && transCount == 0;
+    assign o_Tx_Hold = ((FSMCount == 5'd2) || (FSMCount == 5'd3)) && locked && transCount == 0;
+    assign o_Tx_holdValid = transCount == 0 && ((FSMCount == 5'd0) || (FSMCount == 5'd19)) && locked;
+    
+    GUCounter #(.BITS(SRWIDTH_LOG2))
+            transCounter (.clk(o_SPI_Clk), .reset_in({reset, transCount == SHIFT_REG_WIDTH - 1}), .enable(locked && !o_SPI_CSLow), .count(transCount));
 
     always @(negedge o_SPI_Clk or posedge reset) begin 
         if (reset) begin

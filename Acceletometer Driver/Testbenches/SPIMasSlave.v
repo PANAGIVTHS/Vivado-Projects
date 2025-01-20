@@ -13,6 +13,7 @@ module SPIM;
     wire o_SPI_Clk;
     wire [7:0] o_Rx_Byte;
     wire o_Rx_Ready;
+    wire o_Tx_holdValid;
 
     // Instantiate the SPIMaster module
     SPIMaster #(
@@ -23,9 +24,9 @@ module SPIM;
         .reset(reset),
         .i_Tx_Byte(i_Tx_Byte),
         .i_Tx_Valid(i_Tx_Valid),
-        .o_Tx_Ready(),
         .o_Rx_Byte(o_Rx_Byte),
-        .o_Rx_Hold(o_Rx_Ready),
+        .o_Tx_Hold(o_Rx_Ready),
+        .o_Tx_holdValid(o_Tx_holdValid),
         .i_SPI_Miso(i_SPI_Miso),
         .o_SPI_CSLow(o_SPI_CSLow),
         .o_SPI_Mosi(o_SPI_Mosi),

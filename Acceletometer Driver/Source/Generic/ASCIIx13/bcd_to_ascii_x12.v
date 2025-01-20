@@ -1,4 +1,4 @@
-module bcd_to_ascii #(
+module bcd_to_ascii_x12 #(
     localparam BCD_DIGITS = 4
 )(
     input [4*BCD_DIGITS-1:0] bcd_in,   // Input BCD digits
