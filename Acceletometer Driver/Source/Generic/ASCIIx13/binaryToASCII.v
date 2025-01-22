@@ -61,7 +61,7 @@ module binary_to_ascii #(parameter BIN_WIDTH = 12, parameter BCD_DIGITS = 4) (
     // Ready signal is asserted when BCD conversion is complete
     always @(posedge clk or posedge reset) begin
         if (reset) begin 
-            ready <= 0;
+            ready <= 1;
             ascii_out <= 0;
         end else begin
             ready <= bcd_ready;

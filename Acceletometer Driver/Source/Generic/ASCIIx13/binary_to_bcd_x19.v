@@ -18,6 +18,7 @@ module binary_to_bcd_x19 #(
     reg [BIN_WIDTH-1:0] binary;
     reg [BIN_WIDTH-1:0] count;
     reg shifting, adding, done, idle;
+    wire [2:0] fsmcount;
     integer i;
 
     localparam IDLE = 2'b00, SHIFT = 2'b01, CHECK_ADD = 2'b11, DONE = 2'b10;
@@ -74,6 +75,9 @@ module binary_to_bcd_x19 #(
         end
     end
 
+    GUCounter #(.BITS(3)) 
+        GUCounterInst (.clk(clk), .reset_in({reset, fsmcount == 3'd5 || !done}), .enable(enable), .count(fsmcount));
+
     always @(*) begin
         idle = 0;
         shifting = 0;
@@ -93,7 +97,7 @@ module binary_to_bcd_x19 #(
                 adding = 1;
             end
             DONE: begin
-                next_state = IDLE;
+                next_state = fsmcount == 3'd5 ? IDLE : DONE;
                 done = 1;
             end
             default: next_state = IDLE;

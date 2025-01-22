@@ -1,4 +1,4 @@
-`timescale 1ns/1ps
+`timescale 1ns/10ps
 
 module test();
     localparam BIN_WIDTH = 13;  // Adjust based on your bin width

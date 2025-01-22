@@ -15,12 +15,12 @@
     - overflow: Overflow flag to indicate when the counter has reached the maximum value
 */
 
-module GUCounter #(parameter BITS = 10, parameter SYNCH_RESET = 1, parameter INC_BY = 1) (input clk, input [1:0] reset_in, input enable, output reg [BITS-1:0] count);
+module GUCounter #(parameter BITS = 10, parameter SYNCH_RESET = 0, parameter INC_BY = 1) (input clk, input [1:0] reset_in, input enable, output reg [BITS-1:0] count);
     wire reset = reset_in[1]; 
     wire user_reset = reset_in[0]; 
 
     generate
-        if (SYNCH_RESET == 0 && BITS < 10) begin
+        if (SYNCH_RESET == 1) begin
             // Counter logic
             always @(posedge clk) begin
                 if (reset) begin
@@ -29,57 +29,9 @@ module GUCounter #(parameter BITS = 10, parameter SYNCH_RESET = 1, parameter INC
                     count <= 0; 
                 end else if (enable) begin
                     count <= count + INC_BY; 
-                end
-            end
-        end else if (SYNCH_RESET != 0 && BITS < 10) begin 
-            // Counter logic
-            always @(posedge clk or posedge reset) begin
-                if (reset) begin
-                    count <= 0; 
-                end else if (user_reset) begin 
-                    count <= 0; 
-                end else if (enable) begin
-                    count <= count + INC_BY; 
-                end
-            end
-        end else if (SYNCH_RESET == 0 && BITS >= 10) begin 
-            // Internal signals for next state logic
-            wire [BITS-1:0] next_count;
-            wire csa_cout;
-
-            // Instantiate the Carry Select Adder
-            CarrySelectAdder #(BITS) csa (
-                .A(count),
-                .B(1),       // Increment by 1
-                .Cin(0),     // No carry-in
-                .Sum(next_count),
-                .Cout(csa_cout)
-            );
-
-            // Counter logic
-            always @(posedge clk) begin
-                if (reset) begin
-                    count <= 0; 
-                end else if (user_reset) begin 
-                    count <= 0; 
-                end else if (enable) begin
-                    count <= next_count; 
                 end
             end
         end else begin 
-            // Internal signals for next state logic
-            wire [BITS-1:0] next_count;
-            wire csa_cout;
-
-            // Instantiate the Carry Select Adder
-            CarrySelectAdder #(BITS) csa (
-                .A(count),
-                .B(1),       // Increment by 1
-                .Cin(0),     // No carry-in
-                .Sum(next_count),
-                .Cout(csa_cout)
-            );
-
             // Counter logic
             always @(posedge clk or posedge reset) begin
                 if (reset) begin
@@ -87,7 +39,7 @@ module GUCounter #(parameter BITS = 10, parameter SYNCH_RESET = 1, parameter INC
                 end else if (user_reset) begin 
                     count <= 0; 
                 end else if (enable) begin
-                    count <= next_count; 
+                    count <= count + INC_BY; 
                 end
             end
         end

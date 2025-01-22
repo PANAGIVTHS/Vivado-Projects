@@ -12,16 +12,17 @@
  *           Rx: Receive-related signals.
  *           Tx: Transmit-related signals.
  *           SPI: SPI-specific signals (e.g., SCLK, MOSI, MISO, o_SPI_CSLow).
+ *           CLK: Clock signals.
  *           <none>: Control signals (e.g., start, done, enable).
  !       z - Descriptive name of the variable:
  *           A meaningful identifier for the signal.
  *
  * -----------------------------------------------------------------------------
  ? Example:
- *   - i_Rx_data: An input signal carrying received data.
- *   - o_Tx_ready: An output signal indicating readiness to transmit.
- *   - i_SPI_clk: An input SPI clock signal.
- *   - o_done: A control signal indicating the operation is complete.
+ *   - i_Rx_Byte: An input signal carrying received data.
+ *   - o_Tx_Hold: An output signal indicating the duration data should be held for.
+ *   - i_SPI_Clk: An input SPI clock signal.
+ *   - o_CLK_locked: A control signal indicating the Clock is operating normally.
  *
  * -----------------------------------------------------------------------------
  ? Notes:
@@ -31,55 +32,57 @@
  *      module's code to further enhance readability.
  *
  * -----------------------------------------------------------------------------
+ ? Module Description:
+ *   The SPIMaster module implements a simple SPI Master interface that can be
+ *   used to communicate with SPI Slave devices. The module supports full-duplex
+ *   communication and can transmit and receive data simultaneously. The moudule
+ *   uses a shift register to transmit and receive data over the SPI interface.
+ *   and uses a state machine with sampling signals to control the data transfer
+ *   process.
+ * -----------------------------------------------------------------------------
  */
 
 module SPIMaster #(
     parameter SHIFT_REG_WIDTH = 8,
     parameter SRWIDTH_LOG2 = 3
 )(
-    //? Control Signals
+    //? Control Interface
     input clk,
     input reset,
-    output locked,
+    output o_CLK_locked,
     
-    //? Tx Signals
+    //? Tx Interface
     input [SHIFT_REG_WIDTH-1:0] i_Tx_Byte,
     input i_Tx_Valid,
     output o_Tx_holdValid,
     output o_Tx_Hold,
 
-    //? Rx Signals
+    //? Rx Interface
     output reg [SHIFT_REG_WIDTH-1:0] o_Rx_Byte,
 
-    //? MSI Signals
+    //? MSI Interface
     input i_SPI_Miso,
     output reg o_SPI_CSLow,
     output reg o_SPI_Mosi,
     output o_SPI_Clk
 );
-    reg [4:0] FSMCount;
+    //? Internal Signals
     wire [SRWIDTH_LOG2-1:0] transCount;
-    reg [1:0] nextState;
-    reg [1:0] curState;
+    reg [SHIFT_REG_WIDTH-1:0] byteIn; //? Received byte / Byte to transmit
+    
+    //? FSM Signals
+    reg [1:0] nextState, curState;
+    reg [4:0] FSMCount;
     reg transfer;
-    reg [SHIFT_REG_WIDTH-1:0] byteIn;
 
     localparam IDLE = 2'b00, TRANSFER = 2'b01;
 
-    ClockGenerator ClockGeneratorInst (.clk(clk), .reset(reset), .clk_5MHz(o_SPI_Clk), .clk_10MHz(), .locked(locked));
-
-    always @(posedge clk or posedge reset) begin
-        if (reset) begin
-            FSMCount <= 0;
-        end else if (FSMCount == 5'd19) begin
-            FSMCount <= 0;
-        end else if (locked && !o_SPI_CSLow) begin
-            FSMCount <= FSMCount + 1;
-        end
-    end
-
-    assign shiftIn = (FSMCount == 5'd19) && locked && transfer;
-    assign shiftOut = (FSMCount == 5'd5) && locked && transfer;
+    // Instantiate the ClockGenerator module create a 5 MHz clock
+    ClockGenerator ClockGeneratorInst (.clk(clk), .reset(reset), .clk_5MHz(o_SPI_Clk), .locked(locked));
+    // 5Mhz clock subticks. Sampling signals
+    assign o_CLK_locked = locked;
+    assign shiftIn = (FSMCount == 5'd19) && locked && transfer; 
+    assign shiftOut = (FSMCount == 5'd5) && locked && transfer; // 9
     assign newByte = (FSMCount == 5'd3) && locked && transfer && transCount == 0;
     assign o_Tx_Hold = ((FSMCount == 5'd2) || (FSMCount == 5'd3)) && locked && transCount == 0;
     assign o_Tx_holdValid = transCount == 0 && ((FSMCount == 5'd0) || (FSMCount == 5'd19)) && locked;
@@ -92,6 +95,16 @@ module SPIMaster #(
             o_SPI_CSLow <= 1;
         end else if (transCount == 0) begin
             o_SPI_CSLow <= !i_Tx_Valid;
+        end
+    end
+
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            FSMCount <= 0;
+        end else if (FSMCount == 5'd19) begin
+            FSMCount <= 0;
+        end else if (locked && !o_SPI_CSLow) begin
+            FSMCount <= FSMCount + 1;
         end
     end
 

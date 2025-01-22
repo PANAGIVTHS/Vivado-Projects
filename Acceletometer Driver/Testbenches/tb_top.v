@@ -2,7 +2,8 @@
 
 module tb_tob;
 
-    reg clk, reset, enable, miso;
+    reg clk, reset, enable;
+    wire miso;
     wire mosi, sclk, cs, TxD;
 
     // instantiate the accelerometer_driver module
