@@ -90,12 +90,11 @@ module tb_ascii;
         mem[9] = 12'sd2047;
         mem[10] = -12'sd2048;
 
-
-
         // Apply reset
         #2000;
         reset = 0;
-
+        #3525;
+        $finish;
     end
 
 endmodule

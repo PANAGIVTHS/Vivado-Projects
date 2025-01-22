@@ -44,15 +44,16 @@ module tb_avg;
         reset = 0;
         #2000;
 
-        for (i = 0; i < 17; i = i + 1) begin
-            i_ACCEL_X = 12'h028;
-            i_ACCEL_Y = 12'h073;
-            i_ACCEL_Z = 12'h0A3;
+        for (i = 0; i < 32; i = i + 1) begin
+            i_ACCEL_X = 12'h01 + i;
+            i_ACCEL_Y = 12'h010 + i;
+            i_ACCEL_Z = i;
             i_ACCEL_T = 19'hB71B0;
             #100;
             ready = 1;
             #(CLK_PERIOD) ready = 0;
         end
+        #1000 $finish;
     end
 
 endmodule

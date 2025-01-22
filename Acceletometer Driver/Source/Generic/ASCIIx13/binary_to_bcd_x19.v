@@ -54,8 +54,10 @@ module binary_to_bcd_x19 #(
             bcd <= 0;
             ready <= 0;
         end else if (enable && idle) begin
+            if (start) begin 
+                bcd <= 0;
+            end
             binary <= is_negative ? ~bin + 1 : bin;
-            bcd <= 0;
             ready <= 0;
         end else if (enable && shifting) begin
             bcd <= {bcd[(BCD_DIGITS * 4)-2:0], binary[BIN_WIDTH-1]};

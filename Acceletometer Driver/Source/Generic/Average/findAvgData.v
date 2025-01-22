@@ -64,29 +64,40 @@ module findAvgData (
     reg dataReady;
     wire [11:0] accelXavg, accelYavg, accelZavg;
     wire [18:0] accelTavg;
-    
+    reg signed [11:0] ACCELX, ACCELY, ACCELZ;
+    reg signed [18:0] ACCELT;
+
+
     // Stall 1 cycle to allow the data to go from raw to binary.
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             dataReady <= 0;
+            ACCELX <= 0;
+            ACCELY <= 0;
+            ACCELZ <= 0;
+            ACCELT <= 0;
         end else begin
             dataReady <= i_AVG_dataReady;
+            ACCELX <= i_ACCEL_X;
+            ACCELY <= i_ACCEL_Y;
+            ACCELZ <= i_ACCEL_Z;
+            ACCELT <= i_ACCEL_T;
         end
     end
 
-    AverageCalculator #(.DATA_WIDTH(12)) AverageCalculatorX (.clk(clk), .reset(reset), .i_MEM_Data(i_ACCEL_X),
+    AverageCalculator #(.DATA_WIDTH(12)) AverageCalculatorX (.clk(clk), .reset(reset), .i_MEM_Data(ACCELX),
         .i_MEM_AddSignal(dataReady), .o_AVG_Average(accelXavg), .o_AVG_Ready(avgReadyX)
     );
 
-    AverageCalculator #(.DATA_WIDTH(12)) AverageCalculatorY (.clk(clk), .reset(reset), .i_MEM_Data(i_ACCEL_Y),
+    AverageCalculator #(.DATA_WIDTH(12)) AverageCalculatorY (.clk(clk), .reset(reset), .i_MEM_Data(ACCELY),
         .i_MEM_AddSignal(dataReady), .o_AVG_Average(accelYavg), .o_AVG_Ready(avgReadyY)
     );
 
-    AverageCalculator #(.DATA_WIDTH(12)) AverageCalculatorZ (.clk(clk), .reset(reset), .i_MEM_Data(i_ACCEL_Z),
+    AverageCalculator #(.DATA_WIDTH(12)) AverageCalculatorZ (.clk(clk), .reset(reset), .i_MEM_Data(ACCELZ),
         .i_MEM_AddSignal(dataReady), .o_AVG_Average(accelZavg), .o_AVG_Ready(avgReadyZ)
     );
 
-    AverageCalculator #(.DATA_WIDTH(19)) AverageCalculatorT (.clk(clk), .reset(reset), .i_MEM_Data(i_ACCEL_T),
+    AverageCalculator #(.DATA_WIDTH(19)) AverageCalculatorT (.clk(clk), .reset(reset), .i_MEM_Data(ACCELT),
         .i_MEM_AddSignal(dataReady), .o_AVG_Average(accelTavg), .o_AVG_Ready(avgReadyT)
     );
 

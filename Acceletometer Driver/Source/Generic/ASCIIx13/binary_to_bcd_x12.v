@@ -18,6 +18,7 @@ module binary_to_bcd_x12 #(
     reg [BIN_WIDTH-1:0] binary;
     reg [BIN_WIDTH-1:0] count;
     reg shifting, adding, done, idle;
+    wire [2:0] fsmcount;
     integer i;
 
     localparam IDLE = 2'b00, SHIFT = 2'b01, CHECK_ADD = 2'b11, DONE = 2'b10;
@@ -53,8 +54,10 @@ module binary_to_bcd_x12 #(
             bcd <= 0;
             ready <= 0;
         end else if (enable && idle) begin
+            if (start) begin 
+                bcd <= 0;
+            end
             binary <= is_negative ? ~bin + 1 : bin;
-            bcd <= 0;
             ready <= 0;
         end else if (enable && shifting) begin
             bcd <= {bcd[(BCD_DIGITS * 4)-2:0], binary[BIN_WIDTH-1]};
@@ -73,6 +76,9 @@ module binary_to_bcd_x12 #(
             ready <= 0;
         end
     end
+
+    GUCounter #(.BITS(3)) 
+        GUCounterInst (.clk(clk), .reset_in({reset, fsmcount == 3'd5 || !done}), .enable(enable), .count(fsmcount));
 
     always @(*) begin
         idle = 0;
@@ -93,7 +99,7 @@ module binary_to_bcd_x12 #(
                 adding = 1;
             end
             DONE: begin
-                next_state = IDLE;
+                next_state = fsmcount == 3'd5 ? IDLE : DONE;
                 done = 1;
             end
             default: next_state = IDLE;

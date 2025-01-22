@@ -36,7 +36,7 @@ module AverageCalculator #(
                 if (reset) begin
                     sum <= 23'b0;
                     o_AVG_Average <= 19'b0;
-                end else if (count == 0) begin 
+                end else if (count == 0 && !i_MEM_AddSignal) begin 
                     sum <= 23'b0;
                 end else if (i_MEM_AddSignal) begin 
                     sum <= sum + i_MEM_Data; // Add 19-bit values to a 23-bit sum
@@ -51,7 +51,7 @@ module AverageCalculator #(
                 if (reset) begin
                     sum <= 16'b0;
                     o_AVG_Average <= 12'b0;
-                end else if (count == 0) begin 
+                end else if (count == 0 && !i_MEM_AddSignal) begin 
                     sum <= 16'b0;
                 end else if (i_MEM_AddSignal) begin 
                     sum <= sum + i_MEM_Data; // Add 12-bit values to a 16-bit sum
