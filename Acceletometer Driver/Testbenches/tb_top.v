@@ -17,6 +17,7 @@ module tb_tob;
     SPISlave #(
         .SHIFT_REG_WIDTH(8)
     ) slave (
+        .reset(reset),
         .i_SPI_Clk(sclk),
         .i_SPI_CSLow(cs),
         .i_SPI_Mosi(mosi),

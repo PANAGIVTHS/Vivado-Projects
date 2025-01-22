@@ -102,18 +102,18 @@ module CMDController #(
             o_CMD_dataReady <= 0;
         end else if (newDataPulse && datax) begin
             o_CMD_dataReady <= 1;
-            o_CMD_DataX <= cmdDataIn;
+            o_CMD_DataT <= {cmdDataIn[3:0], temp_l};
         end else if (newDataPulse && datay) begin
             o_CMD_dataReady <= 1;
-            o_CMD_DataY <= cmdDataIn;
+            o_CMD_DataX <= cmdDataIn;
         end else if (newDataPulse && dataz) begin
             o_CMD_dataReady <= 1;
-            o_CMD_DataZ <= cmdDataIn;
+            o_CMD_DataY <= cmdDataIn;
         end else if (newDataPulse && datat1) begin
             o_CMD_dataReady <= 1;
-            temp_l <= cmdDataIn;
+            o_CMD_DataZ <= cmdDataIn;
         end else if (newDataPulse && datat2) begin
-            o_CMD_DataT <= {cmdDataIn[3:0], temp_l};
+            temp_l <= cmdDataIn;
             o_CMD_dataReady <= 1;
         end
     end

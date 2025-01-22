@@ -148,12 +148,16 @@ module CMDHandler #(
 
     // Set the timeout value for each command
     always @(*) begin
-        case (internalAddress)
-            POWER_CTL: timeout = POWER_CTL_TIMEOUT; // 40ms
-            FILTER_CTL: timeout = FILTER_CTL_TIMEOUT; // 5ms
-            SOFT_RESET: timeout = SOFT_RESET_TIMEOUT;  // 0.5ms
-            default: timeout = 2;        // 400ns bigger than required 20ns (Tcsd).
-        endcase
+        if (internalInstr == READ) begin 
+            timeout = FILTER_CTL_TIMEOUT;
+        end else begin 
+            case (internalAddress)
+                POWER_CTL: timeout = POWER_CTL_TIMEOUT; // 40ms
+                FILTER_CTL: timeout = FILTER_CTL_TIMEOUT; // 5ms
+                SOFT_RESET: timeout = SOFT_RESET_TIMEOUT;  // 0.5ms
+                default: timeout = 2;        // 400ns bigger than required 20ns (Tcsd).
+            endcase
+        end
     end
 
     always @(posedge o_SPI_Clk or posedge reset) begin
