@@ -69,7 +69,8 @@ module SPIMaster #(
     //? Internal Signals
     wire [SRWIDTH_LOG2-1:0] transCount;
     reg [SHIFT_REG_WIDTH-1:0] byteIn; //? Received byte / Byte to transmit
-    
+    reg CSBuf;
+
     //? FSM Signals
     reg [1:0] nextState, curState;
     reg [4:0] FSMCount;
@@ -88,13 +89,23 @@ module SPIMaster #(
     assign o_Tx_holdValid = transCount == 0 && ((FSMCount == 5'd0) || (FSMCount == 5'd19)) && locked;
     
     GUCounter #(.BITS(SRWIDTH_LOG2))
-            transCounter (.clk(o_SPI_Clk), .reset_in({reset, transCount == SHIFT_REG_WIDTH - 1}), .enable(locked && !o_SPI_CSLow), .count(transCount));
+            transCounter (.clk(o_SPI_Clk), .reset_in({reset, transCount == SHIFT_REG_WIDTH - 1 || o_SPI_CSLow}), .enable(locked && !o_SPI_CSLow), .count(transCount));
 
     always @(negedge o_SPI_Clk or posedge reset) begin 
         if (reset) begin
+            CSBuf <= 0;
             o_SPI_CSLow <= 1;
-        end else if (transCount == 0) begin
-            o_SPI_CSLow <= !i_Tx_Valid;
+        end else if (transCount == 0 && i_Tx_Valid) begin
+            CSBuf <= 0;
+            o_SPI_CSLow <= 0;
+        end else if (!i_Tx_Valid) begin
+            if (!o_SPI_CSLow) begin 
+                CSBuf <= 1;
+                o_SPI_CSLow <= CSBuf;
+            end else begin 
+                CSBuf <= 0;
+                o_SPI_CSLow <= 1;
+            end
         end
     end
 
