@@ -1,6 +1,7 @@
 module SPISlave #(
     parameter SHIFT_REG_WIDTH = 8
 )(
+    input reset,
     input i_SPI_Clk,              // SPI clock from the master
     input i_SPI_CSLow,            // Chip select signal from the master (active low)
     input i_SPI_Mosi,             // Master-Out-Slave-In signal
@@ -33,6 +34,8 @@ module SPISlave #(
 endmodule
 
 
+// USE BELOW ONLY WITH BEHAVIOURAL!!!
+
 // module SPISlave #(
 //     parameter SHIFT_REG_WIDTH = 8
 // )(
@@ -54,6 +57,7 @@ endmodule
 
 //     GUCounter #(.BITS(4))
 //         GUCounterInst (.clk(i_SPI_Clk), .reset_in({reset, bytes == 3}), .enable(start2 && flag), .count(bytes));
+    
 //     GUCounter #(.BITS(4))
 //         GUCounterInst2 (.clk(i_SPI_Clk), .reset_in({reset, commands == 5}), .enable(bytes == 3), .count(commands));
 
